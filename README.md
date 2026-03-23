@@ -1,58 +1,107 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Talenteedio v2
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Plateforme de mise en relation entre talents créatifs et entreprises.
 
-## About Laravel
+## 🚀 Démarrage rapide
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+### Prérequis
+- PHP 8.2+
+- Composer
+- SQLite ou MySQL
+- Node.js (pour les assets frontend)
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Installation
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
-
-## Learning Laravel
-
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
-
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
-
-## Agentic Development
-
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
-
+1. **Cloner le projet**
 ```bash
-composer require laravel/boost --dev
-
-php artisan boost:install
+git clone <repository-url>
+cd talenteedio-v2
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+2. **Installer les dépendances**
+```bash
+composer install
+npm install
+```
 
-## Contributing
+3. **Configuration**
+```bash
+cp .env.example .env
+php artisan key:generate
+```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+4. **Base de données**
+```bash
+php artisan migrate
+php artisan db:seed --class=RoleSeeder
+php artisan db:seed --class=MediaCategorySeeder
+```
 
-## Code of Conduct
+5. **Lancer le serveur**
+```bash
+php artisan serve
+```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+## 📚 Documentation
 
-## Security Vulnerabilities
+Toute la documentation technique se trouve dans le dossier [`docs/`](./docs/):
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+- **[INDEX.md](./docs/INDEX.md)** - Vue d'ensemble de la documentation
+- **[CONTROLLERS_STRUCTURE.md](./docs/CONTROLLERS_STRUCTURE.md)** - Structure des contrôleurs et API
+- **[ROLES_MIGRATION.md](./docs/ROLES_MIGRATION.md)** - Système de rôles simplifié
+- **[MIGRATION_STEPS.md](./docs/MIGRATION_STEPS.md)** - Guide de migration
+- **[API_SETUP.md](./docs/API_SETUP.md)** - Configuration de l'API
 
-## License
+## 🏗️ Architecture
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### Rôles utilisateurs
+- **Admin** : Gestion complète de la plateforme
+- **Talent** : Créateurs de contenu
+- **Entreprise** : Clients cherchant des talents
+
+### Fonctionnalités principales
+- ✅ Authentification avec Laravel Sanctum
+- ✅ Système de rôles simplifié
+- ✅ Gestion des catégories de média (Admin)
+- ✅ Tableaux de bord par rôle
+- 🔄 Gestion des projets (en cours)
+- 🔄 Système de matching (à venir)
+
+### API Endpoints
+
+#### Authentification
+- `POST /api/register` - Inscription
+- `POST /api/login` - Connexion
+- `POST /api/logout` - Déconnexion
+
+#### Admin
+- `GET /api/admin/dashboard` - Tableau de bord
+- `GET /api/admin/media-categories` - Liste des catégories
+- `POST /api/admin/media-categories` - Créer une catégorie
+
+#### Talent/Entreprise
+- `GET /api/talent/dashboard` - Tableau de bord talent
+- `GET /api/entreprise/dashboard` - Tableau de bord entreprise
+
+## 🧪 Tests
+
+```bash
+# Tests unitaires
+php artisan test
+
+# Tests manuels
+php test_simple_roles.php
+php test_media_categories.php
+```
+
+## 🤝 Contribution
+
+1. Fork le projet
+2. Créer une branche feature (`git checkout -b feature/AmazingFeature`)
+3. Commit les changes (`git commit -m 'Add some AmazingFeature'`)
+4. Push vers la branche (`git push origin feature/AmazingFeature`)
+5. Ouvrir une Pull Request
+
+## 📝 License
+
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.

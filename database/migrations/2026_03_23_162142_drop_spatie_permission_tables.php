@@ -3,7 +3,6 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
-use Exception;
 
 return new class extends Migration
 {
@@ -26,6 +25,6 @@ return new class extends Migration
     {
         // Note: Cette migration ne peut pas être annulée facilement
         // car elle supprime les tables Spatie Permission
-        throw new Exception('Cette migration ne peut pas être annulée');
+        throw new \Exception('Cette migration ne peut pas être annulée');
     }
 };

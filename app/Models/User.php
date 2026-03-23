@@ -54,4 +54,12 @@ class User extends Authenticatable
     {
         return $this->belongsTo(SimpleRole::class, 'role', 'name');
     }
+
+    /**
+     * Relation avec les catégories de média créées par cet utilisateur
+     */
+    public function mediaCategories()
+    {
+        return $this->hasMany(MediaCategory::class, 'created_by');
+    }
 }
