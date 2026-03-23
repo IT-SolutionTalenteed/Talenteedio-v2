@@ -55,4 +55,12 @@ class MediaCategory extends Model
     {
         return $query->where('is_active', true);
     }
+
+    /**
+     * Relation avec les articles qui utilisent cette catégorie
+     */
+    public function articles()
+    {
+        return $this->belongsToMany(Article::class);
+    }
 }

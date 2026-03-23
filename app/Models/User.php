@@ -62,4 +62,12 @@ class User extends Authenticatable
     {
         return $this->hasMany(MediaCategory::class, 'created_by');
     }
+
+    /**
+     * Relation avec les articles créés par cet utilisateur
+     */
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
+    }
 }

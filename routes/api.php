@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\MediaCategoryController;
+use App\Http\Controllers\Admin\ArticleController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Entreprise\DashboardController as EntrepriseDashboardController;
@@ -30,6 +31,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('media-categories', MediaCategoryController::class);
         Route::patch('/media-categories/{mediaCategory}/toggle-status', [MediaCategoryController::class, 'toggleStatus']);
         Route::get('/media-categories-active', [MediaCategoryController::class, 'active']);
+        
+        // Gestion des articles (admin seulement)
+        Route::apiResource('articles', ArticleController::class);
+        Route::get('/articles-media-categories', [ArticleController::class, 'getMediaCategories']);
     });
     
     Route::middleware('role:talent')->prefix('talent')->group(function () {
