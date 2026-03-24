@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\OffreController;
 use App\Http\Controllers\Admin\CategorieEvenementController;
 use App\Http\Controllers\Admin\EvenementController;
 use App\Http\Controllers\Admin\EntrepriseController;
+use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Entreprise\DashboardController as EntrepriseDashboardController;
@@ -75,6 +76,12 @@ Route::middleware('auth:sanctum')->group(function () {
         // Gestion des entreprises
         Route::apiResource('entreprises', EntrepriseController::class);
         Route::get('/entreprises-referentiels', [EntrepriseController::class, 'referentiels']);
+
+        // Gestion des talents
+        Route::get('/talents', [TalentController::class, 'index']);
+        Route::patch('/talents/{user}/suspend', [TalentController::class, 'toggleSuspend']);
+        Route::patch('/talents/{user}/ban', [TalentController::class, 'toggleBan']);
+        Route::delete('/talents/{user}', [TalentController::class, 'destroy']);
     });
     
     Route::middleware('role:talent')->prefix('talent')->group(function () {
