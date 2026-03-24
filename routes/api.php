@@ -17,6 +17,7 @@ use App\Http\Controllers\Admin\CategorieEvenementController;
 use App\Http\Controllers\Admin\EvenementController;
 use App\Http\Controllers\Admin\EntrepriseController;
 use App\Http\Controllers\Admin\TalentController;
+use App\Http\Controllers\Admin\EntretienController as AdminEntretienController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Talent\OffreController as TalentOffreController;
@@ -28,6 +29,7 @@ use App\Http\Controllers\Entreprise\OffreController as EntrepriseOffreController
 use App\Http\Controllers\Entreprise\CandidatureController as EntrepriseCandidatureController;
 use App\Http\Controllers\Entreprise\EvenementController as EntrepriseEvenementController;
 use App\Http\Controllers\Entreprise\ArticleController as EntrepriseArticleController;
+use App\Http\Controllers\Entreprise\EntretienController as EntrepriseEntretienController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -90,6 +92,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('/talents/{user}/suspend', [TalentController::class, 'toggleSuspend']);
         Route::patch('/talents/{user}/ban', [TalentController::class, 'toggleBan']);
         Route::delete('/talents/{user}', [TalentController::class, 'destroy']);
+
+        // Entretiens par stand (D-05)
+        Route::get('/entretiens', [AdminEntretienController::class, 'index']);
+        Route::get('/entretiens-evenements', [AdminEntretienController::class, 'evenementsList']);
     });
     
     Route::middleware('role:talent')->prefix('talent')->group(function () {
@@ -131,6 +137,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/evenements', [EntrepriseEvenementController::class, 'index']);
         Route::post('/evenements/{evenement}/demande', [EntrepriseEvenementController::class, 'demandeParticipation']);
         Route::get('/mes-demandes', [EntrepriseEvenementController::class, 'mesDemandes']);
+
+        // Entretiens stand (F-05)
+        Route::get('/entretiens', [EntrepriseEntretienController::class, 'index']);
+        Route::patch('/entretiens/{entretien}/statut', [EntrepriseEntretienController::class, 'updateStatut']);
 
         // Articles (F-04)
         Route::apiResource('articles', EntrepriseArticleController::class);
