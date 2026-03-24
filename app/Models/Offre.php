@@ -9,7 +9,7 @@ class Offre extends Model
     protected $table = 'offres';
 
     protected $fillable = [
-        'titre', 'mission', 'client', 'profil_recherche', 'a_propos',
+        'entreprise_id', 'titre', 'mission', 'client', 'profil_recherche', 'a_propos',
         'liste_offre', 'description', 'date_mise_en_ligne', 'date_limite',
         'salaire', 'fourchette_salariale', 'localisation', 'nombre_candidatures',
     ];
@@ -20,6 +20,16 @@ class Offre extends Model
         'salaire'            => 'decimal:2',
         'nombre_candidatures'=> 'integer',
     ];
+
+    public function entreprise()
+    {
+        return $this->belongsTo(Entreprise::class);
+    }
+
+    public function candidatures()
+    {
+        return $this->hasMany(Candidature::class);
+    }
 
     public function jobContracts()
     {

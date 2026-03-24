@@ -20,6 +20,10 @@ use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Entreprise\DashboardController as EntrepriseDashboardController;
+use App\Http\Controllers\Entreprise\OffreController as EntrepriseOffreController;
+use App\Http\Controllers\Entreprise\CandidatureController as EntrepriseCandidatureController;
+use App\Http\Controllers\Entreprise\EvenementController as EntrepriseEvenementController;
+use App\Http\Controllers\Entreprise\ArticleController as EntrepriseArticleController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -93,8 +97,22 @@ Route::middleware('auth:sanctum')->group(function () {
     
     Route::middleware('role:entreprise')->prefix('entreprise')->group(function () {
         Route::get('/dashboard', [EntrepriseDashboardController::class, 'index']);
-        
-        // Les entreprises peuvent voir les catégories actives
-        Route::get('/media-categories', [MediaCategoryController::class, 'active']);
+
+        // Offres d'emploi (F-01)
+        Route::apiResource('offres', EntrepriseOffreController::class);
+        Route::get('/offres-referentiels', [EntrepriseOffreController::class, 'referentiels']);
+
+        // Candidatures reçues (F-02)
+        Route::get('/candidatures', [EntrepriseCandidatureController::class, 'index']);
+        Route::patch('/candidatures/{candidature}/statut', [EntrepriseCandidatureController::class, 'updateStatut']);
+
+        // Événements — demande de participation (F-03)
+        Route::get('/evenements', [EntrepriseEvenementController::class, 'index']);
+        Route::post('/evenements/{evenement}/demande', [EntrepriseEvenementController::class, 'demandeParticipation']);
+        Route::get('/mes-demandes', [EntrepriseEvenementController::class, 'mesDemandes']);
+
+        // Articles (F-04)
+        Route::apiResource('articles', EntrepriseArticleController::class);
+        Route::get('/articles-referentiels', [EntrepriseArticleController::class, 'referentiels']);
     });
 });

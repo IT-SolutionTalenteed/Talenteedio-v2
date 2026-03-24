@@ -18,6 +18,7 @@ class Article extends Model
         'slug',
         'is_published',
         'user_id',
+        'entreprise_id',
         'image',
     ];
 
@@ -38,6 +39,11 @@ class Article extends Model
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    public function entreprise(): BelongsTo
+    {
+        return $this->belongsTo(Entreprise::class);
     }
 
     /**
