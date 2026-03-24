@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\EntrepriseController;
 use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
+use App\Http\Controllers\Talent\OffreController as TalentOffreController;
 use App\Http\Controllers\Entreprise\DashboardController as EntrepriseDashboardController;
 use App\Http\Controllers\Entreprise\OffreController as EntrepriseOffreController;
 use App\Http\Controllers\Entreprise\CandidatureController as EntrepriseCandidatureController;
@@ -90,9 +91,12 @@ Route::middleware('auth:sanctum')->group(function () {
     
     Route::middleware('role:talent')->prefix('talent')->group(function () {
         Route::get('/dashboard', [TalentDashboardController::class, 'index']);
-        
-        // Les talents peuvent voir les catégories actives
-        Route::get('/media-categories', [MediaCategoryController::class, 'active']);
+
+        // Offres d'emploi (consultation + candidature) (G-01)
+        Route::get('/offres', [TalentOffreController::class, 'index']);
+        Route::get('/offres/{offre}', [TalentOffreController::class, 'show']);
+        Route::post('/offres/{offre}/postuler', [TalentOffreController::class, 'postuler']);
+        Route::get('/mes-candidatures', [TalentOffreController::class, 'mesCandidatures']);
     });
     
     Route::middleware('role:entreprise')->prefix('entreprise')->group(function () {
