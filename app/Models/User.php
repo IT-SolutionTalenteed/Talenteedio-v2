@@ -72,4 +72,9 @@ class User extends Authenticatable
     {
         return $this->hasMany(Article::class);
     }
+
+    public function favorisOffres()
+    {
+        return $this->belongsToMany(Offre::class, 'offre_favori', 'talent_id', 'offre_id');
+    }
 }

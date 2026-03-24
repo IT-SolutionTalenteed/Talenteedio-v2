@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Talent\OffreController as TalentOffreController;
+use App\Http\Controllers\Talent\FavoriController as TalentFavoriController;
 use App\Http\Controllers\Entreprise\DashboardController as EntrepriseDashboardController;
 use App\Http\Controllers\Entreprise\OffreController as EntrepriseOffreController;
 use App\Http\Controllers\Entreprise\CandidatureController as EntrepriseCandidatureController;
@@ -97,6 +98,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/offres/{offre}', [TalentOffreController::class, 'show']);
         Route::post('/offres/{offre}/postuler', [TalentOffreController::class, 'postuler']);
         Route::get('/mes-candidatures', [TalentOffreController::class, 'mesCandidatures']);
+
+        // Favoris offres (G-02)
+        Route::get('/favoris', [TalentFavoriController::class, 'index']);
+        Route::post('/offres/{offre}/favori', [TalentFavoriController::class, 'toggle']);
     });
     
     Route::middleware('role:entreprise')->prefix('entreprise')->group(function () {
