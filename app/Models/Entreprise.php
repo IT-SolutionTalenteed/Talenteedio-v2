@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Offre;
 
 class Entreprise extends Model
 {
@@ -33,5 +34,10 @@ class Entreprise extends Model
     public function evenements()
     {
         return $this->belongsToMany(Evenement::class, 'evenement_entreprise');
+    }
+
+    public function offres()
+    {
+        return $this->hasMany(Offre::class);
     }
 }

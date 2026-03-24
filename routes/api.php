@@ -40,6 +40,7 @@ Route::post('/login', [AuthController::class, 'login']);
 
 // Routes publiques (footer, etc.)
 Route::get('/legal-pages', [LegalPageController::class, 'index']);
+Route::get('/skills', [SkillController::class, 'index']);
 
 // Routes protégées par Sanctum
 Route::middleware('auth:sanctum')->group(function () {
