@@ -29,4 +29,9 @@ class Entretien extends Model
     {
         return $this->belongsTo(Evenement::class);
     }
+
+    public function feedback()
+    {
+        return $this->hasOne(Feedback::class);
+    }
 }

@@ -24,6 +24,7 @@ use App\Http\Controllers\Talent\OffreController as TalentOffreController;
 use App\Http\Controllers\Talent\FavoriController as TalentFavoriController;
 use App\Http\Controllers\Talent\EvenementController as TalentEvenementController;
 use App\Http\Controllers\Talent\EntretienController as TalentEntretienController;
+use App\Http\Controllers\Talent\FeedbackController as TalentFeedbackController;
 use App\Http\Controllers\Entreprise\DashboardController as EntrepriseDashboardController;
 use App\Http\Controllers\Entreprise\OffreController as EntrepriseOffreController;
 use App\Http\Controllers\Entreprise\CandidatureController as EntrepriseCandidatureController;
@@ -120,6 +121,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/evenements/{evenement}/reserver', [TalentEntretienController::class, 'reserver']);
         Route::get('/mes-entretiens', [TalentEntretienController::class, 'mesEntretiens']);
         Route::patch('/entretiens/{entretien}/annuler', [TalentEntretienController::class, 'annuler']);
+
+        // Feedbacks post-entretien (G-05)
+        Route::get('/mes-feedbacks', [TalentFeedbackController::class, 'index']);
+        Route::post('/entretiens/{entretien}/feedback', [TalentFeedbackController::class, 'store']);
+        Route::put('/feedbacks/{feedback}', [TalentFeedbackController::class, 'update']);
+        Route::delete('/feedbacks/{feedback}', [TalentFeedbackController::class, 'destroy']);
     });
     
     Route::middleware('role:entreprise')->prefix('entreprise')->group(function () {
