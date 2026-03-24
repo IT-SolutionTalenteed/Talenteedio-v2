@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
 {
@@ -17,11 +18,19 @@ class Article extends Model
         'slug',
         'is_published',
         'user_id',
+        'image',
     ];
 
     protected $casts = [
         'is_published' => 'boolean',
     ];
+
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute(): ?string
+    {
+        return $this->image ? url(Storage::url($this->image)) : null;
+    }
 
     /**
      * Get the user that owns the article.

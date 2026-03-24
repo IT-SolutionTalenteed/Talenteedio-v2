@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\MediaCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ArticleController extends Controller
@@ -33,19 +34,22 @@ class ArticleController extends Controller
             'slug' => 'nullable|string|unique:articles,slug',
             'is_published' => 'boolean',
             'media_category_ids' => 'array',
-            'media_category_ids.*' => 'exists:media_categories,id'
+            'media_category_ids.*' => 'exists:media_categories,id',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
         ]);
 
-        // Générer le slug si non fourni
         if (empty($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['title']);
         }
 
         $validated['user_id'] = auth()->id();
 
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('articles', 'public');
+        }
+
         $article = Article::create($validated);
 
-        // Attacher les catégories média si fournies
         if (isset($validated['media_category_ids'])) {
             $article->mediaCategories()->attach($validated['media_category_ids']);
         }
@@ -72,17 +76,23 @@ class ArticleController extends Controller
             'slug' => 'nullable|string|unique:articles,slug,' . $article->id,
             'is_published' => 'boolean',
             'media_category_ids' => 'array',
-            'media_category_ids.*' => 'exists:media_categories,id'
+            'media_category_ids.*' => 'exists:media_categories,id',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
         ]);
 
-        // Générer le slug si modifié
         if (isset($validated['title']) && ($validated['slug'] ?? '') === '') {
             $validated['slug'] = Str::slug($validated['title']);
         }
 
+        if ($request->hasFile('image')) {
+            if ($article->image) {
+                Storage::disk('public')->delete($article->image);
+            }
+            $validated['image'] = $request->file('image')->store('articles', 'public');
+        }
+
         $article->update($validated);
 
-        // Synchroniser les catégories média
         if (isset($validated['media_category_ids'])) {
             $article->mediaCategories()->sync($validated['media_category_ids']);
         }
@@ -95,6 +105,10 @@ class ArticleController extends Controller
      */
     public function destroy(Article $article)
     {
+        if ($article->image) {
+            Storage::disk('public')->delete($article->image);
+        }
+
         $article->delete();
 
         return response()->json(['message' => 'Article supprimé avec succès']);
