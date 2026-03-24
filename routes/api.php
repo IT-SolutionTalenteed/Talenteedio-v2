@@ -15,6 +15,7 @@ use App\Http\Controllers\Admin\LegalPageController;
 use App\Http\Controllers\Admin\OffreController;
 use App\Http\Controllers\Admin\CategorieEvenementController;
 use App\Http\Controllers\Admin\EvenementController;
+use App\Http\Controllers\Admin\EntrepriseController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Entreprise\DashboardController as EntrepriseDashboardController;
@@ -70,6 +71,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('evenements', EvenementController::class);
         Route::patch('/evenements/{evenement}/toggle-featured', [EvenementController::class, 'toggleFeatured']);
         Route::get('/evenements-referentiels', [EvenementController::class, 'referentiels']);
+
+        // Gestion des entreprises
+        Route::apiResource('entreprises', EntrepriseController::class);
     });
     
     Route::middleware('role:talent')->prefix('talent')->group(function () {
