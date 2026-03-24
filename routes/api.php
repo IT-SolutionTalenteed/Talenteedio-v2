@@ -13,6 +13,8 @@ use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\ActivitySectorController;
 use App\Http\Controllers\Admin\LegalPageController;
 use App\Http\Controllers\Admin\OffreController;
+use App\Http\Controllers\Admin\CategorieEvenementController;
+use App\Http\Controllers\Admin\EvenementController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Entreprise\DashboardController as EntrepriseDashboardController;
@@ -61,6 +63,13 @@ Route::middleware('auth:sanctum')->group(function () {
         // Offres d'emploi
         Route::apiResource('offres', OffreController::class);
         Route::get('/offres-referentiels', [OffreController::class, 'referentiels']);
+
+        // Événements
+        Route::apiResource('categorie-evenements', CategorieEvenementController::class);
+        Route::delete('/categorie-evenements/{categorieEvenement}/galerie', [CategorieEvenementController::class, 'removeGalerieItem']);
+        Route::apiResource('evenements', EvenementController::class);
+        Route::patch('/evenements/{evenement}/toggle-featured', [EvenementController::class, 'toggleFeatured']);
+        Route::get('/evenements-referentiels', [EvenementController::class, 'referentiels']);
     });
     
     Route::middleware('role:talent')->prefix('talent')->group(function () {
