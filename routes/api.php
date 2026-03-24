@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ExperienceController;
 use App\Http\Controllers\Admin\LanguageController;
 use App\Http\Controllers\Admin\ActivitySectorController;
 use App\Http\Controllers\Admin\LegalPageController;
+use App\Http\Controllers\Admin\OffreController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Entreprise\DashboardController as EntrepriseDashboardController;
@@ -56,6 +57,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('languages', LanguageController::class);
         Route::apiResource('activity-sectors', ActivitySectorController::class);
         Route::apiResource('legal-pages', LegalPageController::class);
+
+        // Offres d'emploi
+        Route::apiResource('offres', OffreController::class);
+        Route::get('/offres-referentiels', [OffreController::class, 'referentiels']);
     });
     
     Route::middleware('role:talent')->prefix('talent')->group(function () {
