@@ -74,6 +74,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Gestion des entreprises
         Route::apiResource('entreprises', EntrepriseController::class);
+        Route::get('/entreprises-referentiels', [EntrepriseController::class, 'referentiels']);
     });
     
     Route::middleware('role:talent')->prefix('talent')->group(function () {
