@@ -21,6 +21,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Talent\OffreController as TalentOffreController;
 use App\Http\Controllers\Talent\FavoriController as TalentFavoriController;
+use App\Http\Controllers\Talent\EvenementController as TalentEvenementController;
 use App\Http\Controllers\Entreprise\DashboardController as EntrepriseDashboardController;
 use App\Http\Controllers\Entreprise\OffreController as EntrepriseOffreController;
 use App\Http\Controllers\Entreprise\CandidatureController as EntrepriseCandidatureController;
@@ -102,6 +103,10 @@ Route::middleware('auth:sanctum')->group(function () {
         // Favoris offres (G-02)
         Route::get('/favoris', [TalentFavoriController::class, 'index']);
         Route::post('/offres/{offre}/favori', [TalentFavoriController::class, 'toggle']);
+
+        // Événements + matching OpenAI (G-03)
+        Route::get('/evenements', [TalentEvenementController::class, 'index']);
+        Route::post('/evenements/{evenement}/matching', [TalentEvenementController::class, 'matching']);
     });
     
     Route::middleware('role:entreprise')->prefix('entreprise')->group(function () {
