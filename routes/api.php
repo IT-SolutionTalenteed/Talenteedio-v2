@@ -4,6 +4,14 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\MediaCategoryController;
 use App\Http\Controllers\Admin\ArticleController;
+use App\Http\Controllers\Admin\JobContractController;
+use App\Http\Controllers\Admin\JobModeController;
+use App\Http\Controllers\Admin\SkillController;
+use App\Http\Controllers\Admin\StudyLevelController;
+use App\Http\Controllers\Admin\ExperienceController;
+use App\Http\Controllers\Admin\LanguageController;
+use App\Http\Controllers\Admin\ActivitySectorController;
+use App\Http\Controllers\Admin\LegalPageController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Entreprise\DashboardController as EntrepriseDashboardController;
@@ -13,6 +21,9 @@ use Illuminate\Support\Facades\Route;
 // Routes publiques d'authentification
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+// Routes publiques (footer, etc.)
+Route::get('/legal-pages', [LegalPageController::class, 'index']);
 
 // Routes protégées par Sanctum
 Route::middleware('auth:sanctum')->group(function () {
@@ -35,6 +46,16 @@ Route::middleware('auth:sanctum')->group(function () {
         // Gestion des articles (admin seulement)
         Route::apiResource('articles', ArticleController::class);
         Route::get('/articles-media-categories', [ArticleController::class, 'getMediaCategories']);
+
+        // Référentiels
+        Route::apiResource('job-contracts', JobContractController::class);
+        Route::apiResource('job-modes', JobModeController::class);
+        Route::apiResource('skills', SkillController::class);
+        Route::apiResource('study-levels', StudyLevelController::class);
+        Route::apiResource('experiences', ExperienceController::class);
+        Route::apiResource('languages', LanguageController::class);
+        Route::apiResource('activity-sectors', ActivitySectorController::class);
+        Route::apiResource('legal-pages', LegalPageController::class);
     });
     
     Route::middleware('role:talent')->prefix('talent')->group(function () {
