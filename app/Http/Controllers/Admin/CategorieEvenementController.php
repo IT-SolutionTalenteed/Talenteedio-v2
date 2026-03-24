@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CategorieEvenement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\ValidationException;
 
 class CategorieEvenementController extends Controller
 {
@@ -16,13 +18,15 @@ class CategorieEvenementController extends Controller
 
     public function store(Request $request)
     {
+        $this->checkUploadErrors($request);
+
         $validated = $request->validate([
             'titre'             => 'required|string|max:255',
             'description'       => 'nullable|string',
             'image'             => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
-            'video'             => 'nullable|file|mimes:mp4,mov,avi,webm|max:102400',
+            'video'             => 'nullable|file|max:512000',
             'galerie'           => 'nullable|array',
-            'galerie.*'         => 'file|mimes:jpg,jpeg,png,gif,webp,mp4,mov,avi,webm|max:102400',
+            'galerie.*'         => 'file|max:102400',
             'liste_details'     => 'nullable|array',
             'liste_details.*'   => 'string',
             'liste_temoignages' => 'nullable|array',
@@ -59,13 +63,15 @@ class CategorieEvenementController extends Controller
 
     public function update(Request $request, CategorieEvenement $categorieEvenement)
     {
+        $this->checkUploadErrors($request);
+
         $validated = $request->validate([
             'titre'             => 'required|string|max:255',
             'description'       => 'nullable|string',
             'image'             => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
-            'video'             => 'nullable|file|mimes:mp4,mov,avi,webm|max:102400',
+            'video'             => 'nullable|file|max:512000',
             'galerie'           => 'nullable|array',
-            'galerie.*'         => 'file|mimes:jpg,jpeg,png,gif,webp,mp4,mov,avi,webm|max:102400',
+            'galerie.*'         => 'file|max:102400',
             'liste_details'     => 'nullable|array',
             'liste_details.*'   => 'string',
             'liste_temoignages' => 'nullable|array',
@@ -116,5 +122,36 @@ class CategorieEvenementController extends Controller
         $categorieEvenement->update(['galerie' => $galerie ?: null]);
 
         return response()->json($categorieEvenement);
+    }
+
+    private function checkUploadErrors(Request $request): void
+    {
+        $fields = ['image', 'video'];
+        $errors = [];
+
+        foreach ($fields as $field) {
+            if ($request->hasFile($field)) {
+                $file = $request->file($field);
+                $errCode = $file->getError();
+                Log::debug("Upload [$field]: error_code=$errCode, size={$file->getSize()}, mime={$file->getMimeType()}, original={$file->getClientOriginalName()}");
+                if ($errCode !== UPLOAD_ERR_OK) {
+                    $errors[$field] = ['Le fichier ' . $field . ' est trop volumineux ou n\'a pas pu être uploadé. (code: ' . $errCode . ')'];
+                }
+            }
+        }
+
+        if ($request->hasFile('galerie')) {
+            foreach ($request->file('galerie') as $i => $file) {
+                $errCode = $file->getError();
+                Log::debug("Upload [galerie.$i]: error_code=$errCode, size={$file->getSize()}, mime={$file->getMimeType()}");
+                if ($errCode !== UPLOAD_ERR_OK) {
+                    $errors["galerie.$i"] = ['Le fichier galerie[' . $i . '] est trop volumineux ou n\'a pas pu être uploadé. (code: ' . $errCode . ')'];
+                }
+            }
+        }
+
+        if (!empty($errors)) {
+            throw ValidationException::withMessages($errors);
+        }
     }
 }
