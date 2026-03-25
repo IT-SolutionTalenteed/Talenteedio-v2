@@ -95,6 +95,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/talents', [TalentController::class, 'index']);
         Route::patch('/talents/{user}/suspend', [TalentController::class, 'toggleSuspend']);
         Route::patch('/talents/{user}/ban', [TalentController::class, 'toggleBan']);
+        Route::patch('/talents/{user}/statut-crm', [TalentController::class, 'updateStatutCrm']);
         Route::delete('/talents/{user}', [TalentController::class, 'destroy']);
 
         // Entretiens par stand (D-05)
