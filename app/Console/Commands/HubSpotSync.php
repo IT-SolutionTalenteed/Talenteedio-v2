@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Cache;
 
 class HubSpotSync extends Command
 {
-    protected $signature   = 'hubspot:sync {--contacts : Sync contacts seulement} {--companies : Sync companies seulement}';
+    protected $signature   = 'hubspot:sync {--contacts : Sync contacts seulement} {--companies : Sync companies seulement} {--limit=0 : Limiter le nombre de contacts (0 = tous)}';
     protected $description = 'Synchronise tous les talents et entreprises vers HubSpot CRM (batch)';
 
     public function handle(HubSpotService $hubspot): int
@@ -27,10 +27,19 @@ class HubSpotSync extends Command
 
         // ── Contacts (talents + consultants externes) ─────────────────────────
         if ($syncContacts) {
-            $users = User::whereIn('role', ['talent', 'consultant_externe'])->cursor();
-            $total = User::whereIn('role', ['talent', 'consultant_externe'])->count();
+            $limit = (int) $this->option('limit');
+            $query = User::whereIn('role', ['talent', 'consultant_externe'])->orderBy('id');
 
-            $this->info("Sync contacts : {$total} utilisateurs...");
+            if ($limit > 0) {
+                $users = $query->limit($limit)->get();
+                $total = $users->count();
+                $this->info("Sync contacts (limité à {$limit}) : {$total} utilisateurs...");
+            } else {
+                $users = $query->cursor();
+                $total = User::whereIn('role', ['talent', 'consultant_externe'])->count();
+                $this->info("Sync contacts : {$total} utilisateurs...");
+            }
+
             $bar = $this->output->createProgressBar($total);
             $bar->start();
 
