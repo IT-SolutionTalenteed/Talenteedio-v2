@@ -13,7 +13,7 @@ class PublicController extends Controller
      */
     public function featuredEvent()
     {
-        $event = Evenement::with(['entreprises:id,nom,logo', 'categorie:id,nom'])
+        $event = Evenement::with(['entreprises:id,nom,logo', 'categorie:id,titre'])
             ->where('is_featured', true)
             ->latest()
             ->first();
@@ -26,7 +26,7 @@ class PublicController extends Controller
      */
     public function articles()
     {
-        $articles = Article::with('mediaCategories:id,nom')
+        $articles = Article::with('mediaCategories:id,name')
             ->where('is_published', true)
             ->latest()
             ->take(3)
