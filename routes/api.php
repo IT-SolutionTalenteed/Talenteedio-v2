@@ -18,6 +18,7 @@ use App\Http\Controllers\Admin\EvenementController;
 use App\Http\Controllers\Admin\EntrepriseController;
 use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\EntretienController as AdminEntretienController;
+use App\Http\Controllers\Admin\FeedbackController as AdminFeedbackController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Talent\OffreController as TalentOffreController;
@@ -98,6 +99,9 @@ Route::middleware('auth:sanctum')->group(function () {
         // Entretiens par stand (D-05)
         Route::get('/entretiens', [AdminEntretienController::class, 'index']);
         Route::get('/entretiens-evenements', [AdminEntretienController::class, 'evenementsList']);
+
+        // Feedbacks (D-06)
+        Route::get('/feedbacks', [AdminFeedbackController::class, 'index']);
     });
     
     Route::middleware('role:talent')->prefix('talent')->group(function () {

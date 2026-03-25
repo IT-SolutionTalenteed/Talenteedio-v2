@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Entreprise;
 
 use App\Http\Controllers\Controller;
+use App\Mail\EntretienReponseMail;
 use App\Models\Entretien;
 use App\Models\Entreprise;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class EntretienController extends Controller
 {
@@ -44,6 +46,11 @@ class EntretienController extends Controller
 
         $entretien->update(['statut' => $request->statut]);
 
-        return response()->json($entretien->load(['talent', 'evenement']));
+        $entretien->load(['talent', 'entreprise', 'evenement']);
+
+        // M-04 — Mail talent avec la réponse
+        Mail::to($entretien->talent->email)->send(new EntretienReponseMail($entretien));
+
+        return response()->json($entretien);
     }
 }

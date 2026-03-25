@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Talent;
 
 use App\Http\Controllers\Controller;
+use App\Mail\EntretienReserveMail;
 use App\Models\Entretien;
 use App\Models\Evenement;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class EntretienController extends Controller
 {
@@ -77,7 +80,17 @@ class EntretienController extends Controller
             'statut'        => 'en_attente',
         ]);
 
-        return response()->json($entretien->load(['entreprise', 'evenement']), 201);
+        $entretien->load(['talent', 'entreprise', 'evenement']);
+
+        // M-03 — Mail talent + entreprise + admin
+        Mail::to($entretien->talent->email)->send(new EntretienReserveMail($entretien, 'talent'));
+        Mail::to($entretien->entreprise->user->email)->send(new EntretienReserveMail($entretien, 'entreprise'));
+        $admin = User::where('role', 'admin')->first();
+        if ($admin) {
+            Mail::to($admin->email)->send(new EntretienReserveMail($entretien, 'admin'));
+        }
+
+        return response()->json($entretien, 201);
     }
 
     /**

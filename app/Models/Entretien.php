@@ -9,10 +9,13 @@ class Entretien extends Model
     protected $fillable = [
         'talent_id', 'entreprise_id', 'evenement_id',
         'date', 'heure_debut', 'heure_fin', 'statut',
+        'rappel_envoye', 'feedback_demande_at',
     ];
 
     protected $casts = [
-        'date' => 'date',
+        'date'                => 'date',
+        'rappel_envoye'       => 'boolean',
+        'feedback_demande_at' => 'datetime',
     ];
 
     public function talent()
