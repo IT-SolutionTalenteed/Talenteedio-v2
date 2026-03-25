@@ -6,6 +6,7 @@ use App\Mail\WelcomeTalentMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Validation\ValidationException;
 
@@ -46,9 +47,22 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
+            'email'             => 'required|email',
+            'password'          => 'required',
+            'recaptcha_token'   => 'required|string',
         ]);
+
+        // Vérification reCAPTCHA v2
+        $recaptchaResponse = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret'   => env('RECAPTCHA_SECRET_KEY'),
+            'response' => $request->recaptcha_token,
+        ]);
+
+        if (!$recaptchaResponse->successful() || !$recaptchaResponse->json('success')) {
+            throw ValidationException::withMessages([
+                'recaptcha' => ['Vérification reCAPTCHA échouée. Veuillez réessayer.'],
+            ]);
+        }
 
         $user = User::where('email', $request->email)->first();
 
