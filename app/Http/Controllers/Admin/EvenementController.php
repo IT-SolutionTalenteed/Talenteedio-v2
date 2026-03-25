@@ -45,6 +45,10 @@ class EvenementController extends Controller
                 ->store('evenements', 'public');
         }
 
+        if (!empty($validated['is_featured'])) {
+            Evenement::query()->update(['is_featured' => false]);
+        }
+
         $evenement = Evenement::create($validated);
         $evenement->entreprises()->sync($validated['entreprise_ids'] ?? []);
 
@@ -84,6 +88,10 @@ class EvenementController extends Controller
                 ->store('evenements', 'public');
         }
 
+        if (!empty($validated['is_featured'])) {
+            Evenement::where('id', '!=', $evenement->id)->update(['is_featured' => false]);
+        }
+
         $evenement->update($validated);
         $evenement->entreprises()->sync($validated['entreprise_ids'] ?? []);
 
@@ -102,7 +110,13 @@ class EvenementController extends Controller
 
     public function toggleFeatured(Evenement $evenement)
     {
-        $evenement->update(['is_featured' => !$evenement->is_featured]);
+        $newValue = !$evenement->is_featured;
+
+        if ($newValue) {
+            Evenement::where('id', '!=', $evenement->id)->update(['is_featured' => false]);
+        }
+
+        $evenement->update(['is_featured' => $newValue]);
 
         return response()->json($evenement);
     }
