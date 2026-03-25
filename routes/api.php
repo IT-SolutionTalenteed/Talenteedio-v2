@@ -52,11 +52,16 @@ Route::get('/auth/google/callback',  [SocialiteController::class, 'handleGoogleC
 Route::get('/legal-pages', [LegalPageController::class, 'index']);
 Route::get('/skills', [SkillController::class, 'index']);
 
-// Routes publiques — page d'accueil visiteurs
+// Routes publiques — site visiteurs
 Route::prefix('public')->group(function () {
-    Route::get('/featured-event', [PublicController::class, 'featuredEvent']);
-    Route::get('/articles',       [PublicController::class, 'articles']);
-    Route::get('/offres',         [PublicController::class, 'offres']);
+    Route::get('/featured-event',                             [PublicController::class, 'featuredEvent']);
+    Route::get('/offres',                                     [PublicController::class, 'offres']);
+    Route::get('/offres-home',                                [PublicController::class, 'offresHome']);
+    Route::get('/entreprises',                                [PublicController::class, 'entreprises']);
+    Route::get('/categories-evenements',                      [PublicController::class, 'categoriesEvenements']);
+    Route::get('/categories-evenements/{categorieEvenement}', [PublicController::class, 'categorieEvenement']);
+    Route::get('/articles',                                   [PublicController::class, 'articles']);
+    Route::get('/referentiels',                               [PublicController::class, 'referentiels']);
 });
 
 // Routes protégées par Sanctum
