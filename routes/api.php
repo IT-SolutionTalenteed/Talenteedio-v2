@@ -118,8 +118,9 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::post('/import/candidats', [ImportController::class, 'importCandidats']);
 
         // HubSpot CRM (I-06)
-        Route::get('/hubspot/status', [AdminHubSpotController::class, 'status']);
-        Route::post('/hubspot/sync',  [AdminHubSpotController::class, 'sync']);
+        Route::get('/hubspot/status',  [AdminHubSpotController::class, 'status']);
+        Route::post('/hubspot/sync',   [AdminHubSpotController::class, 'sync']);
+        Route::post('/hubspot/setup',  [AdminHubSpotController::class, 'setup']);
 
         // Témoignages (réutilisables)
         Route::get('/temoignages', [AdminTemoignageController::class, 'index']);

@@ -37,4 +37,18 @@ class HubSpotController extends Controller
             'output'    => $output,
         ]);
     }
+
+    /**
+     * Crée les propriétés personnalisées dans HubSpot (à lancer une seule fois).
+     */
+    public function setup()
+    {
+        Artisan::call('hubspot:setup');
+        $output = Artisan::output();
+
+        return response()->json([
+            'message' => 'Setup terminé',
+            'output'  => $output,
+        ]);
+    }
 }
