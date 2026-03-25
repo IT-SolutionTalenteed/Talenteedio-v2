@@ -11,6 +11,7 @@ use App\Models\JobContract;
 use App\Models\StudyLevel;
 use App\Models\ActivitySector;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
 
 class PublicController extends Controller
 {
@@ -187,5 +188,69 @@ class PublicController extends Controller
             ->get(['id', 'titre', 'localisation', 'mission', 'date_limite', 'entreprise_id']);
 
         return response()->json($offres);
+    }
+
+    /**
+     * Détail d'une offre d'emploi.
+     */
+    public function offreDetail(Offre $offre): JsonResponse
+    {
+        $offre->load([
+            'entreprise:id,nom,logo,description,site_web,ville,pays,activity_sector_id',
+            'entreprise.activitySector:id,name',
+            'jobContracts:id,name',
+            'studyLevels:id,name',
+            'experiences:id,name',
+            'jobModes:id,name',
+        ]);
+
+        return response()->json($offre);
+    }
+
+    /**
+     * Détail d'une entreprise avec ses offres et articles publiés.
+     */
+    public function entrepriseDetail(Entreprise $entreprise): JsonResponse
+    {
+        $entreprise->load([
+            'activitySector:id,name',
+        ]);
+
+        $offres = Offre::with(['jobContracts:id,name'])
+            ->where('entreprise_id', $entreprise->id)
+            ->latest()
+            ->get(['id', 'titre', 'localisation', 'mission', 'date_limite', 'entreprise_id']);
+
+        $articles = Article::with('mediaCategories:id,name')
+            ->where('entreprise_id', $entreprise->id)
+            ->where('is_published', true)
+            ->latest()
+            ->get(['id', 'title', 'content', 'image', 'created_at', 'entreprise_id']);
+
+        $participeEvenement = $entreprise->evenements()->exists();
+
+        return response()->json([
+            'entreprise'         => $entreprise,
+            'offres'             => $offres,
+            'articles'           => $articles,
+            'participe_evenement'=> $participeEvenement,
+        ]);
+    }
+
+    /**
+     * Détail d'un article publié (accessible sans connexion).
+     */
+    public function articleDetail(Article $article): JsonResponse
+    {
+        if (!$article->is_published) {
+            return response()->json(['message' => 'Article introuvable.'], 404);
+        }
+
+        $article->load([
+            'mediaCategories:id,name',
+            'entreprise:id,nom,logo',
+        ]);
+
+        return response()->json($article);
     }
 }

@@ -148,15 +148,31 @@ class HubSpotService
                 'talenteed_entreprise_id'     => (string) $entreprise->id,
             ], fn($v) => $v !== null && $v !== '');
 
+            // Utiliser l'ID HubSpot stocké en base si disponible (évite la recherche par nom)
+            $hubspotId = $entreprise->hubspot_company_id;
+
+            if ($hubspotId) {
+                $this->http()->patch("/crm/v3/objects/companies/{$hubspotId}", ['properties' => $props]);
+                return $hubspotId;
+            }
+
+            // Première sync : chercher par nom puis stocker l'ID
             $existingId = $this->searchCompanyByName($entreprise->nom);
 
             if ($existingId) {
                 $this->http()->patch("/crm/v3/objects/companies/{$existingId}", ['properties' => $props]);
+                $entreprise->updateQuietly(['hubspot_company_id' => $existingId]);
                 return $existingId;
             }
 
             $res = $this->http()->post('/crm/v3/objects/companies', ['properties' => $props]);
-            return $res->successful() ? (int) $res->json('id') : null;
+            $newId = $res->successful() ? (int) $res->json('id') : null;
+
+            if ($newId) {
+                $entreprise->updateQuietly(['hubspot_company_id' => $newId]);
+            }
+
+            return $newId;
 
         } catch (\Exception $e) {
             Log::error('[HubSpot] upsertCompany failed', ['entreprise_id' => $entreprise->id, 'error' => $e->getMessage()]);

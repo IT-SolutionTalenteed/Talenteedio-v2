@@ -11,7 +11,7 @@ class Entreprise extends Model
     protected $fillable = [
         'user_id', 'nom', 'logo', 'description',
         'site_web', 'telephone', 'adresse', 'ville', 'pays',
-        'activity_sector_id',
+        'activity_sector_id', 'hubspot_company_id',
     ];
 
     protected $appends = ['logo_url'];
