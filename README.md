@@ -1,107 +1,134 @@
-# Talenteedio v2
+# Talenteed v2 — API Laravel
 
-Plateforme de mise en relation entre talents créatifs et entreprises.
+Plateforme de mise en relation entre talents et entreprises via événements de recrutement.
 
-## 🚀 Démarrage rapide
+## Prérequis
 
-### Prérequis
-- PHP 8.2+
+- PHP 8.4+
 - Composer
-- SQLite ou MySQL
-- Node.js (pour les assets frontend)
+- MySQL
+- XAMPP (ou équivalent) pour MySQL
+- MailDev (mails en développement)
 
-### Installation
+## Installation
 
-1. **Cloner le projet**
-```bash
-git clone <repository-url>
-cd talenteedio-v2
-```
-
-2. **Installer les dépendances**
 ```bash
 composer install
-npm install
-```
-
-3. **Configuration**
-```bash
 cp .env.example .env
 php artisan key:generate
 ```
 
-4. **Base de données**
+## Configuration `.env`
+
+```env
+APP_URL=http://localhost:8000
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=talenteed
+DB_USERNAME=root
+DB_PASSWORD=
+
+MAIL_MAILER=smtp
+MAIL_HOST=127.0.0.1
+MAIL_PORT=1025
+MAIL_FROM_ADDRESS=no-reply@talenteed.com
+MAIL_FROM_NAME=Talenteed
+
+OPENAI_API_KEY=sk-...
+```
+
+## Base de données
+
 ```bash
 php artisan migrate
 php artisan db:seed --class=RoleSeeder
-php artisan db:seed --class=MediaCategorySeeder
+php artisan db:seed --class=AdminSeeder
 ```
 
-5. **Lancer le serveur**
-```bash
-php artisan serve
-```
+## Lancer l'API
 
-## 📚 Documentation
-
-Toute la documentation technique se trouve dans le dossier [`docs/`](./docs/):
-
-- **[INDEX.md](./docs/INDEX.md)** - Vue d'ensemble de la documentation
-- **[CONTROLLERS_STRUCTURE.md](./docs/CONTROLLERS_STRUCTURE.md)** - Structure des contrôleurs et API
-- **[ROLES_MIGRATION.md](./docs/ROLES_MIGRATION.md)** - Système de rôles simplifié
-- **[MIGRATION_STEPS.md](./docs/MIGRATION_STEPS.md)** - Guide de migration
-- **[API_SETUP.md](./docs/API_SETUP.md)** - Configuration de l'API
-
-## 🏗️ Architecture
-
-### Rôles utilisateurs
-- **Admin** : Gestion complète de la plateforme
-- **Talent** : Créateurs de contenu
-- **Entreprise** : Clients cherchant des talents
-
-### Fonctionnalités principales
-- ✅ Authentification avec Laravel Sanctum
-- ✅ Système de rôles simplifié
-- ✅ Gestion des catégories de média (Admin)
-- ✅ Tableaux de bord par rôle
-- 🔄 Gestion des projets (en cours)
-- 🔄 Système de matching (à venir)
-
-### API Endpoints
-
-#### Authentification
-- `POST /api/register` - Inscription
-- `POST /api/login` - Connexion
-- `POST /api/logout` - Déconnexion
-
-#### Admin
-- `GET /api/admin/dashboard` - Tableau de bord
-- `GET /api/admin/media-categories` - Liste des catégories
-- `POST /api/admin/media-categories` - Créer une catégorie
-
-#### Talent/Entreprise
-- `GET /api/talent/dashboard` - Tableau de bord talent
-- `GET /api/entreprise/dashboard` - Tableau de bord entreprise
-
-## 🧪 Tests
+> Le serveur doit être lancé avec les limites PHP étendues pour permettre l'upload de fichiers (images, vidéos).
 
 ```bash
-# Tests unitaires
-php artisan test
-
-# Tests manuels
-php test_simple_roles.php
-php test_media_categories.php
+php -c php-dev.ini artisan serve
 ```
 
-## 🤝 Contribution
+Ou via le script fourni :
 
-1. Fork le projet
-2. Créer une branche feature (`git checkout -b feature/AmazingFeature`)
-3. Commit les changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push vers la branche (`git push origin feature/AmazingFeature`)
-5. Ouvrir une Pull Request
+```bash
+./serve.sh
+```
 
-## 📝 License
+L'API est disponible sur `http://localhost:8000`.
 
-Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.
+## Mails automatiques (scheduler)
+
+Les rappels d'entretien (M-05) et demandes de feedback (M-06) sont envoyés via des commandes planifiées.
+Lancer le scheduler dans un terminal séparé :
+
+```bash
+php artisan schedule:work
+```
+
+Pour tester une commande manuellement :
+
+```bash
+php artisan entretien:rappel
+php artisan entretien:demander-feedback
+```
+
+## MailDev (visualiser les mails en dev)
+
+```bash
+maildev
+```
+
+Interface disponible sur `http://localhost:1080`.
+
+## Storage (upload de fichiers)
+
+Le symlink doit être créé une seule fois :
+
+```bash
+php artisan storage:link
+```
+
+Les fichiers uploadés sont accessibles via `/storage/...`.
+
+## Config OpenAI
+
+Publier le fichier de configuration si absent :
+
+```bash
+php artisan vendor:publish --provider="OpenAI\Laravel\ServiceProvider"
+```
+
+Puis renseigner `OPENAI_API_KEY` dans `.env`.
+
+## Commandes utiles
+
+```bash
+# Vider les caches après modification du .env
+php artisan config:clear
+php artisan cache:clear
+
+# Relancer toutes les migrations (repart de zéro)
+php artisan migrate:fresh --seed
+
+# Lister toutes les routes API
+php artisan route:list --path=api
+```
+
+## Stack
+
+| Couche | Technologie |
+|---|---|
+| Framework | Laravel 13 |
+| Auth | Laravel Sanctum |
+| Rôles | SimpleRole (admin, talent, entreprise) |
+| Base de données | MySQL |
+| Mailing (dev) | MailDev (SMTP 1025 / UI 1080) |
+| IA | OpenAI API (gpt-4o-mini) |
+| Upload | disk `public` via `Storage::disk('public')` |
