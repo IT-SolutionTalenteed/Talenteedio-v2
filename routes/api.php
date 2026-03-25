@@ -20,6 +20,7 @@ use App\Http\Controllers\Admin\EntrepriseController;
 use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\EntretienController as AdminEntretienController;
 use App\Http\Controllers\Admin\FeedbackController as AdminFeedbackController;
+use App\Http\Controllers\Admin\HubSpotController as AdminHubSpotController;
 use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\TemoignageController as AdminTemoignageController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -115,6 +116,10 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Import XLS (H-08)
         Route::post('/import/candidats', [ImportController::class, 'importCandidats']);
+
+        // HubSpot CRM (I-06)
+        Route::get('/hubspot/status', [AdminHubSpotController::class, 'status']);
+        Route::post('/hubspot/sync',  [AdminHubSpotController::class, 'sync']);
 
         // Témoignages (réutilisables)
         Route::get('/temoignages', [AdminTemoignageController::class, 'index']);

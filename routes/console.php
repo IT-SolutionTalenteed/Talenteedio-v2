@@ -13,3 +13,6 @@ Schedule::command('entretien:rappel')->everyMinute();
 
 // M-06 — Demande de feedback 30min après la fin de l'entretien (toutes les minutes)
 Schedule::command('entretien:demander-feedback')->everyMinute();
+
+// I-05 — Sync HubSpot CRM (chaque nuit à 2h00)
+Schedule::command('hubspot:sync')->dailyAt('02:00');
