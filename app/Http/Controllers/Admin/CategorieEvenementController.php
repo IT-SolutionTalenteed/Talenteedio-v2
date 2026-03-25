@@ -13,7 +13,7 @@ class CategorieEvenementController extends Controller
 {
     public function index()
     {
-        return response()->json(CategorieEvenement::orderBy('titre')->get());
+        return response()->json(CategorieEvenement::with('temoignages')->orderBy('titre')->get());
     }
 
     public function store(Request $request)
@@ -29,8 +29,6 @@ class CategorieEvenementController extends Controller
             'galerie.*'         => 'file|max:102400',
             'liste_details'     => 'nullable|array',
             'liste_details.*'   => 'string',
-            'liste_temoignages' => 'nullable|array',
-            'liste_temoignages.*' => 'string',
             'liste_faqs'        => 'nullable|array',
             'liste_faqs.*.question' => 'required_with:liste_faqs|string',
             'liste_faqs.*.reponse'  => 'required_with:liste_faqs|string',
@@ -53,7 +51,7 @@ class CategorieEvenementController extends Controller
 
         $categorie = CategorieEvenement::create($validated);
 
-        return response()->json($categorie, 201);
+        return response()->json($categorie->load('temoignages'), 201);
     }
 
     public function show(CategorieEvenement $categorieEvenement)
@@ -74,8 +72,6 @@ class CategorieEvenementController extends Controller
             'galerie.*'         => 'file|max:102400',
             'liste_details'     => 'nullable|array',
             'liste_details.*'   => 'string',
-            'liste_temoignages' => 'nullable|array',
-            'liste_temoignages.*' => 'string',
             'liste_faqs'        => 'nullable|array',
             'liste_faqs.*.question' => 'required_with:liste_faqs|string',
             'liste_faqs.*.reponse'  => 'required_with:liste_faqs|string',
@@ -99,7 +95,7 @@ class CategorieEvenementController extends Controller
 
         $categorieEvenement->update($validated);
 
-        return response()->json($categorieEvenement);
+        return response()->json($categorieEvenement->load('temoignages'));
     }
 
     public function destroy(CategorieEvenement $categorieEvenement)
