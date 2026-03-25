@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PublicController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\MediaCategoryController;
@@ -50,6 +51,13 @@ Route::get('/auth/google/callback',  [SocialiteController::class, 'handleGoogleC
 // Routes publiques (footer, etc.)
 Route::get('/legal-pages', [LegalPageController::class, 'index']);
 Route::get('/skills', [SkillController::class, 'index']);
+
+// Routes publiques — page d'accueil visiteurs
+Route::prefix('public')->group(function () {
+    Route::get('/featured-event', [PublicController::class, 'featuredEvent']);
+    Route::get('/articles',       [PublicController::class, 'articles']);
+    Route::get('/offres',         [PublicController::class, 'offres']);
+});
 
 // Routes protégées par Sanctum
 Route::middleware('auth:sanctum')->group(function () {
