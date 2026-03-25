@@ -9,47 +9,64 @@ use Illuminate\Support\Facades\Http;
 class HubSpotSetup extends Command
 {
     protected $signature   = 'hubspot:setup';
-    protected $description = 'Crée les propriétés personnalisées Talenteed dans HubSpot (à lancer une seule fois)';
+    protected $description = 'Crée les groupes et propriétés personnalisées Talenteed dans HubSpot (idempotent)';
 
     private string $baseUrl = 'https://api.hubapi.com';
+
+    // ── Groupes de propriétés à créer ─────────────────────────────────────────
+
+    private array $groups = [
+        'contacts' => [
+            'name'        => 'talenteed',
+            'displayName' => 'Talenteed',
+        ],
+        'companies' => [
+            'name'        => 'talenteed_company',
+            'displayName' => 'Talenteed',
+        ],
+        'deals' => [
+            'name'        => 'talenteed_deal',
+            'displayName' => 'Talenteed',
+        ],
+    ];
 
     // ── Définitions des propriétés à créer ────────────────────────────────────
 
     private array $contactProperties = [
         // Identifiants & rôle
-        ['name' => 'talenteed_id',                   'label' => 'Talenteed ID',                    'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_role',                  'label' => 'Talenteed Rôle',                  'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_statut_crm',            'label' => 'Talenteed Statut CRM',            'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_source',                'label' => 'Talenteed Source / Provenance',   'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_ref_crm',               'label' => 'Talenteed Réf. ancien CRM',       'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_id',                   'label' => 'ID Talenteed',                    'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_role',                  'label' => 'Rôle',                            'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_statut_crm',            'label' => 'Statut CRM',                      'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_source',                'label' => 'Source / Provenance',             'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_ref_crm',               'label' => 'Réf. ancien CRM',                 'type' => 'string', 'fieldType' => 'text'],
         // Profil personnel
-        ['name' => 'talenteed_civilite',              'label' => 'Talenteed Civilité',              'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_date_naissance',        'label' => 'Talenteed Date de naissance',     'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_nationalite',           'label' => 'Talenteed Nationalité',           'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_situation_familiale',   'label' => 'Talenteed Situation familiale',   'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_civilite',              'label' => 'Civilité',                        'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_date_naissance',        'label' => 'Date de naissance',               'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_nationalite',           'label' => 'Nationalité',                     'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_situation_familiale',   'label' => 'Situation familiale',             'type' => 'string', 'fieldType' => 'text'],
         // Disponibilité & mobilité
-        ['name' => 'talenteed_disponibilite',         'label' => 'Talenteed Disponibilité',         'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_mobilite',              'label' => 'Talenteed Mobilité',              'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_disponibilite',         'label' => 'Disponibilité',                   'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_mobilite',              'label' => 'Mobilité',                        'type' => 'string', 'fieldType' => 'text'],
         // Référentiels
-        ['name' => 'talenteed_niveau_etudes',         'label' => 'Talenteed Niveau d\'études',      'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_experience',            'label' => 'Talenteed Expérience',            'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_langues',               'label' => 'Talenteed Langues',               'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_secteurs',              'label' => 'Talenteed Secteurs d\'activité',  'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_skills',                'label' => 'Talenteed Compétences',           'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_niveau_etudes',         'label' => 'Niveau d\'études',                'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_experience',            'label' => 'Expérience',                      'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_langues',               'label' => 'Langues',                         'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_secteurs',              'label' => 'Secteurs d\'activité',            'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_skills',                'label' => 'Compétences',                     'type' => 'string', 'fieldType' => 'text'],
         // Activité & compteurs
-        ['name' => 'talenteed_nb_candidatures',       'label' => 'Talenteed Nb candidatures',       'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_nb_entretiens',         'label' => 'Talenteed Nb entretiens',         'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_a_entretien_confirme',  'label' => 'Talenteed A entretien confirmé',  'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_dernier_entretien',     'label' => 'Talenteed Dernier entretien',     'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_nb_candidatures',       'label' => 'Nb candidatures',                 'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_nb_entretiens',         'label' => 'Nb entretiens',                   'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_a_entretien_confirme',  'label' => 'A entretien confirmé',            'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_dernier_entretien',     'label' => 'Dernier entretien (date)',        'type' => 'string', 'fieldType' => 'text'],
     ];
 
     private array $companyProperties = [
-        ['name' => 'talenteed_entreprise_id', 'label' => 'Talenteed Entreprise ID', 'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_entreprise_id', 'label' => 'ID Entreprise Talenteed', 'type' => 'string', 'fieldType' => 'text'],
     ];
 
     private array $dealProperties = [
-        ['name' => 'talenteed_candidature_id',     'label' => 'Talenteed Candidature ID',     'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_statut_candidature', 'label' => 'Talenteed Statut Candidature', 'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_candidature_id',     'label' => 'ID Candidature',     'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_statut_candidature', 'label' => 'Statut Candidature', 'type' => 'string', 'fieldType' => 'text'],
     ];
 
     // ─────────────────────────────────────────────────────────────────────────
@@ -61,23 +78,39 @@ class HubSpotSetup extends Command
             return self::FAILURE;
         }
 
-        $this->info('Création des propriétés personnalisées HubSpot...');
+        $this->info('=== Setup HubSpot — Groupes & Propriétés Talenteed ===');
         $this->newLine();
 
         $created = 0;
         $skipped = 0;
         $errors  = 0;
 
-        foreach ([
+        $propertiesMap = [
             'contacts'  => $this->contactProperties,
             'companies' => $this->companyProperties,
             'deals'     => $this->dealProperties,
-        ] as $objectType => $properties) {
-            $this->line("── {$objectType} ──────────────────────────");
+        ];
+
+        foreach ($propertiesMap as $objectType => $properties) {
+            $group = $this->groups[$objectType];
+
+            $this->line("── {$objectType} (groupe : \"{$group['displayName']}\") ──────────────────────────");
+
+            // 1. Créer le groupe si inexistant
+            $groupResult = $this->ensureGroup($objectType, $group);
+            if ($groupResult === 'created') {
+                $this->line("  ✅ Groupe créé : {$group['name']}");
+            } elseif ($groupResult === 'exists') {
+                $this->line("  ⏭  Groupe existe déjà : {$group['name']}");
+            } else {
+                $this->warn("  ⚠️  Groupe {$group['name']} : {$groupResult}");
+            }
+
+            // 2. Créer chaque propriété dans ce groupe
             foreach ($properties as $prop) {
-                $result = $this->createProperty($objectType, $prop);
+                $result = $this->createProperty($objectType, $prop, $group['name']);
                 if ($result === 'created') {
-                    $this->line("  ✅ Créée : {$prop['name']}");
+                    $this->line("  ✅ {$prop['label']} ({$prop['name']})");
                     $created++;
                 } elseif ($result === 'exists') {
                     $this->line("  ⏭  Existe déjà : {$prop['name']}");
@@ -95,45 +128,86 @@ class HubSpotSetup extends Command
             [[$created, $skipped, $errors]]
         );
 
-        $this->info('Setup terminé. Vous pouvez maintenant lancer : php artisan hubspot:sync');
+        if ($errors === 0) {
+            $this->info('✅ Setup terminé. Dans HubSpot, une section "Talenteed" apparaît maintenant sur chaque fiche contact/company/deal.');
+            $this->info('   Lancez maintenant : php artisan hubspot:sync --contacts --limit=350');
+        } else {
+            $this->warn('Setup terminé avec des erreurs. Vérifiez les scopes de votre Private App HubSpot.');
+        }
 
         return $errors > 0 ? self::FAILURE : self::SUCCESS;
     }
 
     /**
+     * Crée le groupe de propriétés s'il n'existe pas encore.
      * Retourne 'created', 'exists', ou un message d'erreur.
      */
-    private function createProperty(string $objectType, array $prop): string
+    private function ensureGroup(string $objectType, array $group): string
     {
         $token = config('services.hubspot.token');
 
-        // Vérifier si elle existe déjà
         $check = Http::withToken($token)
             ->acceptJson()
-            ->get("{$this->baseUrl}/crm/v3/properties/{$objectType}/{$prop['name']}");
+            ->get("{$this->baseUrl}/crm/v3/properties/{$objectType}/groups/{$group['name']}");
 
         if ($check->successful()) {
             return 'exists';
         }
 
-        // Créer la propriété
         $res = Http::withToken($token)
             ->acceptJson()
-            ->post("{$this->baseUrl}/crm/v3/properties/{$objectType}", [
-                'name'        => $prop['name'],
-                'label'       => $prop['label'],
-                'type'        => $prop['type'],
-                'fieldType'   => $prop['fieldType'],
-                'groupName'   => $objectType === 'contacts'  ? 'contactinformation'
-                              : ($objectType === 'companies' ? 'companyinformation'
-                              :                                'dealinformation'),
+            ->post("{$this->baseUrl}/crm/v3/properties/{$objectType}/groups", [
+                'name'        => $group['name'],
+                'displayName' => $group['displayName'],
             ]);
 
         if ($res->successful()) {
             return 'created';
         }
 
-        $msg = $res->json('message') ?? $res->body();
-        return $msg ?: 'Erreur inconnue';
+        return $res->json('message') ?? $res->body() ?? 'Erreur inconnue';
+    }
+
+    /**
+     * Crée une propriété dans le groupe donné.
+     * Retourne 'created', 'exists', ou un message d'erreur.
+     */
+    private function createProperty(string $objectType, array $prop, string $groupName): string
+    {
+        $token = config('services.hubspot.token');
+
+        $check = Http::withToken($token)
+            ->acceptJson()
+            ->get("{$this->baseUrl}/crm/v3/properties/{$objectType}/{$prop['name']}");
+
+        if ($check->successful()) {
+            // Propriété existe — mettre à jour le groupName si besoin
+            $existing = $check->json('groupName');
+            if ($existing !== $groupName) {
+                Http::withToken($token)
+                    ->acceptJson()
+                    ->patch("{$this->baseUrl}/crm/v3/properties/{$objectType}/{$prop['name']}", [
+                        'groupName' => $groupName,
+                        'label'     => $prop['label'],
+                    ]);
+            }
+            return 'exists';
+        }
+
+        $res = Http::withToken($token)
+            ->acceptJson()
+            ->post("{$this->baseUrl}/crm/v3/properties/{$objectType}", [
+                'name'      => $prop['name'],
+                'label'     => $prop['label'],
+                'type'      => $prop['type'],
+                'fieldType' => $prop['fieldType'],
+                'groupName' => $groupName,
+            ]);
+
+        if ($res->successful()) {
+            return 'created';
+        }
+
+        return $res->json('message') ?? $res->body() ?? 'Erreur inconnue';
     }
 }
