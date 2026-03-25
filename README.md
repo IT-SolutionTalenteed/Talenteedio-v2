@@ -121,6 +121,91 @@ php artisan migrate:fresh --seed
 php artisan route:list --path=api
 ```
 
+---
+
+## Configuration Google OAuth (Connexion avec Google)
+
+> La connexion Google est déjà implémentée côté code. Il faut juste configurer les credentials Google Cloud en production.
+
+### 1. Créer un projet Google Cloud
+
+1. Aller sur [console.cloud.google.com](https://console.cloud.google.com)
+2. Créer un nouveau projet (ex : `Talenteed`)
+3. Aller dans **API & Services > Identifiants**
+4. Cliquer **Créer des identifiants > ID client OAuth 2.0**
+5. Type d'application : **Application Web**
+6. Nom : `Talenteed`
+
+### 2. Configurer les URIs autorisées
+
+Dans la fiche du client OAuth, renseigner :
+
+**Origines JavaScript autorisées :**
+```
+https://votre-domaine.com
+```
+
+**URI de redirection autorisés :**
+```
+https://votre-domaine.com/api/auth/google/callback
+```
+
+> En développement local, remplacer par :
+> - Origine : `http://localhost:8000` et `http://localhost:5173`
+> - Redirect : `http://localhost:8000/api/auth/google/callback`
+
+### 3. Renseigner dans `.env` (backend)
+
+```env
+GOOGLE_CLIENT_ID=xxxxxxxxx.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=GOCSPX-xxxxxxxxx
+GOOGLE_REDIRECT_URI=https://votre-domaine.com/api/auth/google/callback
+FRONTEND_URL=https://votre-domaine.com
+```
+
+### 4. Renseigner dans `.env` (frontend)
+
+```env
+VITE_API_URL=https://votre-domaine.com/api
+```
+
+### 5. Publier l'app Google (obligatoire en prod)
+
+Par défaut, l'app OAuth est en mode **Test** (seulement les adresses ajoutées manuellement peuvent se connecter).
+
+Pour la production :
+1. Aller dans **API & Services > Écran de consentement OAuth**
+2. Cliquer **Publier l'application**
+3. Si l'app demande des scopes sensibles → vérification Google requise (quelques jours)
+4. Pour les scopes `email` + `profile` uniquement → publication immédiate sans vérification
+
+---
+
+## Configuration reCAPTCHA (Login)
+
+> Le widget reCAPTCHA v2 est déjà en place côté code.
+
+### 1. Créer une clé reCAPTCHA
+
+1. Aller sur [google.com/recaptcha/admin](https://www.google.com/recaptcha/admin)
+2. **Type** : reCAPTCHA v2 — "Je ne suis pas un robot"
+3. **Domaines** : ajouter `votre-domaine.com` (et `localhost` pour le dev)
+4. Récupérer la **Clé du site** (frontend) et la **Clé secrète** (backend)
+
+### 2. Renseigner les clés
+
+**Backend `.env` :**
+```env
+RECAPTCHA_SECRET_KEY=6Lxxxxx...
+```
+
+**Frontend `.env` :**
+```env
+VITE_RECAPTCHA_SITE_KEY=6Lxxxxx...
+```
+
+---
+
 ## Stack
 
 | Couche | Technologie |
