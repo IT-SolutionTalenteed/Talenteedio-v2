@@ -157,8 +157,8 @@ class HubSpotSetup extends Command
         $res = Http::withToken($token)
             ->acceptJson()
             ->post("{$this->baseUrl}/crm/v3/properties/{$objectType}/groups", [
-                'name'        => $group['name'],
-                'displayName' => $group['displayName'],
+                'name'  => $group['name'],
+                'label' => $group['displayName'],
             ]);
 
         if ($res->successful()) {
