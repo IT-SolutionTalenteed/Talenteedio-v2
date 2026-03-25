@@ -93,6 +93,8 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Gestion des talents
         Route::get('/talents', [TalentController::class, 'index']);
+        Route::get('/talents/{user}', [TalentController::class, 'show']);
+        Route::patch('/talents/{user}/profil', [TalentController::class, 'updateProfil']);
         Route::patch('/talents/{user}/suspend', [TalentController::class, 'toggleSuspend']);
         Route::patch('/talents/{user}/ban', [TalentController::class, 'toggleBan']);
         Route::patch('/talents/{user}/statut-crm', [TalentController::class, 'updateStatutCrm']);
