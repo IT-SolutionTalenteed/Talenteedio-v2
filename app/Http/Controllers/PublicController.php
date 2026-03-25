@@ -191,6 +191,24 @@ class PublicController extends Controller
     }
 
     /**
+     * Détail d'un événement (public) — avec entreprises participantes et leurs offres.
+     */
+    public function evenementDetail(Evenement $evenement): JsonResponse
+    {
+        $evenement->load([
+            'categorie:id,titre',
+            'entreprises' => function ($q) {
+                $q->with([
+                    'activitySector:id,name',
+                    'offres:id,entreprise_id,titre,localisation,date_limite',
+                ])->select('entreprises.id', 'nom', 'logo', 'description', 'site_web', 'ville', 'pays', 'activity_sector_id');
+            },
+        ]);
+
+        return response()->json($evenement);
+    }
+
+    /**
      * Détail d'une offre d'emploi.
      */
     public function offreDetail(Offre $offre): JsonResponse
