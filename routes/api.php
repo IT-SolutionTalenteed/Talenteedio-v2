@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\EntrepriseController;
 use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\EntretienController as AdminEntretienController;
 use App\Http\Controllers\Admin\FeedbackController as AdminFeedbackController;
+use App\Http\Controllers\Admin\TemoignageController as AdminTemoignageController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Talent\OffreController as TalentOffreController;
@@ -102,6 +103,14 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Feedbacks (D-06)
         Route::get('/feedbacks', [AdminFeedbackController::class, 'index']);
+
+        // Témoignages (réutilisables)
+        Route::get('/temoignages', [AdminTemoignageController::class, 'index']);
+        Route::post('/temoignages', [AdminTemoignageController::class, 'store']);
+        Route::post('/temoignages/{temoignage}', [AdminTemoignageController::class, 'update']);
+        Route::delete('/temoignages/{temoignage}', [AdminTemoignageController::class, 'destroy']);
+        Route::post('/categorie-evenements/{categorieEvenement}/temoignages', [AdminTemoignageController::class, 'attach']);
+        Route::delete('/categorie-evenements/{categorieEvenement}/temoignages/{temoignage}', [AdminTemoignageController::class, 'detach']);
     });
     
     Route::middleware('role:talent')->prefix('talent')->group(function () {

@@ -10,14 +10,13 @@ class CategorieEvenement extends Model
 
     protected $fillable = [
         'titre', 'description', 'image', 'video',
-        'galerie', 'liste_details', 'liste_temoignages', 'liste_faqs',
+        'galerie', 'liste_details', 'liste_faqs',
     ];
 
     protected $casts = [
-        'galerie'           => 'array',
-        'liste_details'     => 'array',
-        'liste_temoignages' => 'array',
-        'liste_faqs'        => 'array',
+        'galerie'       => 'array',
+        'liste_details' => 'array',
+        'liste_faqs'    => 'array',
     ];
 
     protected $appends = ['image_url', 'video_url'];
@@ -30,6 +29,11 @@ class CategorieEvenement extends Model
     public function getVideoUrlAttribute(): ?string
     {
         return $this->video ? url(\Illuminate\Support\Facades\Storage::url($this->video)) : null;
+    }
+
+    public function temoignages()
+    {
+        return $this->belongsToMany(Temoignage::class, 'categorie_evenement_temoignage');
     }
 
     public function evenements()
