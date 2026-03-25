@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\MediaCategoryController;
 use App\Http\Controllers\Admin\ArticleController;
@@ -40,6 +41,10 @@ use Illuminate\Support\Facades\Route;
 // Routes publiques d'authentification
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+// Google OAuth (Socialite)
+Route::get('/auth/google/redirect',  [SocialiteController::class, 'redirectToGoogle']);
+Route::get('/auth/google/callback',  [SocialiteController::class, 'handleGoogleCallback']);
 
 // Routes publiques (footer, etc.)
 Route::get('/legal-pages', [LegalPageController::class, 'index']);
