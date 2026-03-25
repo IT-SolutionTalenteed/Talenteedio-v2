@@ -16,13 +16,31 @@ class HubSpotSetup extends Command
     // ── Définitions des propriétés à créer ────────────────────────────────────
 
     private array $contactProperties = [
-        ['name' => 'talenteed_id',            'label' => 'Talenteed ID',              'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_role',           'label' => 'Talenteed Rôle',            'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_statut_crm',     'label' => 'Talenteed Statut CRM',      'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_disponibilite',  'label' => 'Talenteed Disponibilité',   'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_mobilite',       'label' => 'Talenteed Mobilité',        'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_source',         'label' => 'Talenteed Source',          'type' => 'string', 'fieldType' => 'text'],
-        ['name' => 'talenteed_ref_crm',        'label' => 'Talenteed Réf. ancien CRM', 'type' => 'string', 'fieldType' => 'text'],
+        // Identifiants & rôle
+        ['name' => 'talenteed_id',                   'label' => 'Talenteed ID',                    'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_role',                  'label' => 'Talenteed Rôle',                  'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_statut_crm',            'label' => 'Talenteed Statut CRM',            'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_source',                'label' => 'Talenteed Source / Provenance',   'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_ref_crm',               'label' => 'Talenteed Réf. ancien CRM',       'type' => 'string', 'fieldType' => 'text'],
+        // Profil personnel
+        ['name' => 'talenteed_civilite',              'label' => 'Talenteed Civilité',              'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_date_naissance',        'label' => 'Talenteed Date de naissance',     'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_nationalite',           'label' => 'Talenteed Nationalité',           'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_situation_familiale',   'label' => 'Talenteed Situation familiale',   'type' => 'string', 'fieldType' => 'text'],
+        // Disponibilité & mobilité
+        ['name' => 'talenteed_disponibilite',         'label' => 'Talenteed Disponibilité',         'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_mobilite',              'label' => 'Talenteed Mobilité',              'type' => 'string', 'fieldType' => 'text'],
+        // Référentiels
+        ['name' => 'talenteed_niveau_etudes',         'label' => 'Talenteed Niveau d\'études',      'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_experience',            'label' => 'Talenteed Expérience',            'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_langues',               'label' => 'Talenteed Langues',               'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_secteurs',              'label' => 'Talenteed Secteurs d\'activité',  'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_skills',                'label' => 'Talenteed Compétences',           'type' => 'string', 'fieldType' => 'text'],
+        // Activité & compteurs
+        ['name' => 'talenteed_nb_candidatures',       'label' => 'Talenteed Nb candidatures',       'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_nb_entretiens',         'label' => 'Talenteed Nb entretiens',         'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_a_entretien_confirme',  'label' => 'Talenteed A entretien confirmé',  'type' => 'string', 'fieldType' => 'text'],
+        ['name' => 'talenteed_dernier_entretien',     'label' => 'Talenteed Dernier entretien',     'type' => 'string', 'fieldType' => 'text'],
     ];
 
     private array $companyProperties = [

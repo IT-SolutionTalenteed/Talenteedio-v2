@@ -41,8 +41,22 @@ class HubSpotService
         if (!$this->isConfigured()) return null;
 
         try {
+            // Charger les relations nécessaires si pas déjà chargées
+            $user->loadMissing(['studyLevel', 'experience', 'languages', 'activitySectors', 'skills']);
+
             $nameParts = explode(' ', $user->name, 2);
+
+            // Comptes calculés
+            $nbCandidatures = $user->candidatures()->count();
+            $nbEntretiens   = $user->entretiens()->count();
+            $aEntretienConfirme = $user->entretiens()->where('statut', 'confirme')->exists();
+            $dernierEntretien   = $user->entretiens()
+                ->where('statut', 'confirme')
+                ->orderByDesc('date')
+                ->value('date');
+
             $props = array_filter([
+                // Champs HubSpot natifs
                 'email'                    => $user->email,
                 'firstname'                => $nameParts[0] ?? '',
                 'lastname'                 => $nameParts[1] ?? '',
@@ -50,13 +64,34 @@ class HubSpotService
                 'city'                     => $user->ville,
                 'country'                  => $user->pays,
                 'jobtitle'                 => $user->titre_poste,
+
+                // Identifiants Talenteed
                 'talenteed_id'             => (string) $user->id,
                 'talenteed_role'           => $user->role,
                 'talenteed_statut_crm'     => $user->statut_crm ?? '',
-                'talenteed_disponibilite'  => $user->disponibilite ?? '',
-                'talenteed_mobilite'       => $user->mobilite ?? '',
                 'talenteed_source'         => $user->source_provenance ?? '',
                 'talenteed_ref_crm'        => $user->ref_ancien_crm ?? '',
+
+                // Profil étendu (K-02)
+                'talenteed_civilite'           => $user->civilite ?? '',
+                'talenteed_date_naissance'     => $user->date_naissance?->format('Y-m-d') ?? '',
+                'talenteed_nationalite'        => $user->nationalite ?? '',
+                'talenteed_situation_familiale' => $user->situation_familiale ?? '',
+                'talenteed_disponibilite'      => $user->disponibilite ?? '',
+                'talenteed_mobilite'           => $user->mobilite ?? '',
+
+                // Relations référentielles
+                'talenteed_niveau_etudes'  => $user->studyLevel?->name ?? '',
+                'talenteed_experience'     => $user->experience?->name ?? '',
+                'talenteed_langues'        => $user->languages->pluck('name')->implode(', '),
+                'talenteed_secteurs'       => $user->activitySectors->pluck('name')->implode(', '),
+                'talenteed_skills'         => $user->skills->pluck('name')->implode(', '),
+
+                // Compteurs & activité
+                'talenteed_nb_candidatures'      => (string) $nbCandidatures,
+                'talenteed_nb_entretiens'        => (string) $nbEntretiens,
+                'talenteed_a_entretien_confirme' => $aEntretienConfirme ? 'true' : 'false',
+                'talenteed_dernier_entretien'    => $dernierEntretien ? (string) $dernierEntretien : '',
             ], fn($v) => $v !== null && $v !== '');
 
             $existingId = $this->searchContactByEmail($user->email);

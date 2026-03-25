@@ -117,4 +117,14 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Skill::class, 'user_skill');
     }
+
+    public function candidatures()
+    {
+        return $this->hasMany(\App\Models\Candidature::class, 'talent_id');
+    }
+
+    public function entretiens()
+    {
+        return $this->hasMany(\App\Models\Entretien::class, 'talent_id');
+    }
 }
