@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\CategorieEvenement;
+use App\Models\Temoignage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
@@ -50,6 +51,7 @@ class CategorieEvenementController extends Controller
         $validated['galerie'] = $galeriePaths ?: null;
 
         $categorie = CategorieEvenement::create($validated);
+        $this->syncTemoignages($categorie, $request);
 
         return response()->json($categorie->load('temoignages'), 201);
     }
@@ -94,6 +96,7 @@ class CategorieEvenementController extends Controller
         }
 
         $categorieEvenement->update($validated);
+        $this->syncTemoignages($categorieEvenement, $request);
 
         return response()->json($categorieEvenement->load('temoignages'));
     }
@@ -118,6 +121,56 @@ class CategorieEvenementController extends Controller
         $categorieEvenement->update(['galerie' => $galerie ?: null]);
 
         return response()->json($categorieEvenement);
+    }
+
+    /**
+     * Synchronise les témoignages inline soumis dans le formulaire.
+     * Format FormData :
+     *   temoignages[i][auteur], [poste], [contenu], [id] (optionnel)
+     *   temoignages_avatars[i] (fichier, optionnel)
+     */
+    private function syncTemoignages(CategorieEvenement $categorie, Request $request): void
+    {
+        $temoignagesData = $request->input('temoignages', []);
+        if (empty($temoignagesData)) {
+            $categorie->temoignages()->sync([]);
+            return;
+        }
+
+        $avatarFiles = $request->file('temoignages_avatars', []);
+        $ids = [];
+
+        foreach ($temoignagesData as $i => $data) {
+            $auteur  = trim($data['auteur'] ?? '');
+            $contenu = trim($data['contenu'] ?? '');
+            if (!$auteur || !$contenu) continue;
+
+            $tem = !empty($data['id']) ? Temoignage::find((int) $data['id']) : null;
+
+            if ($tem) {
+                $tem->auteur = $auteur;
+                $tem->poste  = trim($data['poste'] ?? '') ?: null;
+                $tem->contenu = $contenu;
+                if (!empty($avatarFiles[$i])) {
+                    if ($tem->avatar) Storage::disk('public')->delete($tem->avatar);
+                    $tem->avatar = $avatarFiles[$i]->store('evenements/temoignages', 'public');
+                }
+                $tem->save();
+            } else {
+                $avatarPath = !empty($avatarFiles[$i])
+                    ? $avatarFiles[$i]->store('evenements/temoignages', 'public')
+                    : null;
+                $tem = Temoignage::create([
+                    'auteur'  => $auteur,
+                    'poste'   => trim($data['poste'] ?? '') ?: null,
+                    'contenu' => $contenu,
+                    'avatar'  => $avatarPath,
+                ]);
+            }
+            $ids[] = $tem->id;
+        }
+
+        $categorie->temoignages()->sync($ids);
     }
 
     private function checkUploadErrors(Request $request): void
