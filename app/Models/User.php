@@ -20,6 +20,8 @@ use Laravel\Sanctum\HasApiTokens;
     'study_level_id', 'experience_id',
     // Statut CRM (H-03)
     'statut_crm',
+    // Situation familiale (K-01)
+    'situation_familiale',
     // Google Socialite (J-03)
     'google_id', 'avatar_google',
 ])]
