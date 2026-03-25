@@ -19,6 +19,7 @@ use App\Http\Controllers\Admin\EntrepriseController;
 use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\EntretienController as AdminEntretienController;
 use App\Http\Controllers\Admin\FeedbackController as AdminFeedbackController;
+use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\TemoignageController as AdminTemoignageController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
@@ -106,6 +107,9 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Feedbacks (D-06)
         Route::get('/feedbacks', [AdminFeedbackController::class, 'index']);
+
+        // Import XLS (H-08)
+        Route::post('/import/candidats', [ImportController::class, 'importCandidats']);
 
         // Témoignages (réutilisables)
         Route::get('/temoignages', [AdminTemoignageController::class, 'index']);
