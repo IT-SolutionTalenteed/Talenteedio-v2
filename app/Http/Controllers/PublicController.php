@@ -201,7 +201,7 @@ class PublicController extends Controller
                 $q->with([
                     'activitySector:id,name',
                     'offres:id,entreprise_id,titre,localisation,date_limite',
-                ])->select('entreprises.id', 'nom', 'logo', 'description', 'site_web', 'ville', 'pays', 'activity_sector_id');
+                ])->select('entreprises.id', 'user_id', 'nom', 'logo', 'description', 'site_web', 'ville', 'pays', 'activity_sector_id');
             },
         ]);
 
