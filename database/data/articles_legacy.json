@@ -1,0 +1,1208 @@
+{
+  "total": 38,
+  "exportedAt": "2026-03-26T00:22:19.835Z",
+  "articles": [
+    {
+      "id": "b1bcbbac-7c81-426e-aedb-4f073ff5aa0b",
+      "title": "dfghgfdh",
+      "slug": "dfghgfdh",
+      "content": "<p>bgv</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "fdghf",
+      "status": "public",
+      "createdAt": "2026-02-11T09:06:34.980Z",
+      "admin": {
+        "id": "4a62c6cf-fa7e-4458-aeeb-134e840720f1",
+        "firstName": "Franck",
+        "lastName": "RAKOTO",
+        "email": "solofonirina35@gmail.com"
+      },
+      "company": {
+        "id": "2e98341e-a026-445f-85a1-375d72013c84",
+        "name": "Solution Talenteed SARL",
+        "email": "guymunsadi@solutiontalenteed.com"
+      },
+      "image": {
+        "id": "af92c3d1-d636-4221-a055-ec9c89e6f1ee",
+        "fileUrl": "http://localhost:8080/public/uploads/d46bdf05-fef7-4d72-8b07-88072b56b5ef-Capture d’écran du 2026-01-25 15-47-49.png",
+        "fileType": "image/png",
+        "fileName": "Capture d’écran du 2026-01-25 15-47-49.png"
+      },
+      "categories": [
+        {
+          "id": "3399862a-bff7-4a1d-a2ad-f6423eb01cd9",
+          "name": "Interview",
+          "slug": "interview",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-09-13T18:57:40.503Z"
+        },
+        {
+          "id": "84d06dfd-72dc-454a-9821-a32b246eabb2",
+          "name": "Diversity",
+          "slug": "diversity",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-10T08:49:29.578Z"
+        },
+        {
+          "id": "e9b1ec4a-9491-4a18-ac1e-ab83c34a74c7",
+          "name": "Legal",
+          "slug": "legal",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-24T11:01:25.942Z"
+        }
+      ]
+    },
+    {
+      "id": "e7ecf6aa-ccb6-429b-9025-6d244b3ba394",
+      "title": "ssssssss",
+      "slug": "ssssssss",
+      "content": "<p>ssssssss</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "ssssss",
+      "status": "public",
+      "createdAt": "2026-02-11T09:06:05.137Z",
+      "admin": {
+        "id": "4a62c6cf-fa7e-4458-aeeb-134e840720f1",
+        "firstName": "Franck",
+        "lastName": "RAKOTO",
+        "email": "solofonirina35@gmail.com"
+      },
+      "company": {
+        "id": "2e98341e-a026-445f-85a1-375d72013c84",
+        "name": "Solution Talenteed SARL",
+        "email": "guymunsadi@solutiontalenteed.com"
+      },
+      "image": {
+        "id": "4762a2aa-3d29-46e1-beb9-ef79207fce63",
+        "fileUrl": "http://localhost:8080/public/uploads/9f2c58e4-1bc9-42a5-a577-a90bc8aac473-original-f99e3326ed0eac38809ce9e713abe307.webp",
+        "fileType": "image/webp",
+        "fileName": "original-f99e3326ed0eac38809ce9e713abe307.webp"
+      },
+      "categories": [
+        {
+          "id": "3399862a-bff7-4a1d-a2ad-f6423eb01cd9",
+          "name": "Interview",
+          "slug": "interview",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-09-13T18:57:40.503Z"
+        },
+        {
+          "id": "84d06dfd-72dc-454a-9821-a32b246eabb2",
+          "name": "Diversity",
+          "slug": "diversity",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-10T08:49:29.578Z"
+        },
+        {
+          "id": "e9b1ec4a-9491-4a18-ac1e-ab83c34a74c7",
+          "name": "Legal",
+          "slug": "legal",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-24T11:01:25.942Z"
+        }
+      ]
+    },
+    {
+      "id": "1a1115b7-1cc8-4af9-95c1-70ed1d4b69e1",
+      "title": "haha",
+      "slug": "haha",
+      "content": "<p>a</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "aa",
+      "status": "public",
+      "createdAt": "2026-02-11T09:05:21.309Z",
+      "admin": {
+        "id": "4a62c6cf-fa7e-4458-aeeb-134e840720f1",
+        "firstName": "Franck",
+        "lastName": "RAKOTO",
+        "email": "solofonirina35@gmail.com"
+      },
+      "company": {
+        "id": "2e98341e-a026-445f-85a1-375d72013c84",
+        "name": "Solution Talenteed SARL",
+        "email": "guymunsadi@solutiontalenteed.com"
+      },
+      "image": {
+        "id": "4e968ef2-02bb-4744-8dc3-85b3cf004fb4",
+        "fileUrl": "http://localhost:8080/public/uploads/1fa1735c-1900-4044-a97a-872c61f4b3de-original-3dbd2c1e5a7127af70cd82dd7fc0f350.webp",
+        "fileType": "image/webp",
+        "fileName": "original-3dbd2c1e5a7127af70cd82dd7fc0f350.webp"
+      },
+      "categories": [
+        {
+          "id": "3399862a-bff7-4a1d-a2ad-f6423eb01cd9",
+          "name": "Interview",
+          "slug": "interview",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-09-13T18:57:40.503Z"
+        },
+        {
+          "id": "84d06dfd-72dc-454a-9821-a32b246eabb2",
+          "name": "Diversity",
+          "slug": "diversity",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-10T08:49:29.578Z"
+        },
+        {
+          "id": "e9b1ec4a-9491-4a18-ac1e-ab83c34a74c7",
+          "name": "Legal",
+          "slug": "legal",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-24T11:01:25.942Z"
+        }
+      ]
+    },
+    {
+      "id": "15734a32-c2aa-48e5-89c5-6027176d3e94",
+      "title": "encore un test",
+      "slug": "encore_un_test",
+      "content": "<p>aaaaaaaa</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "aaaa",
+      "status": "public",
+      "createdAt": "2026-02-11T09:04:21.181Z",
+      "admin": null,
+      "company": null,
+      "image": {
+        "id": "df99f7de-3896-44d5-bdaf-d14074927c2f",
+        "fileUrl": "http://localhost:8080/public/uploads/180949e8-9b36-4bd4-8176-7fcad3243152-original-78f0f2908e06b86b85eefc36f90781b6.webp",
+        "fileType": "image/webp",
+        "fileName": "original-78f0f2908e06b86b85eefc36f90781b6.webp"
+      },
+      "categories": [
+        {
+          "id": "3399862a-bff7-4a1d-a2ad-f6423eb01cd9",
+          "name": "Interview",
+          "slug": "interview",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-09-13T18:57:40.503Z"
+        },
+        {
+          "id": "84d06dfd-72dc-454a-9821-a32b246eabb2",
+          "name": "Diversity",
+          "slug": "diversity",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-10T08:49:29.578Z"
+        },
+        {
+          "id": "e9b1ec4a-9491-4a18-ac1e-ab83c34a74c7",
+          "name": "Legal",
+          "slug": "legal",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-24T11:01:25.942Z"
+        }
+      ]
+    },
+    {
+      "id": "7a21a4f6-66c4-463c-90a3-5dd271650b9c",
+      "title": "siuuuuuuuuu",
+      "slug": "siuuuuuuuuu",
+      "content": "<p><strong>1 – Manque d'attractivité de certains secteurs</strong><br>&nbsp;</p><p>Le nombre de candidats à l'emploi diminue, notamment dans les secteurs et les métiers considérés comme « difficiles » ou « épuisants ». Les horaires de travail sont irréguliers et les conditions de travail sont difficiles.</p><p>&nbsp;</p><p><strong>2 – Générations Y et Z et nouvelles attentes des candidats</strong><br>&nbsp;</p><p>Une autre raison majeure est l'évolution des besoins et des considérations des candidats. La génération Z est désormais le vivier de candidats à conquérir, et la génération Y est majoritaire dans la population active actuelle. Mais ils ne vont plus travailler simplement parce qu'ils doivent le faire. Le travail est une utilité sociale, un moyen de s'exprimer et doit avoir un but.</p><p>Les conditions de travail doivent leur permettre de s'épanouir tant dans leur vie professionnelle que personnelle. Le candidat d'aujourd'hui n'hésite pas à sanctionner publiquement une entreprise, une profession ou toute une industrie si les conditions de travail ne répondent pas à ses attentes.</p><p><br><strong>3 – Évolution professionnelle</strong><br>&nbsp;</p><p>La compétence est également un enjeu majeur dans certains processus de recrutement. C'est la principale raison de la pénurie croissante d'emplois. Les compétences ne se développent pas aussi rapidement que les avancées technologiques, numériques et écologiques. Certains postes très spécifiques restent sans candidats potentiels. Les tensions professionnelles sont donc souvent imputées à une mauvaise gestion des compétences au sein de l'entreprise, tant en termes d'anticipation des futurs besoins en compétences de l'entreprise qu'en termes de gestion des carrières.</p><p>&nbsp;</p><p><strong>4 – Stratégies de recrutement inappropriées pour les métiers en tension</strong><br>&nbsp;</p><p>On peut expliquer aussi la tension par :</p><p>• Des lacunes dans les stratégies et procédures de recrutement proposées.</p><p>• L’utilisation des « anciens » canaux de recrutement non appréciés des candidats.</p><p>• Le manque d'attention à l'image de marque de l'employeur ;</p><p>• Recrutement limité à des zones précises (département, pays, UE)...</p><p>&nbsp;</p><p>&nbsp;</p>",
+      "publicContent": "<p>siuuuu</p>",
+      "isPremium": false,
+      "metaDescription": "siuuuuuuu",
+      "status": "public",
+      "createdAt": "2026-02-05T07:44:27.021Z",
+      "admin": null,
+      "company": null,
+      "image": {
+        "id": "66cf798e-bba3-4481-be82-16ebb633df18",
+        "fileUrl": "http://localhost:8080/public/uploads/d0d60bfd-fd35-4d01-b220-4b8e619c5dd9-616192855_1190316486569660_3522883950539404920_n.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "616192855_1190316486569660_3522883950539404920_n.jpg"
+      },
+      "categories": [
+        {
+          "id": "3399862a-bff7-4a1d-a2ad-f6423eb01cd9",
+          "name": "Interview",
+          "slug": "interview",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-09-13T18:57:40.503Z"
+        },
+        {
+          "id": "84d06dfd-72dc-454a-9821-a32b246eabb2",
+          "name": "Diversity",
+          "slug": "diversity",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-10T08:49:29.578Z"
+        },
+        {
+          "id": "e9b1ec4a-9491-4a18-ac1e-ab83c34a74c7",
+          "name": "Legal",
+          "slug": "legal",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-24T11:01:25.942Z"
+        }
+      ]
+    },
+    {
+      "id": "ad7b9599-a73c-4d6e-bf5b-60a51b7974eb",
+      "title": "test article",
+      "slug": "test_article",
+      "content": "<p>test article</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "test article",
+      "status": "public",
+      "createdAt": "2026-01-31T17:47:50.655Z",
+      "admin": {
+        "id": "4a62c6cf-fa7e-4458-aeeb-134e840720f1",
+        "firstName": "Franck",
+        "lastName": "RAKOTO",
+        "email": "solofonirina35@gmail.com"
+      },
+      "company": null,
+      "image": {
+        "id": "db74abc4-6fb5-48ff-85d0-9a237170eff9",
+        "fileUrl": "http://localhost:8080/public/uploads/187d498c-9d11-4313-b01f-266df4b6f7e7-Difference-Between-Article-and-Journal_1.webp",
+        "fileType": "image/webp",
+        "fileName": "Difference-Between-Article-and-Journal_1.webp"
+      },
+      "categories": [
+        {
+          "id": "3399862a-bff7-4a1d-a2ad-f6423eb01cd9",
+          "name": "Interview",
+          "slug": "interview",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-09-13T18:57:40.503Z"
+        }
+      ]
+    },
+    {
+      "id": "6df16bf4-d273-48db-abe5-7288afa14a31",
+      "title": "Targeted recruitment by Solution Talenteed",
+      "slug": "targeted_recruitment_by_solution_talenteed",
+      "content": "<p>Solution Talenteed is shaking up traditional recruitment practices once again by introducing a proactive and targeted approach to meet businesses' talent needs.</p><p>Solution Talenteed continues to disrupt traditional recruitment practices by introducing a proactive and targeted approach to meet the talent needs of businesses. At the heart of this innovative approach lies the concept of Active Proposition. Our goal is clear: to anticipate and proactively address the recruitment needs of companies by identifying and actively proposing qualified talents, selected for their technical skills, professional experiences, and, most importantly, their personal abilities.</p><p>We don't just present candidates: we support them in their job search or pursuit of new opportunities, ensuring optimal alignment between their skills and career aspirations and the specific needs of businesses. Before each talent proposal, we conduct a thorough analysis of the company's needs, including the position to be filled and the skills required to succeed within it.</p><p>Solution Talenteed offers another approach to tailor-made recruitment, transforming the way this function is traditionally perceived. Our commitment is to foster a dynamic and results-oriented approach, enabling companies to quickly find talent and talents to find professional opportunities perfectly suited to their skills and aspirations.</p><p>&nbsp;</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "Solution talenteed; recruitment; recrutement; Luxembourg; ",
+      "status": "draft",
+      "createdAt": "2024-02-27T06:20:04.603Z",
+      "admin": {
+        "id": "7cb93a6a-d71e-457f-ba72-3aa7c3944a36",
+        "firstName": "Kerian",
+        "lastName": "Wilton",
+        "email": "kwilton@solutiontalenteed.com"
+      },
+      "company": {
+        "id": "2e98341e-a026-445f-85a1-375d72013c84",
+        "name": "Solution Talenteed SARL",
+        "email": "guymunsadi@solutiontalenteed.com"
+      },
+      "image": {
+        "id": "ba1d4de4-4a1f-4ca9-b111-c55754486fbe",
+        "fileUrl": "https://www.talenteed.io/public/uploads/b8dc58ed-68c4-4f69-a9f0-3aaae1376dfb-Capture%20d%E2%80%99%C3%A9cran%202024-02-27%20%C3%A0%2010.07.13.png",
+        "fileType": "image/png",
+        "fileName": "Capture d’écran 2024-02-27 à 10.07.13.png"
+      },
+      "categories": [
+        {
+          "id": "84d06dfd-72dc-454a-9821-a32b246eabb2",
+          "name": "Diversity",
+          "slug": "diversity",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-10T08:49:29.578Z"
+        }
+      ]
+    },
+    {
+      "id": "66c956a5-c4ea-4af5-8f58-c072f2ca0464",
+      "title": "Maîtrisez la Gestion à Distance d'une Équipe : Conseils efficaces pour 2024",
+      "slug": "matrisez_la_gestion_distance_dune_quipe_conseils_efficaces_pour_2024",
+      "content": "<h2>Comment gérer efficacement une équipe à distance ?</h2><p>La gestion d'une équipe à distance peut présenter des défis uniques, mais il existe des stratégies efficaces pour y faire face.&nbsp;</p><p><strong>Voici quelques conseils pour gérer efficacement une équipe à distance :</strong></p><h3>1. Communiquer régulièrement :&nbsp;</h3><p>Maintenez une communication ouverte et régulière avec les membres de votre équipe. Utilisez des outils de communication en ligne tels que les appels vidéo, les chats et les e-mails pour rester en contact et partager des informations importantes.</p><h3>2. Établir des attentes claires :&nbsp;</h3><p>Définissez des objectifs et des attentes claires pour chaque membre de l'équipe. Assurez-vous que tous comprennent leurs responsabilités et les délais à respecter.</p><h3>3. Favoriser la confiance et l'autonomie :&nbsp;</h3><p>Accordez à vos membres d'équipe la confiance et l'autonomie nécessaires pour accomplir leurs tâches. Encouragez-les à prendre des initiatives et à trouver des solutions par eux-mêmes.</p><h3>4. Utiliser des outils de collaboration en ligne&nbsp;:</h3><p>&nbsp;Utilisez des outils de collaboration en ligne tels que les plateformes de gestion de projet, les outils de partage de fichiers et les tableaux de bord pour faciliter la collaboration et le suivi des tâches.</p><h3>5. Organiser des réunions virtuelles régulières :&nbsp;</h3><p>Planifiez des réunions virtuelles régulières pour discuter des progrès, des défis et des questions. Cela permettra de maintenir l'engagement et de renforcer la cohésion de l'équipe.</p><h3>6. Encourager la communication informelle :&nbsp;</h3><p>Encouragez les membres de l'équipe à se connecter informellement, par exemple en créant des canaux de discussion pour des sujets non liés au travail. Cela favorisera les liens sociaux et renforcera l'esprit d'équipe.</p><h3>7. Offrir un soutien et des ressources :</h3><p>&nbsp;Assurez-vous que les membres de votre équipe disposent des ressources et du soutien nécessaires pour accomplir leur travail à distance. Soyez disponible pour répondre à leurs questions et résoudre les problèmes éventuels.</p><h3>8. Reconnaître et célébrer les réussites :&nbsp;</h3><p>N'oubliez pas de reconnaître et de célébrer les réussites individuelles et collectives de votre équipe. Cela contribuera à maintenir la motivation et l'engagement.</p><p><strong>En suivant ces conseils, vous pourrez gérer efficacement une équipe à distance et soutenir la productivité et la collaboration malgré la distance physique.</strong></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "draft",
+      "createdAt": "2024-01-03T09:04:07.156Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": {
+        "id": "2e98341e-a026-445f-85a1-375d72013c84",
+        "name": "Solution Talenteed SARL",
+        "email": "guymunsadi@solutiontalenteed.com"
+      },
+      "image": {
+        "id": "a0bbf596-3300-4cd1-a26b-522b94526097",
+        "fileUrl": "https://www.talenteed.io/public/uploads/def4e065-ece6-4c0e-87ec-5441ebd971b0-TALENTEEDIO%20Mai%CC%82trisez%20la%20Gestion%20a%CC%80%20Distance%20d'une%20E%CC%81quipe%20%20Conseils%20efficaces%20pour%202024.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "TALENTEEDIO Maîtrisez la Gestion à Distance d'une Équipe  Conseils efficaces pour 2024.jpg"
+      },
+      "categories": [
+        {
+          "id": "3399862a-bff7-4a1d-a2ad-f6423eb01cd9",
+          "name": "Interview",
+          "slug": "interview",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-09-13T18:57:40.503Z"
+        },
+        {
+          "id": "84d06dfd-72dc-454a-9821-a32b246eabb2",
+          "name": "Diversity",
+          "slug": "diversity",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-10T08:49:29.578Z"
+        }
+      ]
+    },
+    {
+      "id": "708e32c9-2702-4c52-b21e-5aecb9344fcb",
+      "title": "Évoluer en Permanence : Les Atouts Cruciaux de la Formation Continue",
+      "slug": "voluer_en_permanence_les_atouts_cruciaux_de_la_formation_continue",
+      "content": "<h2>L'importance de la formation continue pour les employés est cruciale dans le monde du travail actuel.&nbsp;</h2><p><strong>Voici quelques raisons pour lesquelles la formation continue est essentielle :</strong></p><h3>1. Acquisition de nouvelles compétences :&nbsp;</h3><p>La formation continue permet aux employés d'acquérir de nouvelles compétences et connaissances qui sont nécessaires pour rester compétitifs sur le marché du travail.</p><h3>2. Amélioration de la performance :&nbsp;</h3><p>La formation continue contribue à améliorer la performance des employés en leur permettant de développer leurs compétences et de se tenir au courant des dernières tendances et technologies dans leur domaine.</p><h3>3. Motivation et satisfaction au travail :&nbsp;</h3><p>La formation continue offre aux employés la possibilité de se développer professionnellement, ce qui peut augmenter leur motivation et leur satisfaction au travail.</p><h3>4. Adaptation aux changements :&nbsp;</h3><p>Dans un monde en constante évolution, la formation continue permet aux employés de s'adapter aux nouvelles technologies, aux nouvelles méthodes de travail et aux changements organisationnels.</p><h3>5. Avantage concurrentiel :&nbsp;</h3><p>Les entreprises qui investissent dans la formation continue de leurs employés bénéficient d'un avantage concurrentiel en ayant une main-d'œuvre qualifiée et compétente.</p><h3>6. Réduction du turnover :&nbsp;</h3><p>La formation continue peut contribuer à la fidélisation des employés en leur offrant des opportunités de développement professionnel et en les aidant à progresser dans leur carrière au sein de l'entreprise.</p><h3>7. Amélioration de la communication et de la collaboration :&nbsp;</h3><p>La formation continue peut favoriser une meilleure communication et collaboration entre les membres de l'équipe, en renforçant les compétences en communication et en encourageant le partage des connaissances.</p><p>En résumé, la formation continue est essentielle pour les employés, car elle leur permet d'acquérir de nouvelles compétences, d'améliorer leur performance, de rester motivés et satisfaits au travail, de s'adapter aux changements et de maintenir un avantage concurrentiel sur le marché du travail.&nbsp;</p><p><strong>Elle est également bénéfique pour les entreprises en contribuant à la fidélisation des employés et à l'amélioration de la performance globale de l'organisation.</strong></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "draft",
+      "createdAt": "2024-01-03T08:56:58.563Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "35ca49d6-820d-4bc2-ba76-fa38429e84f4",
+        "fileUrl": "https://www.talenteed.io/public/uploads/181da63f-eb7c-4912-b0c4-52bdc0581b24-talenteedio%20Comment%20De%CC%81velopper%20une%20Culture%20d'Entreprise%20Forte%20%20Guide%20e%CC%81tape%20par%20e%CC%81tape.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "talenteedio Comment Développer une Culture d'Entreprise Forte  Guide étape par étape.jpg"
+      },
+      "categories": [
+        {
+          "id": "84d06dfd-72dc-454a-9821-a32b246eabb2",
+          "name": "Diversity",
+          "slug": "diversity",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-10T08:49:29.578Z"
+        }
+      ]
+    },
+    {
+      "id": "1f3a71ed-8895-44a3-8f3a-e0da7072d2b4",
+      "title": "Comment Développer une Culture d'Entreprise Forte : Guide étape par étape",
+      "slug": "comment_dvelopper_une_culture_dentreprise_forte_guide_tape_par_tape",
+      "content": "<h2>La culture d'entreprise est l'ADN de votre organisation.&nbsp;</h2><p>Elle définit comment les employés interagissent entre eux, avec les clients et les parties participent. Une culture d'entreprise forte peut améliorer la productivité, augmenter l'engagement des employés et attirer les meilleurs talents.&nbsp;</p><p><strong>Voici un guide étape par étape pour développer une culture d'entreprise forte.</strong></p><h3>Étape 1 :&nbsp;</h3><p>Définir vos valeurs fondamentales. Les valeurs sont les principes qui guident le comportement de votre entreprise. Elles doivent être claires, concises et alignées avec la mission et la vision de votre entreprise.</p><h3>Étape 2 :&nbsp;</h3><p>Communiquer vos valeurs, une fois que vous avez défini vos valeurs, il est essentiel de les communiquer à tous les niveaux de l'entreprise. Cela peut se faire par le biais de réunions d'entreprise, de bulletins d'information internes, de formations et d'ateliers.</p><h3>Étape 3 :&nbsp;</h3><p>Intégrer les valeurs dans les processus de l'entreprise, les valeurs de l'entreprise doivent être intégrées dans tous les processus de l'entreprise, de l'embauche à l'évaluation des performances. Cela garantit que les valeurs sont vécues et non simplement affichées sur le mur.</p><h3>Étape 4 :&nbsp;</h3><p>Reconnaître et récompenser l'adhésion aux valeurs. Il est important de reconnaître et de récompenser les employés qui incarnent les valeurs de l'entreprise. Cela peut se faire par le biais de programmes de reconnaissance des employés, de promotions ou de primes.</p><h3>Étape 5 :&nbsp;</h3><p>Faire preuve de cohérence. La cohérence est la clé pour maintenir une culture d'entreprise forte. Les dirigeants doivent montrer l'exemple en vivant les valeurs de l'entreprise.</p><p>Développer une culture d'entreprise forte ne se fait pas du jour au lendemain.&nbsp;</p><p>C'est un processus continu qui nécessite un engagement de la part de tous les membres de l'entreprise.&nbsp;</p><p><strong>En suivant ces étapes, vous pouvez créer une culture d'entreprise qui favorise l'engagement, la productivité et la satisfaction des employés.</strong></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "draft",
+      "createdAt": "2024-01-03T08:49:12.786Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": {
+        "id": "2e98341e-a026-445f-85a1-375d72013c84",
+        "name": "Solution Talenteed SARL",
+        "email": "guymunsadi@solutiontalenteed.com"
+      },
+      "image": {
+        "id": "3bd8c945-3544-470b-8466-73617d6dda63",
+        "fileUrl": "https://www.talenteed.io/public/uploads/4dc2e723-a7a4-4b63-be4d-67026ed538d4-talenteedio%20Comment%20De%CC%81velopper%20une%20Culture%20d'Entreprise%20Forte%20%20Guide%20e%CC%81tape%20par%20e%CC%81tape.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "talenteedio Comment Développer une Culture d'Entreprise Forte  Guide étape par étape.jpg"
+      },
+      "categories": [
+        {
+          "id": "3399862a-bff7-4a1d-a2ad-f6423eb01cd9",
+          "name": "Interview",
+          "slug": "interview",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-09-13T18:57:40.503Z"
+        },
+        {
+          "id": "84d06dfd-72dc-454a-9821-a32b246eabb2",
+          "name": "Diversity",
+          "slug": "diversity",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-10T08:49:29.578Z"
+        }
+      ]
+    },
+    {
+      "id": "b7d720a1-70e6-46c0-bc11-36022406586e",
+      "title": "Secteurs en Pénurie : L'Atout Majeur des Cabinets de Recrutement",
+      "slug": "secteurs_en_pnurie_latout_majeur_des_cabinets_de_recrutement",
+      "content": "<h2>Recrutement Stratégique : La Pertinence Cruciale des Cabinets de Recrutement dans les Secteurs en Pénurie</h2><p>Dans le contexte d'un marché du travail compétitif et des défis de recrutement croissants, les entreprises, en particulier celles évoluant dans des secteurs en pénurie, ont recours aux services spécialisés des cabinets de recrutement.</p><p>&nbsp;Décortiquons les raisons pour lesquelles cette approche s'avère indispensable et met en lumière les atouts majeurs de cette collaboration.</p><h3><strong>1. Expertise Sectorielle Aiguisée :</strong></h3><p>Les cabinets de recrutement se distinguent par leur expertise pointue dans des secteurs spécifiques. Dans les domaines confrontés à des pénuries de compétences, cette connaissance approfondie devient un atout stratégique. Ces experts comprennent non seulement les compétences techniques nécessaires, mais aussi les subtilités culturelles et les tendances du marché.</p><h3><strong>2. Réseau Étendu de Talents :</strong></h3><p>Face à la concurrence acharnée pour attirer les meilleurs talents, les cabinets de recrutement offrent un avantage indéniable. Leur réseau étendu permet aux entreprises d'accéder à un vivier de candidats qualifiés, souvent inatteignable par des méthodes de recrutement classiques.</p><h3><strong>3. Efficacité en Termes de Temps et d'Énergie :</strong></h3><p>Recruter peut-être une tâche chronophage, surtout lorsqu'il s'agit de pourvoir des postes exigeant des compétences pointues. Les cabinets de recrutement prennent en charge l'intégralité du processus, libérant ainsi les ressources internes des entreprises pour se concentrer sur leurs activités principales sans compromettre la qualité du recrutement.</p><h3><strong>4. Agilité face aux Évolutions du Marché :</strong></h3><p>Dans des secteurs sujets à des changements rapides, l'agilité est un atout majeur. Les cabinets de recrutement, constamment à l'affût des tendances émergentes, aident les entreprises à rester à la pointe en fournissant des informations cruciales sur les évolutions du marché et les compétences recherchées.</p><h3><strong>5. Minimisation des Risques de Recrutement Infructueux :</strong></h3><p>L'embauche d'un candidat inadapté peut engendrer des coûts importants. Les cabinets de recrutement atténuent ce risque grâce à des processus de sélection rigoureux, assurant ainsi que les candidats présentés correspondent parfaitement aux besoins spécifiques de l'entreprise.</p><p>&nbsp;</p><p>Dans des secteurs en proie à des pénuries de compétences, collaborer avec des cabinets de recrutement ne relève pas simplement d'un choix stratégique, mais d'une nécessité impérieuse. Leur expertise, leur réseau étendu, leur efficacité temporelle, leur agilité face aux mutations du marché et leur capacité à minimiser les risques font des cabinets de recrutement des partenaires essentiels pour les entreprises souhaitant demeurer compétitives dans un environnement professionnel en constante mutation.&nbsp;</p><p>En optant pour cette collaboration, les entreprises tracent la voie vers la constitution d'équipes exceptionnelles, véritables moteurs de leur réussite future.</p><p>À cet égard, <a href=\"https://www.solutiontalenteed.com/\">Solution Talenteed </a>se distingue avec sa plateforme innovante, <strong>talenteed.io,</strong> offrant une solution complète pour le recrutement de talents. Associant technologie de pointe et l'expertise d'une équipe professionnelle.&nbsp;</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "public",
+      "createdAt": "2023-11-27T06:39:44.032Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "27231662-4b48-47d1-abe9-b1db7d0ddae0",
+        "fileUrl": "https://www.talenteed.io/public/uploads/825d14c8-e18c-4d5a-ad58-15931c27d56d-Secteurs%20en%20Pe%CC%81nurie%20%20L'Atout%20Majeur%20des%20Cabinets%20de%20Recrutement.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Secteurs en Pénurie  L'Atout Majeur des Cabinets de Recrutement.jpg"
+      },
+      "categories": [
+        {
+          "id": "3399862a-bff7-4a1d-a2ad-f6423eb01cd9",
+          "name": "Interview",
+          "slug": "interview",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-09-13T18:57:40.503Z"
+        }
+      ]
+    },
+    {
+      "id": "d1d6dde9-1731-4d2c-b469-86f5140e94c6",
+      "title": "Soft Skills vs Hard Skills : L'Harmonie Essentielle pour l'Excellence d'une Équipe",
+      "slug": "soft_skills_vs_hard_skills_lharmonie_essentielle_pour_lexcellence_dune_quipe",
+      "content": "<p>Le débat entre les soft skills et les hard skills fait rage, chacune ayant sa propre importance.&nbsp;</p><p>Cependant, pour former une équipe véritablement performante, il est crucial de comprendre l'équilibre parfait entre ces deux compétences.</p><h3><strong>La Dualité des Compétences :</strong></h3><p><strong>Les Hard Skills</strong>, le Fondement Technique : Les hard skills représentent le savoir-faire technique spécifique à une tâche ou un domaine. Dans un monde en constante évolution, ces compétences évoluent rapidement. Un développeur maîtrisant les langages de programmation, par exemple, apporte des hard skills essentielles à son équipe.</p><p><strong>Les Soft Skills,</strong> la Clef des Relations Humaines : Les soft skills, en revanche, sont souvent considérées comme les compétences humaines, celles qui facilitent la collaboration, la communication et la résolution de problèmes. Des membres d'équipe dotés d'empathie, de leadership et de pensée critique apportent des soft skills qui favorisent un environnement de travail harmonieux.</p><h3><strong>L'Équilibre Parfait :</strong></h3><p><strong>Communication Transparente </strong>: Une équipe performante a besoin d'une communication transparente. Les soft skills, tels que la communication efficace et l'écoute active, sont essentiels pour garantir que les idées sont partagées sans heurts et que les conflits sont résolus de manière constructive.</p><p><strong>Innovation et Adaptabilité </strong>: Les hard skills sont cruciales pour résoudre des problèmes spécifiques, mais c'est l'agilité, une soft skill, qui permet à une équipe de s'adapter aux changements rapides. L'équilibre réside dans la capacité à appliquer des compétences techniques tout en restant ouvert aux nouvelles idées et approches.</p><p><strong>Leadership et Collaboration</strong> : Une équipe performante nécessite un leadership fort, soutenu par des soft skills comme la collaboration et la gestion du temps. Un leader qui comprend le potentiel de chacun, favorise la créativité, et motive les membres de l'équipe démontre l'importance de l'équilibre entre hard et soft skills.</p><h3><strong>La Réalité Professionnelle :</strong></h3><p>Les entreprises qui réussissent reconnaissent l'importance de l'équilibre entre hard et soft skills. Une étude de LinkedIn révèle que 57% des leaders affirment que des soft skills solides sont plus importants que des hard skills.</p><h3><strong>Conclusion :</strong></h3><p>L'équilibre parfait entre soft et hard skills est la clé d'une équipe performante. Les hard skills fournissent la base technique, tandis que les soft skills dynamisent la collaboration, l'innovation et le leadership.&nbsp;</p><p><strong>En cultivant cet équilibre, les équipes peuvent atteindre de nouveaux sommets, alliant expertise technique et dynamique humaine pour créer un environnement professionnel prospère.</strong></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "public",
+      "createdAt": "2023-11-27T06:25:14.672Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "17de2e3d-f512-4002-a947-1aca2dc6d8bc",
+        "fileUrl": "https://www.talenteed.io/public/uploads/e0497af0-4829-4d68-8112-f84a00c40703-Soft%20Skills%20vs%20Hard%20Skills%20%20L'Harmonie%20Essentielle%20pour%20l'Excellence%20d'une%20E%CC%81quipe.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Soft Skills vs Hard Skills  L'Harmonie Essentielle pour l'Excellence d'une Équipe.jpg"
+      },
+      "categories": [
+        {
+          "id": "84d06dfd-72dc-454a-9821-a32b246eabb2",
+          "name": "Diversity",
+          "slug": "diversity",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-10T08:49:29.578Z"
+        }
+      ]
+    },
+    {
+      "id": "2549cb1e-9a41-4e55-afa7-ebf1f6f2915d",
+      "title": "Freelancing en Essor : L'Adaptation des Entreprises à la Révolution du Travail",
+      "slug": "freelancing_en_essor_ladaptation_des_entreprises_la_rvolution_du_travail",
+      "content": "<p>Le freelancing, en pleine expansion, redéfinit le paysage professionnel. Plongeons dans l'adaptation des entreprises à cette ère du travail indépendant, en évaluant attentivement les avantages et les défis de cette évolution.</p><h3><strong>Points Forts du Freelancing :</strong></h3><h4><strong>1. Flexibilité Optimale&nbsp;</strong></h4><p>Les entreprises accueillent le freelancing pour sa flexibilité inégalée. D'après Upwork, 64% des entreprises saluent cette adaptabilité, permettant des ajustements rapides en fonction des besoins.</p><h4><strong>2. Expertise Ciblée à Portée de Main&nbsp;</strong></h4><p>La montée en puissance du freelancing offre un accès immédiat à des experts. McKinsey souligne que 65% des entreprises optent pour des freelances afin d'acquérir des compétences rares en interne.</p><h4><strong>3. Maîtrise des Coûts Fixes&nbsp;</strong></h4><p>Opter pour des freelances permet de réduire les coûts fixes. Selon Deloitte, cette stratégie permet d'optimiser les budgets tout en préservant la qualité.</p><h3><strong>Points Faibles du Freelancing :</strong></h3><h4><strong>1. Défi de l'Intégration Culturelle&nbsp;</strong></h4><p>L'intégration culturelle se révèle délicate. Harvard Business Review indique que 45% des entreprises ont du mal à intégrer les freelances, risquant une perte de cohésion d'équipe.</p><h4><strong>2. Communication Virtuelle&nbsp;</strong></h4><p>&nbsp;Malgré la collaboration virtuelle, la communication peut s'avérer complexe. Forbes signale que 21% des entreprises rencontrent des difficultés à maintenir une communication transparente et efficace.</p><h4><strong>3. Stabilité à Long Terme&nbsp;</strong></h4><p>&nbsp;L'instabilité du freelancing suscite des préoccupations. Deloitte souligne que 32% des entreprises craignent pour la stabilité à long terme de leurs équipes freelances.</p><p>&nbsp;</p><p>L'ère du freelancing offre des avantages substantiels, mais la navigation nécessite finesse. L'adaptation exige une gestion prudente de la communication, une intégration culturelle réfléchie et une stratégie équilibrée pour maximiser les avantages tout en minimisant les défis. C'est une période de transformation où agilité et innovation deviennent les clés du succès.</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "public",
+      "createdAt": "2023-11-27T06:18:12.708Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "12e3a16e-b94b-4b44-9d76-c160599ea570",
+        "fileUrl": "https://www.talenteed.io/public/uploads/8488235d-c302-4c64-a755-f667212ce680-L'Ascension%20du%20Freelancing%20%20Se%20Re%CC%81inventer%20a%CC%80%20ce%20Nouveau%20Mode%CC%80le%20de%20Travail.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "L'Ascension du Freelancing  Se Réinventer à ce Nouveau Modèle de Travail.jpg"
+      },
+      "categories": [
+        {
+          "id": "3399862a-bff7-4a1d-a2ad-f6423eb01cd9",
+          "name": "Interview",
+          "slug": "interview",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-09-13T18:57:40.503Z"
+        }
+      ]
+    },
+    {
+      "id": "36eb28db-8277-4cad-9f1b-b980ab22a45e",
+      "title": "Networking Gagnant : Liens Authentiques, Succès Professionnel",
+      "slug": "networking_gagnant_liens_authentiques_succs_professionnel",
+      "content": "<h2><strong>L'Art du Networking Professionnel : Des Liens Authentiques pour Propulser Votre Carrière</strong></h2><p>Dans le paysage professionnel contemporain, le networking ne se résume pas à une simple compétence accessoire ; il s'agit plutôt d'une clé indispensable pour ouvrir des portes et favoriser l'avancement de sa carrière.&nbsp;</p><p>Toutefois, au-delà des échanges de cartes de visite et des poignées de main, c'est l'authenticité qui se révèle être le facteur déterminant dans la construction de relations durables.</p><h3><strong>1-Des Liens Qui Pèsent</strong>&nbsp;</h3><p>Les chiffres parlent d'eux-mêmes : une enquête réalisée par LinkedIn révèle que 85% des opportunités professionnelles se concrétisent grâce au networking. Ceci met en lumière l'importance de tisser des liens significatifs au sein de votre industrie.</p><h3><strong>2-Écoute Active et Empathie</strong>&nbsp;</h3><p>Une étude de la Harvard Business Review démontre que les professionnels qui font preuve d'une écoute active et d'empathie lors de leurs interactions en networking sont plus enclins à établir des relations solides. Prenez le temps de réellement comprendre les besoins et les objectifs de vos interlocuteurs.</p><h3><strong>3-Sortir de sa Zone de Confort</strong>&nbsp;</h3><p>L'authenticité émerge souvent lorsque l'on ose sortir de sa zone de confort. Participez à des événements professionnels, engagez-vous dans des conversations spontanées, et n'hésitez pas à être vous-même. La diversité des expériences crée des opportunités inattendues.</p><h3><strong>4-La Puissance des Réseaux Sociaux</strong>&nbsp;</h3><p>Les médias sociaux se révèlent être des outils puissants pour le networking. Partagez votre expertise, engagez-vous dans des conversations pertinentes, et connectez-vous avec des professionnels partageant les mêmes idées. Selon une enquête de Jobvite, 93% des recruteurs utilisent les réseaux sociaux pour repérer des candidats.</p><h3><strong>5-Suivi Consistant</strong>&nbsp;</h3><p>La construction de relations authentiques ne se fait pas du jour au lendemain. Maintenez un suivi régulier avec vos contacts. Envoyez des messages de remerciement, partagez des informations utiles, et démontrez un véritable intérêt pour leur réussite.</p><p>L'art du networking professionnel repose sur la création de relations authentiques, alimentées par l'écoute, l'empathie, et la volonté de sortir de sa zone de confort. Les faits démontrent que ces efforts ne sont pas seulement bénéfiques à court terme, mais représentent également un investissement précieux pour une carrière durable et épanouissante.&nbsp;</p><p>Ainsi, ne sous-estimez jamais le pouvoir d'une connexion authentique dans le monde professionnel.</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "public",
+      "createdAt": "2023-11-27T06:02:17.197Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "698ff7d7-a120-4e3d-81cb-dd66825aaa28",
+        "fileUrl": "https://www.talenteed.io/public/uploads/76b096bb-ac36-4bd6-acaa-704f0cb18ba9-Networking%20Gagnant%20%20Liens%20Authentiques,%20Succe%CC%80s%20Professionnel!.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Networking Gagnant  Liens Authentiques, Succès Professionnel!.jpg"
+      },
+      "categories": [
+        {
+          "id": "3399862a-bff7-4a1d-a2ad-f6423eb01cd9",
+          "name": "Interview",
+          "slug": "interview",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-09-13T18:57:40.503Z"
+        }
+      ]
+    },
+    {
+      "id": "b908d368-78c7-4e00-b6cf-aecb42251749",
+      "title": "Mentoring Inversé : Quand Jeunes Employés Guident les Cadres",
+      "slug": "mentoring_invers_quand_jeunes_employs_guident_les_cadres",
+      "content": "<h2>Le mentoring inversé : Quand les jeunes employés deviennent les mentors des cadres.</h2><p><strong>Le mentoring inversé</strong>, une tendance intrigante du monde professionnel, inverse les rôles traditionnels en plaçant les jeunes employés dans le siège du mentorat vis-à-vis des cadres chevronnés. Cette approche novatrice offre une perspective unique, stimulant l'échange de connaissances et renversant la hiérarchie traditionnelle.</p><p>Selon une étude de Harvard Business Review, les entreprises adoptant le mentoring inversé constatent une amélioration significative de la compréhension des nouvelles technologies et des tendances émergentes parmi leurs cadres. Les jeunes employés, souvent plus à l'aise avec les outils numériques et les médias sociaux, deviennent ainsi des guides précieux pour leurs aînés dans ce paysage professionnel en constante évolution.</p><p>Le succès de cette pratique repose sur la volonté des cadres d'accepter l'apprentissage en provenance de sources moins conventionnelles. Des entreprises renommées telles que Google et Microsoft ont mis en place des programmes de mentoring inversé, où des employés juniors partagent leurs connaissances sur les dernières tendances technologiques, les médias sociaux, et même la culture d'entreprise moderne.</p><p>L'un des avantages clés de ce modèle est la création d'un environnement de travail inclusif, où chaque génération contribue à la croissance et au succès collectifs. Les jeunes employés, se sentant valorisés pour leurs compétences spécifiques, gagnent en confiance, tandis que les cadres bénéficient d'une mise à jour constante sur les innovations les plus récentes.</p><p>En conclusion, le mentoring inversé transcende les frontières générationnelles, favorisant un échange mutuel de compétences et de perspectives.</p><p><strong>Alors que le monde du travail continue d'évoluer, cette approche créative offre une solution dynamique pour maintenir la pertinence et l'efficacité au sein des entreprises.</strong></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "public",
+      "createdAt": "2023-11-24T09:41:28.384Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "94f2dab0-25ce-42f2-83e3-cdb6ef11bf97",
+        "fileUrl": "https://www.talenteed.io/public/uploads/c075af5b-91f5-4def-ad00-fa084b1a2f32-Le%20mentoring%20inverse%CC%81%20%20Quand%20les%20jeunes%20employe%CC%81s%20deviennent%20les%20mentors%20des%20cadres.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Le mentoring inversé  Quand les jeunes employés deviennent les mentors des cadres.jpg"
+      },
+      "categories": [
+        {
+          "id": "84d06dfd-72dc-454a-9821-a32b246eabb2",
+          "name": "Diversity",
+          "slug": "diversity",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-10-10T08:49:29.578Z"
+        }
+      ]
+    },
+    {
+      "id": "1e9f3285-c2ca-40af-aa47-34d31acbf228",
+      "title": "Maîtrisez votre Leadership: Adapter votre Style de Management à vos Talents",
+      "slug": "matrisez_votre_leadership_adapter_votre_style_de_management_vos_talents",
+      "content": "<p>Diriger une équipe nécessite une approche nuancée et adaptative. Le choix du style de management joue un rôle crucial dans la réalisation des objectifs tout en favorisant le bien-être des collaborateurs. Plongeons dans les quatre styles de management et découvrons comment les appliquer de manière judicieuse selon les circonstances.</p><h2><strong>Les 4 Facettes du Leadership</strong></h2><h3>Management Directif (1)</h3><p>Le management directif incarne une autorité affirmée, axée sur des résultats immédiats. Ce leader verticalement orienté privilégie l'efficacité, mais peut risquer de diminuer l'engagement et le moral de l'équipe.</p><h3>Management Persuasif (2)</h3><p>Ce style \"paternaliste\" combine résultats concrets et approche humaine. Le leader garde le contrôle des décisions tout en étant à l'écoute des idées de l'équipe. Bien motivant, il peut paraître rigide.</p><h3>Management Participatif (3)</h3><p>Adoptant une approche horizontale, le management participatif place l'humain au cœur du processus. Les idées des collaborateurs sont valorisées, mais ce style peut manquer de structure.</p><h3>Management Délégatif (4)</h3><p>Offrant une autonomie maximale, le management délégatif laisse les employés prendre des décisions quasi-totales. Bien que responsabilisant, il peut entraîner du stress dû à une charge excessive.</p><h2><strong>Transition Harmonieuse entre les Styles</strong></h2><p>Kenneth Blanchard et Paul Hersey sont deux figures majeures du leadership, célèbres pour leur collaboration sur le<a href=\"https://www.wikiberal.org/wiki/Mod%C3%A8le_Hersey-Blanchard_du_leadership_situationnel\"> modèle de leadership situationnel.</a> Blanchard, auteur et consultant en gestion, et Hersey, psychologue, ont conjointement créé un modèle influent soulignant l'importance de l'adaptabilité du leadership en fonction du niveau de maturité des collaborateurs.&nbsp;</p><p><strong>Savoir passer d'un style à l'autre est essentiel. Selon le modèle de leadership situationnel de Blanchard et Hersey, l'adaptation au niveau de maturité des collaborateurs est la clé.</strong></p><h4>M1 : Manager un nouvel arrivant</h4><p>Pour un nouvel arrivant, un management directif est essentiel pour une progression rapide. Cela s'applique également aux situations d'urgence nécessitant une réponse immédiate.</p><h4>M2 : Manager un désillusionné plus compétent</h4><p>Face à un collaborateur compétent mais désillusionné, un style persuasif offre un équilibre entre contrôle et liberté.</p><h4>M3 : Manager un connaisseur manquant de confiance</h4><p>Pour un collaborateur compétent mais manquant de confiance, le management participatif stimule l'implication et encourage l'initiative.</p><h4>M4 : Manager un expert motivé</h4><p>Lorsqu'un collaborateur est hautement qualifié et motivé, le management délégatif permet de libérer sa pleine potentialité.</p><h2><strong>L'Adaptabilité, Clé du Succès</strong></h2><p>L'essentiel est d'ajuster constamment les styles de management en fonction du développement individuel. Communiquer ces changements est crucial pour éviter toute incompréhension. Passer d'un style à l'autre peut être délicat, nécessitant parfois un accompagnement pour surmonter les peurs de contrôle ou de manque de temps.</p><p><strong>En fin de compte, être un leader efficace signifie capitaliser sur les forces des collaborateurs et les aider à donner le meilleur d'eux-mêmes. Le management, c'est une œuvre en constante évolution, sculptant la réussite à travers l'adaptabilité et la compréhension.</strong></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "public",
+      "createdAt": "2023-10-19T05:37:22.693Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "87adf4a9-a0d7-4a1f-a73c-c6dca06e1449",
+        "fileUrl": "https://www.talenteed.io/public/uploads/45038f56-2171-4e3d-a6ce-2702f19aefe7-Mai%CC%82trisez%20votre%20Leadership%20Adapter%20votre%20Style%20de%20Management%20a%CC%80%20vos%20Talents.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Maîtrisez votre Leadership Adapter votre Style de Management à vos Talents.jpg"
+      },
+      "categories": [
+        {
+          "id": "3399862a-bff7-4a1d-a2ad-f6423eb01cd9",
+          "name": "Interview",
+          "slug": "interview",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-09-13T18:57:40.503Z"
+        }
+      ]
+    },
+    {
+      "id": "dc39edaf-d04d-4d02-b35c-f0eee6ace9e1",
+      "title": "Au-delà du Papier : Les Enjeux du Recrutement Sans CV",
+      "slug": "audel_du_papier_les_enjeux_du_recrutement_sans_cv",
+      "content": "<p>Le monde du recrutement évolue, et avec lui, de nouvelles méthodes émergent pour dénicher les talents. Avez-vous déjà entendu parler du <strong>recrutement sans CV?&nbsp;</strong></p><p>Cette approche propose une alternative au traditionnel curriculum vitae, offrant à la fois des avantages et des inconvénients. Dans cet article, nous plongeons dans les profondeurs de cette pratique tendance pour découvrir si elle rime aussi avec pragmatisme.&nbsp;</p><h2>✅ Avantages du recrutement sans CV :</h2><p><strong>Égalité des chances :</strong> En éliminant les préjugés liés à l'origine, au sexe ou à l'apparence physique, le recrutement sans CV offre une égalité des chances inégalée. Il donne à chacun la possibilité de se faire valoir sur la base de compétences et de qualités personnelles.</p><p><strong>Diversité accrue :</strong> En ouvrant la porte à des profils variés et des compétences atypiques, cette approche favorise une diversité qui enrichit la dynamique de l'équipe et stimule l'innovation.</p><p><strong>Évaluation basée sur les compétences :</strong> En se concentrant sur les réalisations tangibles, le recrutement sans CV offre une vision plus approfondie des capacités réelles du candidat, plutôt que de se fier à un simple document.</p><h2>❌ Désavantages du recrutement sans CV :</h2><p><strong>Perte d'informations :</strong> L'absence de détails spécifiques dans un CV détaillé peut entraîner une perte d'informations cruciales pour évaluer l'adéquation du candidat au poste.</p><p><strong>Subjectivité accrue :</strong> En se basant davantage sur des interactions directes, le processus peut devenir plus subjectif, ouvrant la porte à des décisions basées sur des impressions personnelles plutôt que sur des critères objectifs.</p><p><strong>Temps et ressources supplémentaires :</strong> Les entretiens approfondis et les tests spécifiques nécessaires dans le recrutement sans CV peuvent demander plus de temps et de ressources.</p><h2><strong>Le CV : Un Pilier Incontournable</strong></h2><p>Malgré les avantages indéniables du recrutement sans CV, le curriculum vitae demeure un pilier essentiel dans l'évaluation d'un candidat. C'est une ligne directrice qui offre une vue d'ensemble du parcours professionnel, des compétences acquises et des expériences passées.</p><p>Chez <a href=\"https://talenteed.io/\">Talenteed</a>, nous adhérons à l'idée que le CV, bien que ne définissant pas entièrement la réussite d'un candidat, reste un outil précieux. Il complète la vision globale du talent et facilite la compréhension du parcours professionnel.&nbsp;</p><h2><strong>Mot De La Fin : Équilibre et Innovation</strong></h2><p>Le recrutement sans CV apporte une bouffée d'air frais dans le monde du recrutement, mais il doit être équilibré par la reconnaissance continue de la valeur du CV. La clé réside dans l'innovation, l'adaptabilité et la combinaison judicieuse de méthodes pour garantir une évaluation complète des talents.</p><p>&nbsp;</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "public",
+      "createdAt": "2023-10-19T04:28:22.253Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "8154dc79-98f6-4712-9f50-02f1281ba537",
+        "fileUrl": "https://www.talenteed.io/public/uploads/a9e48981-4a21-435d-9406-8b4d9ca7d420-Au-dela%CC%80%20du%20Papier%20%20Les%20Enjeux%20du%20Recrutement%20Sans%20CV%20solution%20talenteed.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Au-delà du Papier  Les Enjeux du Recrutement Sans CV solution talenteed.jpg"
+      },
+      "categories": [
+        {
+          "id": "3399862a-bff7-4a1d-a2ad-f6423eb01cd9",
+          "name": "Interview",
+          "slug": "interview",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-09-13T18:57:40.503Z"
+        }
+      ]
+    },
+    {
+      "id": "8a377675-223e-48a3-ab7f-cd7bf956e245",
+      "title": "Candidat : L'Effet de Halo Le Bias Cognitif Qui influence Les Recruteurs ",
+      "slug": "candidat_leffet_de_halo_le_bias_cognitif_qui_influence_les_recruteurs_",
+      "content": "<h2>L'Effet de Halo, une Arme Stratégique pour Réussir vos Entretiens d'Embauche</h2><p>Les entretiens d'embauche ne sont pas simplement des rendez-vous professionnels, ce sont des arènes où la psychologie joue un rôle crucial. L'effet de Halo, souvent négligé, peut être la clé secrète qui ouvre les portes des opportunités professionnelles. En plongeant plus profondément dans cette dynamique, nous dévoilerons comment vous pouvez maîtriser chaque étape de l'entretien pour influencer positivement vos futurs employeurs.</p><h3>1. La Psychologie de l'Effet de Halo</h3><p><strong>Définition :</strong> L'effet de Halo est un biais psychologique où une caractéristique positive spécifique d'une personne influence favorablement la perception globale de cette personne. En d'autres termes, une qualité particulière peut créer une impression générale positive, entraînant des jugements biaisés. Cela peut jouer un rôle dans divers contextes tels que les entretiens d'embauche et les interactions sociales.</p><p><strong>Dès les premières secondes de l'entretien, votre Halo initial est créé. Maintenant, exploitez-le à votre avantage.</strong></p><h3>2. L'Importance de la Première Impression</h3><p>Le premier contact crée souvent le Halo initial. Que ce soit votre tenue soignée, votre poignée de main ferme, ou simplement un sourire chaleureux, ces éléments contribuent à établir une première impression positive. Il est crucial de reconnaître cette opportunité initiale et d'en faire un atout majeur dans le processus d'embauche.</p><h3>3. Alignez votre Présentation sur vos Points Forts</h3><p>Une fois que le Halo est en place, il est temps de capitaliser sur cette impression positive. Lors de la présentation de vos expériences et compétences, veillez à les aligner sur vos points forts. Utilisez des exemples concrets qui renforcent la première impression positive et montrent votre adaptabilité et vos compétences.</p><h3>4. Gérez Considérablement l'Image Personnelle</h3><p>L'effet de Halo peut être alimenté par des éléments externes tels que la réputation de l'entreprise où vous avez travaillé précédemment ou les recommandations de collègues. Assurez-vous de présenter ces éléments de manière stratégique. Mettez en avant les aspects qui renforcent votre Halo et atténuez ceux qui pourraient potentiellement créer des nuances négatives.</p><h3>5. L'Importance de la Cohérence</h3><p>Le maintien d'une cohérence entre votre première impression et les détails que vous partagez est essentiel. Les incohérences peuvent briser le Halo et créer des doutes dans l'esprit de l'intervieweur. Veillez à ce que votre discours, vos gestes et votre présentation générale restent alignés tout au long de l'entretien.</p><h3>6. Utilisez des Références avec Discernement</h3><p>Si vous avez des références professionnelles ou des réalisations notables, n'hésitez pas à les partager. Cependant, faites-le avec discernement pour ne pas sembler arrogant. Des références bien placées peuvent renforcer votre Halo en fournissant des preuves tangibles de vos compétences et succès passés.</p><p><br><strong>En conclusion,</strong> l'effet de Halo peut être une arme puissante dans votre arsenal lors des entretiens d'embauche. En comprenant comment il fonctionne et en le guidant stratégiquement, vous pouvez transformer une première impression positive en une opportunité exceptionnelle. N'oubliez pas d'être authentique et transparent, car la crédibilité personnelle est la clé de la durabilité de l'effet de Halo au fil du temps.</p><p>En maîtrisant cette dynamique psychologique, vous serez mieux équipé pour naviguer avec confiance à travers les entretiens d'embauche, laissant derrière vous une impression qui résonne longtemps après la fin de la conversation.&nbsp;</p><p><strong>Bonne chance dans votre prochaine entrevue !</strong></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "public",
+      "createdAt": "2023-10-19T04:00:40.371Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "2798ca1b-63e4-4a80-ae3e-7159d9b32fdb",
+        "fileUrl": "https://www.talenteed.io/public/uploads/64f27ef4-c61f-49c9-ac0e-a29211e0b751-Candidat%20%20L'Effet%20de%20Halo%20Le%20Bias%20Cognitif%20Qui%20influence%20Les%20Recruteurs%20%20SOLUTION%20TALENTEED.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Candidat  L'Effet de Halo Le Bias Cognitif Qui influence Les Recruteurs  SOLUTION TALENTEED.jpg"
+      },
+      "categories": [
+        {
+          "id": "3399862a-bff7-4a1d-a2ad-f6423eb01cd9",
+          "name": "Interview",
+          "slug": "interview",
+          "subtitle": null,
+          "description": null,
+          "status": "public",
+          "model": "Article",
+          "createdAt": "2023-09-13T18:57:40.503Z"
+        }
+      ]
+    },
+    {
+      "id": "7476516b-f03b-4728-a09f-ab0fa65b60cd",
+      "title": "Sortir de sa Zone de Confort pour Faire Évoluer Sa Carrière",
+      "slug": "sortir_de_sa_zone_de_confort_pour_faire_voluer_sa_carrire",
+      "content": "<h2>Comment sortir de sa zone de confort peut transformer sa carrière ?&nbsp;</h2><p><strong>Définition :</strong> La zone de confort est un état psychologique où une personne se sent à l'aise, en sécurité et familier avec ses activités et son environnement. C'est un espace où le stress et l'anxiété sont minimisés, mais où le potentiel de croissance personnelle et professionnelle est limité, car il n'y a pas de défis ou de nouveautés.&nbsp;</p><p><strong>En quoi est-ce un frein pour une évolution professionnelle ?</strong> La peur de quitter sa zone de confort est un sentiment universel qui entrave souvent la réalisation de nos aspirations professionnelles. Cela peut se manifester par la peur de quitter un emploi qui ne vous convient plus par la crainte de ne pas en trouver un autre, l'hésitation à suivre une formation pour accroître vos compétences, le doute à demander une augmentation salariale, ou la réticence à viser un poste plus élevé….&nbsp;</p><p>Cette appréhension, bien que compréhensible, peut limiter nos horizons. Il est essentiel de se rappeler que les opportunités exceptionnelles se cachent souvent au-delà de ce que l'on connaît déjà.&nbsp;</p><p><strong>Dans cet article, nous plongerons profondément dans l'importance de sortir de sa zone de confort pour trouver un emploi ou pour évoluer dans son entreprise, en mettant en lumière des faits concrets et des histoires inspirantes.</strong></p><p>&nbsp;</p><h3><strong>Dépasser la Peur&nbsp;</strong></h3><p>Le secteur de la technologie offre un exemple concret de l'impact positif de la sortie de zone de confort. De nombreux leaders de l'industrie ont initialement affronté la peur de l'échec en lançant des start-ups innovantes. Elon Musk, fondateur de SpaceX, a risqué son capital pour réaliser ses rêves d'exploration spatiale. Cette prise de risque a non seulement transformé sa carrière mais a également révolutionné l'industrie spatiale.</p><h3><strong>Explorer de Nouveaux Chemins&nbsp;</strong></h3><p>Un exemple tangible de l'exploration de nouveaux chemins est l'histoire de Brian Acton et Jan Koum, les fondateurs de WhatsApp. Ils ont quitté des postes confortables chez Yahoo! pour créer une application de messagerie qui a changé la façon dont le monde communique. Leur décision d'explorer un domaine relativement inconnu a abouti à l'une des acquisitions les plus importantes de l'histoire de la technologie par Facebook.</p><h3><strong>Les Différentes Zones&nbsp;</strong></h3><p>Selon une étude de Harvard Business Review, la peur de changer de carrière est une préoccupation majeure pour de nombreux professionnels. Cependant, des faits montrent que ceux qui osent franchir ce pas découvrent souvent une satisfaction professionnelle accrue. Par exemple, des enquêtes révèlent que 80% des personnes qui ont changé de carrière se disent plus satisfaites de leur travail.</p><h3><strong>L'Opportunité derrière le Risque&nbsp;</strong></h3><p>&nbsp;Le monde du divertissement nous offre un exemple inspirant de la prise de risques. L'actrice Viola Davis a déclaré avoir surmonté sa peur de sortir de sa zone de confort en acceptant des rôles qui la défiaient profondément. Cela a abouti à des performances acclamées, notamment son Oscar pour son rôle dans \"Fences\". Ce faisant, elle a prouvé que le risque peut être le catalyseur d'une carrière exceptionnelle.</p><h3><strong>Élargir son Réseau Professionnel&nbsp;</strong></h3><p>&nbsp;Dans le monde des affaires, le réseautage peut souvent être la clé du succès. Des études montrent que 70% des emplois sont pourvus par le biais de réseaux personnels. Des personnalités telles que Richard Branson attribuent une grande partie de leur succès à leur capacité à étendre leur réseau au-delà de leur zone de confort initiale.</p><p>&nbsp;</p><p>Sortir de sa zone de confort dans le monde pro est un voyage semé de défis, mais aussi de récompenses significatives.&nbsp;</p><p>Des faits réels démontrent que des personnalités emblématiques ont transformé leur vie professionnelle en prenant des risques calculés et en explorant l'inconnu.</p><p>Ainsi, en embrassant cette aventure avec détermination et curiosité, vous pourriez non seulement trouver un emploi gratifiant mais aussi définir une carrière qui dépasse vos rêves les plus fous.&nbsp;</p><h4><strong>N'ayez pas peur de l'inconnu, car c'est là que résident souvent les plus grandes opportunités de croissance et de succès.</strong></h4>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "public",
+      "createdAt": "2023-10-06T10:57:06.628Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "fcb563b1-39b3-4b55-98ad-1f2c126da94f",
+        "fileUrl": "https://www.talenteed.io/public/uploads/815f2280-ca15-4cb5-b756-0854290bc471-Sortir%20de%20sa%20zone%20de%20confort%20pour%20faire%20e%CC%81voluer%20sa%20carrie%CC%80re.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Sortir de sa zone de confort pour faire évoluer sa carrière.jpg"
+      },
+      "categories": []
+    },
+    {
+      "id": "6930d6dc-20d1-4d40-bbab-319e0ff0070e",
+      "title": "Candidat : 10 Défauts que Tu Peux Mentionner en toute Confiance en Entretien",
+      "slug": "candidat_10_dfauts_que_tu_peux_mentionner_en_toute_confiance_en_entretien",
+      "content": "<h2>“ Citez-moi trois de vos défauts ? ”</h2><p>Lors des entretiens d'embauche, l'idée de partager ses défauts peut sembler contre-intuitive. Cependant, adopter une approche sincère et stratégique peut métamorphoser ces prétendus défauts en véritables atouts pour toute entreprise.&nbsp;</p><p><strong>Découvrons comment dix traits souvent mal interprétés peuvent être présentés de manière positive lors d'une entrevue.</strong></p><h3><strong>1. Perfectionniste</strong></h3><p>Être trop perfectionniste peut sembler être un défaut, mais cela montre également un engagement envers l'excellence. Les perfectionnistes ont tendance à fournir un travail de haute qualité, à persévérer jusqu'à ce que chaque détail soit parfait. En entreprise, cette attitude peut se traduire par des résultats exceptionnels et une approche méticuleuse des projets.</p><h3><strong>2. Bavard.e</strong></h3><p>Un candidat bavard peut sembler difficile à gérer, mais cette qualité peut être un atout dans des rôles nécessitant la communication. Un bavard peut établir des relations plus facilement, favorisant un environnement de travail positif et encourageant la collaboration.</p><h3><strong>3. Introverti.e</strong></h3><p>L'introversion est souvent perçue comme une faiblesse dans le monde professionnel, mais les introvertis ont des compétences précieuses telles que l'écoute attentive et la réflexion approfondie. Ces caractéristiques peuvent contribuer à des décisions bien pensées et à des solutions innovantes.</p><h3><strong>4. Obstiné.e</strong></h3><p>L'obstination peut être vue comme une qualité négative, mais elle indique également une détermination sans faille. Un individu obstiné peut être un atout dans des situations difficiles, ne reculant pas devant les défis et cherchant toujours des solutions.</p><h3><strong>5. Pessimiste</strong></h3><p>Bien que le pessimisme puisse sembler démoralisant, il peut également être une source d'anticipation des problèmes potentiels. Un candidat pessimiste peut être celui qui anticipe les risques, ce qui peut être crucial dans des rôles liés à la gestion des crises.</p><h3><strong>6. Autonome</strong></h3><p>L'autonomie est souvent mal interprétée comme une difficulté à travailler en équipe. Cependant, un individu autonome est capable de prendre des initiatives sans supervision constante, ce qui peut conduire à une efficacité accrue et à la réalisation de tâches de manière indépendante.</p><h3><strong>7. Avoir du franc-parler</strong></h3><p>Être franc peut parfois être mal vu, mais cela témoigne également de l'honnêteté et de l'intégrité. Un franc-parler peut créer un environnement de travail transparent, favorisant une communication ouverte et une résolution rapide des problèmes.</p><h3><strong>8. Hyperactif / Hyperactive</strong></h3><p>L'hyperactivité peut sembler difficile à gérer, mais elle peut aussi signifier une énergie constante et un dynamisme au travail. Ces individus sont souvent des moteurs d'inspiration, stimulant l'innovation et la productivité.</p><h3><strong>9. Rêveur / Rêveuse</strong></h3><p>Les rêveurs ont souvent la réputation de ne pas être suffisamment ancrés dans la réalité, mais leur créativité et leur capacité à penser en dehors des sentiers battus peuvent apporter une nouvelle perspective aux défis de l'entreprise.</p><h3><strong>10. Maniaque</strong></h3><p>La maniaquerie peut sembler être une obsession pour les détails, mais elle montre également un souci du travail bien fait. Les personnes maniaques sont souvent celles qui veillent à ce que chaque aspect d'un projet soit soigné, ce qui peut conduire à des résultats impeccables.</p><p>&nbsp;</p><p>Présenter ces défauts d'une manière positive lors d'un entretien peut non seulement montrer votre honnêteté, mais aussi démontrer comment ces caractéristiques peuvent être des atouts pour l'entreprise.&nbsp;</p><p><strong>N'oubliez pas qu'en embrassant vos défauts et en les transformant en forces, vous pouvez vous positionner comme un(e) candidat(e) unique.&nbsp;</strong></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "public",
+      "createdAt": "2023-10-06T10:18:46.483Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "a47290ac-86b2-4b3a-8894-4dc2921b4c61",
+        "fileUrl": "https://www.talenteed.io/public/uploads/22a2f38d-7169-4598-a128-e18f458e9c04-Candidat%20%2010%20de%CC%81fauts%20que%20tu%20peux%20mentionner%20en%20toute%20confiance%20en%20entretien.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Candidat  10 défauts que tu peux mentionner en toute confiance en entretien.jpg"
+      },
+      "categories": []
+    },
+    {
+      "id": "c4f51901-cdf5-4ea4-a04e-66d21b1210b6",
+      "title": "Décryptage Approfondi des Tendances Mondiales du Travail ",
+      "slug": "dcryptage_approfondi_des_tendances_mondiales_du_travail_",
+      "content": "<h2><strong>Décryptage Approfondi des Tendances Mondiales du Travail : Résultats de l'Enquête Randstad Employer Brand Research de Janvier 2023</strong>&nbsp;</h2><p>En janvier 2023, <a href=\"https://www.randstad.fr/employer-brand-research-attractivite-entreprise/\">Randstad Employer Brand Research</a> a entrepris une enquête d'envergure, interrogeant pas moins de 163 000 personnes dans 32 pays, dont 8516 en France. Cette investigation exhaustive visait à capturer les nuances des aspirations professionnelles et des attentes des travailleurs contemporains âgés de 18 à 65 ans. Les résultats, publiés récemment, sont non seulement impressionnants mais aussi révélateurs des évolutions majeures dans le monde du travail.</p><h3><strong>Les Priorités des Travailleurs : Un Équilibre Subtil entre Carrière et Bien-Être&nbsp;</strong></h3><p>Au cœur de ces résultats, émerge clairement la dualité des priorités des travailleurs modernes. Si la carrière continue d'être un moteur essentiel, une tendance marquée vers des attentes plus élevées en matière de bien-être et d'équilibre vie professionnelle-vie personnelle est palpable. Les travailleurs recherchent désormais des employeurs qui reconnaissent et répondent à cette quête d'équilibre, créant ainsi un environnement professionnel plus épanouissant.</p><h3><strong>Aspirations Professionnelles Mondiales : Des thèmes Universels qui Traversent les Frontières&nbsp;</strong></h3><p>L'enquête a également révélé des aspirations professionnelles communes transcendant les barrières culturelles. La quête de défis stimulants, d'opportunités de développement continu, et d'une culture d'entreprise inclusive est une constante mondiale. Ces aspirations définissent une nouvelle norme mondiale, indiquant clairement ce que les travailleurs attendent de leur parcours professionnel.</p><h3><strong>Le Bien-Être au Travail : De l'Avantage à la Nécessité&nbsp;</strong></h3><p>Parmi les conclusions les plus notables de cette enquête se trouve la transformation du bien-être au travail, qui n'est plus perçu comme un simple avantage, mais comme une nécessité. Les travailleurs considèrent le bien-être non seulement comme un droit, mais aussi comme une condition fondamentale pour une productivité et une satisfaction professionnelles durables. Les entreprises qui intègrent des initiatives telles que des programmes de santé mentale et des environnements de travail favorables voient leur attractivité augmenter considérablement.</p><h3><strong>Équilibre Vie Professionnelle - Vie Personnelle : Une Priorité Non Négociable&nbsp;</strong></h3><p>L'équilibre entre vie professionnelle et vie personnelle demeure une pierre angulaire des attentes professionnelles. Les travailleurs recherchent activement des employeurs qui comprennent et respectent l'importance de cet équilibre délicat. Les politiques de flexibilité, les horaires de travail adaptatifs, et les initiatives favorisant la conciliation sont désormais des critères déterminants dans le choix d'un employeur.</p><h3><strong>Un Aperçu Inestimable des Dynamiques Professionnelles Mondiales&nbsp;</strong></h3><p>Les données collectées par Randstad Employer Brand Research offrent un aperçu inestimable des dynamiques professionnelles à l'échelle mondiale. Employeurs et professionnels des ressources humaines, prenez note de ces tendances en constante évolution. L'adaptabilité à ces changements est cruciale pour attirer et retenir les talents exceptionnels.</p><p><strong>Restez actifs sur </strong><a href=\"www.talenteed.io\"><strong>Talenteed</strong></a><strong> pour suivre de près les dernières actualités en matière de ressources humaines</strong></p><p><strong>Source : </strong><a href=\"https://www.randstad.fr/employer-brand-research-attractivite-entreprise/\"><strong>https://www.randstad.fr/employer-brand-research-attractivite-entreprise/</strong></a></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "draft",
+      "createdAt": "2023-10-06T07:13:38.906Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "f9567f74-02c9-4bed-a8d8-72cf3919bcb8",
+        "fileUrl": "https://www.talenteed.io/public/uploads/3365fd6a-36b4-4abc-8a6f-18df2b4243cc-De%CC%81cryptage%20Approfondi%20des%20Tendances%20Mondiales%20du%20Travail%20.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Décryptage Approfondi des Tendances Mondiales du Travail .jpg"
+      },
+      "categories": []
+    },
+    {
+      "id": "01a967fb-449d-4003-be84-03b4e1d2116a",
+      "title": "S'épanouir au Luxembourg : Une Odyssée Professionnelle",
+      "slug": "spanouir_au_luxembourg_une_odysse_professionnelle",
+      "content": "<h2>S'épanouir au Luxembourg : Une Odyssée Professionnelle Soutenue par des Faits Concrets&nbsp;</h2><p>En entamant une aventure professionnelle au Luxembourg, découvrez un éventail d'opportunités enrichissantes étayé par des données tangibles, faisant du Grand-Duché un choix incontournable pour les immigrants professionnels.</p><h3>Le Luxembourg : Un Épicentre Économique Européen</h3><p>&nbsp;Malgré sa taille modeste, le Luxembourg se positionne en tant que fer de lance économique européen. Selon la Banque mondiale, son PIB par habitant figure parmi les plus élevés au monde, témoignant de la prospérité du pays. Cette stabilité économique crée un environnement propice à la croissance professionnelle, offrant aux travailleurs étrangers un terrain fertile pour bâtir leur carrière.</p><h3>Un Marché du Travail Florissant&nbsp;</h3><p>Les statistiques récentes<a href=\"https://ec.europa.eu/eurostat\"> d'Eurostat</a> confirment la robustesse du marché du travail luxembourgeois, avec un taux de chômage inférieur à 5%, &nbsp;bien en deçà la moyenne européenne. Cette oasis d'opportunités offre une garantie de stabilité professionnelle aux immigrants, soutenue par des faits concrets.</p><h3>Avantages Fiscaux et Sociaux : Une Réalité&nbsp;</h3><p>Les avantages fiscaux au Luxembourg ne sont pas des mirages, mais des réalités tangibles. Le pays propose des régimes fiscaux attractifs, avec un impôt sur le revenu progressif descendant jusqu'à 8%, selon le ministère des Finances. De plus, la sécurité sociale luxembourgeoise, selon la CNS, garantit une prise en charge efficace des soins de santé pour tous les résidents, renforçant le bien-être au sein de la population active.</p><h3>Facilité Administrative : Des Faits Vérifiables</h3><p>Les processus administratifs luxembourgeois, confirmés par des sources gouvernementales comme le Service de l'Immigration, sont aussi fluides que la Moselle qui traverse le pays. Des délais de traitement rapides et une assistance dédiée aux nouveaux arrivants sont des faits tangibles renforçant la réputation du Luxembourg en tant que terre d'accueil.</p><h3>Un Panorama Multiculturel : Une Réalité Approuvée&nbsp;</h3><p>Une étude de la <a href=\"https://www.cc.lu/\">Chambre de Commerce du Luxembourg</a> souligne l'importance de la diversité culturelle dans le succès des entreprises luxembourgeoises. Les travailleurs étrangers sont accueillis comme des contributeurs précieux à la richesse culturelle et professionnelle du pays, soutenu par des témoignages d'expatriés louant l'ouverture d'esprit et l'inclusion au sein des entreprises luxembourgeoises.</p><h3>Une Qualité de Vie Incontestée&nbsp;</h3><p>Au-delà des chiffres, la qualité de vie luxembourgeoise est une réalité confirmée par chaque résident. Classé régulièrement parmi les meilleurs au monde dans des indices comme l'Indice du Bonheur Mondial, le Luxembourg offre une satisfaction générale, complétée par des infrastructures de transport efficaces, un système éducatif de premier ordre et des espaces verts bien entretenus. Une destination où il fait bon vivre.</p><p>&nbsp;</p><p>Ainsi, la décision de s'installer professionnellement au Luxembourg, loin d'être une simple aspiration, est étayée par des faits concrets et des sources crédibles. L'aventure luxembourgeoise offre bien plus que des promesses ; elle offre une réalité professionnelle solide, soutenue par des avantages tangibles et une qualité de vie incontestée.&nbsp;</p><p><strong>Pour faciliter cette transition, des entreprises tels que </strong><a href=\"https://solutiontalenteed.com/\"><strong>Solution Talenteed</strong></a><strong> accompagnent les candidats à trouver un job qui leur convient et simplifient les démarches administratives.</strong></p><p><strong>&nbsp;Du côté des entreprises, </strong><a href=\"https://solutiontalenteed.com/\"><strong>Solution Talenteed</strong></a><strong> offre un accompagnement complet sur le recrutement international, assurant ainsi une intégration harmonieuse des nouveaux talents dans le tissu professionnel luxembourgeois.</strong></p><p>&nbsp;</p><p>Lancez-vous à l'international, et pourquoi ne pas choisir le Luxembourg ?</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "public",
+      "createdAt": "2023-10-06T06:50:37.412Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "6b59d803-dd94-45e8-bf6e-3e2de814a87f",
+        "fileUrl": "https://www.talenteed.io/public/uploads/7f94fce5-6d39-436d-8a77-7f60f6e4ec2a-S'e%CC%81panouir%20au%20Luxembourg%20%20Une%20Odysse%CC%81e%20Professionnelle.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "S'épanouir au Luxembourg  Une Odyssée Professionnelle.jpg"
+      },
+      "categories": []
+    },
+    {
+      "id": "a0d149e2-1284-40e3-8282-c2ecf3be796e",
+      "title": "Les Quatre Piliers d'un Recruteur d'Exception",
+      "slug": "les_quatre_piliers_dun_recruteur_dexception",
+      "content": "<p>Dans le monde du recrutement, bien souvent centré sur le candidat idéal, il est crucial de ne pas négliger le rôle déterminant du recruteur lui-même.&nbsp;</p><p>Explorez avec nous les quatre caractéristiques clés qui distinguent un recruteur de haut niveau, des atouts que notre<a href=\"https://solutiontalenteed.com/\"> équipe dédiée incarne avec excellence.&nbsp;</a></p><h3><strong>1. Empathie : La Clé de la Compréhension</strong></h3><p>Un recruteur d'exception se distingue par son empathie. En comprenant les aspirations des candidats, il tisse des liens de confiance solides, sélectionnant ainsi ceux qui non seulement possèdent les compétences requises, mais s'harmonisent également avec la culture de l'entreprise. C'est cette connexion émotionnelle qui transforme une simple embauche en une collaboration fructueuse.</p><h3><strong>2. Curiosité : Aller Au-delà des Évidences</strong></h3><p>La curiosité définit le bon recruteur. Posant des questions profondes, il creuse au-delà des réponses évidentes pour dévoiler les motivations, expériences et compétences des candidats. En allant au cœur de leurs histoires professionnelles, le recruteur identifie les perles rares, ceux dont la valeur dépasse les apparences initiales.</p><h3><strong>3. Communication Efficace : Pilier de la Transparence</strong></h3><p>La communication efficace est un impératif. Un recruteur doit être capable d'expliquer clairement le processus de recrutement, fournir des retours constructifs et maintenir une communication ouverte avec toutes les parties impliquées. Cette transparence renforce la confiance et crée un environnement propice à des échanges fructueux.</p><h3><strong>4. Sens de l'Observation : Détecter l'Invisible</strong></h3><p>Un recruteur averti possède un sens aiguisé de l'observation. En captant les détails, les signaux non verbaux et les nuances, il transforme ces informations en choix éclairés. Cette capacité à discerner l'invisible lui permet de trouver les candidats parfaitement alignés avec les besoins spécifiques de l'entreprise.</p><p><strong>En conclusion, être un recruteur d'exception va au-delà de la simple sélection de CV. C'est un art délicat qui nécessite empathie, curiosité, communication efficace et un sens aigu de l'observation.&nbsp;</strong></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "Les Quatre Piliers d'un Recruteur d'Exception",
+      "status": "public",
+      "createdAt": "2023-10-04T10:44:45.052Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "f569bc42-f1ff-4923-923d-022f71297e27",
+        "fileUrl": "https://www.talenteed.io/public/uploads/ada1154f-3fa4-4710-9762-e6765fca9c50-Les%20Quatre%20Piliers%20d'un%20Recruteur%20d'Exception.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Les Quatre Piliers d'un Recruteur d'Exception.jpg"
+      },
+      "categories": []
+    },
+    {
+      "id": "fb48aab9-eb76-4c85-bdb5-487727bbfbaf",
+      "title": "Analyse du Marché de l'emploi Luxembourgeois by Solution Talenteed ( réecriture à valider) ",
+      "slug": "analyse_du_march_de_lemploi_luxembourgeois_by_solution_talenteed_recriture_valider_",
+      "content": "<p>La dynamique du marché de l'emploi au Luxembourg est en pleine mutation, avec une augmentation constante du nombre de travailleurs étrangers. Cependant, la demande en matière d'emplois ne peut être entièrement satisfaite par la main-d’œuvre nationale et les travailleurs immigrés, créant une tension sur le marché du travail luxembourgeois. Cette situation pose des défis considérables pour les employeurs locaux.</p><h3><i><strong>Le Réveil Post-Covid :</strong></i></h3><p>La pandémie a non seulement changé notre façon de vivre, mais elle a également incité à réfléchir sur nos priorités. Les candidats, contraints de remettre en question leurs modes de vie post-Covid, recherchent désormais une nouvelle approche de l'emploi.</p><h3><i>Le Défi du Recrutement :</i></h3><p>Face à des difficultés de recrutement croissantes, les entreprises doivent s'adapter rapidement. Les offres d'emploi restent sans preneur, nécessitant une transformation urgente des canaux de recrutement.</p><h3><i>La Solution, Talenteed :&nbsp;</i></h3><p>C'est dans ce contexte que Talenteed propose une solution novatrice, s'inspirant de la stratégie \"phygitale\" utilisée par les marques dans le commerce de détail. Cette approche combine harmonieusement le monde digital et physique, en fusionnant le concept de job board et de cabinet de recrutement.</p><h3><i>La Plateforme \"Phygital\" de Talenteed :</i></h3><p>La plateforme de recrutement de Talenteed offre un job board pour la publicité des offres et la mise en relation des candidats et des employeurs. L'utilisation du traitement automatique du langage naturel et de l'apprentissage automatique permet une présélection efficace des profils dans le monde numérique.</p><h3><i>Le Sourcing Global :</i></h3><p>Pour compléter cette offre digitale, Talenteed étend ses services en intégrant 5 sourcing centers répartis dans le monde entier. Après 4 semaines de publication infructueuse sur le job board, ces centres prennent le relais en proposant des candidats qualifiés et diversifiés sur les offres prioritaires des clients.</p><h3><i>La Révolution dans l'Investissement :</i></h3><p>La révolution de Talenteed va au-delà de l'approche du recrutement ; elle se situe dans l'investissement pour l'entreprise. En ciblant les candidats, le temps et le coût, leur solution permet une accélération significative du processus de recrutement, réduisant les coûts de manière substantielle.</p><p><strong>Talenteed offre bien plus qu'une simple plateforme de recrutement ; elle introduit une ère \"phygitale\" révolutionnaire dans la manière dont les entreprises attirent et sélectionnent leurs talents.&nbsp;</strong></p><p>Avec des résultats prouvés de rapidité et d'efficacité, cette solution répond aux défis contemporains du marché de l'emploi au Luxembourg, offrant un avenir prometteur pour les employeurs et les candidats.</p><p><strong>-Solution Talenteed&nbsp;</strong></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "",
+      "status": "draft",
+      "createdAt": "2023-10-04T05:33:02.695Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "e9e9b18a-319c-4b73-a64c-7d8984b915b2",
+        "fileUrl": "https://www.talenteed.io/public/uploads/e6cf65bb-fa32-42bf-84d6-15ab95fb02bd-talenteed.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "talenteed.jpg"
+      },
+      "categories": []
+    },
+    {
+      "id": "e328b660-600b-48c1-a86a-d8ede3428beb",
+      "title": " L'Intelligence Artificielle : Entre Craintes et Opportunités pour l'Emploi",
+      "slug": "_lintelligence_artificielle_entre_craintes_et_opportunits_pour_lemploi",
+      "content": "<h2>L'Intelligence Artificielle : Entre Craintes et Opportunités pour l'Emploi</h2><p>Dans l'ère de la révolution technologique, l'intelligence artificielle (IA) occupe le devant de la scène, suscitant à la fois fascination et appréhension quant à son impact sur le monde du travail. Alors que des inquiétudes persistent quant à l'automatisation de certains emplois, une lueur d'optimisme se profile à l'horizon, soulignant la capacité de l'IA à créer de nouvelles opportunités professionnelles.</p><p>Une étude récente de<a href=\"https://www.pwc.com/gx/en/issues/analytics/assets/pwc-ai-analysis-sizing-the-prize-report.pdf\"> PricewaterhouseCoopers </a>(PwC) apporte un éclairage révélateur sur cette dynamique. Selon leurs conclusions, l'intelligence artificielle devrait générer plus d'emplois qu'elle n'en détruit d'ici 2030, avec une augmentation nette de 14 % des opportunités d'emploi à l'échelle mondiale. Cette projection contraste avec les appréhensions courantes et suggère que l'IA peut être un catalyseur pour une croissance significative du marché du travail.</p><p>Le potentiel de l'IA réside en grande partie dans sa capacité à accomplir des tâches répétitives et prévisibles de manière efficace. Cela libère les travailleurs de ces tâches monotones, leur permettant de se consacrer à des aspects plus créatifs et stratégiques de leur travail. Plutôt que de représenter une menace directe pour l'emploi, l'IA pourrait ainsi devenir un partenaire productif, contribuant à augmenter la productivité globale.</p><p>Cependant, la transition vers ce nouveau paradigme ne sera pas sans défis. Une adaptation harmonieuse nécessite une refonte des compétences professionnelles et des politiques de reconversion.&nbsp;</p><p>Les travailleurs doivent être prêts à acquérir de nouvelles compétences pour rester pertinents dans un paysage professionnel en constante évolution. Les gouvernements et les entreprises ont également un rôle essentiel à jouer en facilitant cette transition, en mettant en place des programmes de formation et des politiques de reconversion pour assurer une société inclusive et résiliente face aux changements induits par l'IA.</p><p><strong>L'IA, bien utilisée, peut être un outil puissant pour accroître l'efficacité, stimuler l'innovation et créer de nouvelles opportunités économiques. Cependant, son impact dépend largement de la manière dont nous, en tant que société, choisissons de le guider.</strong></p><p><strong>&nbsp;</strong>Un engagement responsable envers le développement et l'utilisation de l'IA est essentiel pour s'assurer que ses bénéfices se répercutent de manière équitable sur l'ensemble de la société.&nbsp;</p><h3>En modelant consciemment l'impact de l'IA, nous pouvons transformer les craintes en opportunités et ouvrir la voie à un avenir professionnel prometteur et dynamique.</h3>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": " L'Intelligence Artificielle : Entre Craintes et Opportunités pour l'Emploi",
+      "status": "public",
+      "createdAt": "2023-10-03T12:49:52.854Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "f898a615-f1e1-4c62-8ad2-ba368d933eeb",
+        "fileUrl": "https://www.talenteed.io/public/uploads/98522aad-6b92-41d9-9894-ac137213e252-_L'Intelligence%20Artificielle%20%20Entre%20Craintes%20et%20Opportunite%CC%81s%20pour%20l'Emploi.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "_L'Intelligence Artificielle  Entre Craintes et Opportunités pour l'Emploi.jpg"
+      },
+      "categories": []
+    },
+    {
+      "id": "0fe1b3db-d144-486c-bd36-37ecdca7e315",
+      "title": "Les impacts négatifs d'un recrutement lent",
+      "slug": "les_impacts_ngatifs_dun_recrutement_lent",
+      "content": "<h2>Les impacts négatifs d'un recrutement lent</h2><p>Dans le monde compétitif du recrutement luxembourgeois actuel, le recrutement efficace est crucial pour maintenir la croissance et la vitalité d'une entreprise. Cependant, lorsque ce processus traîne en longueur, les conséquences néfastes peuvent être multiples et étendues, en voici quelques unes :&nbsp;</p><p>&nbsp;</p><ul><li><strong>L'attrition de talents qualifiés </strong>est l'une des premières conséquences à émerger de manière percutante. Les candidats exceptionnellement doués ne resteront pas sur le marché indéfiniment. Dans l'intervalle où une entreprise hésite, ses concurrents peuvent attirer et embaucher ces talents convoités. Cette perte peut non seulement affaiblir la force de travail de l'entreprise, mais également renforcer la compétitivité des autres acteurs du secteur.</li></ul><p>&nbsp;</p><ul><li><strong>La dégradation de l'expérience des candidats</strong> est une autre facette à considérer. Les délais prolongés créent un climat de frustration et d'incertitude parmi les candidats potentiels. Ces individus, dans l'attente d'une réponse, peuvent percevoir l'entreprise comme manquant d'engagement envers eux. L'impression d'être relégué au second plan peut laisser une marque indélébile sur la perception que ces talents pourraient avoir de l'entreprise.</li></ul><p>&nbsp;</p><ul><li><strong>Les coûts croissants</strong> constituent une troisième conséquence inévitable d'un processus de recrutement étiré dans le temps. Les délais prolongés entraînent une baisse de la productivité, avec des postes vacants qui ne sont pas comblés. Pour attirer davantage de candidats, les entreprises peuvent également être amenées à intensifier leurs efforts de publicité, augmentant ainsi les dépenses liées au recrutement. Ces coûts supplémentaires pèsent lourdement sur les budgets, impactant la rentabilité globale de l'entreprise.</li></ul><p>&nbsp;</p><ul><li>Enfin, <strong>le retard dans la prise de décisions</strong> et la mise en œuvre de projets constitue la quatrième conséquence majeure. Les postes vacants prolongés peuvent entraver la réalisation des objectifs et projets stratégiques. L'effet domino de cette procrastination se fait sentir à tous les niveaux de l'organisation, retardant les initiatives importantes et compromettant la compétitivité globale de l'entreprise.</li></ul><p>&nbsp;</p><p>En résumé, un processus de recrutement qui s'étire dans le temps n'est pas simplement une question d'efficacité opérationnelle, mais aussi un enjeu critique pour la rétention des talents et la compétitivité sur le marché.</p><p><strong>&nbsp;L'attrition de talents qualifiés, la dégradation de l'expérience des candidats, l'augmentation des coûts et les retards dans la prise de décisions forment un cocktail dévastateur pour toute entreprise qui néglige l'importance cruciale d'un recrutement prompt et efficace.</strong></p><p>&nbsp;</p><p><br>&nbsp;</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "Les impacts négatifs d'un recrutement lent",
+      "status": "public",
+      "createdAt": "2023-10-03T12:38:46.787Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "4bc21e37-4269-4bcb-a4ee-e3f5059e32ef",
+        "fileUrl": "https://www.talenteed.io/public/uploads/4a8bf51b-5015-4698-b657-8032b4aa3734-Les%20impacts%20ne%CC%81gatifs%20d'un%20recrutement%20lent.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Les impacts négatifs d'un recrutement lent.jpg"
+      },
+      "categories": []
+    },
+    {
+      "id": "995268aa-d7f4-4d4f-b6f0-cdb82357af75",
+      "title": "La génération Z et l'entreprise de demain !",
+      "slug": "la_gnration_z_et_lentreprise_de_demain_",
+      "content": "<h2><strong>La génération Z et l'entreprise de demain&nbsp;</strong></h2><p>La Génération Z, composée de jeunes nés entre la fin des années 1990 et le début des années 2010, représente l'avenir du monde du travail. Avec des aspirations et des attentes uniques, cette génération dynamique et connectée révolutionne la manière dont les entreprises doivent aborder le recrutement et la gestion des talents.&nbsp;</p><p>Dans cet article, nous explorerons les aspirations de la Génération Z en ce qui concerne le monde du travail, ainsi que des stratégies que les entreprises peuvent adopter pour s'adapter à ces aspirations.</p><p>&nbsp;</p><h3>&nbsp;1-Recherche de Sens et de Valeurs&nbsp;</h3><p>La Génération Z est profondément préoccupée par les questions sociales et environnementales. Elle recherche des emplois qui lui permettent de donner un sens à sa carrière, de contribuer positivement à la société et de soutenir des valeurs éthiques. Les entreprises qui intègrent ces préoccupations dans leur culture d'entreprise et leurs activités ont un avantage pour attirer et retenir les membres de la Génération Z.</p><p>&nbsp;</p><h3>2-Flexibilité et Équilibre Travail-Vie Personnelle</h3><p>La Génération Z valorise l'équilibre entre travail et vie personnelle plus que toute autre génération précédente. Elle recherche des employeurs qui offrent des horaires flexibles, du télétravail et des politiques de congé adaptées. Les entreprises doivent être prêtes à ajuster leurs politiques pour répondre à ces besoins.</p><p>&nbsp;</p><h3>3-Apprentissage Continu</h3><p>Les membres de la Génération Z sont des apprenants permanents. Ils cherchent constamment à acquérir de nouvelles compétences et à évoluer dans leur carrière. Les entreprises peuvent les attirer en offrant des opportunités de formation continue et de développement professionnel.</p><p>&nbsp;</p><h3>4-La Technologie comme partie intégrante&nbsp;</h3><p>La Génération Z a grandi avec la technologie, ce qui en fait une génération hautement numérique. Les entreprises doivent investir dans des outils et des infrastructures technologiques modernes pour attirer et retenir ces talents numériques.</p><p>&nbsp;</p><h3>5-Diversité et Inclusion</h3><p>La Génération Z valorise la diversité et l'inclusion au sein de l'entreprise. Les entreprises doivent travailler activement pour créer des environnements inclusifs où chacun se sente représenté et respecté.</p><p>&nbsp;</p><h3>6-Communication Transparente</h3><p>La Génération Z apprécie la communication transparente et ouverte avec la direction. Les entreprises doivent promouvoir une culture où les employés se sentent entendus et peuvent partager leurs idées.</p><p>&nbsp;</p><p>En conclusion, la Génération Z apporte un ensemble unique d'aspirations et d'attentes au monde du travail. Les entreprises qui reconnaissent ces besoins et ajustent leur approche seront mieux préparées à attirer et à retenir ces talents. Il est essentiel de créer des environnements de travail qui favorisent la diversité, l'inclusion, l'apprentissage continu et le sens, tout en offrant la flexibilité nécessaire pour permettre à cette génération de s'épanouir.&nbsp;</p><h4>Les entreprises qui s'adaptent à ces aspirations auront un avantage concurrentiel sur le marché du recrutement de la Génération Z.</h4><p>&nbsp;</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": "La génération Z et l'entreprise de demain !",
+      "status": "public",
+      "createdAt": "2023-10-03T12:18:27.418Z",
+      "admin": {
+        "id": "4e2b839b-fab6-45e0-801d-7cabf5cfc66b",
+        "firstName": "Team",
+        "lastName": "Solution Talenteed",
+        "email": "contact@solutiontalenteed.com"
+      },
+      "company": null,
+      "image": {
+        "id": "1cd658b6-1e6f-4ba7-9d60-e2d5631bc0d1",
+        "fileUrl": "https://www.talenteed.io/public/uploads/526ad1b7-b321-46ac-8c7d-e6bf8a70dc3a-la%20ge%CC%81ne%CC%81ration%20Z%20et%20l'entreprise%20de%20demain%20.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "la génération Z et l'entreprise de demain .jpg"
+      },
+      "categories": []
+    },
+    {
+      "id": "2ff3f163-4ff7-467d-bdb1-8a738f544117",
+      "title": "Solution Talenteed Merges Job Board And Recruitment Agency Activities",
+      "slug": "solution_talenteed_merges_job_board_and_recruitment_agency_activities",
+      "content": "<p><a href=\"https://www.siliconluxembourg.lu/author/marc-auxenfants/\"><img src=\"https://www.siliconluxembourg.lu/wp-content/uploads/2021/12/Marc-Auxenfants_Portrait-150x150.jpg\" alt=\"\"></a></p><p><a href=\"https://www.siliconluxembourg.lu/author/marc-auxenfants/\">Marc Auxenfants</a></p><p>December 7, 2022</p><p>&nbsp;</p><p>3Guy Christian Munsadi, Founder &amp; Managing Partner, and Kérian Wilton, Business &amp; Sales Director at Solution Talenteed&nbsp;(Photo: Stephanie Jabardo / Silicon Luxembourg)<br><br>&nbsp;</p><h2>With its phygital HR solution, Luxembourg-based startup Talenteed is targeting the international recruitment market in Luxembourg and intends to develop its activity in West Africa, a talent pool that can meet the needs and requirements of Luxembourg employers, explain its two founders.</h2><p>Created in June 2021, <strong>Solution Talenteed</strong>&nbsp;has recently launched its phygital solution in Luxembourg, North America, Africa and Asia.</p><p>The company’s mission is to support small and large companies in their search for the best profiles and more broadly in their digital transformation project. Although open to all clients, it mainly serves those active in IT and finance, both companies and consulting firms.</p><p>Guy Christian Munsadi (Founder &amp; Managing Partner) and Kérian Wilton (Business &amp; Sales Director), talk about the origin and ambitions of their entrepreneurial project, which they describe as a “Global HR Digital” solution.</p><h3>How did the idea of a phygital recruitment solution come about?</h3><p><strong>G.C.M.</strong>&nbsp;The pandemic, the entry of teleworking in the customs and organization of companies, the search for a better work-life balance and the shortage of manpower have changed the situation on the labor market.</p><p>In addition, Luxembourg has adopted a strategy of diversification of its economy, which creates a labor market in perpetual change and gives it a strong dynamic. Although constantly increasing, cross-border employment no longer provides enough talent to satisfy this market demand.</p><p>In order to overcome these difficulties in finding staff that meet their needs, HR must therefore change their recruitment methods and channels. They are faced with offers that do not find applicants, while candidates expect recruiters and HR to meet their expectations and needs. To do this, they must be more flexible and responsive.</p><p>Faced with these challenges, Solution Talenteed wants to provide a solution that relieves all stakeholders. During our respective careers as HR consultants, we have also been confronted with the problem of finding the right candidates to meet our clients’ expectations.</p><h3>What is your business model?</h3><p><strong>K.W.</strong>&nbsp;We were inspired by brand strategies that combine a physical (retail) and online (digital) presence. Then we made this phygital fusion with an online job board and physical recruitment agencies (sourcing centers).</p><p>Our business model is based on our job board, which quickly puts forward job advertisements and the needs of companies in terms of personnel. These ads are directly posted on Facebook, LinkedIn and Twitter. The platform then puts recruiters and candidates in contact.</p><p>Each client has a personalized space to manage their offers and applications.</p><p>The physical side is our sourcing center, a network of correspondents in Canada, India, Madagascar and Mauritania, who search for candidates on our behalf, then meet them during a job interview, before sending us their file.</p><h3>On the digital side, what technologies does your recruitment platform rely on?</h3><p><strong>K.W.</strong>&nbsp;We use natural language processing and machine learning. The idea is to use a web service that allows natural referencing via metadata in search engines and social networks, and also to use artificial intelligence to perform a number of sorting tasks on applications. This combination of machine learning and natural language processing allows for the automatic extraction of keywords</p><p><strong>G.K.M.</strong>&nbsp;If four weeks after the publication of the employer’s offer with ADEM and on our platform, the company has not found any profiles corresponding to its needs, the law allows it to hire non-EU citizens. We then turn to our international sourcing centers to find candidates.</p><p>Once the candidate has been recruited via one of our partners in Africa, North America or Asia, we prepare all the necessary formalities for his relocation to Luxembourg.</p><h3>How does your offer differ from other recruitment platforms?</h3><p><strong>K.W.</strong>&nbsp;Our difference is not just in the approach to recruitment, it is also in the investment for the company. We address three parameters of recruitment: candidates, time and cost. Thanks to our solution, recruitment is on average 50% faster and, above all, less expensive.</p><p>The other added value of our offer, compared to others, is to go and find qualified and diverse candidates outside the EU, with a more reactive and quicker solution, and for a lower cost.</p><p>These sourcing centers are firms that we know well and whose founders are trusted professionals with whom we have worked in the past.</p><p>Therefore, within three weeks after the publication of an ad, we are able to present a candidate to our client. And after two recruitments with us, our client has already halved his recruitment costs.</p><h3>What are your ambitions after this launch?</h3><p><strong>G.C.M.</strong>&nbsp;Our ambition is to conquer the international recruitment market in Luxembourg, by becoming the reference platform for international recruitment. During the second quarter of 2023, we intend to develop our activity in West Africa, through the launch of a structure in Senegal and Ivory Coast. These two countries have a pool of candidates who can meet the needs and requirements of the Luxembourg market and job offers that are likely to correspond to European candidates.</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": null,
+      "status": "public",
+      "createdAt": "2023-09-13T18:57:40.611Z",
+      "admin": null,
+      "company": null,
+      "image": {
+        "id": "2ab2c00b-5962-4b0a-80c0-645808482e57",
+        "fileUrl": "https://www.talenteed.io/public/uploads/16bc1344-823a-4abf-bb26-31a7f9aed2b1-Capture%20d%E2%80%99%C3%A9cran%202023-09-25%20%C3%A0%2018.17.35.png",
+        "fileType": "image/png",
+        "fileName": "Capture d’écran 2023-09-25 à 18.17.35.png"
+      },
+      "categories": []
+    },
+    {
+      "id": "43ef2449-2923-454e-bdaa-a5e07a7a767b",
+      "title": "Talenteed Merges Job Board And Recruitment Agency Activities",
+      "slug": "talenteed_merges_job_board_and_recruitment_agency_activities",
+      "content": "<div class=\"cs-entry__header cs-entry__header-standard cs-video-wrap\" style=\"box-sizing: border-box; position: relative; margin-bottom: 2.5rem; font-family: Roboto, sans-serif; font-size: 20px;\">\r\n<div class=\"cs-entry__header-inner\" style=\"box-sizing: border-box; z-index: 1; text-align: center;\">&nbsp;</div>\r\n</div>\r\n<div>\r\n<div>\r\n<div class=\"cs-entry__header cs-entry__header-standard cs-video-wrap\" style=\"box-sizing: border-box; position: relative; margin-bottom: 2.5rem; font-family: Roboto, sans-serif; font-size: 20px;\">\r\n<figure class=\"cs-entry__post-media post-media\" style=\"box-sizing: border-box; margin: 2.5rem 0px 0px; display: block; padding: 0px;\"><img class=\"attachment-csco-medium-uncropped size-csco-medium-uncropped wp-post-image lazyautosizes ls-is-cached pk-lazyloaded\" style=\"box-sizing: border-box; vertical-align: middle; border-style: none; max-width: 100%; height: auto; width: 800px; object-fit: cover; object-position: center; border-radius: var(--cs-image-border-radius); display: block; margin-left: auto; margin-right: auto;\" src=\"https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-800x600.jpg\" sizes=\"800px\" srcset=\"https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-800x600.jpg 800w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-300x225.jpg 300w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-1024x768.jpg 1024w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-768x576.jpg 768w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-1536x1152.jpg 1536w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-2048x1536.jpg 2048w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-380x285.jpg 380w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-550x413.jpg 550w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-1160x870.jpg 1160w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-scaled.jpg 2560w\" alt=\"\" width=\"800\" height=\"600\" data-pk-sizes=\"auto\" data-ls-sizes=\"(max-width: 800px) 100vw, 800px\" data-pk-src=\"https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-800x600.jpg\" data-pk-srcset=\"https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-800x600.jpg 800w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-300x225.jpg 300w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-1024x768.jpg 1024w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-768x576.jpg 768w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-1536x1152.jpg 1536w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-2048x1536.jpg 2048w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-380x285.jpg 380w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-550x413.jpg 550w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-1160x870.jpg 1160w, https://www.siliconluxembourg.lu/wp-content/uploads/2022/12/talenteed_team-scaled.jpg 2560w\" /></figure>\r\n<p class=\"cs-entry__header-inner\" style=\"box-sizing: border-box; z-index: 1; text-align: center;\">Guy Christian Munsadi, Founder &amp; Managing Partner, and K&eacute;rian Wilton, Business &amp; Sales Director at Talenteed (Photo: Stephanie Jabardo / Silicon Luxembourg)</p>\r\n<div class=\"cs-entry__header-inner\" style=\"box-sizing: border-box; z-index: 1; text-align: justify;\">\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-family: 'Helvetica Neue';\">With its phygital HR solution, Luxembourg-based startup Talenteed is targeting the international recruitment market in Luxembourg and intends to develop its activity in West Africa, a talent pool that can meet the needs and requirements of Luxembourg employers, explain its two founders.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">Created in June 2021,&nbsp;</span><strong><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue'; color: #ed7d31;\">Solution Talenteed</span></strong><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue'; color: #ed7d31;\">&nbsp;</span><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">has recently launched its phygital solution in Luxembourg, North America, Africa and Asia.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">The company&rsquo;s mission is to support small and large companies in their search for the best profiles and more broadly in their digital transformation project. Although open to all clients, it mainly serves those active in IT and finance, both companies and consulting firms.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">Guy Christian Munsadi (Founder &amp; Managing Partner) and K&eacute;rian Wilton (Business &amp; Sales Director), talk about the origin and ambitions of their entrepreneurial project, which they describe as a &ldquo;Global HR Digital&rdquo; solution.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\"><span style=\"color: #000000;\"><strong>How did the idea of a phygital recruitment solution come about?</strong></span></span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">G.C.M. The pandemic, the entry of teleworking in the customs and organization of companies, the search for a better work-life balance and the shortage of manpower have changed the situation on the labor market.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">In addition, Luxembourg has adopted a strategy of diversification of its economy, which creates a labor market in perpetual change and gives it a strong dynamic. Although constantly increasing, cross-border employment no longer provides enough talent to satisfy this market demand.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">In order to overcome these difficulties in finding staff that meet their needs, HR must therefore change their recruitment methods and channels. They are faced with offers that do not find applicants, while candidates expect recruiters and HR to meet their expectations and needs. To do this, they must be more flexible and responsive.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">Faced with these challenges,&nbsp;</span><strong><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue'; color: #ed7d31;\">Solution Talenteed</span></strong><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue'; color: #ed7d31;\">&nbsp;</span><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">wants to provide a solution that relieves all stakeholders. During our respective careers as HR consultants, we have also been confronted with the problem of finding the right candidates to meet our clients&rsquo; expectations.</span><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">&nbsp;</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\"><strong>What is your business model?</strong></span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">K.W. We were inspired by brand strategies that combine a physical (retail) and online (digital) presence. Then we made this phygital fusion with an online job board and physical recruitment agencies (sourcing centers).</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">Our business model is based on our job board, which quickly puts forward job advertisements and the needs of companies in terms of personnel. These ads are directly posted on Facebook, LinkedIn and Twitter. The platform then puts recruiters and candidates in contact.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">Each client has a personalized space to manage their offers and applications.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">The physical side is our sourcing center, a network of correspondents in Canada, India, Madagascar and Mauritania, who search for candidates on our behalf, then meet them during a job interview, before sending us their file.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\"><strong>On the digital side, what technologies does your recruitment platform rely on?</strong></span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">K.W. We use natural language processing and machine learning. The idea is to use a web service that allows natural referencing via metadata in search engines and social networks, and also to use artificial intelligence to perform a number of sorting tasks on applications. This combination of machine learning and natural language processing allows for the automatic extraction of keywords</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">G.K.M. If four weeks after the publication of the employer&rsquo;s offer with ADEM and on our platform, the company has not found any profiles corresponding to its needs, the law allows it to hire non-EU citizens. We then turn to our international sourcing centers to find candidates.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">Once the candidate has been recruited via one of our partners in Africa, North America or Asia, we prepare all the necessary formalities for his relocation to Luxembourg.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\"><strong>How does your offer differ from other recruitment platforms?</strong></span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">K.W. Our difference is not just in the approach to recruitment, it is also in the investment for the company. We address three parameters of recruitment: candidates, time and cost. Thanks to our solution, recruitment is on average 50% faster and, above all, less expensive.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">The other added value of our offer, compared to others, is to go and find qualified and diverse candidates outside the EU, with a more reactive and quicker solution, and for a lower cost.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">These sourcing centers are firms that we know well and whose founders are trusted professionals with whom we have worked in the past.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">Therefore, within three weeks after the publication of an ad, we are able to present a candidate to our client. And after two recruitments with us, our client has already halved his recruitment costs.</span></p>\r\n<p style=\"margin-right: 0cm; margin-left: 0cm; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\"><strong>What are your ambitions after this launch?</strong></span></p>\r\n<p style=\"margin: 0cm 0cm 12pt; font-size: medium; font-family: 'Times New Roman', serif;\"><span lang=\"EN-US\" style=\"font-size: 10pt; font-family: 'Helvetica Neue';\">G.C.M. Our ambition is to conquer the international recruitment market in Luxembourg, by becoming the reference platform for international recruitment. During the second quarter of 2023, we intend to develop our activity in West Africa, through the launch of a structure in Senegal and Ivory Coast. These two countries have a pool of candidates who can meet the needs and requirements of the Luxembourg market and job offers that are likely to correspond to European candidates.</span></p>\r\n</div>\r\n</div>\r\n<p><a class=\"cs-author-avatar\" style=\"box-sizing: border-box; color: var(--cs-color-primary); text-decoration: none; transition: color 0.25s ease 0s; width: 40px; border-radius: 50%; overflow: hidden; font-family: Roboto, sans-serif; font-size: 20px;\" href=\"https://www.siliconluxembourg.lu/author/marc-auxenfants/\"><img class=\"avatar avatar-40 photo\" style=\"box-sizing: border-box; vertical-align: middle; border-style: none; max-width: 100%; height: auto; object-fit: cover; object-position: center; border-radius: 50%;\" src=\"https://www.siliconluxembourg.lu/wp-content/uploads/2021/12/Marc-Auxenfants_Portrait-150x150.jpg\" alt=\"\" width=\"40\" height=\"40\" /></a></p>\r\n<div class=\"cs-entry__details-meta\" style=\"font-family: var(--cs-font-post-meta-family), sans-serif; box-sizing: border-box; display: flex; flex-wrap: wrap; flex: 1 1 0%; font-size: var(--cs-font-post-meta-size); margin-left: 0.5rem;\">\r\n<div class=\"cs-entry__author-meta\" style=\"box-sizing: border-box; display: flex; align-items: center; flex-wrap: wrap;\"><a style=\"box-sizing: border-box; color: var(--cs-color-meta-links, var(--cs-color-primary)); text-decoration: none; transition: color 0.25s ease 0s; position: relative;\" href=\"https://www.siliconluxembourg.lu/author/marc-auxenfants/\">Marc Auxenfants</a></div>\r\n<div class=\"cs-entry__post-meta\" style=\"box-sizing: border-box; display: flex; align-items: center; flex-wrap: wrap; transition: all 0.25s ease 0s; color: var(--cs-color-meta); font-family: var(--cs-font-post-meta-family), sans-serif; font-size: var(--cs-font-post-meta-size); font-style: var(--cs-font-post-meta-style); letter-spacing: var(--cs-font-post-meta-letter-spacing); text-transform: var(--cs-font-post-meta-text-transform); flex: 0 0 100%; width: 649.84375px; margin-top: 0px;\">\r\n<div class=\"cs-meta-date\" style=\"box-sizing: border-box; display: flex;\">December 7, 2022</div>\r\n</div>\r\n</div>\r\n</div>\r\n</div>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": null,
+      "status": "draft",
+      "createdAt": "2023-09-13T18:57:40.610Z",
+      "admin": null,
+      "company": null,
+      "image": null,
+      "categories": []
+    },
+    {
+      "id": "fb3bbb3d-abb7-42e4-8b2b-8b0b374fdf9a",
+      "title": "Les titres RH dans le nouveau monde du travail",
+      "slug": "les_titres_rh_dans_le_nouveau_monde_du_travail",
+      "content": "<p>Excellent Article de Notre Partenaire Adequasys !!!</p><h2><strong>Les titres RH dans le nouveau monde du travail</strong></h2><p>Le monde des ressources humaines est en perpétuelle évolution. Ces dernières années les changements sont majeurs. Dans le passé les principales responsabilités des professionnels RH se résumaient à la tenue des dossiers administratifs, de la paie ou encore de la conformité. Mais aujourd’hui la technologie a automatisé et rationalisé de nombreux processus RH laissant la place à la gestion personnalisée des collaborateurs et au développement des cultures de travail.</p><p>Les titres RH et postes des membres des équipes RH commencent à refléter ces changements et l’importance accrue de l’expérience collaborateur. Les nouvelles fonctions et titres RH reflètent les compétences que possèdent les responsables RH d’aujourd’hui. Morceaux choisis.</p><h3><strong>Responsable data RH</strong></h3><p>Le spécialiste de l’information des ressources humaines d’hier, l’analytique ou le spécialiste est aujourd’hui le responsable de la data RH ou HR analytics. Les RH ont toujours recoupé la technologie, les données et l’analyse. Les spécialistes du SIRH ou de l’information RH ont travaillé avec le service informatique pour superviser l’utilisation de technologies telles que les systèmes de suivi des candidats et les portails d’avantages sociaux, en veillant à la sécurité des données.&nbsp;</p><p>Mais le directeur actuel des analyses RH va au-delà de cela pour extraire des informations indispensables sur le comportement, les compétences, l’engagement, les équipes, les réseaux, la collaboration et la manière dont le travail est effectué. Ils plongent profondément dans les données des personnes pour découvrir des informations susceptibles d’améliorer la productivité, de stimuler les performances et de débloquer l’innovation. Et ce rôle est d’autant plus important que les organigrammes s’aplatissent et que les équipes agiles remplacent les hiérarchies traditionnelles.</p><h3><strong>Talent acquisition specialist</strong></h3><p>Le recrutement est une fonction traditionnellement centrale du service des RH, certains professionnels des RH se concentrant exclusivement sur la recherche, la vérification et l’embauche de nouvelles personnes. Un spécialiste en acquisition de talents, cependant, apporte une nouvelle dimension de stratégie et de vision à son travail avec le cycle de recrutement. En plus de pourvoir les postes vacants, les spécialistes de l’acquisition de talents anticipent les postes susceptibles de s’ouvrir à l’avenir et s’assurent que l’entreprise recrute de nouvelles recrues pour assurer le succès et la croissance à long terme de l’organisation.</p><h3><strong>Responsable diversité</strong></h3><p>Dans le passé un coordinateur RH pouvait passer une partie de son temps à travailler sur l’amélioration de l’inclusivité. Aujourd’hui ces missions représentent régulièrement un poste à temps complet. Des rôles entiers tels que directeur de la diversité et responsable de la diversité sont consacrés à la conception et à l’exécution d’ initiatives de diversité et d’inclusion .&nbsp;</p><p>Après tout, les entreprises modernes comprennent que la diversité et l’inclusion sont fondamentales pour le succès des entreprises et reconnaissent que les entreprises doivent faire plus pour éliminer les inégalités sur le lieu de travail. Les responsables de la diversité travaillent dans toute l’entreprise pour aligner les objectifs de diversité et d’inclusion sur les résultats commerciaux. Ils instituent également des politiques en matière de recrutement et de promotions qui peuvent éliminer les préjugés et embaucher ou promouvoir des personnes que les entreprises pourraient autrement négliger. Certaines de ces pratiques incluent la suppression des exigences de diplôme des rôles professionnels et l’instauration de sélections à l’aveugle pour l’embauche et les promotions.</p><h3><strong>Responsable QVCT</strong></h3><p>Les avantages sociaux et la rémunération étant l’une des principales préoccupations des services des ressources humaines, il était toujours courant qu’une ou plusieurs personnes se concentrent entièrement sur l’administration des avantages sociaux. Mais aujourd’hui, les choses deviennent encore plus granulaires. Les gestionnaires de la&nbsp;<a href=\"https://adequasys.com/fr/de-la-qvt-a-la-qvct-definition-presentation-et-explications/\">QVCT</a>&nbsp;des employés sont chargés de superviser en particulier les programmes de santé et de bien-être des organisations.&nbsp;</p><p>Un titre qui a connu un regain de popularité ces dernières années alors que les personnes qui travaillaient au bureau ont déménagé chez elles du jour au lendemain au milieu d’une pandémie mondiale. Les responsables du bien-être des employés gèrent des programmes tels que des cours de yoga, des défis de bien-être à domicile, des services médicaux et des programmes d’aide aux employés.&nbsp;</p><h3><strong>Responsable formation</strong></h3><p>Membre de l’équipe RH par le passé, le responsable formation devient un des piliers de la stratégie RH de l’entreprise. Les spécialistes des ressources humaines axés sur la formation et l’intégration mettent l’accent sur la transformation des nouvelles recrues en membres à part entière de l’équipe. Mais la tendance à embaucher des directeurs de l’apprentissage montre la compréhension croissante que l’éducation et le développement doivent se poursuivre tout au long du temps d’une personne au sein de l’organisation. Cela ne veut pas dire que les professionnels d’aujourd’hui voient les opportunités de croissance et d’apprentissage comme une clé pour rejoindre et rester dans les entreprises.</p><p>Les directeurs de l’apprentissage sont généralement des experts en formation d’entreprise et personnelle. Ils sont capables de piloter la stratégie organisationnelle et l’établissement d’objectifs tout en alignant le développement de leur personnel sur les missions et les objectifs de l’entreprise.</p><h3><strong>Responsable de l’expérience collaborateur</strong></h3><p>Le responsable RH d’hier devient le responsable de l’expérience collaborateur. Dans le passé, les responsables des ressources humaines étaient souvent embourbés dans des tâches répétitives telles que des feuilles de calcul, des formulaires et des approbations, ce qui leur privait de temps pour se concentrer sur ce qui les passionnait le plus et considérait le plus important&nbsp;: l’expérience des employés et la culture d’entreprise. Heureusement, l’automatisation – et la tendance à donner la priorité à l’expérience des employés comme l’une des responsabilités RH les plus critiques – a libéré suffisamment de temps et d’énergie pour que certains professionnels des RH se concentrent uniquement sur leur travail en tant que gestionnaires de l’expérience des employés.&nbsp;</p><p>Les responsabilités d’un gestionnaire de l’expérience employé ne se limitent pas à offrir aux gens une excellente expérience employé. Ils sont également chargés d’élaborer des stratégies pour améliorer la culture de travail et optimiser chaque domaine du cycle de vie des employés.&nbsp;</p><h2><strong>Un métier RH en transition</strong></h2><p>Ce qui peut semble être des titres RH inutilement excentriques ou uniques reflète en fait un changement dans la façon dont les collaborateurs perçoivent les fonctions RH dans leur entreprise. Fini le temps des tâches administratives interminables, de la nécessité de tenir des registres et d’assurer la conformité. Aujourd’hui, les entreprises et les professionnels reconnaissent les professionnels des RH comme des partenaires stratégiques pour aider une organisation à réussir.</p><p>Reconsidérer et potentiellement transformer les anciens titres de poste des RH nous aide à entrer dans une nouvelle ère d’infrastructure de travail et à être plus précis et enthousiastes à propos des emplois que nous effectuons. Personne n’a jamais dit que nos vies professionnelles devaient être ennuyeuses, alors pourquoi ne pas en dire autant de nos intitulés de poste&nbsp;?</p><p>&nbsp;</p><p><a href=\"https://adequasys.com/fr/les-titres-rh-dans-le-nouveau-monde-du-travail/\">Les titres RH dans le nouveau monde du travail - Adequasys SIRH</a></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": null,
+      "status": "public",
+      "createdAt": "2023-09-13T18:57:40.609Z",
+      "admin": null,
+      "company": null,
+      "image": {
+        "id": "56771a3a-c41d-4706-b03e-9fb936ca6522",
+        "fileUrl": "https://www.talenteed.io/public/uploads/6ef22483-d913-438e-b37d-e0c82377e439-Les%20titres%20RH%20dans%20le%20nouveau%20monde%20du%20travail.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Les titres RH dans le nouveau monde du travail.jpg"
+      },
+      "categories": []
+    },
+    {
+      "id": "b635b0fc-7467-4780-a193-97f0546e9acf",
+      "title": "10 indicateurs RH pour booster l’entreprise",
+      "slug": "10_indicateurs_rh_pour_booster_lentreprise",
+      "content": "<p><strong style=\"box-sizing: border-box; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\"><span style=\"caret-color: #000000; color: #000000; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-size: medium; font-weight: 400;\">Je vous recommande cet excellent article de notre partenaire : ADEQUASYS</span></strong></p>\r\n<p><strong style=\"box-sizing: border-box; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">Le monde professionnel &eacute;volue tr&egrave;s rapidement ces derni&egrave;res ann&eacute;es. R&eacute;guli&egrave;rement le pouvoir passe des entreprises aux personnes, avec des professionnels talentueux plus que dispos&eacute;s &agrave; quitter leur emploi si leurs besoins ne sont pas satisfaits. Parall&egrave;lement &agrave; ce changement de pouvoir, le r&ocirc;le des RH a &eacute;galement consid&eacute;rablement &eacute;volu&eacute;. Les professionnels des RH d&rsquo;aujourd&rsquo;hui sont responsables de l&rsquo;&eacute;laboration de strat&eacute;gies commerciales ax&eacute;es sur les personnes qui r&eacute;pondent aux besoins de la main-d&rsquo;&oelig;uvre d&rsquo;aujourd&rsquo;hui. L&rsquo;analyse des donn&eacute;es est essentielle pour am&eacute;liorer les r&eacute;sultats de l&rsquo;entreprise. Voici quelques exemples d&rsquo;indicateurs RH pertinentes pour booster votre entreprise et l&rsquo;adapter au monde du travail moderne.</strong></p>\r\n<h2 style=\"box-sizing: border-box; margin: 1.25em 0px 0.2em; text-rendering: optimizeLegibility; font-size: 39.998001px; line-height: 1.2; font-family: Raleway, sans-serif; letter-spacing: -0.035em; color: #272727;\">Qu&rsquo;est-ce qu&rsquo;un indicateur RH&nbsp;?</h2>\r\n<p style=\"box-sizing: border-box; margin: 0px 0px 1.313em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">La notion d&rsquo;indicateur RH a commenc&eacute; &agrave; se d&eacute;velopper au d&eacute;but des ann&eacute;es 70 au moment ou la fonction RH est pass&eacute;e d&rsquo;un centralisateur de documents &agrave; une fonction a part enti&egrave;re dans l&rsquo;entreprise. L&rsquo;indicateur RH est un outil de mesure donnant la possibilit&eacute; d&rsquo;avoir une vision globale et synth&eacute;tique d&rsquo;une ou plusieurs donn&eacute;es RH.</p>\r\n<p style=\"box-sizing: border-box; margin: 0px 0px 1.313em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">Les indicateurs RH ne cessent de se d&eacute;velopper et de se pr&eacute;ciser gr&acirc;ce au d&eacute;veloppement de la data dans les m&eacute;tiers RH. Les indicateurs sont souvent rassembl&eacute;s dans des dashboards ou tableaux de bord RH. Le tableau de bord RH permettra aux dirigeants de suivre en temps r&eacute;el l&rsquo;ensemble de leurs indicateurs et d&rsquo;identifier les liens de causalit&eacute; entre les diff&eacute;rentes politiques RH, commerciales ou autres qui ont &eacute;t&eacute; entreprises.</p>\r\n<h2 style=\"box-sizing: border-box; margin: 1.25em 0px 0.2em; text-rendering: optimizeLegibility; font-size: 39.998001px; line-height: 1.2; font-family: Raleway, sans-serif; letter-spacing: -0.035em; color: #272727;\">10 indicateurs RH &agrave; la une</h2>\r\n<h3 style=\"box-sizing: border-box; margin: 1.25em 0px 0.2em; text-rendering: optimizeLegibility; font-size: 31.99px; line-height: 1.3; font-family: Raleway, sans-serif; letter-spacing: -0.035em; color: #272727;\">1.&nbsp;&nbsp;&nbsp;&nbsp; Le temps de recrutement</h3>\r\n<p style=\"box-sizing: border-box; margin: 0px 0px 1.313em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">Le premier indicateur RH &agrave; prendre en compte est le temps n&eacute;cessaire pour le recrutement d&rsquo;un collaborateur. Plus l&rsquo;entreprise est capable de recruter et former rapidement un nouveau collaborateur, plus les &eacute;quipes pourront grandir. Parall&egrave;lement &agrave; ce changement de pouvoir, le r&ocirc;le des RH a &eacute;galement consid&eacute;rablement &eacute;volu&eacute;. Les professionnels des RH d&rsquo;aujourd&rsquo;hui sont responsables de l&rsquo;&eacute;laboration de strat&eacute;gies commerciales ax&eacute;es sur les personnes qui r&eacute;pondent aux besoins de la main-d&rsquo;&oelig;uvre d&rsquo;aujourd&rsquo;hui.</p>\r\n<h3 style=\"box-sizing: border-box; margin: 1.25em 0px 0.2em; text-rendering: optimizeLegibility; font-size: 31.99px; line-height: 1.3; font-family: Raleway, sans-serif; letter-spacing: -0.035em; color: #272727;\">2.&nbsp;&nbsp;&nbsp;&nbsp; Le co&ucirc;t par embauche</h3>\r\n<p style=\"box-sizing: border-box; margin: 0px 0px 1.313em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">Le recrutement a un co&ucirc;t non n&eacute;gligeable et prend du temps. Le suivi du co&ucirc;t par embauche peut vous aider &agrave; rep&eacute;rer o&ugrave; se situent les inefficacit&eacute;s dans le processus de recrutement. Cela vous permet &eacute;galement d&rsquo;am&eacute;liorer l&rsquo;exp&eacute;rience des candidats et des responsables du recrutement, et de r&eacute;duire les co&ucirc;ts de recrutement globaux.</p>\r\n<h3 style=\"box-sizing: border-box; margin: 1.25em 0px 0.2em; text-rendering: optimizeLegibility; font-size: 31.99px; line-height: 1.3; font-family: Raleway, sans-serif; letter-spacing: -0.035em; color: #272727;\">3.&nbsp;&nbsp;&nbsp;&nbsp; Les taux d&rsquo;engagement et de r&eacute;tention</h3>\r\n<p style=\"box-sizing: border-box; margin: 0px 0px 1.313em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">Ces deux indicateurs sont &eacute;troitement li&eacute;s. Un taux de r&eacute;tention &eacute;lev&eacute; indique entre autres un bon niveau d&rsquo;engagement et vice versa. Et avec le monde des affaires en g&eacute;n&eacute;ral qui lutte pour retenir et engager ses employ&eacute;s, l&rsquo;&eacute;tude de ces mesures peut aider &agrave; identifier o&ugrave; et comment vous pouvez am&eacute;liorer l&rsquo;engagement (et la r&eacute;tention, par extension). Ceci, &agrave; son tour, peut aider &agrave; r&eacute;duire les co&ucirc;ts associ&eacute;s &agrave; l&rsquo;attrition et au recrutement.</p>\r\n<h3 style=\"box-sizing: border-box; margin: 1.25em 0px 0.2em; text-rendering: optimizeLegibility; font-size: 31.99px; line-height: 1.3; font-family: Raleway, sans-serif; letter-spacing: -0.035em; color: #272727;\">4.&nbsp;&nbsp;&nbsp;&nbsp; Taux d&rsquo;attrition</h3>\r\n<p style=\"box-sizing: border-box; margin: 0px 0px 1.313em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">L&rsquo;attrition au sein des &eacute;quipes n&rsquo;affecte pas uniquement le moral et la productivit&eacute; des collaborateurs. Elle peut &eacute;galement avoir un impact financier s&rsquo;il y a des recrutements et de la formation de nouveaux collaborateurs. Les donn&eacute;es recueillies sur les collaborateurs peuvent aider &agrave; anticiper le risque d&rsquo;attrition. Les donnes peuvent &ecirc;tre tr&egrave;s diverses, de la taille des &eacute;quipes, de l&rsquo;anciennet&eacute; des salari&eacute;s du d&eacute;lai depuis leur derni&egrave;re augmentation de salaire ou encore la dur&eacute;e des cong&eacute;s. Les informations sur le risque d&rsquo;attrition des individus peuvent vous aider &agrave; r&eacute;soudre les probl&egrave;mes sous-jacents avant que votre pr&eacute;cieux membre de l&rsquo;&eacute;quipe ne d&eacute;cide de d&eacute;missionner, ce qui augmente les taux de r&eacute;tention.</p>\r\n<h3 style=\"box-sizing: border-box; margin: 1.25em 0px 0.2em; text-rendering: optimizeLegibility; font-size: 31.99px; line-height: 1.3; font-family: Raleway, sans-serif; letter-spacing: -0.035em; color: #272727;\">5.&nbsp;&nbsp;&nbsp;&nbsp; Le retour sur investissement de la formation</h3>\r\n<p style=\"box-sizing: border-box; margin: 0px 0px 1.313em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">Travailler sur un plan de formation et de d&eacute;veloppement des comp&eacute;tences performant montre que votre soci&eacute;t&eacute; est pr&ecirc;te &agrave; investir dans l&rsquo;humain. Des recherches ont mis en &eacute;vidence que 45% des salari&eacute;s seraient plus susceptibles de rester dans leur entreprise s&rsquo;ils avaient la possibilit&eacute; de suivre une formation adapt&eacute;e &agrave; leur carri&egrave;re. En investissant dans l&rsquo;apprentissage et le d&eacute;veloppement par le biais de programmes de perfectionnement, de formation et de stages, votre entreprise peut aider les membres talentueux de l&rsquo;&eacute;quipe &agrave; fort potentiel de croissance &agrave; s&rsquo;&eacute;panouir. De plus, votre &eacute;quipe sera satisfaite de savoir qu&rsquo;elle s&rsquo;am&eacute;liore et qu&rsquo;elle est appr&eacute;ci&eacute;e par son entreprise.</p>\r\n<h3 style=\"box-sizing: border-box; margin: 1.25em 0px 0.2em; text-rendering: optimizeLegibility; font-size: 31.99px; line-height: 1.3; font-family: Raleway, sans-serif; letter-spacing: -0.035em; color: #272727;\">6.&nbsp;&nbsp;&nbsp;&nbsp; Le taux de turnover</h3>\r\n<p style=\"box-sizing: border-box; margin: 0px 0px 1.313em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">Il s&rsquo;agit surement de l&rsquo;un des indicateurs les plus utilis&eacute;s dans la gestion RH de l&rsquo;entreprise. Le taux de rotation du personnel ou&nbsp;<a style=\"box-sizing: border-box; text-decoration: none; color: #e88437;\" href=\"https://adequasys.com/fr/8-causes-du-turnover-et-comment-y-remedier/\">turnover</a>&nbsp;indique le nombre ou le pourcentage de collaborateurs qui quittent une entreprise au cours d&rsquo;une p&eacute;riode donn&eacute;e. Cet indicateur RH est utile pour &eacute;valuer la culture d&rsquo;entreprise et la strat&eacute;gie de recrutement. Un taux de turnover &eacute;lev&eacute; est signe de probl&egrave;mes internes que la direction doit traiter.</p>\r\n<h3 style=\"box-sizing: border-box; margin: 1.25em 0px 0.2em; text-rendering: optimizeLegibility; font-size: 31.99px; line-height: 1.3; font-family: Raleway, sans-serif; letter-spacing: -0.035em; color: #272727;\">7.&nbsp;&nbsp;&nbsp;&nbsp; Le co&ucirc;t du travail</h3>\r\n<p style=\"box-sizing: border-box; margin: 0px 0px 1.313em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">Les donn&eacute;es sur les co&ucirc;ts des t&acirc;ches peuvent vous aider &agrave; d&eacute;terminer le co&ucirc;t des t&acirc;ches individuelles au sein de la structure de votre entreprise. En &eacute;valuant le co&ucirc;t du travail, vous pouvez identifier les d&eacute;partements et les &eacute;quipes de votre entreprise qui encourent des co&ucirc;ts plus &eacute;lev&eacute;s et &eacute;laborer des strat&eacute;gies sur la mani&egrave;re de r&eacute;duire les d&eacute;penses inutiles.</p>\r\n<h3 style=\"box-sizing: border-box; margin: 1.25em 0px 0.2em; text-rendering: optimizeLegibility; font-size: 31.99px; line-height: 1.3; font-family: Raleway, sans-serif; letter-spacing: -0.035em; color: #272727;\">8.&nbsp;&nbsp;&nbsp;&nbsp; La productivit&eacute; des &eacute;quipes</h3>\r\n<p style=\"box-sizing: border-box; margin: 0px 0px 1.313em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">L&rsquo;&eacute;tude des tendances et des niveaux de productivit&eacute; de vos employ&eacute;s les plus performants peut vous donner un aper&ccedil;u des niveaux de productivit&eacute; et des performances des membres de l&rsquo;&eacute;quipe. Cela peut &eacute;galement vous aider &agrave; comprendre pourquoi les niveaux varient d&rsquo;une personne &agrave; l&rsquo;autre et comment am&eacute;liorer les performances et la productivit&eacute; de toute votre &eacute;quipe, une personne &agrave; la fois.</p>\r\n<h3 style=\"box-sizing: border-box; margin: 1.25em 0px 0.2em; text-rendering: optimizeLegibility; font-size: 31.99px; line-height: 1.3; font-family: Raleway, sans-serif; letter-spacing: -0.035em; color: #272727;\">9.&nbsp;&nbsp;&nbsp;&nbsp; Analyser les avantages</h3>\r\n<p style=\"box-sizing: border-box; margin: 0px 0px 1.313em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">Il est toujours bon de comparer les avantages propos&eacute;s aux salari&eacute;s. Ainsi vous pourrez les comparer par rapport &agrave; la concurrence et am&eacute;liorer votre propre offre, ce qui peut profiter &agrave; vos employ&eacute;s et r&eacute;duire les co&ucirc;ts &agrave; long terme. Investir dans des programmes de pr&eacute;voyance et de mutuelle qui accompagnent au mieux vos collaborateurs peut aider &agrave; pr&eacute;venir l&rsquo;&eacute;puisement professionnel.</p>\r\n<h3 style=\"box-sizing: border-box; margin: 1.25em 0px 0.2em; text-rendering: optimizeLegibility; font-size: 31.99px; line-height: 1.3; font-family: Raleway, sans-serif; letter-spacing: -0.035em; color: #272727;\">10.&nbsp; L&rsquo;efficacit&eacute; de vos logiciels RH</h3>\r\n<p style=\"box-sizing: border-box; margin: 0px 0px 1.313em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">Chaque service RH efficace a besoin d&rsquo;un&nbsp;<a style=\"box-sizing: border-box; text-decoration: none; color: #e88437;\" href=\"https://adequasys.com/fr/sirh/\">SIRH</a>&nbsp;efficace pour automatiser les processus et collecter les donn&eacute;es afin de recueillir des informations approfondies sur les besoins de vos collaborateurs. Plus important encore, une excellente technologie RH peut vous aider &agrave; minimiser les co&ucirc;ts et &agrave; maximiser une strat&eacute;gie ax&eacute;e sur les personnes. Tout en am&eacute;liorant l&rsquo;exp&eacute;rience de votre &eacute;quipe, en vous assurant d&rsquo;embaucher les bonnes personnes et en vous fournissant des informations bas&eacute;es sur des donn&eacute;es sur la mani&egrave;re de vous am&eacute;liorer dans tous les domaines de l&rsquo;entreprise.</p>\r\n<h2 style=\"box-sizing: border-box; margin: 1.25em 0px 0.2em; text-rendering: optimizeLegibility; font-size: 39.998001px; line-height: 1.2; font-family: Raleway, sans-serif; letter-spacing: -0.035em; color: #272727;\">Les avantages des indicateurs RH</h2>\r\n<p style=\"box-sizing: border-box; margin: 0px 0px 1.313em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">Les indicateurs RH ne cessent de se d&eacute;velopper. En dehors des avantages communs &agrave; avoir une information pr&eacute;cise et claire, les indicateurs pr&eacute;sentent diff&eacute;rents avantages&nbsp;:</p>\r\n<ul style=\"box-sizing: border-box; padding: 0px; margin: 0px 0px 1.313em 1.655em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">\r\n<li style=\"box-sizing: border-box;\">Aiguiller les dirigeants de l&rsquo;entreprise et les aider dans le pilotage de la soci&eacute;t&eacute; et la prise de d&eacute;cisions strat&eacute;giques&nbsp;;</li>\r\n<li style=\"box-sizing: border-box;\">Mesurer la performance au sein de l&rsquo;&eacute;quipe RH et plus globalement de l&rsquo;ensemble de l&rsquo;entreprise&nbsp;;</li>\r\n<li style=\"box-sizing: border-box;\">Valider ou non la r&eacute;ussite des objectifs fix&eacute;s&nbsp;;</li>\r\n<li style=\"box-sizing: border-box;\">Etablir un diagnostic pr&eacute;cis et en temps r&eacute;el de la situation de l&rsquo;entreprise.</li>\r\n</ul>\r\n<h2 style=\"box-sizing: border-box; margin: 1.25em 0px 0.2em; text-rendering: optimizeLegibility; font-size: 39.998001px; line-height: 1.2; font-family: Raleway, sans-serif; letter-spacing: -0.035em; color: #272727;\">Simplifiez-vous le suivi des indicateurs RH gr&acirc;ce au SIRH</h2>\r\n<p>&nbsp;</p>\r\n<p style=\"box-sizing: border-box; margin: 0px 0px 1.313em; caret-color: #999999; color: #999999; font-family: Raleway, sans-serif; font-size: 14px;\">Les m&eacute;triques RH sont une ressource inestimable pour am&eacute;liorer les r&eacute;sultats de votre entreprise et favoriser sa r&eacute;ussite. Les donn&eacute;es sur les personnes sont essentielles pour &eacute;laborer une strat&eacute;gie commerciale moderne r&eacute;ussie. Il peut vous aider &agrave; affiner les programmes et les avantages qui attirent et retiennent les meilleurs talents, &agrave; r&eacute;duire les co&ucirc;ts et &agrave; augmenter vos r&eacute;sultats, tout en vous permettant de rester loin devant la concurrence. Gr&acirc;ce au SIRH vous pouvez</p>\r\n<p><a title=\"10 indicateurs RH\" href=\"https://adequasys.com/fr/10-indicateurs-rh-pour-booster-lentreprise/\" target=\"_blank\" rel=\"noopener\">https://adequasys.com/fr/10-indicateurs-rh-pour-booster-lentreprise/</a></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": null,
+      "status": "public",
+      "createdAt": "2023-09-13T18:57:40.607Z",
+      "admin": null,
+      "company": null,
+      "image": {
+        "id": "44ceb969-c13e-43d1-ba8c-375174dcf259",
+        "fileUrl": "https://www.talenteed.io/public/uploads/2e9dcb8f-e591-4271-9d35-7a2156061bad-10%20indicateurs%20RH%20pour%20booster%20l%E2%80%99entreprise.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "10 indicateurs RH pour booster l’entreprise.jpg"
+      },
+      "categories": []
+    },
+    {
+      "id": "b4f82067-c4d2-4e4f-aa54-69c06390674b",
+      "title": "L’Escape Game, quand le recrutement se transforme en mode gaming",
+      "slug": "lescape_game_quand_le_recrutement_se_transforme_en_mode_gaming",
+      "content": "<p><strong>Escape game, hackathon, serious game, jeu de piste… Pour attirer les candidats, les entreprises recourent de plus en plus au jeu dans le parcours de sélection.</strong><br><br>Selon Platon&nbsp;«&nbsp;On peut en savoir plus sur quelqu’un en une heure de jeu qu’en une année de conservation&nbsp;». Alors sur cette même perspective les modalités de recrutement ont connu un changement, elles commencent à s’éloigner du cadre classique d’un simple entretien d’embauche où le recruteur échange avec le candidat pour détecter sa motivation et tester ses compétences et sa personnalité.<br><br>L’instauration d’un recrutement gamifié grâce à l’Escape Game est devenu aujourd’hui une tendance alliant un côté innovant et original pour repérer les meilleurs talents.<br><br><strong>L’Escape Game, c’est quoi exactement ?</strong></p><p><br>L’Escape Game appelé également jeu d’évasion est une activité repose sur un principe simple. Les participants se retrouvent, dans le jeu, enfermés dans une salle, leur but est de s’évader en cherchant des indices et en résolvant des énigmes. En parallèle, la notion du temps est primordiale, les candidats doivent respecter la durée fixée.<br><br>A travers cette expérience plusieurs qualités comportementales se révèlent à savoir le leadership, la communication et la gestion du stress. Ainsi le recruteur arrive à tester et mesurer l’efficacité du travail en équipe des participants grâce à un jeu qui nécessite un degré élevé de collaboration.<br><br>L’Escape Game devient un sujet d’actualité dans les entreprises, les recruteurs utilisent de plus en plus cet outil comme étant une nouvelle méthode pour sélectionner les meilleurs profils. En effet, il permet de d’apprécier la capacité de communiquer, la prise d’initiative et la gestion des émotions chez chaque candidat.<br><br>Afin d'utiliser un tel outil, il faut que l'entreprise possède en son sein un ATS ( Applicant Tracking System), qui est un SIRH dédié pour le recrutement.</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": null,
+      "status": "public",
+      "createdAt": "2023-09-13T18:57:40.607Z",
+      "admin": null,
+      "company": null,
+      "image": {
+        "id": "cf6f51d2-988e-4300-84b3-ec13489fcf47",
+        "fileUrl": "https://www.talenteed.io/public/uploads/3bfd7a8a-3e68-44c5-a37b-b9a9e070d407-L%E2%80%99Escape%20Game,%20quand%20le%20recrutement%20se%20transforme%20en%20mode%20gaming.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "L’Escape Game, quand le recrutement se transforme en mode gaming.jpg"
+      },
+      "categories": []
+    },
+    {
+      "id": "5cb48292-d089-4b81-ac1e-4be2a7474c63",
+      "title": "Analyse du Marché de l'emploi Luxembougeois by Solution Talenteed",
+      "slug": "analyse-du-marche-de-lemploi-luxembougeois-by-solution-talenteed",
+      "content": "<p class=\"MsoNormal\">Malgr&eacute; le nombre d'emplois occup&eacute;s par des travailleurs de pays limitrophes qui ne cesse d'augmenter, la demande d&rsquo;emplois ne peut &ecirc;tre satisfaite par la main-d&rsquo;&oelig;uvre nationale et les travailleurs immigr&eacute;. Cette situation est particuli&egrave;rement inconfortable pour tous les employeurs luxembourgeois.</p>\r\n<p class=\"MsoNormal\" style=\"mso-margin-top-alt: auto; mso-margin-bottom-alt: auto;\">Avec une situation sanitaire qui nous a tous forc&eacute;s &agrave; r&eacute;fl&eacute;chir &agrave; ce qui compte vraiment pour nous et pour le monde dans lequel nous vivons. Elle nous a pouss&eacute;s &agrave; remettre en question nos habitudes, nos routines et nos valeurs, tant dans notre vie personnelle que professionnelle.&nbsp;Les&nbsp;candidats, oblig&eacute;s &agrave; remettre en question de nombreux &eacute;l&eacute;ments de leur vie quotidienne post Covid, souhaitent aujourd'hui une nouvel donne de l'emploi. &nbsp;</p>\r\n<p class=\"MsoNormal\" style=\"mso-margin-top-alt: auto; mso-margin-bottom-alt: auto;\">En r&eacute;action les entreprises en proie&nbsp;&agrave; des difficult&eacute;s de recrutement, doivent rapidement changer leurs canaux de recrutement, car elles&nbsp;font face des offres qui ne trouvent pas de preneur in fine.&nbsp;Cela signifie que nos organisations doivent s'adapter et changer &eacute;galement, et vite.</p>\r\n<p class=\"MsoNormal\" style=\"mso-margin-top-alt: auto; mso-margin-bottom-alt: auto;\">Solution Talenteed souhaite &agrave; apporter une solution qui pourra soulager toutes les parties prenantes.</p>\r\n<p class=\"MsoNormal\" style=\"mso-margin-top-alt: auto; mso-margin-bottom-alt: auto;\">Nous nous sommes inspir&eacute; de l'utilisation par les marques d'une strat&eacute;gie &agrave; la fois physique (retail) et &agrave; la fois en ligne (web/ digital). Le terme va souvent de paire avec le terme de digitalisation des points de vente : la fusion entre le eCommerce et les magasins physiques. Nous nous avons fait la fusion entre le job board et le cabinet de recrutement.</p>\r\n<p class=\"MsoNormal\" style=\"mso-margin-top-alt: auto; mso-margin-bottom-alt: auto;\">Notre solution de recrutement porte sur cette approche nouvelle&nbsp; \"phygital\" du recrutement , nous mettons &agrave; disposition des candidats et des employeurs notre job board pour la publicit&eacute; des offres et la la mise en relation gr&acirc;ce &agrave; l&rsquo;utilisation du natural language processing et du machine learning pour pr&eacute;s&eacute;lectionner les profils&nbsp; en ce qui concerne la partie digitale.</p>\r\n<p class=\"MsoNormal\" style=\"mso-margin-top-alt: auto; mso-margin-bottom-alt: auto;\">Du c&ocirc;t&eacute; entreprise nous avons &eacute;largi l&rsquo;offre en proposant&nbsp; en suppl&eacute;ment les services de nos 5 sourcings centers repartis dans les quatre coins du monde pour la partie physique de notre offre. Ainsi, des 4 semaines de publications non fructueuses, nos sourcing centers prennent le relais pour proposer des candidats qualifi&eacute;s et diversifi&eacute;s sur les offres prioritaires de nos clients.</p>\r\n<p class=\"MsoNormal\" style=\"mso-margin-top-alt: auto; mso-margin-bottom-alt: auto;\">La r&eacute;volution, n'est pas simplement dans l'approche du recrutement, la r&eacute;volution est surtout dans l'investissement pour l'entreprise. Nous nous attaquons &agrave; trois param&egrave;tres de recrutement: les candidats, le temps et le co&ucirc;t. Grace &agrave; notre solution, le recrutement est en moyenne 50% plus rapide et surtout moins cher.</p>\r\n<p class=\"MsoNormal\" style=\"mso-margin-top-alt: auto; mso-margin-bottom-alt: auto;\">&nbsp;</p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": null,
+      "status": "public",
+      "createdAt": "2023-09-13T18:57:40.605Z",
+      "admin": null,
+      "company": null,
+      "image": null,
+      "categories": []
+    },
+    {
+      "id": "bd51aefd-9829-429d-86bb-bb9f22a447cf",
+      "title": "Candidat : pourquoi passer par un cabinet de recrutement ?",
+      "slug": "candidat_pourquoi_passer_par_un_cabinet_de_recrutement_",
+      "content": "<p><i><strong>Ce sont les entreprises qui engagent un cabinet de recrutement. Le but de ce dernier, c’est d’accompagner ses entreprises clientes dans tout ou partie de leur processus de recrutement pour trouver le talent qui correspond parfaitement à leurs attentes.</strong></i></p><p>En croissance, mais encore timide en comparaison des pays anglo-saxons notamment, les cabinets de recrutement séduisent. De plus en plus d’entreprises font appel à un cabinet de recrutement pour trouver des candidats pour leurs emplois à pourvoir. Il existe environ 1 700 cabinets de recrutement en France et près de 20 % des recrutements se font avec l’accompagnement de l’un d’eux (contre 67 % dans les pays anglo-saxons).</p><p>Mais du côté des candidats, pourquoi avoir recours à un&nbsp;<a href=\"https://www.expectra.fr/\">cabinet de recrutement </a>? Voici 6 avantages d’un cabinet de recrutement pour un candidat.</p><h2>1. Multiplier ses chances de trouver un emploi</h2><p>En tant que candidat, passer par un cabinet de recrutement, c’est multiplier ses chances de trouver un emploi, sans pour autant multiplier ses recherches. C’est le cabinet de recrutement qui travaille pour vous, c’est donc l’occasion d’obtenir un poste plus facilement et plus rapidement. Ce travail en amont permet au candidat de se concentrer sur ses entretiens d’embauches, entre autres.</p><h2>2. Valoriser sa candidature grâce à un cabinet de recrutement</h2><p>En étant répertorié auprès d’un cabinet de recrutement, le candidat bénéficie d’une légitimité supplémentaire pour l’entreprise. En effet, un cabinet de recrutement, lorsqu’il ajoute un talent à son répertoire, vérifie les diplômes et les références de ce dernier.</p><p>Ainsi, l’entreprise sait que quand le cabinet de recrutement lui présente un candidat, celui-ci a déjà été validé par des professionnels du recrutement et que son CV est véridique.</p><h2>3. Accéder à un vaste réseau d’entreprises</h2><p>Grâce à un cabinet de recrutement, un candidat a accès à un vaste réseau d’entreprise. Startup,&nbsp;<a href=\"https://www.economie.gouv.fr/cedef/definition-petites-et-moyennes-entreprises\">PME</a>, grand groupe… Les candidats accèdent à des offres d’emploi variées.</p><p>L’autre avantage, c’est qu’un cabinet de recrutement peut aussi proposer des exclusivités. En effet, la majorité des cabinets de recrutement travaillent en collaboration avec leurs entreprises clientes. Cela leur permet de proposer des offres d’emplois qui ne sont pas sur le marché.&nbsp;</p><h2>4. Se faire accompagner et coacher par un cabinet de recrutement</h2><p>Lorsqu’un candidat intègre un cabinet de recrutement, il a droit à un accompagnement complet. Coaching personnel, préparation aux entretiens d’embauche, discussions, réponse aux questions… Un avantage considérable par rapport à d’autres talents. Une façon de prendre confiance en soi, en son parcours professionnel, de savoir ce que l’on veut et comment l’atteindre.</p><h2>5. Obtenir les conseils d’un cabinet de recrutement</h2><p>Pendant tout le processus de recrutement d’un candidat, le cabinet de recrutement le conseille et le dirige. Informations sur le marché du travail actuel, sur son secteur de prédilection, conseils sur les évolutions professionnelles à envisager, le niveau de rémunération possible, les responsabilités futures…</p><h2>6. Ne pas s’occuper des négociations durant l’entretien</h2><p>Le cabinet de recrutement prend en charge les négociations avec l’entreprise : rémunération, avantages, date de début de contrat… Des étapes parfois délicates à gérer pour un candidat non expérimenté, qui n’a pas confiance en soi, timide et/ou qui n’est pas informé sur le marché de l’emploi.</p><p>Dans la majorité des cas, le candidat discute en amont de ses prétentions salariales et le cabinet de recrutement négocie en sa faveur. Il arrive parfois qu’un cabinet de recrutement propose un poste payé en deçà des espérances du candidat, dans ce cas, c’est pour un projet innovant, une mission spontanée ou un emploi qui propose des formations complémentaires.</p><p><a href=\"https://www.dynamique-mag.com/article/author/dynamique-entrepreneuriale\"><strong>L'équipe Dynamique Entrepreneuriale &nbsp;-&nbsp;</strong></a><a href=\"https://www.dynamique-mag.com/article/candidat-pourquoi-passer-par-un-cabinet-de-recrutement\">https://www.dynamique-mag.com/article/candidat-pourquoi-passer-par-un-cabinet-de-recrutement</a></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": null,
+      "status": "public",
+      "createdAt": "2023-09-13T18:57:40.604Z",
+      "admin": null,
+      "company": null,
+      "image": {
+        "id": "ab4e2777-d81d-4b6a-b741-df0d2f4da89b",
+        "fileUrl": "https://www.talenteed.io/public/uploads/ed6fa390-5a93-47c9-821d-2177096dc3cb-Candidat%20%20pourquoi%20passer%20par%20un%20cabinet%20de%20recrutement%20.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Candidat  pourquoi passer par un cabinet de recrutement .jpg"
+      },
+      "categories": []
+    },
+    {
+      "id": "b6c63089-5af7-48cf-98a7-5211145ead3d",
+      "title": "Comment expliquez-vous la pénurie actuelle de talents ?",
+      "slug": "comment_expliquezvous_la_pnurie_actuelle_de_talents_",
+      "content": "<p>Solution Talenteed vous explique les 4 principales causes des difficultés d'embauche d'aujourd'hui</p><p>&nbsp;</p><h3><strong>1 – Manque d'attractivité de certains secteurs</strong></h3><p>&nbsp;</p><p>Le nombre de candidats à l'emploi diminue, notamment dans les secteurs et les métiers considérés comme « difficiles » ou « épuisants ». Les horaires de travail sont irréguliers et les conditions de travail sont difficiles.</p><p>&nbsp;</p><h3><strong>2 – Générations Y et Z et nouvelles attentes des candidats</strong></h3><p>&nbsp;</p><p>Une autre raison majeure est l'évolution des besoins et des considérations des candidats. La génération Z est désormais le vivier de candidats à conquérir, et la génération Y est majoritaire dans la population active actuelle. Mais ils ne vont plus travailler simplement parce qu'ils doivent le faire. Le travail est une utilité sociale, un moyen de s'exprimer et doit avoir un but.</p><p>Les conditions de travail doivent leur permettre de s'épanouir tant dans leur vie professionnelle que personnelle. Le candidat d'aujourd'hui n'hésite pas à sanctionner publiquement une entreprise, une profession ou toute une industrie si les conditions de travail ne répondent pas à ses attentes.&nbsp;</p><figure class=\"image\"><img src=\"/uploads/demo/news/img-detail.jpg\" alt=\"\"></figure><h3><strong>3 – Évolution professionnelle</strong></h3><p>&nbsp;</p><p>La compétence est également un enjeu majeur dans certains processus de recrutement. C'est la principale raison de la pénurie croissante d'emplois. Les compétences ne se développent pas aussi rapidement que les avancées technologiques, numériques et écologiques. Certains postes très spécifiques restent sans candidats potentiels. Les tensions professionnelles sont donc souvent imputées à une mauvaise gestion des compétences au sein de l'entreprise, tant en termes d'anticipation des futurs besoins en compétences de l'entreprise qu'en termes de gestion des carrières.&nbsp;</p><p>&nbsp;</p><h3><strong>4 – Stratégies de recrutement inappropriées pour les métiers en tension</strong></h3><p>&nbsp;</p><p>On peut expliquer aussi la tension par :</p><p>• Des lacunes dans les stratégies et procédures de recrutement proposées.</p><p>• L’utilisation des « anciens » canaux de recrutement non appréciés des candidats.</p><p>• Le manque d'attention à l'image de marque de l'employeur ;</p><p>• Recrutement limité à des zones précises (département, pays, UE)...</p><p>&nbsp;</p><p><strong>Kerian W. - Consultant RH - SOLUTION TALENTEED</strong></p>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": null,
+      "status": "public",
+      "createdAt": "2023-09-13T18:57:40.603Z",
+      "admin": null,
+      "company": null,
+      "image": {
+        "id": "28e0c54a-6344-4159-8d72-1e40e5316fd4",
+        "fileUrl": "https://www.talenteed.io/public/uploads/6a8a4367-6bca-4d15-9e1a-02d10f1193cf-Comment%20expliquez-vous%20la%20pe%CC%81nurie%20actuelle%20de%20talents%20.jpg",
+        "fileType": "image/jpeg",
+        "fileName": "Comment expliquez-vous la pénurie actuelle de talents .jpg"
+      },
+      "categories": []
+    },
+    {
+      "id": "61791aa0-2238-41aa-b194-281cb4db3f4b",
+      "title": "An Overworked Newspaper Editor",
+      "slug": "an_overworked_newspaper_editor",
+      "content": "<h4>Course Description</h4>\r\n<p>Aliquam hendrerit sollicitudin purus, quis rutrum mi accumsan nec. Quisque bibendum orci ac nibh facilisis, at malesuada orci congue. Nullam tempus sollicitudin cursus. Ut et adipiscing erat. Curabitur this is a text link libero tempus congue.</p>\r\n<p>Duis mattis laoreet neque, et ornare neque sollicitudin at. Proin sagittis dolor sed mi elementum pretium. Donec et justo ante. Vivamus egestas sodales est, eu rhoncus urna semper eu. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer tristique elit lobortis purus bibendum, quis dictum metus mattis. Phasellus posuere felis sed eros porttitor mattis. Curabitur massa magna, tempor in blandit id, porta in ligula. Aliquam laoreet nisl massa, at interdum mauris sollicitudin et.</p>\r\n<p><img src=\"/uploads/demo/news/img-detail.jpg\" alt=\"\" width=\"770\" height=\"450\" /></p>\r\n<h4>Requirements</h4>\r\n<ul style=\"list-style-type: square;\">\r\n<li>We do not require any previous experience or pre-defined skills to take this course. A great orientation would be enough to master UI/UX design.</li>\r\n<li>A computer with a good internet connection.</li>\r\n<li>Adobe Photoshop (OPTIONAL)</li>\r\n</ul>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": null,
+      "status": "draft",
+      "createdAt": "2023-09-13T18:57:40.603Z",
+      "admin": null,
+      "company": null,
+      "image": null,
+      "categories": []
+    },
+    {
+      "id": "273027df-539b-4e48-971d-47e222355ca3",
+      "title": "5 Tips For Your Job Interviews",
+      "slug": "5_tips_for_your_job_interviews",
+      "content": "<h4>Course Description</h4>\r\n<p>Aliquam hendrerit sollicitudin purus, quis rutrum mi accumsan nec. Quisque bibendum orci ac nibh facilisis, at malesuada orci congue. Nullam tempus sollicitudin cursus. Ut et adipiscing erat. Curabitur this is a text link libero tempus congue.</p>\r\n<p>Duis mattis laoreet neque, et ornare neque sollicitudin at. Proin sagittis dolor sed mi elementum pretium. Donec et justo ante. Vivamus egestas sodales est, eu rhoncus urna semper eu. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer tristique elit lobortis purus bibendum, quis dictum metus mattis. Phasellus posuere felis sed eros porttitor mattis. Curabitur massa magna, tempor in blandit id, porta in ligula. Aliquam laoreet nisl massa, at interdum mauris sollicitudin et.</p>\r\n<p><img src=\"/uploads/demo/news/img-detail.jpg\" alt=\"\" width=\"770\" height=\"450\" /></p>\r\n<h4>Requirements</h4>\r\n<ul style=\"list-style-type: square;\">\r\n<li>We do not require any previous experience or pre-defined skills to take this course. A great orientation would be enough to master UI/UX design.</li>\r\n<li>A computer with a good internet connection.</li>\r\n<li>Adobe Photoshop (OPTIONAL)</li>\r\n</ul>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": null,
+      "status": "draft",
+      "createdAt": "2023-09-13T18:57:40.602Z",
+      "admin": null,
+      "company": null,
+      "image": null,
+      "categories": []
+    },
+    {
+      "id": "14f18532-b91e-4161-993d-918984d4fafd",
+      "title": "Attract Sales And Profits",
+      "slug": "attract_sales_and_profits",
+      "content": "<h4>Course Description</h4>\r\n<p>Aliquam hendrerit sollicitudin purus, quis rutrum mi accumsan nec. Quisque bibendum orci ac nibh facilisis, at malesuada orci congue. Nullam tempus sollicitudin cursus. Ut et adipiscing erat. Curabitur this is a text link libero tempus congue.</p>\r\n<p>Duis mattis laoreet neque, et ornare neque sollicitudin at. Proin sagittis dolor sed mi elementum pretium. Donec et justo ante. Vivamus egestas sodales est, eu rhoncus urna semper eu. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Integer tristique elit lobortis purus bibendum, quis dictum metus mattis. Phasellus posuere felis sed eros porttitor mattis. Curabitur massa magna, tempor in blandit id, porta in ligula. Aliquam laoreet nisl massa, at interdum mauris sollicitudin et.</p>\r\n<p><img src=\"/uploads/demo/news/img-detail.jpg\" alt=\"\" width=\"770\" height=\"450\" /></p>\r\n<h4>Requirements</h4>\r\n<ul style=\"list-style-type: square;\">\r\n<li>We do not require any previous experience or pre-defined skills to take this course. A great orientation would be enough to master UI/UX design.</li>\r\n<li>A computer with a good internet connection.</li>\r\n<li>Adobe Photoshop (OPTIONAL)</li>\r\n</ul>",
+      "publicContent": "",
+      "isPremium": false,
+      "metaDescription": null,
+      "status": "draft",
+      "createdAt": "2023-09-13T18:57:40.601Z",
+      "admin": null,
+      "company": null,
+      "image": null,
+      "categories": []
+    }
+  ]
+}

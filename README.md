@@ -217,3 +217,13 @@ VITE_RECAPTCHA_SITE_KEY=6Lxxxxx...
 | Mailing (dev) | MailDev (SMTP 1025 / UI 1080) |
 | IA | OpenAI API (gpt-4o-mini) |
 | Upload | disk `public` via `Storage::disk('public')` |
+
+
+
+
+
+Objectif	Commande
+Tout synchro (contacts + companies)	php artisan hubspot:sync
+Contacts seulement (talents + consultants)	php artisan hubspot:sync --contacts
+Companies seulement (entreprises)	php artisan hubspot:sync --companies
+Limiter à N contacts (test)	php artisan hubspot:s
