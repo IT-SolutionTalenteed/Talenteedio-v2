@@ -13,7 +13,9 @@ class OffreController extends Controller
     public function index()
     {
         return response()->json(
-            Offre::with($this->relations)->orderBy('created_at', 'desc')->paginate(15)
+            Offre::with($this->relations)->orderBy('created_at', 'desc')->paginate(
+                min((int) request()->get('per_page', 15), 1000)
+            )
         );
     }
 
