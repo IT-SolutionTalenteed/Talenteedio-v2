@@ -105,4 +105,35 @@ class AuthController extends Controller
             'role' => $user->role,
         ]);
     }
+
+    public function updateProfile(Request $request)
+    {
+        $user = $request->user();
+
+        $validated = $request->validate([
+            'name'                  => 'sometimes|string|max:255',
+            'email'                 => 'sometimes|email|max:255|unique:users,email,' . $user->id,
+            'current_password'      => 'required_with:password|string',
+            'password'              => 'sometimes|string|min:8|confirmed',
+        ]);
+
+        if ($request->filled('password')) {
+            if (!Hash::check($request->current_password, $user->password)) {
+                throw ValidationException::withMessages([
+                    'current_password' => ['Mot de passe actuel incorrect.'],
+                ]);
+            }
+            $validated['password'] = Hash::make($validated['password']);
+        }
+
+        unset($validated['current_password']);
+        $user->update($validated);
+
+        return response()->json([
+            'id'    => $user->id,
+            'name'  => $user->name,
+            'email' => $user->email,
+            'role'  => $user->role,
+        ]);
+    }
 }
