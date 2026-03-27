@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\TemoignageController as AdminTemoignageController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\CandidatureController as AdminCandidatureController;
+use App\Http\Controllers\Admin\EvenementDemandeController as AdminEvenementDemandeController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Talent\OffreController as TalentOffreController;
 use App\Http\Controllers\Talent\FavoriController as TalentFavoriController;
@@ -121,6 +122,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/candidatures', [AdminCandidatureController::class, 'index']);
         Route::patch('/candidatures/{candidature}/statut', [AdminCandidatureController::class, 'updateStatut']);
         Route::delete('/candidatures/{candidature}', [AdminCandidatureController::class, 'destroy']);
+
+        // Demandes de participation aux événements
+        Route::get('/evenement-demandes', [AdminEvenementDemandeController::class, 'index']);
+        Route::patch('/evenement-demandes/{evenementDemande}/statut', [AdminEvenementDemandeController::class, 'updateStatut']);
 
         // Gestion des talents
         Route::get('/talents', [TalentController::class, 'index']);
