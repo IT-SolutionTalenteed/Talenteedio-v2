@@ -13,7 +13,7 @@ class TalentController extends Controller
         $talents = User::whereIn('role', ['talent', 'consultant_externe'])
             ->with(['studyLevel', 'experience', 'activitySectors', 'languages', 'skills'])
             ->orderBy('name')
-            ->paginate(20);
+            ->paginate($request->input('per_page', 20));
 
         return response()->json($talents);
     }
@@ -29,6 +29,9 @@ class TalentController extends Controller
         abort_if(!in_array($user->role, ['talent', 'consultant_externe']), 403);
 
         $validated = $request->validate([
+            'first_name'        => 'nullable|string|max:100',
+            'last_name'         => 'nullable|string|max:100',
+            'email'             => 'nullable|email|max:255|unique:users,email,' . $user->id,
             'civilite'          => 'nullable|string|max:10',
             'titre_poste'       => 'nullable|string|max:255',
             'telephone'         => 'nullable|string|max:30',
@@ -49,6 +52,13 @@ class TalentController extends Controller
             'skill_ids'         => 'nullable|array',
             'skill_ids.*'       => 'exists:skills,id',
         ]);
+
+        // Sync name from first+last
+        if (isset($validated['first_name']) || isset($validated['last_name'])) {
+            $first = $validated['first_name'] ?? $user->first_name;
+            $last  = $validated['last_name']  ?? $user->last_name;
+            $validated['name'] = trim("$first $last") ?: $user->name;
+        }
 
         $user->update(collect($validated)->except(['activity_sector_ids', 'language_ids', 'skill_ids'])->toArray());
 
