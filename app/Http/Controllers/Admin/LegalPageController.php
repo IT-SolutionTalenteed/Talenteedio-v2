@@ -28,6 +28,11 @@ class LegalPageController extends Controller
         return response()->json($legalPage);
     }
 
+    public function showBySlug(string $slug)
+    {
+        $page = LegalPage::where('slug', $slug)->firstOrFail();
+        return response()->json($page);
+    }
     public function update(Request $request, LegalPage $legalPage)
     {
         $validated = $request->validate([
