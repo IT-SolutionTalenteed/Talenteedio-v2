@@ -99,10 +99,16 @@ class AuthController extends Controller
     {
         $user = $request->user();
         return response()->json([
-            'id' => $user->id,
-            'name' => $user->name,
-            'email' => $user->email,
-            'role' => $user->role,
+            'id'         => $user->id,
+            'name'       => $user->name,
+            'first_name' => $user->first_name,
+            'last_name'  => $user->last_name,
+            'email'      => $user->email,
+            'role'       => $user->role,
+            'telephone'  => $user->telephone,
+            'ville'      => $user->ville,
+            'pays'       => $user->pays,
+            'titre_poste'=> $user->titre_poste,
         ]);
     }
 
@@ -111,8 +117,13 @@ class AuthController extends Controller
         $user = $request->user();
 
         $validated = $request->validate([
-            'name'                  => 'sometimes|string|max:255',
+            'first_name'            => 'sometimes|nullable|string|max:100',
+            'last_name'             => 'sometimes|nullable|string|max:100',
             'email'                 => 'sometimes|email|max:255|unique:users,email,' . $user->id,
+            'telephone'             => 'sometimes|nullable|string|max:30',
+            'ville'                 => 'sometimes|nullable|string|max:100',
+            'pays'                  => 'sometimes|nullable|string|max:100',
+            'titre_poste'           => 'sometimes|nullable|string|max:255',
             'current_password'      => 'required_with:password|string',
             'password'              => 'sometimes|string|min:8|confirmed',
         ]);
@@ -127,13 +138,27 @@ class AuthController extends Controller
         }
 
         unset($validated['current_password']);
+
+        // Sync name from first+last
+        if (isset($validated['first_name']) || isset($validated['last_name'])) {
+            $first = $validated['first_name'] ?? $user->first_name;
+            $last  = $validated['last_name']  ?? $user->last_name;
+            $validated['name'] = trim("$first $last") ?: $user->name;
+        }
+
         $user->update($validated);
 
         return response()->json([
-            'id'    => $user->id,
-            'name'  => $user->name,
-            'email' => $user->email,
-            'role'  => $user->role,
+            'id'         => $user->id,
+            'name'       => $user->name,
+            'first_name' => $user->first_name,
+            'last_name'  => $user->last_name,
+            'email'      => $user->email,
+            'role'       => $user->role,
+            'telephone'  => $user->telephone,
+            'ville'      => $user->ville,
+            'pays'       => $user->pays,
+            'titre_poste'=> $user->titre_poste,
         ]);
     }
 }
