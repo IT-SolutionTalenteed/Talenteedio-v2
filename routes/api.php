@@ -45,6 +45,7 @@ use Illuminate\Support\Facades\Route;
 // Routes publiques d'authentification
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+Route::post('/mobile/login', [AuthController::class, 'mobileLogin']); // App Flutter — sans reCAPTCHA
 
 // Google OAuth (Socialite)
 Route::get('/auth/google/redirect',  [SocialiteController::class, 'redirectToGoogle']);

@@ -86,6 +86,41 @@ class AuthController extends Controller
         ]);
     }
 
+    public function mobileLogin(Request $request)
+    {
+        // Endpoint réservé à l'app Flutter — pas de reCAPTCHA
+        // Sécurisé par le header X-App-Platform: flutter
+        if ($request->header('X-App-Platform') !== 'flutter') {
+            return response()->json(['message' => 'Accès non autorisé.'], 403);
+        }
+
+        $request->validate([
+            'email'    => 'required|email',
+            'password' => 'required',
+        ]);
+
+        $user = User::where('email', $request->email)->first();
+
+        if (!$user || !Hash::check($request->password, $user->password)) {
+            throw ValidationException::withMessages([
+                'email' => ['Les informations d\'identification fournies sont incorrectes.'],
+            ]);
+        }
+
+        $token = $user->createToken('mobile_token')->plainTextToken;
+
+        return response()->json([
+            'access_token' => $token,
+            'token_type'   => 'Bearer',
+            'user'         => [
+                'id'    => $user->id,
+                'name'  => $user->name,
+                'email' => $user->email,
+                'role'  => $user->role,
+            ],
+        ]);
+    }
+
     public function logout(Request $request)
     {
         $request->user()->currentAccessToken()->delete();
