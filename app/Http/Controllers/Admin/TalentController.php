@@ -10,7 +10,7 @@ class TalentController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = min((int) $request->get('per_page', 20), 100);
+        $perPage = min((int) $request->get('per_page', 20), 1000);
 
         $talents = User::whereIn('role', ['talent', 'consultant_externe'])
             ->with(['studyLevel', 'experience', 'activitySectors', 'languages', 'skills'])
