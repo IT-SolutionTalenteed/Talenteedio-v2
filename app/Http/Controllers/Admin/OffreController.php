@@ -10,13 +10,22 @@ class OffreController extends Controller
 {
     private array $relations = ['jobContracts', 'jobModes', 'skills', 'studyLevels', 'experiences'];
 
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(
-            Offre::with($this->relations)->orderBy('created_at', 'desc')->paginate(
-                min((int) request()->get('per_page', 15), 1000)
-            )
-        );
+        $perPage = min((int) $request->get('per_page', 25), 100);
+        $search  = trim($request->get('search', ''));
+
+        $query = Offre::with($this->relations)->orderBy('created_at', 'desc');
+
+        if ($search !== '') {
+            $query->where(function ($q) use ($search) {
+                $q->where('titre',       'like', "%{$search}%")
+                  ->orWhere('client',      'like', "%{$search}%")
+                  ->orWhere('localisation','like', "%{$search}%");
+            });
+        }
+
+        return response()->json($query->paginate($perPage));
     }
 
     public function store(Request $request)

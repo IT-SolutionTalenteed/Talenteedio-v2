@@ -10,14 +10,24 @@ class TalentController extends Controller
 {
     public function index(Request $request)
     {
-        $perPage = min((int) $request->get('per_page', 20), 1000);
+        $perPage = min((int) $request->get('per_page', 25), 100);
+        $search  = trim($request->get('search', ''));
 
-        $talents = User::whereIn('role', ['talent', 'consultant_externe'])
+        $query = User::whereIn('role', ['talent', 'consultant_externe'])
             ->with(['studyLevel', 'experience', 'activitySectors', 'languages', 'skills'])
-            ->orderBy('name')
-            ->paginate($perPage);
+            ->orderBy('name');
 
-        return response()->json($talents);
+        if ($search !== '') {
+            $query->where(function ($q) use ($search) {
+                $q->where('name',        'like', "%{$search}%")
+                  ->orWhere('email',       'like', "%{$search}%")
+                  ->orWhere('titre_poste', 'like', "%{$search}%")
+                  ->orWhere('ville',       'like', "%{$search}%")
+                  ->orWhere('pays',        'like', "%{$search}%");
+            });
+        }
+
+        return response()->json($query->paginate($perPage));
     }
 
     public function show(User $user)
