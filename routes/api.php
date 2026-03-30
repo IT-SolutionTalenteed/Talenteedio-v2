@@ -141,6 +141,7 @@ Route::middleware('auth:sanctum')->group(function () {
         // Entretiens par stand (D-05)
         Route::get('/entretiens', [AdminEntretienController::class, 'index']);
         Route::get('/entretiens-evenements', [AdminEntretienController::class, 'evenementsList']);
+        Route::get('/entretiens-featured-evenement', [AdminEntretienController::class, 'featuredEvenement']);
 
         // Feedbacks (D-06)
         Route::get('/feedbacks', [AdminFeedbackController::class, 'index']);

@@ -36,7 +36,13 @@ class EntretienController extends Controller
 
     public function evenementsList()
     {
-        $evenements = Evenement::orderByDesc('date_debut')->get(['id', 'titre', 'date_debut', 'date_fin']);
+        $evenements = Evenement::orderByDesc('date_debut')->get(['id', 'titre', 'date_debut', 'date_fin', 'is_featured']);
         return response()->json($evenements);
+    }
+
+    public function featuredEvenement()
+    {
+        $evenement = Evenement::where('is_featured', true)->first(['id', 'titre', 'date_debut', 'date_fin', 'is_featured']);
+        return response()->json($evenement);
     }
 }
