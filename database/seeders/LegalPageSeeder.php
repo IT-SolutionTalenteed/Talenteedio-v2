@@ -15,18 +15,20 @@ class LegalPageSeeder extends Seeder
         $pages = [
             [
                 'title' => 'Conditions générales',
+                'type'  => 'terms',
                 'description' => '<p>Contenu à remplir...</p>'
             ],
             [
                 'title' => 'Confidentialité',
+                'type'  => 'privacy',
                 'description' => '<p>Contenu à remplir...</p>'
             ]
         ];
 
         foreach ($pages as $page) {
             LegalPage::firstOrCreate(
-                ['title' => $page['title']],
-                ['description' => $page['description']]
+                ['type' => $page['type']],
+                ['title' => $page['title'], 'description' => $page['description']]
             );
         }
     }

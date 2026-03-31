@@ -18,6 +18,7 @@ class LegalPageController extends Controller
         $validated = $request->validate([
             'title'       => 'required|string|max:255',
             'description' => 'required|string',
+            'type'        => 'nullable|string|in:terms,privacy|unique:legal_pages,type',
         ]);
 
         return response()->json(LegalPage::create($validated), 201);
@@ -33,11 +34,18 @@ class LegalPageController extends Controller
         $page = LegalPage::where('slug', $slug)->firstOrFail();
         return response()->json($page);
     }
+
+    public function showByType(string $type)
+    {
+        $page = LegalPage::where('type', $type)->firstOrFail();
+        return response()->json($page);
+    }
     public function update(Request $request, LegalPage $legalPage)
     {
         $validated = $request->validate([
             'title'       => 'required|string|max:255',
             'description' => 'required|string',
+            'type'        => 'nullable|string|in:terms,privacy|unique:legal_pages,type,' . $legalPage->id,
         ]);
 
         $legalPage->update($validated);
