@@ -44,6 +44,7 @@ class OffreController extends Controller
             'fourchette_salariale' => 'nullable|string|max:255',
             'localisation'         => 'nullable|string|max:255',
             'nombre_candidatures'  => 'nullable|integer|min:0',
+            'image'                => 'nullable|image|max:2048',
             'job_contract_ids'     => 'array',
             'job_contract_ids.*'   => 'exists:job_contracts,id',
             'job_mode_ids'         => 'array',
@@ -55,6 +56,10 @@ class OffreController extends Controller
             'experience_ids'       => 'array',
             'experience_ids.*'     => 'exists:experiences,id',
         ]);
+
+        if ($request->hasFile('image')) {
+            $validated['image'] = $request->file('image')->store('offres', 'public');
+        }
 
         $offre = Offre::create($validated);
         $this->syncRelations($offre, $validated);
@@ -83,6 +88,8 @@ class OffreController extends Controller
             'fourchette_salariale' => 'nullable|string|max:255',
             'localisation'         => 'nullable|string|max:255',
             'nombre_candidatures'  => 'nullable|integer|min:0',
+            'image'                => 'nullable|image|max:2048',
+            'remove_image'         => 'nullable|boolean',
             'job_contract_ids'     => 'array',
             'job_contract_ids.*'   => 'exists:job_contracts,id',
             'job_mode_ids'         => 'array',
@@ -95,6 +102,18 @@ class OffreController extends Controller
             'experience_ids.*'     => 'exists:experiences,id',
         ]);
 
+        if ($request->hasFile('image')) {
+            if ($offre->image) {
+                \Storage::disk('public')->delete($offre->image);
+            }
+            $validated['image'] = $request->file('image')->store('offres', 'public');
+        } elseif ($request->boolean('remove_image')) {
+            if ($offre->image) {
+                \Storage::disk('public')->delete($offre->image);
+            }
+            $validated['image'] = null;
+        }
+
         $offre->update($validated);
         $this->syncRelations($offre, $validated);
 
@@ -103,6 +122,9 @@ class OffreController extends Controller
 
     public function destroy(Offre $offre)
     {
+        if ($offre->image) {
+            \Storage::disk('public')->delete($offre->image);
+        }
         $offre->delete();
 
         return response()->json(['message' => 'Offre supprimée avec succès']);

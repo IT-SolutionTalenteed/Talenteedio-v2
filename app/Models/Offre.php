@@ -11,8 +11,16 @@ class Offre extends Model
     protected $fillable = [
         'entreprise_id', 'titre', 'mission', 'client', 'profil_recherche', 'a_propos',
         'liste_offre', 'description', 'date_mise_en_ligne', 'date_limite',
-        'salaire', 'fourchette_salariale', 'localisation', 'nombre_candidatures',
+        'salaire', 'fourchette_salariale', 'localisation', 'nombre_candidatures', 'image',
     ];
+
+    protected $appends = ['image_url'];
+
+    public function getImageUrlAttribute(): ?string
+    {
+        if (!$this->image) return null;
+        return asset('storage/' . $this->image);
+    }
 
     protected $casts = [
         'date_mise_en_ligne' => 'date',
