@@ -245,13 +245,19 @@ class PublicController extends Controller
             ->latest()
             ->get(['id', 'title', 'content', 'image', 'created_at', 'entreprise_id']);
 
-        $participeEvenement = $entreprise->evenements()->exists();
+        $evenements = $entreprise->evenements()
+            ->where('date_debut', '>=', now())
+            ->orderBy('date_debut')
+            ->get(['evenements.id', 'evenements.titre', 'evenements.date_debut', 'evenements.date_fin']);
+
+        $participeEvenement = $evenements->isNotEmpty() || $entreprise->evenements()->exists();
 
         return response()->json([
-            'entreprise'         => $entreprise,
-            'offres'             => $offres,
-            'articles'           => $articles,
-            'participe_evenement'=> $participeEvenement,
+            'entreprise'          => $entreprise,
+            'offres'              => $offres,
+            'articles'            => $articles,
+            'evenements'          => $evenements,
+            'participe_evenement' => $participeEvenement,
         ]);
     }
 
