@@ -234,10 +234,10 @@ class PublicController extends Controller
             'activitySector:id,name',
         ]);
 
-        $offres = Offre::with(['jobContracts:id,name'])
+        $offres = Offre::with(['jobContracts:id,name', 'jobModes:id,name', 'skills:id,name', 'experiences:id,name', 'studyLevels:id,name'])
             ->where('entreprise_id', $entreprise->id)
             ->latest()
-            ->get(['id', 'titre', 'localisation', 'mission', 'date_limite', 'entreprise_id']);
+            ->get(['id', 'titre', 'localisation', 'mission', 'date_limite', 'entreprise_id', 'profil_recherche', 'nombre_candidatures']);
 
         $articles = Article::with('mediaCategories:id,name')
             ->where('entreprise_id', $entreprise->id)
