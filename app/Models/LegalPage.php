@@ -7,7 +7,7 @@ use Illuminate\Support\Str;
 
 class LegalPage extends Model
 {
-    protected $fillable = ['title', 'slug', 'type', 'description'];
+    protected $fillable = ['title', 'slug', 'description'];
 
     protected static function booted(): void
     {

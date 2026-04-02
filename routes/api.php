@@ -53,7 +53,6 @@ Route::get('/auth/google/callback',  [SocialiteController::class, 'handleGoogleC
 
 // Routes publiques (footer, etc.)
 Route::get('/legal-pages', [LegalPageController::class, 'index']);
-Route::get('/legal-pages/by-type/{type}', [LegalPageController::class, 'showByType']);
 Route::get('/legal-pages/{slug}', [LegalPageController::class, 'showBySlug']);
 Route::get('/skills', [SkillController::class, 'index']);
 
