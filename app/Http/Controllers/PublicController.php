@@ -184,7 +184,7 @@ class PublicController extends Controller
     {
         $offres = Offre::with('entreprise:id,nom,logo')
             ->latest()
-            ->take(3)
+            ->take(6)
             ->get(['id', 'titre', 'localisation', 'mission', 'date_limite', 'entreprise_id', 'image']);
 
         return response()->json($offres);
