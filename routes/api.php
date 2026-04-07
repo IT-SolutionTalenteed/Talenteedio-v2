@@ -218,3 +218,11 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/articles-referentiels', [EntrepriseArticleController::class, 'referentiels']);
     });
 });
+
+// Routes de diagnostic (à protéger en production)
+use App\Http\Controllers\DiagnosticController;
+
+Route::prefix('diagnostic')->group(function () {
+    Route::get('/config', [DiagnosticController::class, 'checkConfig']);
+    Route::post('/test-upload', [DiagnosticController::class, 'testUpload']);
+});
