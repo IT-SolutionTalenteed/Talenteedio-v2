@@ -62,6 +62,13 @@ class EvenementController extends Controller
 
     public function update(Request $request, Evenement $evenement)
     {
+        \Log::info('Update evenement request', [
+            'has_file' => $request->hasFile('image_mise_en_avant'),
+            'file_valid' => $request->hasFile('image_mise_en_avant') ? $request->file('image_mise_en_avant')->isValid() : null,
+            'file_size' => $request->hasFile('image_mise_en_avant') ? $request->file('image_mise_en_avant')->getSize() : null,
+            'file_error' => $request->hasFile('image_mise_en_avant') ? $request->file('image_mise_en_avant')->getError() : null,
+        ]);
+
         $validated = $request->validate([
             'titre'                   => 'required|string|max:255',
             'image_mise_en_avant'     => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
@@ -80,7 +87,7 @@ class EvenementController extends Controller
             'entreprise_ids.*'        => 'exists:entreprises,id',
         ]);
 
-        if ($request->hasFile('image_mise_en_avant')) {
+        if ($request->hasFile('image_mise_en_avant') && $request->file('image_mise_en_avant')->isValid()) {
             if ($evenement->image_mise_en_avant) {
                 Storage::disk('public')->delete($evenement->image_mise_en_avant);
             }
