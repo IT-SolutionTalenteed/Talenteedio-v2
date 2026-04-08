@@ -96,12 +96,8 @@ class PublicController extends Controller
     public function entreprises()
     {
         $entreprises = Entreprise::with('activitySector:id,name')
-            ->withCount('offres')
-            ->get(['id', 'nom', 'logo', 'description', 'ville', 'pays', 'activity_sector_id'])
-            ->map(function ($e) {
-                $e->participe_evenement = $e->evenements()->exists();
-                return $e;
-            });
+            ->withCount(['offres', 'articles', 'evenements'])
+            ->get(['id', 'nom', 'logo', 'description', 'ville', 'pays', 'activity_sector_id']);
 
         return response()->json($entreprises);
     }

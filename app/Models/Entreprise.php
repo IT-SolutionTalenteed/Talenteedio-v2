@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Offre;
+use App\Models\Article;
 
 class Entreprise extends Model
 {
@@ -39,5 +40,10 @@ class Entreprise extends Model
     public function offres()
     {
         return $this->hasMany(Offre::class);
+    }
+
+    public function articles()
+    {
+        return $this->hasMany(Article::class);
     }
 }
