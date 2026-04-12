@@ -38,22 +38,67 @@ class EvenementController extends Controller
     }
 
     /**
+     * POST /talent/cv/parse
+     * Parse un CV uploadé et retourne les compétences extraites + résumé du profil.
+     * Utilisé pour pré-remplir le formulaire de matching côté client.
+     */
+    public function parseCv(Request $request, OpenAIMatchingService $matchingService)
+    {
+        $request->validate([
+            'cv' => 'required|file|mimes:pdf,doc,docx|max:5120',
+        ]);
+
+        $file   = $request->file('cv');
+        $cvPath = $file->store('matching/cvs', 'public');
+        $cvText = $matchingService->parseCv(
+            Storage::disk('public')->path($cvPath),
+            $file->getClientOriginalName()
+        );
+
+        if (!$cvText) {
+            return response()->json([
+                'competences' => [],
+                'resume'      => null,
+                'message'     => 'Impossible d\'extraire le contenu de ce fichier.',
+            ]);
+        }
+
+        // Demander à OpenAI d'extraire les compétences du CV
+        $extracted = $matchingService->extractCvSkills($cvText);
+
+        return response()->json([
+            'competences' => $extracted['competences'] ?? [],
+            'resume'      => $extracted['resume']      ?? null,
+            'cv_path'     => $cvPath,
+        ]);
+    }
+
+    /**
      * G-03 — Matching événement : talent vs entreprises participantes.
-     * Profil complet BDD + CV parsé + offres des entreprises.
+     * Les champs du formulaire (pays_souhaites, villes_souhaitees, secteur_souhaite_id, competences)
+     * overrident les valeurs du profil BDD.
      */
     public function matching(Request $request, Evenement $evenement, OpenAIMatchingService $matchingService)
     {
         $request->validate([
-            'poste_recherche' => 'required|string|max:255',
-            'cv'              => 'nullable|file|mimes:pdf,doc,docx|max:5120',
+            'poste_recherche'    => 'required|string|max:255',
+            'cv'                 => 'nullable|file|mimes:pdf,doc,docx|max:5120',
+            'cv_path'            => 'nullable|string',   // chemin si déjà uploadé via parseCv
+            'competences'        => 'nullable|string',   // compétences extraites du CV ou saisies
+            'pays_souhaites'     => 'nullable|array',
+            'pays_souhaites.*'   => 'string|max:100',
+            'villes_souhaitees'  => 'nullable|array',
+            'villes_souhaitees.*'=> 'string|max:100',
+            'secteur_souhaite_id'=> 'nullable|integer|exists:activity_sectors,id',
         ]);
 
         $talent = auth()->user();
         $talent->load(['activitySectors', 'skills', 'languages', 'studyLevel', 'experience', 'secteurSouhaite']);
 
-        // Parsing CV
-        $cvText  = null;
-        $cvPath  = null;
+        // Parsing CV (nouveau fichier ou réutilisation du cv_path déjà parsé)
+        $cvText = null;
+        $cvPath = $request->input('cv_path');
+
         if ($request->hasFile('cv')) {
             $file   = $request->file('cv');
             $cvPath = $file->store('matching/cvs', 'public');
@@ -61,7 +106,21 @@ class EvenementController extends Controller
                 Storage::disk('public')->path($cvPath),
                 $file->getClientOriginalName()
             );
+        } elseif ($cvPath) {
+            // CV déjà parsé lors de l'étape parseCv — on reparse depuis le disque
+            $fullPath = Storage::disk('public')->path($cvPath);
+            if (file_exists($fullPath)) {
+                $cvText = $matchingService->parseCv($fullPath, basename($cvPath));
+            }
         }
+
+        // Overrides formulaire → profil temporaire pour ce matching
+        $overrides = [
+            'pays_souhaites'      => $request->input('pays_souhaites'),
+            'villes_souhaitees'   => $request->input('villes_souhaitees'),
+            'secteur_souhaite_id' => $request->input('secteur_souhaite_id'),
+            'competences_libres'  => $request->input('competences'), // texte libre extrait du CV
+        ];
 
         $evenement->load(['entreprises.offres.skills', 'entreprises.offres.activitySector', 'entreprises.activitySector']);
 
@@ -69,9 +128,8 @@ class EvenementController extends Controller
             return response()->json(['message' => 'Aucune entreprise participante pour cet événement.'], 422);
         }
 
-        $results = $matchingService->matchEvenement($talent, $request->poste_recherche, $cvText, $evenement);
+        $results = $matchingService->matchEvenement($talent, $request->poste_recherche, $cvText, $evenement, $overrides);
 
-        // Persister pour l'historique
         MatchingResult::create([
             'user_id'         => $talent->id,
             'evenement_id'    => $evenement->id,
@@ -88,21 +146,28 @@ class EvenementController extends Controller
 
     /**
      * G-03b — Matching global : talent vs toutes les offres en base.
-     * Permet au talent de trouver des offres pertinentes sans passer par un événement.
      */
     public function matchingOffresGlobal(Request $request, OpenAIMatchingService $matchingService)
     {
         $request->validate([
-            'poste_recherche' => 'required|string|max:255',
-            'cv'              => 'nullable|file|mimes:pdf,doc,docx|max:5120',
-            'limit'           => 'nullable|integer|min:5|max:50',
+            'poste_recherche'    => 'required|string|max:255',
+            'cv'                 => 'nullable|file|mimes:pdf,doc,docx|max:5120',
+            'cv_path'            => 'nullable|string',
+            'competences'        => 'nullable|string',
+            'pays_souhaites'     => 'nullable|array',
+            'pays_souhaites.*'   => 'string|max:100',
+            'villes_souhaitees'  => 'nullable|array',
+            'villes_souhaitees.*'=> 'string|max:100',
+            'secteur_souhaite_id'=> 'nullable|integer|exists:activity_sectors,id',
+            'limit'              => 'nullable|integer|min:5|max:50',
         ]);
 
         $talent = auth()->user();
         $talent->load(['activitySectors', 'skills', 'languages', 'studyLevel', 'experience', 'secteurSouhaite']);
 
-        // Parsing CV
         $cvText = null;
+        $cvPath = $request->input('cv_path');
+
         if ($request->hasFile('cv')) {
             $file   = $request->file('cv');
             $cvPath = $file->store('matching/cvs', 'public');
@@ -110,9 +175,20 @@ class EvenementController extends Controller
                 Storage::disk('public')->path($cvPath),
                 $file->getClientOriginalName()
             );
+        } elseif ($cvPath) {
+            $fullPath = Storage::disk('public')->path($cvPath);
+            if (file_exists($fullPath)) {
+                $cvText = $matchingService->parseCv($fullPath, basename($cvPath));
+            }
         }
 
-        // Charger toutes les offres avec toutes leurs relations
+        $overrides = [
+            'pays_souhaites'      => $request->input('pays_souhaites'),
+            'villes_souhaitees'   => $request->input('villes_souhaitees'),
+            'secteur_souhaite_id' => $request->input('secteur_souhaite_id'),
+            'competences_libres'  => $request->input('competences'),
+        ];
+
         $offres = Offre::with([
             'entreprise.activitySector',
             'activitySector',
@@ -127,31 +203,28 @@ class EvenementController extends Controller
             return response()->json(['message' => 'Aucune offre disponible.'], 422);
         }
 
-        // Si trop d'offres, pré-filtrer par secteur ou mots-clés pour éviter un prompt trop long
         $limit  = $request->input('limit', 30);
-        $offres = $this->preselectOffres($offres, $talent, $request->poste_recherche, $limit);
+        $offres = $this->preselectOffres($offres, $talent, $request->poste_recherche, $limit, $overrides);
 
-        $results = $matchingService->matchOffresGlobal($talent, $request->poste_recherche, $cvText, $offres);
+        $results = $matchingService->matchOffresGlobal($talent, $request->poste_recherche, $cvText, $offres, $overrides);
 
         return response()->json([
-            'poste_recherche' => $request->poste_recherche,
+            'poste_recherche'        => $request->poste_recherche,
             'total_offres_analysees' => $offres->count(),
-            'resultats' => $results,
+            'resultats'              => $results,
         ]);
     }
 
     /**
-     * Pré-sélection légère des offres avant l'envoi à OpenAI.
-     * Priorise les offres dont le secteur ou la localisation correspond aux préférences du talent.
-     * Tombe en fallback sur les offres les plus récentes si pas assez de correspondances.
+     * Pré-sélection légère des offres avant envoi à OpenAI.
+     * Utilise les overrides formulaire en priorité, puis le profil BDD.
      */
-    private function preselectOffres($offres, $talent, string $posteRecherche, int $limit)
+    private function preselectOffres($offres, $talent, string $posteRecherche, int $limit, array $overrides = [])
     {
-        $secteurId    = $talent->secteur_souhaite_id;
-        $paysSouhaites = $talent->pays_souhaites ?? [];
-        $keywords     = collect(explode(' ', strtolower($posteRecherche)))->filter(fn($w) => strlen($w) > 2);
+        $secteurId     = $overrides['secteur_souhaite_id'] ?? $talent->secteur_souhaite_id;
+        $paysSouhaites = $overrides['pays_souhaites']      ?? $talent->pays_souhaites ?? [];
+        $keywords      = collect(explode(' ', strtolower($posteRecherche)))->filter(fn($w) => strlen($w) > 2);
 
-        // Score de priorité rapide (sans IA)
         $scored = $offres->map(function ($offre) use ($secteurId, $paysSouhaites, $keywords) {
             $priority = 0;
             if ($secteurId && ($offre->activity_sector_id === $secteurId || $offre->entreprise?->activity_sector_id === $secteurId)) {
