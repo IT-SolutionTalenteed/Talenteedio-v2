@@ -179,6 +179,7 @@ Route::middleware('auth:sanctum')->group(function () {
 
         // Événements + matching OpenAI (G-03)
         Route::get('/evenements', [TalentEvenementController::class, 'index']);
+        Route::get('/mes-matchings', [TalentEvenementController::class, 'mesMatchings']);
         Route::post('/evenements/{evenement}/matching', [TalentEvenementController::class, 'matching']);
 
         // Réservation entretiens créneaux 15min (G-04)
