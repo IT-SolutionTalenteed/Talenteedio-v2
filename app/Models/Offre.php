@@ -9,7 +9,7 @@ class Offre extends Model
     protected $table = 'offres';
 
     protected $fillable = [
-        'entreprise_id', 'titre', 'mission', 'client', 'profil_recherche', 'a_propos',
+        'entreprise_id', 'activity_sector_id', 'titre', 'mission', 'client', 'profil_recherche', 'a_propos',
         'liste_offre', 'description', 'date_mise_en_ligne', 'date_limite',
         'salaire', 'fourchette_salariale', 'localisation', 'nombre_candidatures', 'image',
     ];
@@ -32,6 +32,11 @@ class Offre extends Model
     public function entreprise()
     {
         return $this->belongsTo(Entreprise::class);
+    }
+
+    public function activitySector()
+    {
+        return $this->belongsTo(\App\Models\ActivitySector::class);
     }
 
     public function candidatures()
