@@ -24,6 +24,8 @@ use Laravel\Sanctum\HasApiTokens;
     'situation_familiale',
     // Google Socialite (J-03)
     'google_id', 'avatar_google',
+    // Préférences matching (matching CV)
+    'pays_souhaites', 'villes_souhaitees', 'secteur_souhaite_id',
 ])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
@@ -39,11 +41,13 @@ class User extends Authenticatable
     protected function casts(): array
     {
         return [
-            'email_verified_at' => 'datetime',
-            'password'          => 'hashed',
-            'is_suspended'      => 'boolean',
-            'is_banned'         => 'boolean',
-            'date_naissance'    => 'date',
+            'email_verified_at'  => 'datetime',
+            'password'           => 'hashed',
+            'is_suspended'       => 'boolean',
+            'is_banned'          => 'boolean',
+            'date_naissance'     => 'date',
+            'pays_souhaites'     => 'array',
+            'villes_souhaitees'  => 'array',
         ];
     }
 
@@ -106,6 +110,11 @@ class User extends Authenticatable
     public function activitySectors()
     {
         return $this->belongsToMany(ActivitySector::class, 'user_activity_sector');
+    }
+
+    public function secteurSouhaite()
+    {
+        return $this->belongsTo(ActivitySector::class, 'secteur_souhaite_id');
     }
 
     public function languages()
