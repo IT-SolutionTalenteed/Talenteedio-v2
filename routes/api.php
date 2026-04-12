@@ -55,6 +55,7 @@ Route::get('/auth/google/callback',  [SocialiteController::class, 'handleGoogleC
 Route::get('/legal-pages', [LegalPageController::class, 'index']);
 Route::get('/legal-pages/{slug}', [LegalPageController::class, 'showBySlug']);
 Route::get('/skills', [SkillController::class, 'index']);
+Route::get('/activity-sectors', [ActivitySectorController::class, 'index']);
 
 // Routes publiques — site visiteurs
 Route::prefix('public')->group(function () {
@@ -182,6 +183,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/mes-matchings', [TalentEvenementController::class, 'mesMatchings']);
         Route::post('/evenements/{evenement}/matching', [TalentEvenementController::class, 'matching']);
         Route::post('/matching-offres', [TalentEvenementController::class, 'matchingOffresGlobal']);
+        Route::post('/cv/parse', [TalentEvenementController::class, 'parseCv']);
 
         // Réservation entretiens créneaux 15min (G-04)
         Route::get('/evenements/{evenement}/creneaux', [TalentEntretienController::class, 'creneaux']);
