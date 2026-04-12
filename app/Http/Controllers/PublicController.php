@@ -103,6 +103,24 @@ class PublicController extends Controller
     }
 
     /**
+     * Liste paginée de tous les événements (tous statuts publiés).
+     */
+    public function evenements(Request $request): JsonResponse
+    {
+        $perPage = min((int) ($request->per_page ?? 15), 50);
+
+        $query = Evenement::with('entreprises:id,nom,logo')
+            ->orderByDesc('is_featured')
+            ->orderBy('date_debut');
+
+        if ($request->filled('categorie_id')) {
+            $query->where('categorie_evenement_id', $request->categorie_id);
+        }
+
+        return response()->json($query->paginate($perPage));
+    }
+
+    /**
      * Liste des catégories d'événement.
      */
     public function categoriesEvenements()
