@@ -181,6 +181,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/evenements', [TalentEvenementController::class, 'index']);
         Route::get('/mes-matchings', [TalentEvenementController::class, 'mesMatchings']);
         Route::post('/evenements/{evenement}/matching', [TalentEvenementController::class, 'matching']);
+        Route::post('/matching-offres', [TalentEvenementController::class, 'matchingOffresGlobal']);
 
         // Réservation entretiens créneaux 15min (G-04)
         Route::get('/evenements/{evenement}/creneaux', [TalentEntretienController::class, 'creneaux']);
