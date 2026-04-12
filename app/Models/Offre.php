@@ -11,7 +11,7 @@ class Offre extends Model
     protected $fillable = [
         'entreprise_id', 'activity_sector_id', 'titre', 'mission', 'client', 'profil_recherche', 'a_propos',
         'liste_offre', 'description', 'date_mise_en_ligne', 'date_limite',
-        'salaire', 'fourchette_salariale', 'localisation', 'nombre_candidatures', 'image',
+        'salaire', 'salaire_min', 'salaire_max', 'fourchette_salariale', 'localisation', 'nombre_candidatures', 'image',
     ];
 
     protected $appends = ['image_url'];
@@ -26,6 +26,8 @@ class Offre extends Model
         'date_mise_en_ligne' => 'date',
         'date_limite'        => 'date',
         'salaire'            => 'decimal:2',
+        'salaire_min'        => 'decimal:2',
+        'salaire_max'        => 'decimal:2',
         'nombre_candidatures'=> 'integer',
     ];
 
@@ -67,5 +69,10 @@ class Offre extends Model
     public function experiences()
     {
         return $this->belongsToMany(Experience::class, 'offre_experience');
+    }
+
+    public function languages()
+    {
+        return $this->belongsToMany(Language::class, 'offre_language');
     }
 }
