@@ -224,3 +224,4 @@ Route::post('/admin/evenements/{evenement}/upload-image', [EvenementController::
 4. ⏳ Tester avec différentes tailles d'images
 5. ⏳ Vérifier les logs Laravel
 6. ⏳ Implémenter l'upload en deux étapes si nécessaire
+# surr
