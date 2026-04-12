@@ -31,6 +31,16 @@ class EvenementDemandeController extends Controller
 
         $evenementDemande->update(['statut' => $request->statut]);
 
+        // Si la demande est acceptée, ajouter l'entreprise aux participants
+        if ($request->statut === 'acceptee') {
+            $evenementDemande->evenement->entreprises()->syncWithoutDetaching([$evenementDemande->entreprise_id]);
+        }
+
+        // Si la demande est refusée, retirer l'entreprise des participants
+        if ($request->statut === 'refusee') {
+            $evenementDemande->evenement->entreprises()->detach($evenementDemande->entreprise_id);
+        }
+
         return response()->json($evenementDemande->load(['entreprise', 'evenement']));
     }
 }

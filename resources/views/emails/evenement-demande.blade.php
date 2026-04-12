@@ -9,8 +9,8 @@
 
     <p>L'entreprise <strong>{{ $nomEntreprise }}</strong> souhaite participer à l'événement <strong>{{ $nomEvenement }}</strong>.</p>
 
-    @if($message)
-    <p><strong>Message :</strong> {{ $message }}</p>
+    @if($messageEntreprise)
+    <p><strong>Message :</strong> {{ $messageEntreprise }}</p>
     @endif
 
     <p>Connectez-vous à l'espace administrateur pour accepter ou refuser cette demande.</p>

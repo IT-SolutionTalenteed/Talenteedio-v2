@@ -15,7 +15,7 @@ class EvenementDemandeMail extends Mailable
     public function __construct(
         public string $nomEntreprise,
         public string $nomEvenement,
-        public ?string $message
+        public ?string $messageEntreprise
     ) {}
 
     public function envelope(): Envelope
