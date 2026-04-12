@@ -59,6 +59,7 @@ Route::get('/skills', [SkillController::class, 'index']);
 // Routes publiques — site visiteurs
 Route::prefix('public')->group(function () {
     Route::get('/featured-event',                             [PublicController::class, 'featuredEvent']);
+    Route::get('/evenements',                                 [PublicController::class, 'evenements']);
     Route::get('/evenements/{evenement}',                     [PublicController::class, 'evenementDetail']);
     Route::get('/offres',                                     [PublicController::class, 'offres']);
     Route::get('/offres-home',                                [PublicController::class, 'offresHome']);
