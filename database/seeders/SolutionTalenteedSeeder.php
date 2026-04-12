@@ -3,13 +3,14 @@
 namespace Database\Seeders;
 
 use App\Models\ActivitySector;
+use App\Models\Article;
 use App\Models\Entreprise;
 use App\Models\Offre;
 use Illuminate\Database\Seeder;
 
 /**
- * Crée l'entreprise système "Solution Talenteed" (secteur RH / Recrutement)
- * et réassigne toutes les offres orphelines (entreprise_id NULL) vers elle.
+ * Crée l'entreprise système "Solution Talenteed SARL" (secteur RH / Recrutement)
+ * et réassigne toutes les offres et articles orphelins (entreprise_id NULL) vers elle.
  *
  * Idempotent — peut être rejoué sans créer de doublon.
  */
@@ -24,18 +25,22 @@ class SolutionTalenteedSeeder extends Seeder
 
         // Entreprise système — sans compte user (entreprise plateforme)
         $entreprise = Entreprise::firstOrCreate(
-            ['nom' => 'Solution Talenteed'],
+            ['nom' => 'Solution Talenteed SARL'],
             [
                 'user_id'            => null,
-                'description'        => 'Entreprise système de la plateforme Talenteed. Regroupe les offres publiées directement sur la plateforme.',
+                'description'        => 'Entreprise système de la plateforme Talenteed. Regroupe les offres et articles publiés directement sur la plateforme.',
                 'activity_sector_id' => $secteurRH->id,
             ]
         );
 
         // Réassigner les offres orphelines
-        $count = Offre::whereNull('entreprise_id')->update(['entreprise_id' => $entreprise->id]);
+        $offresCount = Offre::whereNull('entreprise_id')->update(['entreprise_id' => $entreprise->id]);
 
-        $this->command->info("✓ Entreprise \"Solution Talenteed\" ID={$entreprise->id} (secteur: {$secteurRH->name})");
-        $this->command->info("✓ {$count} offres orphelines réassignées.");
+        // Réassigner les articles orphelins
+        $articlesCount = Article::whereNull('entreprise_id')->update(['entreprise_id' => $entreprise->id]);
+
+        $this->command->info("✓ Entreprise \"Solution Talenteed SARL\" ID={$entreprise->id} (secteur: {$secteurRH->name})");
+        $this->command->info("✓ {$offresCount} offres orphelines réassignées.");
+        $this->command->info("✓ {$articlesCount} articles orphelins réassignés.");
     }
 }
