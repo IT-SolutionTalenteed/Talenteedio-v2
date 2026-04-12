@@ -4,12 +4,26 @@ namespace App\Http\Controllers\Talent;
 
 use App\Http\Controllers\Controller;
 use App\Models\Evenement;
+use App\Models\MatchingResult;
 use App\Services\OpenAIMatchingService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class EvenementController extends Controller
 {
+    /**
+     * Historique des matchings du talent connecté.
+     */
+    public function mesMatchings()
+    {
+        $matchings = MatchingResult::where('user_id', auth()->id())
+            ->with('evenement:id,titre,date_debut,date_fin')
+            ->latest()
+            ->get();
+
+        return response()->json($matchings);
+    }
+
     /**
      * Liste des événements disponibles.
      */
@@ -57,6 +71,15 @@ class EvenementController extends Controller
         }
 
         $results = $matchingService->match($talentProfile, $cvText, $evenement);
+
+        // Persister les résultats pour l'historique "Mes matchings"
+        MatchingResult::create([
+            'user_id'         => $talent->id,
+            'evenement_id'    => $evenement->id,
+            'poste_recherche' => $request->poste_recherche,
+            'resultats'       => $results,
+            'cv_path'         => $cvPath ?? null,
+        ]);
 
         return response()->json([
             'evenement' => $evenement->only(['id', 'titre', 'date_debut', 'date_fin']),
