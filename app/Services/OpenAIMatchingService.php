@@ -19,7 +19,7 @@ class OpenAIMatchingService
      * @param  Evenement  $evenement  Événement avec entreprises + offres
      * @return array      Liste triée d'entreprises avec score, raison, offres matchées
      */
-    public function matchEvenement(User $talent, string $posteRecherche, ?string $cvText, Evenement $evenement): array
+    public function matchEvenement(User $talent, string $posteRecherche, ?string $cvText, Evenement $evenement, array $overrides = []): array
     {
         $evenement->loadMissing(['entreprises.offres.skills', 'entreprises.offres.activitySector', 'entreprises.activitySector']);
 
@@ -27,7 +27,7 @@ class OpenAIMatchingService
             return [];
         }
 
-        $talentBlock  = $this->buildTalentBlock($talent, $posteRecherche, $cvText);
+        $talentBlock  = $this->buildTalentBlock($talent, $posteRecherche, $cvText, $overrides);
         $entreprisesBlock = $this->buildEntreprisesBlock($evenement->entreprises);
 
         $systemPrompt = $this->buildSystemPrompt('evenement');
@@ -58,13 +58,13 @@ class OpenAIMatchingService
      * @param  array       $offres   Collection d'Offre avec relations chargées
      * @return array       Liste triée d'offres avec score et raison
      */
-    public function matchOffresGlobal(User $talent, string $posteRecherche, ?string $cvText, $offres): array
+    public function matchOffresGlobal(User $talent, string $posteRecherche, ?string $cvText, $offres, array $overrides = []): array
     {
         if ($offres->isEmpty()) {
             return [];
         }
 
-        $talentBlock = $this->buildTalentBlock($talent, $posteRecherche, $cvText);
+        $talentBlock = $this->buildTalentBlock($talent, $posteRecherche, $cvText, $overrides);
         $offresBlock = $this->buildOffresBlock($offres);
 
         $systemPrompt = $this->buildSystemPrompt('offres');
@@ -158,7 +158,48 @@ class OpenAIMatchingService
     //  Builders de blocs texte
     // ─────────────────────────────────────────────
 
-    private function buildTalentBlock(User $talent, string $posteRecherche, ?string $cvText): string
+    /**
+     * Extrait les compétences et un résumé de profil depuis le texte d'un CV.
+     * Appelé par l'endpoint POST /talent/cv/parse pour pré-remplir le formulaire.
+     *
+     * @return array{competences: string[], resume: string|null}
+     */
+    public function extractCvSkills(string $cvText): array
+    {
+        $systemPrompt = <<<PROMPT
+Tu es un assistant RH. Analyse ce CV et extrait :
+1. La liste des compétences techniques et soft skills mentionnées
+2. Un résumé du profil en 1-2 phrases
+
+Réponds UNIQUEMENT avec un JSON valide, sans markdown autour :
+{
+  "competences": ["PHP", "Laravel", "React", ...],
+  "resume": "Développeur full-stack avec 5 ans d'expérience..."
+}
+PROMPT;
+
+        $result = $this->callOpenAI($systemPrompt, "CV :\n{$cvText}", 600);
+
+        // callOpenAI retourne un array, mais ici on attend un objet — on reparse
+        if (is_array($result) && isset($result['competences'])) {
+            return $result;
+        }
+
+        return ['competences' => [], 'resume' => null];
+    }
+
+    /**
+     * Construit le bloc texte du talent pour le prompt OpenAI.
+     * Les $overrides (issus du formulaire) priment sur les valeurs du profil BDD.
+     *
+     * @param array $overrides {
+     *   pays_souhaites?: string[],
+     *   villes_souhaitees?: string[],
+     *   secteur_souhaite_id?: int,
+     *   competences_libres?: string,   // compétences extraites du CV ou saisies manuellement
+     * }
+     */
+    private function buildTalentBlock(User $talent, string $posteRecherche, ?string $cvText, array $overrides = []): string
     {
         $lines = ["## PROFIL DU TALENT"];
         $lines[] = "Nom: {$talent->name}";
@@ -174,37 +215,48 @@ class OpenAIMatchingService
             $lines[] = "Localisation actuelle: {$locActuelle}";
         }
 
-        // Préférences géographiques
-        $paysSouhaites = $talent->pays_souhaites;
+        // Préférences géographiques — override formulaire en priorité
+        $paysSouhaites = $overrides['pays_souhaites'] ?? $talent->pays_souhaites;
         if (!empty($paysSouhaites)) {
-            $lines[] = "Pays où il souhaite travailler: " . implode(', ', $paysSouhaites);
+            $lines[] = "Pays où il souhaite travailler: " . implode(', ', (array) $paysSouhaites);
         } else {
             $lines[] = "Pays où il souhaite travailler: flexible (peu importe)";
         }
 
-        $villesSouhaitees = $talent->villes_souhaitees;
+        $villesSouhaitees = $overrides['villes_souhaitees'] ?? $talent->villes_souhaitees;
         if (!empty($villesSouhaitees)) {
-            $lines[] = "Villes souhaitées: " . implode(', ', $villesSouhaitees);
+            $lines[] = "Villes souhaitées: " . implode(', ', (array) $villesSouhaitees);
         } else {
             $lines[] = "Villes souhaitées: flexible (peu importe)";
         }
 
-        // Secteur souhaité
-        $talent->loadMissing('secteurSouhaite');
-        if ($talent->secteurSouhaite) {
-            $lines[] = "Secteur d'activité souhaité: {$talent->secteurSouhaite->name}";
+        // Secteur souhaité — override formulaire en priorité
+        if (!empty($overrides['secteur_souhaite_id'])) {
+            $secteur = \App\Models\ActivitySector::find($overrides['secteur_souhaite_id']);
+            if ($secteur) {
+                $lines[] = "Secteur d'activité souhaité: {$secteur->name}";
+            }
+        } else {
+            $talent->loadMissing('secteurSouhaite');
+            if ($talent->secteurSouhaite) {
+                $lines[] = "Secteur d'activité souhaité: {$talent->secteurSouhaite->name}";
+            }
         }
 
-        // Secteurs d'activité (profil)
+        // Secteurs d'activité du profil
         $talent->loadMissing('activitySectors');
         if ($talent->activitySectors->isNotEmpty()) {
             $lines[] = "Secteurs d'activité: " . $talent->activitySectors->pluck('name')->join(', ');
         }
 
-        // Compétences
-        $talent->loadMissing('skills');
-        if ($talent->skills->isNotEmpty()) {
-            $lines[] = "Compétences: " . $talent->skills->pluck('name')->join(', ');
+        // Compétences — override formulaire (extraites du CV) en priorité, puis profil BDD
+        if (!empty($overrides['competences_libres'])) {
+            $lines[] = "Compétences (extraites du CV): " . $overrides['competences_libres'];
+        } else {
+            $talent->loadMissing('skills');
+            if ($talent->skills->isNotEmpty()) {
+                $lines[] = "Compétences: " . $talent->skills->pluck('name')->join(', ');
+            }
         }
 
         // Langues
@@ -227,7 +279,7 @@ class OpenAIMatchingService
             $lines[] = "Mobilité: {$talent->mobilite}";
         }
 
-        // Contenu parsé du CV
+        // Contenu parsé du CV (contexte complet pour OpenAI)
         if ($cvText) {
             $lines[] = "\n### CONTENU DU CV (extrait)";
             $lines[] = $cvText;
