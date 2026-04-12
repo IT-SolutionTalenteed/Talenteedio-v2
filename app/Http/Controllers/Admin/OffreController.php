@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 
 class OffreController extends Controller
 {
-    private array $relations = ['jobContracts', 'jobModes', 'skills', 'studyLevels', 'experiences'];
+    private array $relations = ['jobContracts', 'jobModes', 'skills', 'studyLevels', 'experiences', 'languages'];
 
     public function index(Request $request)
     {
@@ -41,6 +41,8 @@ class OffreController extends Controller
             'date_mise_en_ligne'   => 'nullable|date',
             'date_limite'          => 'nullable|date',
             'salaire'              => 'nullable|numeric|min:0',
+            'salaire_min'          => 'nullable|numeric|min:0',
+            'salaire_max'          => 'nullable|numeric|min:0|gte:salaire_min',
             'fourchette_salariale' => 'nullable|string|max:255',
             'localisation'         => 'nullable|string|max:255',
             'nombre_candidatures'  => 'nullable|integer|min:0',
@@ -55,6 +57,8 @@ class OffreController extends Controller
             'study_level_ids.*'    => 'exists:study_levels,id',
             'experience_ids'       => 'array',
             'experience_ids.*'     => 'exists:experiences,id',
+            'language_ids'         => 'array',
+            'language_ids.*'       => 'exists:languages,id',
         ]);
 
         if ($request->hasFile('image')) {
@@ -85,6 +89,8 @@ class OffreController extends Controller
             'date_mise_en_ligne'   => 'nullable|date',
             'date_limite'          => 'nullable|date',
             'salaire'              => 'nullable|numeric|min:0',
+            'salaire_min'          => 'nullable|numeric|min:0',
+            'salaire_max'          => 'nullable|numeric|min:0|gte:salaire_min',
             'fourchette_salariale' => 'nullable|string|max:255',
             'localisation'         => 'nullable|string|max:255',
             'nombre_candidatures'  => 'nullable|integer|min:0',
@@ -100,6 +106,8 @@ class OffreController extends Controller
             'study_level_ids.*'    => 'exists:study_levels,id',
             'experience_ids'       => 'array',
             'experience_ids.*'     => 'exists:experiences,id',
+            'language_ids'         => 'array',
+            'language_ids.*'       => 'exists:languages,id',
         ]);
 
         if ($request->hasFile('image')) {
@@ -138,6 +146,7 @@ class OffreController extends Controller
             'skills'        => \App\Models\Skill::orderBy('name')->get(),
             'study_levels'  => \App\Models\StudyLevel::orderBy('name')->get(),
             'experiences'   => \App\Models\Experience::orderBy('name')->get(),
+            'languages'     => \App\Models\Language::orderBy('name')->get(),
         ]);
     }
 
@@ -148,5 +157,6 @@ class OffreController extends Controller
         $offre->skills()->sync($data['skill_ids'] ?? []);
         $offre->studyLevels()->sync($data['study_level_ids'] ?? []);
         $offre->experiences()->sync($data['experience_ids'] ?? []);
+        $offre->languages()->sync($data['language_ids'] ?? []);
     }
 }
