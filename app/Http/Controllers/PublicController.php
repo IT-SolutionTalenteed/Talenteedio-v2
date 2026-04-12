@@ -188,6 +188,10 @@ class PublicController extends Controller
             'job_contracts'    => JobContract::orderBy('name')->get(['id', 'name']),
             'study_levels'     => StudyLevel::orderBy('name')->get(['id', 'name']),
             'activity_sectors' => ActivitySector::orderBy('name')->get(['id', 'name']),
+            'job_modes'        => \App\Models\JobMode::orderBy('name')->get(['id', 'name']),
+            'skills'           => \App\Models\Skill::orderBy('name')->get(['id', 'name']),
+            'experiences'      => \App\Models\Experience::orderBy('name')->get(['id', 'name']),
+            'languages'        => \App\Models\Language::orderBy('name')->get(['id', 'name']),
         ]);
     }
 
