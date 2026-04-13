@@ -108,7 +108,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('legal-pages', LegalPageController::class);
 
         // Offres d'emploi
-        Route::apiResource('offres', OffreController::class);
+        Route::apiResource('offres', OffreController::class)->names('admin.offres');
         Route::get('/offres-referentiels', [OffreController::class, 'referentiels']);
 
         // Événements
@@ -202,7 +202,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/dashboard', [EntrepriseDashboardController::class, 'index']);
 
         // Offres d'emploi (F-01)
-        Route::apiResource('offres', EntrepriseOffreController::class);
+        Route::apiResource('offres', EntrepriseOffreController::class)->names('entreprise.offres');
         Route::get('/offres-referentiels', [EntrepriseOffreController::class, 'referentiels']);
 
         // Candidatures reçues (F-02)
@@ -219,7 +219,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('/entretiens/{entretien}/statut', [EntrepriseEntretienController::class, 'updateStatut']);
 
         // Articles (F-04)
-        Route::apiResource('articles', EntrepriseArticleController::class);
+        Route::apiResource('articles', EntrepriseArticleController::class)->names('entreprise.articles');
         Route::get('/articles-referentiels', [EntrepriseArticleController::class, 'referentiels']);
     });
 });
