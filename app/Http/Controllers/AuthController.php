@@ -58,9 +58,13 @@ class AuthController extends Controller
             'response' => $request->recaptcha_token,
         ]);
 
-        if (!$recaptchaResponse->successful() || !$recaptchaResponse->json('success')) {
+        $recaptchaData = $recaptchaResponse->json();
+        \Log::info('reCAPTCHA response', $recaptchaData ?? []);
+
+        if (!$recaptchaResponse->successful() || !($recaptchaData['success'] ?? false)) {
+            $errorCodes = $recaptchaData['error-codes'] ?? [];
             throw ValidationException::withMessages([
-                'recaptcha' => ['Vérification reCAPTCHA échouée. Veuillez réessayer.'],
+                'recaptcha' => ['Vérification reCAPTCHA échouée. Veuillez réessayer. (' . implode(', ', $errorCodes) . ')'],
             ]);
         }
 
