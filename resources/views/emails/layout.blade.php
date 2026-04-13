@@ -42,14 +42,10 @@
       display: inline-block;
       margin-bottom: 0;
     }
-    .email-logo-text {
-      font-size: 26px;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.5px;
-    }
-    .email-logo-text span {
-      color: #f29f1f;
+    .email-logo img {
+      height: 48px;
+      width: auto;
+      display: block;
     }
     .email-header-badge {
       display: inline-block;
@@ -306,7 +302,7 @@
       <!-- Header -->
       <div class="email-header">
         <div class="email-logo">
-          <div class="email-logo-text">Talent<span>eed</span></div>
+          <img src="https://talenteed.io/logo.png" alt="Talenteed">
         </div>
         @hasSection('header_badge')
           <div><div class="email-header-badge">@yield('header_badge')</div></div>
