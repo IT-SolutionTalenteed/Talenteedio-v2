@@ -11,19 +11,71 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 15
     steps:
       - name: Connect to Talenteed.io
-        uses: appleboy/ssh-action@master
+        uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_TALENTEED_HOST }}
           username: ${{ secrets.SSH_TALENTEED_USERNAME }}
           password: ${{ secrets.SSH_TALENTEED_PASSWORD }}
           port: ${{ secrets.SSH_TALENTEED_PORT }}
+          command_timeout: 12m
+          retry_count: 3
+          retry_delay: 20
           script: |
             cd /home/talenteedio/website/backend/
             ./scripts/deploy_prod.sh
+
+      - name: Health check — API backend
+        if: success()
+        run: |
+          echo "⏳ Waiting 10s for app to settle..."
+          sleep 10
+          for i in 1 2 3 4 5; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 10 https://talenteed.io/api/public/featured-event)
+            echo "Attempt $i — HTTP $STATUS"
+            if [ "$STATUS" = "200" ] || [ "$STATUS" = "204" ]; then
+              echo "✅ Health check passed (HTTP $STATUS)"
+              exit 0
+            fi
+            sleep 15
+          done
+          echo "❌ Health check failed after 5 attempts — last status: $STATUS"
+          exit 1
+
+      - name: Rollback on health check failure
+        if: failure()
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_TALENTEED_HOST }}
+          username: ${{ secrets.SSH_TALENTEED_USERNAME }}
+          password: ${{ secrets.SSH_TALENTEED_PASSWORD }}
+          port: ${{ secrets.SSH_TALENTEED_PORT }}
+          command_timeout: 5m
+          retry_count: 3
+          retry_delay: 10
+          script: |
+            cd /home/talenteedio/website/backend/
+            ./scripts/rollback_prod.sh
+
+      - name: Report deployment result
+        if: always()
+        run: |
+          if [ "${{ job.status }}" = "success" ]; then
+            echo "## ✅ Backend deployed successfully" >> $GITHUB_STEP_SUMMARY
+            echo "- Commit: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+            echo "- Branch: \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+            echo "- Triggered by: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+          else
+            echo "## ❌ Backend deployment FAILED — rollback triggered" >> $GITHUB_STEP_SUMMARY
+            echo "- Commit: \`${{ github.sha }}\`" >> $GITHUB_STEP_SUMMARY
+            echo "- Branch: \`${{ github.ref_name }}\`" >> $GITHUB_STEP_SUMMARY
+            echo "- Triggered by: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
+            echo "- Check logs above for details" >> $GITHUB_STEP_SUMMARY
+          fi
