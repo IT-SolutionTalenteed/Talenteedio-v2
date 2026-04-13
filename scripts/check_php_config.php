@@ -23,9 +23,9 @@ foreach ($configs as $key => $value) {
 echo "\n=== Vérification des permissions ===\n\n";
 
 $dirs = [
-    'storage/app/public' => storage_path('app/public'),
-    'storage/app/public/evenements' => storage_path('app/public/evenements'),
-    'storage/logs' => storage_path('logs'),
+    'storage/app/public' => __DIR__ . '/../storage/app/public',
+    'storage/app/public/evenements' => __DIR__ . '/../storage/app/public/evenements',
+    'storage/logs' => __DIR__ . '/../storage/logs',
 ];
 
 foreach ($dirs as $name => $path) {
@@ -75,19 +75,19 @@ if ($post_bytes <= $upload_bytes) {
     echo "⚠️  post_max_size doit être plus grand que upload_max_filesize\n";
 }
 
-if (!is_writable(storage_path('app/public'))) {
+if (!is_writable(__DIR__ . '/../storage/app/public')) {
     echo "⚠️  Le dossier storage/app/public n'est pas accessible en écriture\n";
     echo "   Exécuter: chmod -R 775 storage/app/public\n";
 }
 
-if (!is_dir(storage_path('app/public/evenements'))) {
+if (!is_dir(__DIR__ . '/../storage/app/public/evenements')) {
     echo "⚠️  Le dossier storage/app/public/evenements n'existe pas\n";
     echo "   Exécuter: mkdir -p storage/app/public/evenements\n";
 }
 
 echo "\n=== Test d'upload ===\n\n";
 
-$test_file = storage_path('app/public/test_upload.txt');
+$test_file = __DIR__ . '/../storage/app/public/test_upload.txt';
 $test_content = 'Test upload - ' . date('Y-m-d H:i:s');
 
 if (file_put_contents($test_file, $test_content)) {
