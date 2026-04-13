@@ -18,7 +18,10 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 15
     steps:
-      - name: Connect to Talenteed.io
+      # ── Tentative 1 ──────────────────────────────────────────────────────
+      - name: Deploy — attempt 1
+        id: deploy1
+        continue-on-error: true
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.SSH_TALENTEED_HOST }}
@@ -26,12 +29,42 @@ jobs:
           password: ${{ secrets.SSH_TALENTEED_PASSWORD }}
           port: ${{ secrets.SSH_TALENTEED_PORT }}
           command_timeout: 12m
-          retry_count: 3
-          retry_delay: 20
           script: |
             cd /home/talenteedio/website/backend/
             ./scripts/deploy_prod.sh
 
+      # ── Tentative 2 (si 1 échoue) ────────────────────────────────────────
+      - name: Deploy — attempt 2
+        id: deploy2
+        if: steps.deploy1.outcome == 'failure'
+        continue-on-error: true
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_TALENTEED_HOST }}
+          username: ${{ secrets.SSH_TALENTEED_USERNAME }}
+          password: ${{ secrets.SSH_TALENTEED_PASSWORD }}
+          port: ${{ secrets.SSH_TALENTEED_PORT }}
+          command_timeout: 12m
+          script: |
+            cd /home/talenteedio/website/backend/
+            ./scripts/deploy_prod.sh
+
+      # ── Tentative 3 (si 2 échoue) ────────────────────────────────────────
+      - name: Deploy — attempt 3
+        id: deploy3
+        if: steps.deploy1.outcome == 'failure' && steps.deploy2.outcome == 'failure'
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.SSH_TALENTEED_HOST }}
+          username: ${{ secrets.SSH_TALENTEED_USERNAME }}
+          password: ${{ secrets.SSH_TALENTEED_PASSWORD }}
+          port: ${{ secrets.SSH_TALENTEED_PORT }}
+          command_timeout: 12m
+          script: |
+            cd /home/talenteedio/website/backend/
+            ./scripts/deploy_prod.sh
+
+      # ── Health check ──────────────────────────────────────────────────────
       - name: Health check — API backend
         if: success()
         run: |
@@ -49,7 +82,8 @@ jobs:
           echo "❌ Health check failed after 5 attempts — last status: $STATUS"
           exit 1
 
-      - name: Rollback on health check failure
+      # ── Rollback si health check échoue ──────────────────────────────────
+      - name: Rollback on failure
         if: failure()
         uses: appleboy/ssh-action@v1.0.3
         with:
@@ -58,12 +92,11 @@ jobs:
           password: ${{ secrets.SSH_TALENTEED_PASSWORD }}
           port: ${{ secrets.SSH_TALENTEED_PORT }}
           command_timeout: 5m
-          retry_count: 3
-          retry_delay: 10
           script: |
             cd /home/talenteedio/website/backend/
             ./scripts/rollback_prod.sh
 
+      # ── Résumé ────────────────────────────────────────────────────────────
       - name: Report deployment result
         if: always()
         run: |
