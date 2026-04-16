@@ -152,8 +152,12 @@ class ATSRegistrationController extends Controller
                 'email_verified_at' => now(),
             ]);
 
-            // Envoyer le mail de bienvenue
-            $this->sendWelcomeEmailTalent($user);
+            // Envoyer le mail de bienvenue (ne pas bloquer si erreur)
+            try {
+                $this->sendWelcomeEmailTalent($user);
+            } catch (\Exception $mailError) {
+                \Log::warning('Erreur envoi mail bienvenue talent: ' . $mailError->getMessage());
+            }
 
             return response()->json([
                 'success' => true,
@@ -192,8 +196,12 @@ class ATSRegistrationController extends Controller
                 'email_verified_at' => now(),
             ]);
 
-            // Envoyer le mail de bienvenue entreprise
-            $this->sendWelcomeEmailCorporate($user);
+            // Envoyer le mail de bienvenue entreprise (ne pas bloquer si erreur)
+            try {
+                $this->sendWelcomeEmailCorporate($user);
+            } catch (\Exception $mailError) {
+                \Log::warning('Erreur envoi mail bienvenue entreprise: ' . $mailError->getMessage());
+            }
 
             return response()->json([
                 'success' => true,
@@ -242,8 +250,7 @@ class ATSRegistrationController extends Controller
      */
     private function sendWelcomeEmailTalent(User $user)
     {
-        // TODO: Implémenter l'envoi du mail de bienvenue
-        // Mail::to($user->email)->send(new WelcomeTalentMail($user));
+        Mail::to($user->email)->send(new \App\Mail\WelcomeTalentMail($user));
     }
 
     /**
@@ -251,7 +258,6 @@ class ATSRegistrationController extends Controller
      */
     private function sendWelcomeEmailCorporate(User $user)
     {
-        // TODO: Implémenter l'envoi du mail de bienvenue
-        // Mail::to($user->email)->send(new WelcomeCorporateMail($user));
+        Mail::to($user->email)->send(new \App\Mail\WelcomeCorporateMail($user));
     }
 }
