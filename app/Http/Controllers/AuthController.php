@@ -18,7 +18,16 @@ class AuthController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'password' => 'required|string|min:8|confirmed',
-            'role' => 'required|string|in:talent'
+            'role' => 'required|string|in:talent,entreprise',
+            // Champs spécifiques aux entreprises
+            'company_name' => 'required_if:role,entreprise|string|max:255',
+            'company_description' => 'nullable|string',
+            'company_website' => 'nullable|url',
+            'company_phone' => 'nullable|string|max:30',
+            'company_address' => 'nullable|string',
+            'company_city' => 'nullable|string|max:100',
+            'company_country' => 'nullable|string|max:100',
+            'activity_sector_id' => 'nullable|exists:activity_sectors,id',
         ]);
 
         $user = User::create([
@@ -28,7 +37,24 @@ class AuthController extends Controller
             'role' => $request->role,
         ]);
 
-        Mail::to($user->email)->send(new WelcomeTalentMail($user));
+        // Si c'est une entreprise, créer le profil entreprise
+        if ($request->role === 'entreprise') {
+            \App\Models\Entreprise::create([
+                'user_id' => $user->id,
+                'nom' => $request->company_name,
+                'description' => $request->company_description,
+                'site_web' => $request->company_website,
+                'telephone' => $request->company_phone,
+                'adresse' => $request->company_address,
+                'ville' => $request->company_city,
+                'pays' => $request->company_country,
+                'activity_sector_id' => $request->activity_sector_id,
+            ]);
+        }
+
+        if ($request->role === 'talent') {
+            Mail::to($user->email)->send(new WelcomeTalentMail($user));
+        }
 
         $token = $user->createToken('auth_token')->plainTextToken;
 
