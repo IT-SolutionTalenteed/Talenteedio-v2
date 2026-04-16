@@ -238,6 +238,10 @@ Route::middleware('auth:sanctum')->group(function () {
         // Articles (F-04)
         Route::apiResource('articles', EntrepriseArticleController::class)->names('entreprise.articles');
         Route::get('/articles-referentiels', [EntrepriseArticleController::class, 'referentiels']);
+
+        // Talents - consultation pour les entreprises
+        Route::get('/talents', [\App\Http\Controllers\Entreprise\TalentController::class, 'index']);
+        Route::get('/talents/{talent}', [\App\Http\Controllers\Entreprise\TalentController::class, 'show']);
     });
 });
 

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Entreprise;
 
 use App\Http\Controllers\Controller;
+use App\Models\Entreprise;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -13,6 +14,28 @@ class DashboardController extends Controller
     public function index()
     {
         $user = auth()->user();
+        $entreprise = Entreprise::where('user_id', $user->id)->first();
+        
+        $stats = [
+            'total_offres' => 0,
+            'active_offres' => 0,
+            'total_candidatures' => 0,
+            'total_entretiens' => 0,
+        ];
+
+        if ($entreprise) {
+            $stats['total_offres'] = $entreprise->offres()->count();
+            $stats['active_offres'] = $entreprise->offres()
+                ->where(function($query) {
+                    $query->where('date_limite', '>=', now())
+                          ->orWhereNull('date_limite');
+                })
+                ->count();
+            $stats['total_candidatures'] = \App\Models\Candidature::whereHas('offre', function($q) use ($entreprise) {
+                $q->where('entreprise_id', $entreprise->id);
+            })->count();
+            $stats['total_entretiens'] = \App\Models\Entretien::where('entreprise_id', $entreprise->id)->count();
+        }
         
         return response()->json([
             'message' => 'Tableau de bord entreprise',
@@ -22,11 +45,12 @@ class DashboardController extends Controller
                 'email' => $user->email,
                 'role' => $user->role,
             ],
-            'stats' => [
-                'total_projects' => 0, // À implémenter plus tard
-                'active_projects' => 0,
-                'posted_projects' => 0,
-            ]
+            'stats' => $stats,
+            'entreprise' => $entreprise ? [
+                'id' => $entreprise->id,
+                'nom' => $entreprise->nom,
+                'logo_url' => $entreprise->logo_url,
+            ] : null,
         ]);
     }
 }
