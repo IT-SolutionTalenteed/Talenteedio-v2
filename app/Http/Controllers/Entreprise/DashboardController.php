@@ -26,13 +26,14 @@ class DashboardController extends Controller
         if ($entreprise) {
             $stats['total_offres'] = $entreprise->offres()->count();
             $stats['active_offres'] = $entreprise->offres()
-                ->where('date_limite', '>=', now())
-                ->orWhereNull('date_limite')
+                ->where(function($query) {
+                    $query->where('date_limite', '>=', now())
+                          ->orWhereNull('date_limite');
+                })
                 ->count();
-            $stats['total_candidatures'] = $entreprise->offres()
-                ->withCount('candidatures')
-                ->get()
-                ->sum('candidatures_count');
+            $stats['total_candidatures'] = \App\Models\Candidature::whereHas('offre', function($q) use ($entreprise) {
+                $q->where('entreprise_id', $entreprise->id);
+            })->count();
             $stats['total_entretiens'] = \App\Models\Entretien::whereHas('candidature.offre', function ($q) use ($entreprise) {
                 $q->where('entreprise_id', $entreprise->id);
             })->count();
