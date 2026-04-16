@@ -34,9 +34,7 @@ class DashboardController extends Controller
             $stats['total_candidatures'] = \App\Models\Candidature::whereHas('offre', function($q) use ($entreprise) {
                 $q->where('entreprise_id', $entreprise->id);
             })->count();
-            $stats['total_entretiens'] = \App\Models\Entretien::whereHas('candidature.offre', function ($q) use ($entreprise) {
-                $q->where('entreprise_id', $entreprise->id);
-            })->count();
+            $stats['total_entretiens'] = \App\Models\Entretien::where('entreprise_id', $entreprise->id)->count();
         }
         
         return response()->json([
