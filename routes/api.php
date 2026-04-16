@@ -72,6 +72,23 @@ Route::prefix('public')->group(function () {
     Route::get('/offres/{offre}',                             [PublicController::class, 'offreDetail']);
     Route::get('/entreprises/{entreprise}',                   [PublicController::class, 'entrepriseDetail']);
     Route::get('/referentiels',                               [PublicController::class, 'referentiels']);
+    
+    // Routes ATS Registration (Africa Talent Summit)
+    Route::prefix('ats')->group(function () {
+        // Référentiels pour les formulaires
+        Route::get('/activity-sectors', [\App\Http\Controllers\Public\ATSRegistrationController::class, 'getActivitySectors']);
+        Route::get('/experiences', [\App\Http\Controllers\Public\ATSRegistrationController::class, 'getExperiences']);
+        
+        // Inscription talents
+        Route::post('/register', [\App\Http\Controllers\Public\ATSRegistrationController::class, 'registerTalent']);
+        Route::post('/set-password', [\App\Http\Controllers\Public\ATSRegistrationController::class, 'setPasswordTalent']);
+        
+        // Inscription entreprises
+        Route::prefix('corporate')->group(function () {
+            Route::post('/register', [\App\Http\Controllers\Public\ATSRegistrationController::class, 'registerCorporate']);
+            Route::post('/set-password', [\App\Http\Controllers\Public\ATSRegistrationController::class, 'setPasswordCorporate']);
+        });
+    });
 });
 
 // Routes protégées par Sanctum
