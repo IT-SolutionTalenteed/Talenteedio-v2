@@ -1,0 +1,29 @@
+{
+  "company": {
+    "id": "2e98341e-a026-445f-85a1-375d72013c84",
+    "company_name": "Solution Talenteed SARL",
+    "status": "public",
+    "userId": "c5ebb8cc-1187-4e6b-b820-9242f0a81b49",
+    "contactId": "9c3ac5db-5b2d-4afe-a379-7f6984aa8250",
+    "logoId": "e710acf6-9cb2-4adb-b76c-fde8343ecd2b",
+    "categoryId": "14148ce3-037e-466f-b3cc-3d0736a77c9a",
+    "createdAt": "2023-09-14 09:42:16",
+    "socialNetworks": {}
+  },
+  "user": {
+    "id": "c5ebb8cc-1187-4e6b-b820-9242f0a81b49",
+    "email": "guymunsadi@solutiontalenteed.com",
+    "password": "$2b$10$JlutvIPd5MT58u7r4TWq1uakFEAit/kcQwG7t7ssgO8Dj76fUdo16",
+    "firstname": "Guy",
+    "lastname": "Munsadi",
+    "name": "Guy Munsadi"
+  },
+  "contact": {
+    "id": "9c3ac5db-5b2d-4afe-a379-7f6984aa8250",
+    "email": "guymunsadi@solutiontalenteed.com",
+    "phoneNumber": "003522689231",
+    "addressId": "d83bde13-9367-415b-b65b-1d1f876f82b3",
+    "createdAt": "2023-09-14 09:42:16.901293"
+  },
+  "extracted_at": "2026-04-17 00:54:51"
+}

@@ -1,0 +1,42 @@
+[
+  {
+    "name": "IT Solution Talenteed",
+    "email": "it@solutiontalenteed.com",
+    "password": "$2b$10$W/QpvtgSEKGU/5JarGI9duwpGTaEcKwezoEt3WhihMIv478bDyd7m",
+    "email_verified_at": "2026-04-17 00:42:08",
+    "created_at": "2026-04-17 00:42:08",
+    "updated_at": "2026-04-17 00:42:08"
+  },
+  {
+    "name": "Franck RAKOTO",
+    "email": "solofonirina35@gmail.com",
+    "password": "$2b$10$iIKGpcbhQeVPQ7t0wyQHe.c9udS26ooJis/BwBTrqnHPvVxtO74LG",
+    "email_verified_at": "2026-04-17 00:42:08",
+    "created_at": "2026-04-17 00:42:08",
+    "updated_at": "2026-04-17 00:42:08"
+  },
+  {
+    "name": "Team Solution Talenteed",
+    "email": "contact@solutiontalenteed.com",
+    "password": "$2b$10$CKsEd1JnnA3kerQU0gZWoOqAm7EHS5GyQYBwDxJMaqtOOiiXB9PAC",
+    "email_verified_at": "2026-04-17 00:42:08",
+    "created_at": "2026-04-17 00:42:08",
+    "updated_at": "2026-04-17 00:42:08"
+  },
+  {
+    "name": "Kerian Wilton",
+    "email": "kwilton@solutiontalenteed.com",
+    "password": "$2b$10$GXC9z1peB396B/kllNq3yOqDEfJcheVy9ICBfCpB1aFAAynKtiiqe",
+    "email_verified_at": "2026-04-17 00:42:08",
+    "created_at": "2026-04-17 00:42:08",
+    "updated_at": "2026-04-17 00:42:08"
+  },
+  {
+    "name": "Guy Munsadi",
+    "email": "guymunsadi@gmail.com",
+    "password": "$2b$10$Ln/X3U53NC4ClJsR87TuQegIH78sD59smKvjEWwkeD0PA4W3TSQFu",
+    "email_verified_at": "2026-04-17 00:42:08",
+    "created_at": "2026-04-17 00:42:08",
+    "updated_at": "2026-04-17 00:42:08"
+  }
+]
