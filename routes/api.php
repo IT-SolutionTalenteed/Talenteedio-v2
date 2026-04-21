@@ -27,6 +27,7 @@ use App\Http\Controllers\Admin\TemoignageController as AdminTemoignageController
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\CandidatureController as AdminCandidatureController;
 use App\Http\Controllers\Admin\EvenementDemandeController as AdminEvenementDemandeController;
+use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Talent\OffreController as TalentOffreController;
 use App\Http\Controllers\Talent\FavoriController as TalentFavoriController;
@@ -156,6 +157,12 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::patch('/talents/{user}/ban', [TalentController::class, 'toggleBan']);
         Route::patch('/talents/{user}/statut-crm', [TalentController::class, 'updateStatutCrm']);
         Route::delete('/talents/{user}', [TalentController::class, 'destroy']);
+
+        // Gestion des administrateurs
+        Route::get('/admins', [AdminController::class, 'index']);
+        Route::get('/admins/{user}', [AdminController::class, 'show']);
+        Route::post('/admins/{user}/toggle-suspend', [AdminController::class, 'toggleSuspend']);
+        Route::post('/admins/{user}/toggle-ban', [AdminController::class, 'toggleBan']);
 
         // Entretiens par stand (D-05)
         Route::get('/entretiens', [AdminEntretienController::class, 'index']);
