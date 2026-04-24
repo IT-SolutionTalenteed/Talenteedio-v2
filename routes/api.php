@@ -101,6 +101,7 @@ Route::middleware('auth:sanctum')->group(function () {
     // Routes spécifiques aux rôles
     Route::middleware('role:admin')->prefix('admin')->group(function () {
         Route::get('/dashboard', [AdminDashboardController::class, 'index']);
+        Route::get('/dashboard-stats', [AdminDashboardController::class, 'stats']);
         
         // Gestion des utilisateurs (admin seulement)
         Route::apiResource('users', UserController::class);
