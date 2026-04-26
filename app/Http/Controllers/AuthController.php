@@ -35,6 +35,7 @@ class AuthController extends Controller
             'email' => $request->email,
             'password' => Hash::make($request->password),
             'role' => $request->role,
+            'auth_provider' => 'local', // Compte local
         ]);
 
         // Si c'est une entreprise, créer le profil entreprise
@@ -95,6 +96,20 @@ class AuthController extends Controller
         }
 
         $user = User::where('email', $request->email)->first();
+
+        // SÉCURITÉ : Bloquer les comptes Google
+        if ($user && $user->auth_provider === 'google') {
+            throw ValidationException::withMessages([
+                'email' => ['Ce compte utilise Google pour se connecter. Veuillez utiliser le bouton "Se connecter avec Google".'],
+            ]);
+        }
+
+        // SÉCURITÉ : Vérifier que le compte a un mot de passe
+        if ($user && !$user->password) {
+            throw ValidationException::withMessages([
+                'email' => ['Ce compte n\'a pas de mot de passe. Veuillez utiliser Google pour vous connecter.'],
+            ]);
+        }
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([
