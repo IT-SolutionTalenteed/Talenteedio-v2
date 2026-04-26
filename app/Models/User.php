@@ -23,7 +23,7 @@ use Laravel\Sanctum\HasApiTokens;
     // Situation familiale (K-01)
     'situation_familiale',
     // Google Socialite (J-03)
-    'google_id', 'avatar_google',
+    'google_id', 'avatar_google', 'auth_provider',
     // Préférences matching (matching CV)
     'pays_souhaites', 'villes_souhaitees', 'secteur_souhaite_id',
 ])]
