@@ -28,7 +28,7 @@ class SocialiteController extends Controller
      */
     public function handleGoogleCallback()
     {
-        $frontendBase = env('FRONTEND_URL', 'http://localhost:5173');
+        $frontendBase = rtrim(env('FRONTEND_URL', 'http://localhost:5173'), '/');
 
         try {
             // Récupérer le type (register ou login) depuis le state
@@ -70,6 +70,7 @@ class SocialiteController extends Controller
      */
     private function handleRegister($existingUser, $email, $googleId, $name, $avatar, $frontendBase)
     {
+        $frontendBase = rtrim($frontendBase, '/');
         // Si l'email existe déjà (compte local ou Google)
         if ($existingUser) {
             $errorMsg = $existingUser->auth_provider === 'google'
@@ -109,6 +110,7 @@ class SocialiteController extends Controller
      */
     private function handleLogin($existingUser, $email, $googleId, $frontendBase)
     {
+        $frontendBase = rtrim($frontendBase, '/');
         // Si l'utilisateur n'existe pas
         if (!$existingUser) {
             return redirect("{$frontendBase}/auth/google/callback?type=login&error=" . 
