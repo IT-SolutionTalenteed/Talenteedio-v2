@@ -21,7 +21,11 @@ class SocialiteController extends Controller
         
         return Socialite::driver('google')
             ->stateless()
-            ->with(['state' => base64_encode(json_encode(['type' => $type]))])
+            ->with([
+                'state' => base64_encode(json_encode(['type' => $type])),
+                'prompt' => 'select_account consent', // Force le choix du compte et la confirmation
+                'access_type' => 'offline', // Optionnel : pour obtenir un refresh token
+            ])
             ->redirect();
     }
 
