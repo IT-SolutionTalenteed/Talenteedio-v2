@@ -53,4 +53,31 @@ class DashboardController extends Controller
             ] : null,
         ]);
     }
+
+    /**
+     * Retourner uniquement les statistiques pour le dashboard
+     */
+    public function stats()
+    {
+        $user = auth()->user();
+        $entreprise = Entreprise::where('user_id', $user->id)->first();
+        
+        $stats = [
+            'totalOffres' => 0,
+            'totalCandidatures' => 0,
+            'totalEntretiens' => 0,
+            'totalArticles' => 0,
+        ];
+
+        if ($entreprise) {
+            $stats['totalOffres'] = $entreprise->offres()->count();
+            $stats['totalCandidatures'] = \App\Models\Candidature::whereHas('offre', function($q) use ($entreprise) {
+                $q->where('entreprise_id', $entreprise->id);
+            })->count();
+            $stats['totalEntretiens'] = \App\Models\Entretien::where('entreprise_id', $entreprise->id)->count();
+            $stats['totalArticles'] = $entreprise->articles()->count();
+        }
+        
+        return response()->json($stats);
+    }
 }
