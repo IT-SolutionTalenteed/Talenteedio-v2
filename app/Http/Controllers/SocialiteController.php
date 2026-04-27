@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\WelcomeTalentMail;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use Laravel\Socialite\Facades\Socialite;
 
@@ -92,6 +94,9 @@ class SocialiteController extends Controller
             'email_verified_at' => now(), // Email vérifié par Google
             'role'           => 'talent', // Rôle par défaut
         ]);
+        
+        // Envoyer l'email de bienvenue
+        Mail::to($user->email)->send(new WelcomeTalentMail($user));
         
         // Générer un token
         $token = $user->createToken('auth_token')->plainTextToken;
