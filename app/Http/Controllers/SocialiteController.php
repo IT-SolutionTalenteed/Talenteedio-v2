@@ -100,7 +100,7 @@ class SocialiteController extends Controller
             'token' => $token,
             'role' => $user->role,
             'user_id' => $user->id,
-            'user_name' => urlencode($user->name),
+            'user_name' => $user->name,
             'type' => 'register'
         ]));
     }
@@ -136,7 +136,7 @@ class SocialiteController extends Controller
             'token' => $token,
             'role' => $existingUser->role,
             'user_id' => $existingUser->id,
-            'user_name' => urlencode($existingUser->name),
+            'user_name' => $existingUser->name,
             'type' => 'login'
         ]));
     }
