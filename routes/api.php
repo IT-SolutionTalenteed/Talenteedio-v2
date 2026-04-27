@@ -225,6 +225,7 @@ Route::middleware('auth:sanctum')->group(function () {
     
     Route::middleware('role:entreprise')->prefix('entreprise')->group(function () {
         Route::get('/dashboard', [EntrepriseDashboardController::class, 'index']);
+        Route::get('/dashboard-stats', [EntrepriseDashboardController::class, 'stats']);
 
         // Offres d'emploi (F-01)
         Route::apiResource('offres', EntrepriseOffreController::class)->names('entreprise.offres');
