@@ -28,6 +28,7 @@ use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\CandidatureController as AdminCandidatureController;
 use App\Http\Controllers\Admin\EvenementDemandeController as AdminEvenementDemandeController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\PlanController;
 use App\Http\Controllers\Talent\DashboardController as TalentDashboardController;
 use App\Http\Controllers\Talent\OffreController as TalentOffreController;
 use App\Http\Controllers\Talent\FavoriController as TalentFavoriController;
@@ -125,6 +126,7 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::apiResource('languages', LanguageController::class);
         Route::apiResource('activity-sectors', ActivitySectorController::class);
         Route::apiResource('legal-pages', LegalPageController::class);
+        Route::apiResource('plans', PlanController::class);
 
         // Offres d'emploi
         Route::apiResource('offres', OffreController::class)->names('admin.offres');
