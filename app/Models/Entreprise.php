@@ -12,7 +12,7 @@ class Entreprise extends Model
     protected $fillable = [
         'user_id', 'nom', 'logo', 'description',
         'site_web', 'telephone', 'adresse', 'ville', 'pays',
-        'activity_sector_id', 'hubspot_company_id',
+        'activity_sector_id', 'plan_id', 'hubspot_company_id',
     ];
 
     protected $appends = ['logo_url'];
@@ -30,6 +30,11 @@ class Entreprise extends Model
     public function activitySector()
     {
         return $this->belongsTo(ActivitySector::class);
+    }
+
+    public function plan()
+    {
+        return $this->belongsTo(Plan::class);
     }
 
     public function evenements()

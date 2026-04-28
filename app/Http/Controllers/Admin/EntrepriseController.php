@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\EntrepriseCreatedMail;
 use App\Models\ActivitySector;
+use App\Models\Plan;
 use App\Models\Entreprise;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,7 +17,7 @@ class EntrepriseController extends Controller
 {
     public function index()
     {
-        $entreprises = Entreprise::with(['user', 'activitySector'])->orderBy('nom')->get();
+        $entreprises = Entreprise::with(['user', 'activitySector', 'plan'])->orderBy('nom')->get();
         return response()->json($entreprises);
     }
 
@@ -24,6 +25,7 @@ class EntrepriseController extends Controller
     {
         return response()->json([
             'activity_sectors' => ActivitySector::orderBy('name')->get(),
+            'plans' => Plan::where('is_active', true)->orderBy('price')->get(),
         ]);
     }
 
@@ -54,6 +56,7 @@ class EntrepriseController extends Controller
             'ville'              => $request->ville,
             'pays'               => $request->pays,
             'activity_sector_id' => $request->activity_sector_id ?: null,
+            'plan_id'            => $request->plan_id ?: null,
         ];
 
         if ($request->hasFile('logo')) {
@@ -64,12 +67,12 @@ class EntrepriseController extends Controller
 
         Mail::to($user->email)->send(new EntrepriseCreatedMail($request->nom, $user->email, $password));
 
-        return response()->json($entreprise->load(['user', 'activitySector']), 201);
+        return response()->json($entreprise->load(['user', 'activitySector', 'plan']), 201);
     }
 
     public function show(Entreprise $entreprise)
     {
-        return response()->json($entreprise->load(['user', 'activitySector']));
+        return response()->json($entreprise->load(['user', 'activitySector', 'plan']));
     }
 
     public function update(Request $request, Entreprise $entreprise)
@@ -89,6 +92,7 @@ class EntrepriseController extends Controller
             'ville'              => $request->ville,
             'pays'               => $request->pays,
             'activity_sector_id' => $request->activity_sector_id ?: null,
+            'plan_id'            => $request->plan_id ?: null,
         ];
 
         if ($request->hasFile('logo')) {
@@ -107,7 +111,7 @@ class EntrepriseController extends Controller
             ]);
         }
 
-        return response()->json($entreprise->fresh()->load(['user', 'activitySector']));
+        return response()->json($entreprise->fresh()->load(['user', 'activitySector', 'plan']));
     }
 
     public function destroy(Entreprise $entreprise)
