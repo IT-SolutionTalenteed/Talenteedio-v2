@@ -1,6 +1,6 @@
 @extends('emails.layout')
 
-@section('header_badge', 'Candidature Envoyée')
+@section('header_badge', __('emails.validated_confirmation.badge'))
 
 @section('hero')
   <div class="email-hero-icon">
@@ -8,81 +8,78 @@
       <path d="M9 16.2L4.8 12l-1.4 1.4L9 19 21 7l-1.4-1.4L9 16.2z"/>
     </svg>
   </div>
-  <div class="email-hero-title">Candidature envoyée avec succès !</div>
-  <div class="email-hero-subtitle">Votre profil a été transmis à l'entreprise</div>
+  <div class="email-hero-title">{{ __('emails.validated_confirmation.hero_title') }}</div>
+  <div class="email-hero-subtitle">{{ __('emails.validated_confirmation.hero_subtitle') }}</div>
 @endsection
 
 @section('content')
-  <p class="email-greeting">Bonjour {{ $candidature->talent->name }},</p>
+  <p class="email-greeting">{!! __('emails.validated_confirmation.greeting', ['name' => $candidature->talent->name]) !!}</p>
 
   <p class="email-text">
-    Félicitations ! Votre candidature pour le poste de <strong>{{ $candidature->offre->titre }}</strong> 
-    chez <strong>{{ $candidature->offre->entreprise->nom }}</strong> a été envoyée avec succès.
+    {!! __('emails.validated_confirmation.intro', ['job_title' => $candidature->offre->titre, 'company' => $candidature->offre->entreprise->nom]) !!}
   </p>
 
   <!-- Score de matching -->
   <div class="highlight-box">
-    <div class="highlight-box-label">Votre score de compatibilité</div>
+    <div class="highlight-box-label">{{ __('emails.validated_confirmation.your_score') }}</div>
     <div class="highlight-box-value">{{ $matchingScore }}%</div>
   </div>
 
   <p class="email-text">
-    <strong>Excellente nouvelle !</strong> Votre profil présente une très forte compatibilité avec cette offre. 
-    Votre candidature a été <strong>automatiquement validée</strong> et transmise directement à l'entreprise.
+    {!! __('emails.validated_confirmation.excellent_news') !!}
   </p>
 
   <!-- Informations de l'offre -->
   <div class="info-card">
-    <div class="info-card-title">Détails de l'offre</div>
+    <div class="info-card-title">{{ __('emails.validated_confirmation.offer_details') }}</div>
     <div class="info-row">
-      <span class="info-label">Poste</span>
+      <span class="info-label">{{ __('emails.validated_confirmation.position') }}</span>
       <span class="info-value">{{ $candidature->offre->titre }}</span>
     </div>
     <div class="info-row">
-      <span class="info-label">Entreprise</span>
+      <span class="info-label">{{ __('emails.validated_confirmation.company') }}</span>
       <span class="info-value">{{ $candidature->offre->entreprise->nom }}</span>
     </div>
     @if($candidature->offre->localisation)
     <div class="info-row">
-      <span class="info-label">Localisation</span>
+      <span class="info-label">{{ __('emails.validated_confirmation.location') }}</span>
       <span class="info-value">{{ $candidature->offre->localisation }}</span>
     </div>
     @endif
     <div class="info-row">
-      <span class="info-label">Date de candidature</span>
+      <span class="info-label">{{ __('emails.validated_confirmation.application_date') }}</span>
       <span class="info-value">{{ $candidature->created_at->format('d/m/Y à H:i') }}</span>
     </div>
     <div class="info-row">
-      <span class="info-label">Statut</span>
-      <span class="info-value"><span class="status-badge status-badge--success">Envoyée à l'entreprise</span></span>
+      <span class="info-label">{{ __('emails.validated_confirmation.status') }}</span>
+      <span class="info-value"><span class="status-badge status-badge--success">{{ __('emails.validated_confirmation.status_sent') }}</span></span>
     </div>
   </div>
 
   <p class="email-text">
-    <strong>Prochaines étapes :</strong>
+    <strong>{{ __('emails.validated_confirmation.next_steps') }}</strong>
   </p>
 
   <ul class="email-list">
-    <li>L'entreprise va examiner votre candidature dans les prochains jours</li>
-    <li>Si votre profil les intéresse, ils vous contacteront directement</li>
-    <li>Vous pouvez suivre l'évolution de votre candidature depuis votre espace personnel</li>
+    <li>{{ __('emails.validated_confirmation.step_1') }}</li>
+    <li>{{ __('emails.validated_confirmation.step_2') }}</li>
+    <li>{{ __('emails.validated_confirmation.step_3') }}</li>
   </ul>
 
   <div class="email-cta">
-    <a href="{{ config('app.frontend_url') }}/mes-candidatures" class="btn-primary">
-      Suivre ma candidature
+    <a href="{{ config('app.frontend_url') }}/talent/candidatures" class="btn-primary">
+      {{ __('emails.validated_confirmation.track_application') }}
     </a>
   </div>
 
   <hr class="email-divider">
 
   <p class="email-text" style="font-size: 13px; color: #64748b;">
-    <strong>Pourquoi ma candidature a été validée automatiquement ?</strong><br>
-    Votre score de compatibilité de {{ $matchingScore }}% indique une excellente adéquation avec les critères de l'offre. 
-    Notre système d'IA a analysé votre CV et a détecté que vous correspondez parfaitement au profil recherché.
+    <strong>{{ __('emails.validated_confirmation.why_validated_title') }}</strong><br>
+    {!! __('emails.validated_confirmation.why_validated_text', ['score' => $matchingScore]) !!}
   </p>
 
   <p class="email-text" style="font-size: 13px; color: #64748b;">
-    Nous vous souhaitons bonne chance pour la suite du processus de recrutement ! 🍀
+    {{ __('emails.validated_confirmation.good_luck') }}
   </p>
 @endsection
