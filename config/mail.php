@@ -115,4 +115,15 @@ return [
         'name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Laravel')),
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Admin Email Address
+    |--------------------------------------------------------------------------
+    |
+    | Email address for administrative notifications (candidatures to validate, etc.)
+    |
+    */
+
+    'admin_email' => env('MAIL_ADMIN_ADDRESS', 'admin@talenteed.io'),
+
 ];
