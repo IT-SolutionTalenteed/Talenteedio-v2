@@ -199,6 +199,10 @@ Route::middleware('auth:sanctum')->group(function () {
         Route::get('/offres', [TalentOffreController::class, 'index']);
         Route::get('/offres/{offre}', [TalentOffreController::class, 'show']);
         Route::post('/offres/{offre}/postuler', [TalentOffreController::class, 'postuler']);
+        Route::post('/offres/{offre}/match', [TalentOffreController::class, 'matchWithJob']);
+        Route::get('/offres/{offre}/match', [TalentOffreController::class, 'getExistingMatch']);
+        Route::get('/mes-matchings', [TalentOffreController::class, 'mesMatchings']);
+        Route::post('/test-cv-parsing', [TalentOffreController::class, 'testCvParsing']); // Debug
         Route::get('/mes-candidatures', [TalentOffreController::class, 'mesCandidatures']);
 
         // Favoris offres (G-02)
