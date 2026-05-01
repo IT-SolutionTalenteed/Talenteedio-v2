@@ -10,7 +10,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class CandidatureEnAttenteValidationMail extends Mailable implements ShouldQueue
+class CandidatureEnAttenteValidationMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -24,6 +24,9 @@ class CandidatureEnAttenteValidationMail extends Mailable implements ShouldQueue
     {
         $this->candidature = $candidature;
         $this->matchingScore = $matchingScore;
+        
+        // Définir la locale pour cet email (français par défaut)
+        app()->setLocale('fr');
     }
 
     /**
@@ -31,8 +34,10 @@ class CandidatureEnAttenteValidationMail extends Mailable implements ShouldQueue
      */
     public function envelope(): Envelope
     {
+        $subject = __('emails.pending_validation.badge') . ' - ' . __('emails.pending_validation.hero_subtitle');
+        
         return new Envelope(
-            subject: 'Candidature reçue - En attente de validation',
+            subject: $subject,
         );
     }
 
