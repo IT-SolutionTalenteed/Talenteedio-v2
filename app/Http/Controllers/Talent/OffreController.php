@@ -39,8 +39,10 @@ class OffreController extends Controller
             'message' => 'nullable|string|max:1000',
         ]);
 
+        $talent = auth()->user();
+
         // Vérifier si le talent a déjà postulé
-        $existing = Candidature::where('talent_id', auth()->id())
+        $existing = Candidature::where('talent_id', $talent->id)
             ->where('offre_id', $offre->id)
             ->first();
 
@@ -50,15 +52,65 @@ class OffreController extends Controller
 
         $cvPath = $request->file('cv')->store('candidatures/cvs', 'public');
 
+        // Vérifier si un matching existe pour cette offre
+        $matching = OffreMatching::where('talent_id', $talent->id)
+            ->where('offre_id', $offre->id)
+            ->first();
+
+        $matchingScore = $matching ? $matching->score : 0;
+
+        // Déterminer le statut en fonction du score de matching
+        // Score >= 80% : validation automatique
+        // Score < 80% : en attente de validation admin
+        $statut = $matchingScore >= 80 ? 'en_attente' : 'en_attente_validation';
+
         $candidature = Candidature::create([
-            'talent_id' => auth()->id(),
+            'talent_id' => $talent->id,
             'offre_id'  => $offre->id,
-            'statut'    => 'en_attente',
+            'statut'    => $statut,
             'cv'        => $cvPath,
             'message'   => $request->message,
         ]);
 
-        return response()->json($candidature->load(['offre', 'talent']), 201);
+        // Charger les relations nécessaires
+        $candidature->load(['offre.entreprise', 'talent']);
+
+        // Envoyer les emails en fonction du score
+        if ($matchingScore >= 80) {
+            // Validation automatique : envoyer directement à l'entreprise
+            \Illuminate\Support\Facades\Mail::to($candidature->offre->entreprise->email)
+                ->send(new \App\Mail\CandidatureValideeEntrepriseMail($candidature, $matchingScore));
+
+            // Confirmation au talent
+            \Illuminate\Support\Facades\Mail::to($talent->email)
+                ->send(new \App\Mail\CandidatureValideeConfirmationMail($candidature, $matchingScore));
+
+            \Illuminate\Support\Facades\Log::info("Candidature auto-validée", [
+                'candidature_id' => $candidature->id,
+                'matching_score' => $matchingScore,
+            ]);
+        } else {
+            // Score < 80% : en attente de validation admin
+            // Email au talent pour patienter
+            \Illuminate\Support\Facades\Mail::to($talent->email)
+                ->send(new \App\Mail\CandidatureEnAttenteValidationMail($candidature, $matchingScore));
+
+            // Email à l'admin pour validation
+            $adminEmail = config('mail.admin_email', 'admin@talenteed.io');
+            \Illuminate\Support\Facades\Mail::to($adminEmail)
+                ->send(new \App\Mail\CandidatureEnAttenteAdminMail($candidature, $matchingScore));
+
+            \Illuminate\Support\Facades\Log::info("Candidature en attente de validation admin", [
+                'candidature_id' => $candidature->id,
+                'matching_score' => $matchingScore,
+            ]);
+        }
+
+        return response()->json([
+            'candidature' => $candidature,
+            'matching_score' => $matchingScore,
+            'auto_validated' => $matchingScore >= 80,
+        ], 201);
     }
 
     /**
