@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class CandidatureValideeEntrepriseMail extends Mailable implements ShouldQueue
+class CandidatureValideeEntrepriseMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -25,6 +25,9 @@ class CandidatureValideeEntrepriseMail extends Mailable implements ShouldQueue
     {
         $this->candidature = $candidature;
         $this->matchingScore = $matchingScore;
+        
+        // Définir la locale pour cet email (français par défaut)
+        app()->setLocale('fr');
     }
 
     /**
@@ -32,8 +35,10 @@ class CandidatureValideeEntrepriseMail extends Mailable implements ShouldQueue
      */
     public function envelope(): Envelope
     {
+        $subject = __('emails.validated_company.badge') . ' - ' . $this->candidature->offre->titre;
+        
         return new Envelope(
-            subject: 'Nouvelle candidature validée - ' . $this->candidature->offre->titre,
+            subject: $subject,
         );
     }
 
