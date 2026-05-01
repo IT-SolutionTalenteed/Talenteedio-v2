@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class CandidatureEnAttenteAdminMail extends Mailable implements ShouldQueue
+class CandidatureEnAttenteAdminMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -25,6 +25,9 @@ class CandidatureEnAttenteAdminMail extends Mailable implements ShouldQueue
     {
         $this->candidature = $candidature;
         $this->matchingScore = $matchingScore;
+        
+        // Définir la locale pour cet email (français par défaut pour l'admin)
+        app()->setLocale('fr');
     }
 
     /**
@@ -32,8 +35,10 @@ class CandidatureEnAttenteAdminMail extends Mailable implements ShouldQueue
      */
     public function envelope(): Envelope
     {
+        $subject = '[' . __('emails.pending_admin.badge') . '] ' . __('emails.pending_admin.hero_title') . ' - ' . $this->candidature->offre->titre;
+        
         return new Envelope(
-            subject: '[ACTION REQUISE] Candidature à valider - ' . $this->candidature->offre->titre,
+            subject: $subject,
         );
     }
 
