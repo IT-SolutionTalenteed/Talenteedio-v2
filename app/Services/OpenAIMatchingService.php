@@ -86,6 +86,41 @@ class OpenAIMatchingService
         })->sortByDesc('score')->values()->toArray();
     }
 
+    /**
+     * Matching d'un talent avec une offre spécifique.
+     *
+     * @param  User   $talent
+     * @param  string $cvText
+     * @param  Offre  $offre
+     * @return array  {score: int, raison: string, details: array}
+     */
+    public function matchSingleOffre(User $talent, string $cvText, $offre): array
+    {
+        $talentBlock = $this->buildTalentBlockSimple($talent, $cvText);
+        $offreBlock = $this->buildSingleOffreBlock($offre);
+
+        $systemPrompt = $this->buildSystemPromptSingle();
+        $userContent  = $talentBlock . "\n\n" . $offreBlock;
+
+        $result = $this->callOpenAI($systemPrompt, $userContent, 1000);
+
+        // Le résultat devrait être un objet avec score, raison, et détails
+        if (is_array($result) && isset($result['score'])) {
+            return $result;
+        }
+
+        // Si c'est un tableau d'objets, prendre le premier
+        if (is_array($result) && !empty($result) && isset($result[0]['score'])) {
+            return $result[0];
+        }
+
+        return [
+            'score' => 0,
+            'raison' => 'Erreur lors de l\'analyse du matching.',
+            'details' => []
+        ];
+    }
+
     // ─────────────────────────────────────────────
     //  Parsing CV
     // ─────────────────────────────────────────────
@@ -98,27 +133,59 @@ class OpenAIMatchingService
     {
         $ext = strtolower(pathinfo($originalName, PATHINFO_EXTENSION));
 
+        Log::info("Parsing CV: {$originalName} (extension: {$ext})");
+
         try {
             if ($ext === 'pdf') {
+                if (!file_exists($filePath)) {
+                    Log::error("PDF file not found: {$filePath}");
+                    return null;
+                }
+
                 $parser = new PdfParser();
                 $pdf    = $parser->parseFile($filePath);
                 $text   = $pdf->getText();
+                
+                Log::info("PDF parsed successfully, text length: " . strlen($text));
+                
+                if (empty(trim($text))) {
+                    Log::warning("PDF parsing returned empty text");
+                    // Essayer une méthode alternative pour les PDFs scannés
+                    return "CV PDF (contenu non extractible - possiblement scanné)";
+                }
+                
                 return $this->sanitizeCvText($text);
             }
 
             if (in_array($ext, ['docx', 'doc'])) {
+                if (!file_exists($filePath)) {
+                    Log::error("DOCX file not found: {$filePath}");
+                    return null;
+                }
+
                 // phpoffice/phpword n'est pas installé — on lit le XML interne du DOCX
                 if ($ext === 'docx') {
-                    return $this->extractDocxText($filePath);
+                    $text = $this->extractDocxText($filePath);
+                    if ($text) {
+                        Log::info("DOCX parsed successfully, text length: " . strlen($text));
+                        return $text;
+                    }
                 }
+                
                 // .doc binaire : on ne peut pas parser sans lib dédiée
-                return null;
+                Log::warning("DOC format not fully supported");
+                return "CV Word (format .doc non supporté - utilisez .docx ou .pdf)";
             }
-        } catch (\Throwable $e) {
-            Log::warning("CV parsing failed for {$originalName}: " . $e->getMessage());
-        }
 
-        return null;
+            Log::warning("Unsupported file extension: {$ext}");
+            return null;
+        } catch (\Throwable $e) {
+            Log::error("CV parsing failed for {$originalName}: " . $e->getMessage());
+            Log::error("Stack trace: " . $e->getTraceAsString());
+            
+            // Retourner un texte minimal plutôt que null pour permettre le matching
+            return "CV uploadé (extraction automatique échouée - analyse basée sur le profil utilisateur)";
+        }
     }
 
     /**
@@ -126,21 +193,28 @@ class OpenAIMatchingService
      */
     private function extractDocxText(string $filePath): ?string
     {
-        $zip = new \ZipArchive();
-        if ($zip->open($filePath) !== true) {
+        try {
+            $zip = new \ZipArchive();
+            if ($zip->open($filePath) !== true) {
+                Log::error("Failed to open DOCX as ZIP: {$filePath}");
+                return null;
+            }
+
+            $xml = $zip->getFromName('word/document.xml');
+            $zip->close();
+
+            if ($xml === false) {
+                Log::error("Failed to extract word/document.xml from DOCX");
+                return null;
+            }
+
+            // Supprimer les balises XML et garder le texte
+            $text = strip_tags(str_replace(['</w:p>', '</w:tr>'], "\n", $xml));
+            return $this->sanitizeCvText($text);
+        } catch (\Throwable $e) {
+            Log::error("DOCX extraction error: " . $e->getMessage());
             return null;
         }
-
-        $xml = $zip->getFromName('word/document.xml');
-        $zip->close();
-
-        if ($xml === false) {
-            return null;
-        }
-
-        // Supprimer les balises XML et garder le texte
-        $text = strip_tags(str_replace(['</w:p>', '</w:tr>'], "\n", $xml));
-        return $this->sanitizeCvText($text);
     }
 
     /**
@@ -283,6 +357,129 @@ PROMPT;
         if ($cvText) {
             $lines[] = "\n### CONTENU DU CV (extrait)";
             $lines[] = $cvText;
+        }
+
+        return implode("\n", $lines);
+    }
+
+    /**
+     * Version simplifiée du bloc talent pour le matching d'une seule offre.
+     */
+    private function buildTalentBlockSimple(User $talent, string $cvText): string
+    {
+        $lines = ["## PROFIL DU CANDIDAT"];
+        $lines[] = "Nom: {$talent->name}";
+
+        if ($talent->titre_poste) {
+            $lines[] = "Titre actuel: {$talent->titre_poste}";
+        }
+
+        // Localisation
+        $locActuelle = implode(', ', array_filter([$talent->ville, $talent->pays]));
+        if ($locActuelle) {
+            $lines[] = "Localisation: {$locActuelle}";
+        }
+
+        // Secteurs d'activité
+        $talent->loadMissing('activitySectors');
+        if ($talent->activitySectors->isNotEmpty()) {
+            $lines[] = "Secteurs d'activité: " . $talent->activitySectors->pluck('name')->join(', ');
+        }
+
+        // Compétences
+        $talent->loadMissing('skills');
+        if ($talent->skills->isNotEmpty()) {
+            $lines[] = "Compétences: " . $talent->skills->pluck('name')->join(', ');
+        }
+
+        // Langues
+        $talent->loadMissing('languages');
+        if ($talent->languages->isNotEmpty()) {
+            $lines[] = "Langues: " . $talent->languages->pluck('name')->join(', ');
+        }
+
+        // Niveau d'études & expérience
+        $talent->loadMissing(['studyLevel', 'experience']);
+        if ($talent->studyLevel) {
+            $lines[] = "Niveau d'études: {$talent->studyLevel->name}";
+        }
+        if ($talent->experience) {
+            $lines[] = "Expérience: {$talent->experience->name}";
+        }
+
+        // CV
+        if ($cvText) {
+            $lines[] = "\n### CONTENU DU CV";
+            $lines[] = $cvText;
+        }
+
+        return implode("\n", $lines);
+    }
+
+    /**
+     * Construit le bloc pour une seule offre.
+     */
+    private function buildSingleOffreBlock($offre): string
+    {
+        $lines = ["## OFFRE D'EMPLOI"];
+        $lines[] = "Titre: {$offre->titre}";
+
+        if ($offre->entreprise) {
+            $lines[] = "Entreprise: {$offre->entreprise->nom}";
+            if ($offre->entreprise->activitySector) {
+                $lines[] = "Secteur entreprise: {$offre->entreprise->activitySector->name}";
+            }
+            $locEntreprise = implode(', ', array_filter([$offre->entreprise->ville, $offre->entreprise->pays]));
+            if ($locEntreprise) {
+                $lines[] = "Siège entreprise: {$locEntreprise}";
+            }
+        }
+
+        if ($offre->localisation) {
+            $lines[] = "Lieu du poste: {$offre->localisation}";
+        }
+
+        if ($offre->activitySector) {
+            $lines[] = "Secteur du poste: {$offre->activitySector->name}";
+        }
+
+        if ($offre->description) {
+            $lines[] = "\nDescription du poste:";
+            $lines[] = $offre->description;
+        }
+
+        if ($offre->mission) {
+            $lines[] = "\nMission:";
+            $lines[] = $offre->mission;
+        }
+
+        if ($offre->profil_recherche) {
+            $lines[] = "\nProfil recherché:";
+            $lines[] = $offre->profil_recherche;
+        }
+
+        if ($offre->skills->isNotEmpty()) {
+            $lines[] = "\nCompétences requises: " . $offre->skills->pluck('name')->join(', ');
+        }
+
+        if ($offre->fourchette_salariale) {
+            $lines[] = "Salaire: {$offre->fourchette_salariale}";
+        }
+
+        if ($offre->jobContracts->isNotEmpty()) {
+            $lines[] = "Type de contrat: " . $offre->jobContracts->pluck('name')->join(', ');
+        }
+
+        if ($offre->jobModes->isNotEmpty()) {
+            $lines[] = "Mode de travail: " . $offre->jobModes->pluck('name')->join(', ');
+        }
+
+        if ($offre->studyLevels->isNotEmpty()) {
+            $lines[] = "Niveau d'études requis: " . $offre->studyLevels->pluck('name')->join(', ');
+        }
+
+        if ($offre->experiences->isNotEmpty()) {
+            $lines[] = "Expérience requise: " . $offre->experiences->pluck('name')->join(', ');
         }
 
         return implode("\n", $lines);
@@ -432,6 +629,39 @@ Réponds UNIQUEMENT avec un JSON valide, sans texte ni markdown autour, sous cet
   ...
 ]
 Classe TOUTES les offres.
+PROMPT;
+    }
+
+    /**
+     * Prompt système pour le matching d'une seule offre.
+     */
+    private function buildSystemPromptSingle(): string
+    {
+        return <<<PROMPT
+Tu es un expert en recrutement. On te donne le profil complet d'un candidat (avec son CV) et une offre d'emploi détaillée.
+Analyse la compatibilité entre le candidat et l'offre.
+
+Calcule un score de matching global (0 à 100) en pondérant ces critères :
+- 40% — Adéquation des compétences du candidat avec les compétences requises
+- 25% — Adéquation du secteur d'activité et de l'expérience
+- 20% — Adéquation géographique et mobilité
+- 15% — Adéquation du niveau d'études et du type de contrat
+
+Fournis également :
+- Une raison globale du score (2-3 phrases)
+- Des détails par catégorie avec un score et une explication courte
+
+Réponds UNIQUEMENT avec un JSON valide, sans texte ni markdown autour, sous cette forme exacte :
+{
+  "score": 85,
+  "raison": "Le candidat possède les compétences clés requises et son expérience correspond bien au poste. La localisation est compatible.",
+  "details": {
+    "competences": {"score": 90, "explication": "Maîtrise excellente des technologies requises (PHP, Laravel, React)"},
+    "secteur": {"score": 80, "explication": "Expérience dans le secteur IT, compatible avec l'offre"},
+    "localisation": {"score": 85, "explication": "Localisation compatible, mobilité possible"},
+    "formation": {"score": 85, "explication": "Niveau d'études et expérience correspondent aux attentes"}
+  }
+}
 PROMPT;
     }
 
