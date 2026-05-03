@@ -85,6 +85,8 @@ class EntrepriseController extends Controller
 
         $data = [
             'nom'                => $request->nom,
+            'status'             => $request->status ?? $entreprise->status,
+            'taille'             => $request->taille,
             'description'        => $request->description,
             'site_web'           => $request->site_web,
             'telephone'          => $request->telephone,
