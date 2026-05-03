@@ -5,14 +5,17 @@ namespace App\Http\Controllers\Talent;
 use App\Http\Controllers\Controller;
 use App\Mail\EntretienReserveMail;
 use App\Models\Entretien;
+use App\Models\Entreprise;
 use App\Models\Evenement;
 use App\Models\User;
+use App\Traits\CheckPlanLimits;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class EntretienController extends Controller
 {
+    use CheckPlanLimits;
     /**
      * Retourne les créneaux disponibles pour une entreprise à un événement.
      * Créneaux de 15min entre heure_debut_journee et heure_fin_journee, sur toutes les dates.
@@ -54,6 +57,10 @@ class EntretienController extends Controller
         if ($existing) {
             return response()->json(['message' => 'Vous avez déjà un entretien réservé avec cette entreprise.'], 422);
         }
+
+        // Vérifier la limite d'entretiens du plan de l'entreprise sur cet événement
+        $entreprise = Entreprise::with('plan')->findOrFail($request->entreprise_id);
+        $this->checkEntretienLimit($entreprise, $evenement->id);
 
         // Vérifier que le créneau est libre
         $heureDebut = $request->heure_debut;

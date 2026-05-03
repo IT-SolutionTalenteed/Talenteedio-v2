@@ -6,11 +6,13 @@ use App\Http\Controllers\Controller;
 use App\Models\Evenement;
 use App\Models\CategorieEvenement;
 use App\Models\Entreprise;
+use App\Traits\CheckPlanLimits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class EvenementController extends Controller
 {
+    use CheckPlanLimits;
     public function index()
     {
         return response()->json(
@@ -50,7 +52,12 @@ class EvenementController extends Controller
         }
 
         $evenement = Evenement::create($validated);
-        $evenement->entreprises()->sync($validated['entreprise_ids'] ?? []);
+
+        $newIds = $validated['entreprise_ids'] ?? [];
+        foreach (Entreprise::with('plan')->whereIn('id', $newIds)->get() as $e) {
+            $this->checkEvenementLimit($e);
+        }
+        $evenement->entreprises()->sync($newIds);
 
         return response()->json($evenement->load(['categorie', 'entreprises']), 201);
     }
@@ -100,7 +107,14 @@ class EvenementController extends Controller
         }
 
         $evenement->update($validated);
-        $evenement->entreprises()->sync($validated['entreprise_ids'] ?? []);
+
+        $newIds      = $validated['entreprise_ids'] ?? [];
+        $existingIds = $evenement->entreprises()->pluck('entreprises.id')->toArray();
+        $addedIds    = array_diff($newIds, $existingIds);
+        foreach (Entreprise::with('plan')->whereIn('id', $addedIds)->get() as $e) {
+            $this->checkEvenementLimit($e);
+        }
+        $evenement->entreprises()->sync($newIds);
 
         return response()->json($evenement->load(['categorie', 'entreprises']));
     }

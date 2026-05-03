@@ -10,13 +10,16 @@ use App\Models\JobMode;
 use App\Models\Offre;
 use App\Models\Skill;
 use App\Models\StudyLevel;
+use App\Traits\CheckPlanLimits;
 use Illuminate\Http\Request;
 
 class OffreController extends Controller
 {
+    use CheckPlanLimits;
+
     private function getEntreprise(): Entreprise
     {
-        return Entreprise::where('user_id', auth()->id())->firstOrFail();
+        return Entreprise::with('plan')->where('user_id', auth()->id())->firstOrFail();
     }
 
     public function index()
@@ -46,6 +49,7 @@ class OffreController extends Controller
     public function store(Request $request)
     {
         $entreprise = $this->getEntreprise();
+        $this->checkOffreLimit($entreprise);
 
         $request->validate([
             'titre'           => 'required|string|max:255',

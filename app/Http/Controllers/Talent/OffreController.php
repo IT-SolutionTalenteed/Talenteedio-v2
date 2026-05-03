@@ -10,6 +10,15 @@ use Illuminate\Http\Request;
 
 class OffreController extends Controller
 {
+    private function checkCandidatureLimit(Offre $offre): void
+    {
+        $max = $offre->entreprise?->plan?->max_candidatures_par_offre ?? null;
+        if ($max === null) return;
+
+        if ($offre->candidatures()->count() >= $max) {
+            abort(403, "Cette offre ne peut plus recevoir de candidatures (limite de {$max} atteinte).");
+        }
+    }
     /**
      * Liste toutes les offres publiées (publiques pour les talents).
      */
@@ -40,6 +49,10 @@ class OffreController extends Controller
         ]);
 
         $talent = auth()->user();
+
+        // Vérifier la limite de candidatures par offre selon le plan de l'entreprise
+        $offre->loadMissing('entreprise.plan');
+        $this->checkCandidatureLimit($offre);
 
         // Vérifier si le talent a déjà postulé
         $existing = Candidature::where('talent_id', $talent->id)

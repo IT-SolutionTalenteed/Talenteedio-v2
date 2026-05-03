@@ -6,15 +6,18 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Entreprise;
 use App\Models\MediaCategory;
+use App\Traits\CheckPlanLimits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
+    use CheckPlanLimits;
+
     private function getEntreprise(): Entreprise
     {
-        return Entreprise::where('user_id', auth()->id())->firstOrFail();
+        return Entreprise::with('plan')->where('user_id', auth()->id())->firstOrFail();
     }
 
     public function index()
@@ -39,6 +42,7 @@ class ArticleController extends Controller
     public function store(Request $request)
     {
         $entreprise = $this->getEntreprise();
+        $this->checkArticleLimit($entreprise);
 
         $request->validate([
             'title'       => 'required|string|max:255',

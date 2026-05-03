@@ -28,6 +28,7 @@ class AuthController extends Controller
             'company_city' => 'nullable|string|max:100',
             'company_country' => 'nullable|string|max:100',
             'activity_sector_id' => 'nullable|exists:activity_sectors,id',
+            'plan_id'            => 'nullable|exists:plans,id',
         ]);
 
         $user = User::create([
@@ -41,15 +42,16 @@ class AuthController extends Controller
         // Si c'est une entreprise, créer le profil entreprise
         if ($request->role === 'entreprise') {
             \App\Models\Entreprise::create([
-                'user_id' => $user->id,
-                'nom' => $request->company_name,
-                'description' => $request->company_description,
-                'site_web' => $request->company_website,
-                'telephone' => $request->company_phone,
-                'adresse' => $request->company_address,
-                'ville' => $request->company_city,
-                'pays' => $request->company_country,
+                'user_id'            => $user->id,
+                'nom'                => $request->company_name,
+                'description'        => $request->company_description,
+                'site_web'           => $request->company_website,
+                'telephone'          => $request->company_phone,
+                'adresse'            => $request->company_address,
+                'ville'              => $request->company_city,
+                'pays'               => $request->company_country,
                 'activity_sector_id' => $request->activity_sector_id,
+                'plan_id'            => $request->plan_id,
             ]);
         }
 
