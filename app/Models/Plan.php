@@ -12,18 +12,15 @@ class Plan extends Model
         'price',
         'max_offres',
         'max_articles',
-        'featured_events',
-        'priority_support',
-        'analytics',
+        'max_evenements',
+        'max_entretiens_par_evenement',
+        'max_candidatures_par_offre',
         'is_active',
         'duration_days',
     ];
 
     protected $casts = [
-        'price' => 'decimal:2',
-        'featured_events' => 'boolean',
-        'priority_support' => 'boolean',
-        'analytics' => 'boolean',
+        'price'    => 'decimal:2',
         'is_active' => 'boolean',
     ];
 
