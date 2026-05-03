@@ -16,7 +16,6 @@ class Plan extends Model
         'max_entretiens_par_evenement',
         'max_candidatures_par_offre',
         'is_active',
-        'duration_days',
     ];
 
     protected $casts = [
