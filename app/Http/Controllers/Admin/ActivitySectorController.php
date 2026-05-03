@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\ActivitySector;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
 
 class ActivitySectorController extends Controller
 {
@@ -30,7 +31,7 @@ class ActivitySectorController extends Controller
     public function update(Request $request, ActivitySector $activitySector)
     {
         $validated = $request->validate([
-            'name' => 'required|string|max:255|unique:activity_sectors,name,' . $activitySector->id,
+            'name' => ['required', 'string', 'max:255', Rule::unique('activity_sectors', 'name')->ignore($activitySector->id)],
         ]);
 
         $activitySector->update($validated);
