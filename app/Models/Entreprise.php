@@ -10,7 +10,7 @@ use App\Models\Article;
 class Entreprise extends Model
 {
     protected $fillable = [
-        'user_id', 'nom', 'logo', 'description',
+        'user_id', 'nom', 'status', 'taille', 'poste_contact', 'logo', 'description',
         'site_web', 'telephone', 'adresse', 'ville', 'pays',
         'activity_sector_id', 'plan_id', 'hubspot_company_id',
     ];
