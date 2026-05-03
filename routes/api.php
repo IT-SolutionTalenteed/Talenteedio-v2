@@ -72,6 +72,7 @@ Route::prefix('public')->group(function () {
     Route::get('/articles',                                   [PublicController::class, 'articles']);
     Route::get('/articles/{article}',                         [PublicController::class, 'articleDetail']);
     Route::get('/offres/{offre}',                             [PublicController::class, 'offreDetail']);
+    Route::post('/callback',                                  [\App\Http\Controllers\Public\ContactController::class, 'callback']);
     Route::get('/entreprises/{entreprise}',                   [PublicController::class, 'entrepriseDetail']);
     Route::get('/referentiels',                               [PublicController::class, 'referentiels']);
     
