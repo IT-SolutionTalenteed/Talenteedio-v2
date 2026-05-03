@@ -58,6 +58,7 @@ Route::get('/legal-pages', [LegalPageController::class, 'index']);
 Route::get('/legal-pages/{slug}', [LegalPageController::class, 'showBySlug']);
 Route::get('/skills', [SkillController::class, 'index']);
 Route::get('/activity-sectors', [ActivitySectorController::class, 'index']);
+Route::get('/plans', [PlanController::class, 'index']);
 
 // Routes publiques — site visiteurs
 Route::prefix('public')->group(function () {
