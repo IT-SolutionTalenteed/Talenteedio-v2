@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Mail\WelcomeTalentMail;
+use App\Mail\EntreprisePendingMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,15 +21,17 @@ class AuthController extends Controller
             'password' => 'required|string|min:8|confirmed',
             'role' => 'required|string|in:talent,entreprise',
             // Champs spécifiques aux entreprises
-            'company_name' => 'required_if:role,entreprise|string|max:255',
+            'company_name'        => 'required_if:role,entreprise|string|max:255',
             'company_description' => 'nullable|string',
-            'company_website' => 'nullable|url',
-            'company_phone' => 'nullable|string|max:30',
-            'company_address' => 'nullable|string',
-            'company_city' => 'nullable|string|max:100',
-            'company_country' => 'nullable|string|max:100',
-            'activity_sector_id' => 'nullable|exists:activity_sectors,id',
-            'plan_id'            => 'nullable|exists:plans,id',
+            'company_website'     => 'nullable|url',
+            'company_phone'       => 'nullable|string|max:30',
+            'company_address'     => 'nullable|string',
+            'company_city'        => 'nullable|string|max:100',
+            'company_country'     => 'nullable|string|max:100',
+            'company_size'        => 'nullable|string|max:50',
+            'company_poste'       => 'nullable|string|max:255',
+            'activity_sector_id'  => 'nullable|exists:activity_sectors,id',
+            'plan_id'             => 'nullable|exists:plans,id',
         ]);
 
         $user = User::create([
@@ -39,11 +42,14 @@ class AuthController extends Controller
             'auth_provider' => 'local', // Compte local
         ]);
 
-        // Si c'est une entreprise, créer le profil entreprise
+        // Si c'est une entreprise, créer le profil en statut pending
         if ($request->role === 'entreprise') {
             \App\Models\Entreprise::create([
                 'user_id'            => $user->id,
                 'nom'                => $request->company_name,
+                'status'             => 'pending',
+                'taille'             => $request->company_size,
+                'poste_contact'      => $request->company_poste,
                 'description'        => $request->company_description,
                 'site_web'           => $request->company_website,
                 'telephone'          => $request->company_phone,
@@ -53,6 +59,13 @@ class AuthController extends Controller
                 'activity_sector_id' => $request->activity_sector_id,
                 'plan_id'            => $request->plan_id,
             ]);
+
+            Mail::to($user->email)->send(new EntreprisePendingMail($user));
+
+            return response()->json([
+                'status'  => 'pending',
+                'message' => 'Votre demande a bien été enregistrée. Notre équipe va examiner votre dossier et vous contacter très prochainement.',
+            ], 201);
         }
 
         if ($request->role === 'talent') {
@@ -63,11 +76,11 @@ class AuthController extends Controller
 
         return response()->json([
             'access_token' => $token,
-            'token_type' => 'Bearer',
+            'token_type'   => 'Bearer',
             'user' => [
-                'id' => $user->id,
+                'id'   => $user->id,
                 'name' => $user->name,
-                'email' => $user->email,
+                'email'=> $user->email,
                 'role' => $user->role,
             ],
         ], 201);
@@ -117,6 +130,16 @@ class AuthController extends Controller
             throw ValidationException::withMessages([
                 'email' => ['Les informations d\'identification fournies sont incorrectes.'],
             ]);
+        }
+
+        // Bloquer les comptes entreprise en attente de validation
+        if ($user->role === 'entreprise') {
+            $entreprise = \App\Models\Entreprise::where('user_id', $user->id)->first();
+            if ($entreprise && $entreprise->status === 'pending') {
+                throw ValidationException::withMessages([
+                    'email' => ['__PENDING__'],
+                ]);
+            }
         }
 
         $token = $user->createToken('auth_token')->plainTextToken;
