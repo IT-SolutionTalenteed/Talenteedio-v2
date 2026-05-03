@@ -20,7 +20,6 @@ class PlanSeeder extends Seeder
                 'max_entretiens_par_evenement' => 5,
                 'max_candidatures_par_offre'   => 20,
                 'is_active'                    => true,
-                'duration_days'                => 30,
             ],
             [
                 'name'                         => 'Business',
@@ -32,7 +31,6 @@ class PlanSeeder extends Seeder
                 'max_entretiens_par_evenement' => 15,
                 'max_candidatures_par_offre'   => 50,
                 'is_active'                    => true,
-                'duration_days'                => 30,
             ],
             [
                 'name'                         => 'Premium',
@@ -44,7 +42,6 @@ class PlanSeeder extends Seeder
                 'max_entretiens_par_evenement' => 30,
                 'max_candidatures_par_offre'   => null,
                 'is_active'                    => true,
-                'duration_days'                => 30,
             ],
             [
                 'name'                         => 'Enterprise',
@@ -56,7 +53,6 @@ class PlanSeeder extends Seeder
                 'max_entretiens_par_evenement' => null,
                 'max_candidatures_par_offre'   => null,
                 'is_active'                    => true,
-                'duration_days'                => 30,
             ],
         ];
 
