@@ -25,7 +25,6 @@ class PlanController extends Controller
             'max_entretiens_par_evenement' => 'nullable|integer|min:0',
             'max_candidatures_par_offre'   => 'nullable|integer|min:0',
             'is_active'                    => 'boolean',
-            'duration_days'                => 'required|integer|min:1',
         ]);
 
         return response()->json(Plan::create($validated), 201);
@@ -48,7 +47,6 @@ class PlanController extends Controller
             'max_entretiens_par_evenement' => 'nullable|integer|min:0',
             'max_candidatures_par_offre'   => 'nullable|integer|min:0',
             'is_active'                    => 'boolean',
-            'duration_days'                => 'required|integer|min:1',
         ]);
 
         $plan->update($validated);
