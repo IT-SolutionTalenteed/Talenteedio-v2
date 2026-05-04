@@ -15,6 +15,11 @@ class EnsureAccountActive
             return $next($request);
         }
 
+        // Les admins et consultants ne sont jamais bloqués
+        if (in_array($user->role, ['admin', 'consultant_externe'])) {
+            return $next($request);
+        }
+
         // Vérifier le statut sur l'user directement
         if (isset($user->status) && $user->status === 'pending') {
             return response()->json([
