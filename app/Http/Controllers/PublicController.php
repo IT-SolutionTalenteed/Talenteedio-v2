@@ -291,8 +291,16 @@ class PublicController extends Controller
         $article->load([
             'mediaCategories:id,name',
             'entreprise:id,nom,logo',
+            'user:id,name',
         ]);
 
-        return response()->json($article);
+        $data = $article->toArray();
+
+        // Expose admin key for frontend when article has no entreprise
+        if (!$article->entreprise_id && $article->user) {
+            $data['admin'] = ['name' => $article->user->name];
+        }
+
+        return response()->json($data);
     }
 }
