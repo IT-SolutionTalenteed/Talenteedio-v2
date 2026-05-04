@@ -44,11 +44,13 @@ class EntrepriseController extends Controller
             'email'    => $request->email,
             'password' => $password,
             'role'     => 'entreprise',
+            'status'   => 'active',
         ]);
 
         $data = [
             'user_id'            => $user->id,
             'nom'                => $request->nom,
+            'status'             => 'active',
             'description'        => $request->description,
             'site_web'           => $request->site_web,
             'telephone'          => $request->telephone,
