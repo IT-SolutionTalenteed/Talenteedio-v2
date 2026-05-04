@@ -15,10 +15,15 @@ use Illuminate\Support\Str;
 
 class EntrepriseController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $entreprises = Entreprise::with(['user', 'activitySector', 'plan'])->orderBy('nom')->get();
-        return response()->json($entreprises);
+        $query = Entreprise::with(['user', 'activitySector', 'plan'])->orderBy('nom');
+
+        if ($request->filled('status')) {
+            $query->where('status', $request->status);
+        }
+
+        return response()->json($query->get());
     }
 
     public function referentiels()
