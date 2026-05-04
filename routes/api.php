@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\UserController;
@@ -59,6 +60,8 @@ Route::get('/legal-pages/{slug}', [LegalPageController::class, 'showBySlug']);
 Route::get('/skills', [SkillController::class, 'index']);
 Route::get('/activity-sectors', [ActivitySectorController::class, 'index']);
 Route::get('/plans', [PlanController::class, 'index']);
+Route::post('/forgot-password', [PasswordResetController::class, 'forgot']);
+Route::post('/reset-password',  [PasswordResetController::class, 'reset']);
 
 // Routes publiques — site visiteurs
 Route::prefix('public')->group(function () {
