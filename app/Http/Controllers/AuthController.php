@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\WelcomeTalentMail;
 use App\Mail\EntreprisePendingMail;
+use App\Mail\EntrepriseInscriptionAdminMail;
 use App\Mail\PasswordChangedMail;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -62,6 +63,18 @@ class AuthController extends Controller
             ]);
 
             Mail::to($user->email)->send(new EntreprisePendingMail($user));
+
+            // Notifier tous les admins
+            $frontendUrl = rtrim(env('FRONTEND_URL', 'http://localhost:5173'), '/');
+            $adminUrl    = $frontendUrl . '/admin/entreprises';
+            $admins      = \App\Models\User::where('role', 'admin')->get();
+            foreach ($admins as $admin) {
+                try {
+                    Mail::to($admin->email)->send(new EntrepriseInscriptionAdminMail($user, $request->company_name, $adminUrl));
+                } catch (\Exception $e) {
+                    \Log::warning('[EntrepriseInscription] Admin mail failed: ' . $e->getMessage());
+                }
+            }
 
             return response()->json([
                 'status'  => 'pending',
