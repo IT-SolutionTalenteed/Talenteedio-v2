@@ -59,7 +59,7 @@ Route::get('/legal-pages', [LegalPageController::class, 'index']);
 Route::get('/legal-pages/{slug}', [LegalPageController::class, 'showBySlug']);
 Route::get('/skills', [SkillController::class, 'index']);
 Route::get('/activity-sectors', [ActivitySectorController::class, 'index']);
-Route::get('/plans', [PlanController::class, 'index']);
+Route::get('/plans', [\App\Http\Controllers\Public\PlanPublicController::class, 'index']);
 Route::post('/forgot-password', [PasswordResetController::class, 'forgot']);
 Route::post('/reset-password',  [PasswordResetController::class, 'reset']);
 
