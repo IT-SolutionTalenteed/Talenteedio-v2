@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\WelcomeTalentMail;
 use App\Mail\EntreprisePendingMail;
+use App\Mail\PasswordChangedMail;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -244,6 +245,7 @@ class AuthController extends Controller
             $validated['password'] = Hash::make($validated['password']);
         }
 
+        $passwordChanged = $request->filled('password');
         unset($validated['current_password']);
 
         // Sync name from first+last
@@ -254,6 +256,14 @@ class AuthController extends Controller
         }
 
         $user->update($validated);
+
+        if ($passwordChanged) {
+            try {
+                Mail::to($user->email)->send(new PasswordChangedMail($user));
+            } catch (\Exception $e) {
+                \Log::warning('[PasswordChanged] Mail failed: ' . $e->getMessage());
+            }
+        }
 
         return response()->json([
             'id'         => $user->id,
