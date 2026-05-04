@@ -99,7 +99,7 @@ Route::prefix('public')->group(function () {
 });
 
 // Routes protégées par Sanctum
-Route::middleware('auth:sanctum')->group(function () {
+Route::middleware(['auth:sanctum', 'account.active'])->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/user', [AuthController::class, 'user']);
     Route::patch('/user/profile', [AuthController::class, 'updateProfile']);
