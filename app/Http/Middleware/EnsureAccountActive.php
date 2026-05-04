@@ -15,28 +15,18 @@ class EnsureAccountActive
             return $next($request);
         }
 
-        // Les admins et consultants ne sont jamais bloqués
-        if (in_array($user->role, ['admin', 'consultant_externe'])) {
+        // Le check pending ne concerne QUE les entreprises
+        if ($user->role !== 'entreprise') {
             return $next($request);
         }
 
-        // Vérifier le statut sur l'user directement
-        if (isset($user->status) && $user->status === 'pending') {
+        // Pour les entreprises, vérifier le statut sur le modèle Entreprise
+        $entreprise = $user->entreprise;
+        if ($entreprise && $entreprise->status === 'pending') {
             return response()->json([
                 'message' => 'Votre compte est en cours de vérification. Talenteed.io vous contactera dans les plus brefs délais.',
                 'status'  => 'pending',
             ], 403);
-        }
-
-        // Pour les entreprises, vérifier aussi sur le modèle Entreprise
-        if ($user->role === 'entreprise') {
-            $entreprise = $user->entreprise;
-            if ($entreprise && $entreprise->status === 'pending') {
-                return response()->json([
-                    'message' => 'Votre compte est en cours de vérification. Talenteed.io vous contactera dans les plus brefs délais.',
-                    'status'  => 'pending',
-                ], 403);
-            }
         }
 
         return $next($request);
