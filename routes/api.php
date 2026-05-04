@@ -146,6 +146,7 @@ Route::middleware(['auth:sanctum', 'account.active'])->group(function () {
 
         // Gestion des entreprises
         Route::apiResource('entreprises', EntrepriseController::class);
+        Route::patch('/entreprises/{entreprise}/status', [EntrepriseController::class, 'updateStatus']);
         Route::get('/entreprises-referentiels', [EntrepriseController::class, 'referentiels']);
 
         // Candidatures (vue globale admin)

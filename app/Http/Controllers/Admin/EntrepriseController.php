@@ -126,6 +126,17 @@ class EntrepriseController extends Controller
         return response()->json($entreprise->fresh()->load(['user', 'activitySector', 'plan']));
     }
 
+    public function updateStatus(Request $request, Entreprise $entreprise)
+    {
+        $request->validate([
+            'status' => 'required|string|in:active,pending',
+        ]);
+
+        $entreprise->update(['status' => $request->status]);
+
+        return response()->json($entreprise->fresh()->load(['user', 'activitySector', 'plan']));
+    }
+
     public function destroy(Entreprise $entreprise)
     {
         if ($entreprise->logo) {
