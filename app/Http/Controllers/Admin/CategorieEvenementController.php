@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\CategorieEvenement;
 use App\Models\Temoignage;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
@@ -182,7 +181,6 @@ class CategorieEvenementController extends Controller
             if ($request->hasFile($field)) {
                 $file = $request->file($field);
                 $errCode = $file->getError();
-                Log::debug("Upload [$field]: error_code=$errCode, size={$file->getSize()}, mime={$file->getMimeType()}, original={$file->getClientOriginalName()}");
                 if ($errCode !== UPLOAD_ERR_OK) {
                     $errors[$field] = ['Le fichier ' . $field . ' est trop volumineux ou n\'a pas pu être uploadé. (code: ' . $errCode . ')'];
                 }
@@ -192,7 +190,6 @@ class CategorieEvenementController extends Controller
         if ($request->hasFile('galerie')) {
             foreach ($request->file('galerie') as $i => $file) {
                 $errCode = $file->getError();
-                Log::debug("Upload [galerie.$i]: error_code=$errCode, size={$file->getSize()}, mime={$file->getMimeType()}");
                 if ($errCode !== UPLOAD_ERR_OK) {
                     $errors["galerie.$i"] = ['Le fichier galerie[' . $i . '] est trop volumineux ou n\'a pas pu être uploadé. (code: ' . $errCode . ')'];
                 }
