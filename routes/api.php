@@ -78,6 +78,7 @@ Route::prefix('public')->group(function () {
     Route::get('/offres/{offre}',                             [PublicController::class, 'offreDetail']);
     Route::post('/callback',                                  [\App\Http\Controllers\Public\ContactController::class, 'callback']);
     Route::get('/entreprises/{entreprise}',                   [PublicController::class, 'entrepriseDetail']);
+    Route::post('/signaler-bug',                              [\App\Http\Controllers\BugReportController::class, 'store']);
     Route::get('/referentiels',                               [PublicController::class, 'referentiels']);
     
     // Routes ATS Registration (Africa Talent Summit)
