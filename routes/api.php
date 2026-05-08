@@ -137,6 +137,9 @@ Route::middleware(['auth:sanctum', 'account.active'])->group(function () {
         // Offres d'emploi
         Route::apiResource('offres', OffreController::class)->names('admin.offres');
         Route::get('/offres-referentiels', [OffreController::class, 'referentiels']);
+        Route::post('/offres/{offre}/archive', [OffreController::class, 'archive']);
+        Route::post('/offres/{offre}/unarchive', [OffreController::class, 'unarchive']);
+        Route::post('/offres/archive-all', [OffreController::class, 'archiveAll']);
 
         // Événements
         Route::apiResource('categorie-evenements', CategorieEvenementController::class);
@@ -243,6 +246,9 @@ Route::middleware(['auth:sanctum', 'account.active'])->group(function () {
         // Offres d'emploi (F-01)
         Route::apiResource('offres', EntrepriseOffreController::class)->names('entreprise.offres');
         Route::get('/offres-referentiels', [EntrepriseOffreController::class, 'referentiels']);
+        Route::get('/offres-archived', [EntrepriseOffreController::class, 'archived']);
+        Route::post('/offres/{offre}/archive', [EntrepriseOffreController::class, 'archive']);
+        Route::post('/offres/{offre}/unarchive', [EntrepriseOffreController::class, 'unarchive']);
 
         // Candidatures reçues (F-02)
         Route::get('/candidatures', [EntrepriseCandidatureController::class, 'index']);
