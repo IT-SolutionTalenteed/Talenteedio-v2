@@ -25,6 +25,7 @@ class OffreController extends Controller
     public function index(Request $request)
     {
         $offres = Offre::with(['entreprise', 'jobContracts', 'jobModes', 'skills'])
+            ->notArchived() // Filtrer les offres archivées
             ->orderByDesc('created_at')
             ->paginate(20);
 
@@ -33,6 +34,11 @@ class OffreController extends Controller
 
     public function show(Offre $offre)
     {
+        // Empêcher l'accès aux offres archivées
+        if ($offre->isArchived()) {
+            abort(404, 'Cette offre n\'est plus disponible.');
+        }
+
         return response()->json(
             $offre->load(['entreprise', 'jobContracts', 'jobModes', 'skills', 'studyLevels', 'experiences'])
         );
@@ -43,6 +49,11 @@ class OffreController extends Controller
      */
     public function postuler(Request $request, Offre $offre)
     {
+        // Empêcher de postuler à une offre archivée
+        if ($offre->isArchived()) {
+            return response()->json(['message' => 'Cette offre n\'est plus disponible.'], 404);
+        }
+
         $request->validate([
             'cv'      => 'required|file|mimes:pdf,doc,docx|max:5120',
             'message' => 'nullable|string|max:1000',
@@ -144,6 +155,11 @@ class OffreController extends Controller
      */
     public function matchWithJob(Request $request, Offre $offre)
     {
+        // Empêcher le matching avec une offre archivée
+        if ($offre->isArchived()) {
+            return response()->json(['message' => 'Cette offre n\'est plus disponible.'], 404);
+        }
+
         $talent = auth()->user();
         
         // Vérifier si un matching existe déjà pour ce talent et cette offre

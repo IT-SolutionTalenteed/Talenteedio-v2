@@ -14,8 +14,16 @@ class OffreController extends Controller
     {
         $perPage = min((int) $request->get('per_page', 25), 100);
         $search  = trim($request->get('search', ''));
+        $showArchived = $request->boolean('archived', false);
 
         $query = Offre::with($this->relations)->orderBy('created_at', 'desc');
+
+        // Filtrer selon le statut d'archivage
+        if ($showArchived) {
+            $query->archived();
+        } else {
+            $query->notArchived();
+        }
 
         if ($search !== '') {
             $query->where(function ($q) use ($search) {
@@ -158,5 +166,49 @@ class OffreController extends Controller
         $offre->studyLevels()->sync($data['study_level_ids'] ?? []);
         $offre->experiences()->sync($data['experience_ids'] ?? []);
         $offre->languages()->sync($data['language_ids'] ?? []);
+    }
+
+    public function archive(Offre $offre)
+    {
+        if ($offre->isArchived()) {
+            return response()->json(['message' => 'Cette offre est déjà archivée.'], 400);
+        }
+
+        $offre->archive();
+
+        return response()->json([
+            'message' => 'Offre archivée avec succès.',
+            'offre' => $offre->load($this->relations)
+        ]);
+    }
+
+    public function unarchive(Offre $offre)
+    {
+        if (!$offre->isArchived()) {
+            return response()->json(['message' => 'Cette offre n\'est pas archivée.'], 400);
+        }
+
+        $offre->unarchive();
+
+        return response()->json([
+            'message' => 'Offre désarchivée avec succès.',
+            'offre' => $offre->load($this->relations)
+        ]);
+    }
+
+    public function archiveAll()
+    {
+        $count = Offre::notArchived()->count();
+
+        if ($count === 0) {
+            return response()->json(['message' => 'Aucune offre à archiver.'], 200);
+        }
+
+        Offre::notArchived()->update(['archived_at' => now()]);
+
+        return response()->json([
+            'message' => "{$count} offre(s) archivée(s) avec succès.",
+            'count' => $count
+        ]);
     }
 }

@@ -27,11 +27,59 @@ class OffreController extends Controller
         $entreprise = $this->getEntreprise();
 
         $offres = Offre::where('entreprise_id', $entreprise->id)
+            ->notArchived() // Filtrer les offres non-archivées par défaut
             ->with(['jobContracts', 'jobModes', 'skills', 'studyLevels', 'experiences', 'languages'])
             ->orderByDesc('created_at')
             ->get();
 
         return response()->json($offres);
+    }
+
+    public function archived()
+    {
+        $entreprise = $this->getEntreprise();
+
+        $offres = Offre::where('entreprise_id', $entreprise->id)
+            ->archived() // Récupérer uniquement les offres archivées
+            ->with(['jobContracts', 'jobModes', 'skills', 'studyLevels', 'experiences', 'languages'])
+            ->orderByDesc('archived_at')
+            ->get();
+
+        return response()->json($offres);
+    }
+
+    public function archive(Offre $offre)
+    {
+        $entreprise = $this->getEntreprise();
+        abort_if($offre->entreprise_id !== $entreprise->id, 403);
+
+        if ($offre->isArchived()) {
+            return response()->json(['message' => 'Cette offre est déjà archivée.'], 400);
+        }
+
+        $offre->archive();
+
+        return response()->json([
+            'message' => 'Offre archivée avec succès.',
+            'offre' => $offre
+        ]);
+    }
+
+    public function unarchive(Offre $offre)
+    {
+        $entreprise = $this->getEntreprise();
+        abort_if($offre->entreprise_id !== $entreprise->id, 403);
+
+        if (!$offre->isArchived()) {
+            return response()->json(['message' => 'Cette offre n\'est pas archivée.'], 400);
+        }
+
+        $offre->unarchive();
+
+        return response()->json([
+            'message' => 'Offre désarchivée avec succès.',
+            'offre' => $offre
+        ]);
     }
 
     public function referentiels()
