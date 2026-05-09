@@ -13,6 +13,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 #[Fillable([
     'name', 'first_name', 'last_name', 'email', 'password', 'role', 'is_suspended', 'is_banned',
+    // Statut compte (flux ATS inscription)
+    'status', 'email_verified_at',
     // Profil talent étendu (H-02)
     'civilite', 'titre_poste', 'telephone', 'date_naissance', 'nationalite',
     'ville', 'pays', 'disponibilite', 'mobilite', 'source_provenance', 'ref_ancien_crm',
@@ -26,6 +28,8 @@ use Laravel\Sanctum\HasApiTokens;
     'google_id', 'avatar_google', 'auth_provider',
     // Préférences matching (matching CV)
     'pays_souhaites', 'villes_souhaitees', 'secteur_souhaite_id',
+    // ATS registration
+    'cv_path', 'matching_completed',
 ])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
