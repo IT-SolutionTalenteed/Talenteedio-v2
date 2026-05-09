@@ -21,7 +21,7 @@ class ATSRegistrationController extends Controller
     public function registerTalent(Request $request)
     {
         $validated = $request->validate([
-            'first_name' => 'required|string|max:255',
+            'first_name' => 'nullable|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
             'secteur_souhaite_id' => 'required|integer|exists:activity_sectors,id',
@@ -44,8 +44,8 @@ class ATSRegistrationController extends Controller
 
             // Créer l'utilisateur avec status = 'pending' et password = NULL
             $user = User::create([
-                'name' => trim($validated['first_name'] . ' ' . $validated['last_name']),
-                'first_name' => $validated['first_name'],
+                'name' => trim(($validated['first_name'] ?? '') . ' ' . $validated['last_name']),
+                'first_name' => $validated['first_name'] ?? null,
                 'last_name' => $validated['last_name'],
                 'email' => $validated['email'],
                 'role' => 'talent',
