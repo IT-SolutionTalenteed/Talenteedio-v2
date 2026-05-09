@@ -36,6 +36,7 @@ use App\Http\Controllers\Talent\FavoriController as TalentFavoriController;
 use App\Http\Controllers\Talent\EvenementController as TalentEvenementController;
 use App\Http\Controllers\Talent\EntretienController as TalentEntretienController;
 use App\Http\Controllers\Talent\FeedbackController as TalentFeedbackController;
+use App\Http\Controllers\Talent\AccountController as TalentAccountController;
 use App\Http\Controllers\Entreprise\DashboardController as EntrepriseDashboardController;
 use App\Http\Controllers\Entreprise\OffreController as EntrepriseOffreController;
 use App\Http\Controllers\Entreprise\CandidatureController as EntrepriseCandidatureController;
@@ -237,6 +238,9 @@ Route::middleware(['auth:sanctum', 'account.active'])->group(function () {
         Route::post('/entretiens/{entretien}/feedback', [TalentFeedbackController::class, 'store']);
         Route::put('/feedbacks/{feedback}', [TalentFeedbackController::class, 'update']);
         Route::delete('/feedbacks/{feedback}', [TalentFeedbackController::class, 'destroy']);
+
+        // Suppression de compte
+        Route::delete('/account', [TalentAccountController::class, 'deleteAccount']);
     });
     
     Route::middleware('role:entreprise')->prefix('entreprise')->group(function () {
