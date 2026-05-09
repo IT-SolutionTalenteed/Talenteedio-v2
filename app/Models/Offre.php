@@ -12,6 +12,7 @@ class Offre extends Model
         'entreprise_id', 'activity_sector_id', 'titre', 'mission', 'client', 'profil_recherche', 'a_propos',
         'liste_offre', 'description', 'date_mise_en_ligne', 'date_limite',
         'salaire', 'salaire_min', 'salaire_max', 'fourchette_salariale', 'localisation', 'nombre_candidatures', 'image',
+        'archived_at',
     ];
 
     protected $appends = ['image_url'];
@@ -25,6 +26,7 @@ class Offre extends Model
     protected $casts = [
         'date_mise_en_ligne' => 'date',
         'date_limite'        => 'date',
+        'archived_at'        => 'datetime',
         'salaire'            => 'decimal:2',
         'salaire_min'        => 'decimal:2',
         'salaire_max'        => 'decimal:2',
@@ -74,5 +76,34 @@ class Offre extends Model
     public function languages()
     {
         return $this->belongsToMany(Language::class, 'offre_language');
+    }
+
+    // Scopes pour filtrer les offres archivées/non-archivées
+    public function scopeNotArchived($query)
+    {
+        return $query->whereNull('archived_at');
+    }
+
+    public function scopeArchived($query)
+    {
+        return $query->whereNotNull('archived_at');
+    }
+
+    // Méthodes d'archivage
+    public function archive()
+    {
+        $this->archived_at = now();
+        $this->save();
+    }
+
+    public function unarchive()
+    {
+        $this->archived_at = null;
+        $this->save();
+    }
+
+    public function isArchived(): bool
+    {
+        return $this->archived_at !== null;
     }
 }

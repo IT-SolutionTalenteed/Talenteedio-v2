@@ -37,7 +37,7 @@ class PublicController extends Controller
             'entreprise:id,nom,logo',
             'jobContracts:id,name',
             'studyLevels:id,name',
-        ]);
+        ])->notArchived(); // Filtrer les offres archivées
 
         // Recherche par mot-clé (titre ou mission)
         if ($request->filled('search')) {
@@ -96,7 +96,9 @@ class PublicController extends Controller
     public function entreprises()
     {
         $entreprises = Entreprise::with('activitySector:id,name')
-            ->withCount(['offres', 'articles', 'evenements'])
+            ->withCount(['offres' => function ($query) {
+                $query->notArchived(); // Compter uniquement les offres non-archivées
+            }, 'articles', 'evenements'])
             ->get(['id', 'nom', 'logo', 'description', 'ville', 'pays', 'activity_sector_id']);
 
         return response()->json($entreprises);
@@ -201,6 +203,7 @@ class PublicController extends Controller
     public function offresHome()
     {
         $offres = Offre::with('entreprise:id,nom,logo')
+            ->notArchived() // Filtrer les offres archivées
             ->latest()
             ->take(6)
             ->get(['id', 'titre', 'localisation', 'mission', 'date_limite', 'entreprise_id', 'image']);
@@ -231,6 +234,11 @@ class PublicController extends Controller
      */
     public function offreDetail(Offre $offre): JsonResponse
     {
+        // Empêcher l'accès aux offres archivées
+        if ($offre->isArchived()) {
+            return response()->json(['message' => 'Cette offre n\'est plus disponible.'], 404);
+        }
+
         $offre->load([
             'entreprise:id,nom,logo,description,site_web,ville,pays,activity_sector_id',
             'entreprise.activitySector:id,name',
@@ -254,6 +262,7 @@ class PublicController extends Controller
 
         $offres = Offre::with(['jobContracts:id,name', 'jobModes:id,name', 'skills:id,name', 'experiences:id,name', 'studyLevels:id,name'])
             ->where('entreprise_id', $entreprise->id)
+            ->notArchived() // Filtrer les offres archivées
             ->latest()
             ->get(['id', 'titre', 'localisation', 'mission', 'date_limite', 'entreprise_id', 'profil_recherche', 'nombre_candidatures']);
 

@@ -78,6 +78,7 @@ Route::prefix('public')->group(function () {
     Route::get('/offres/{offre}',                             [PublicController::class, 'offreDetail']);
     Route::post('/callback',                                  [\App\Http\Controllers\Public\ContactController::class, 'callback']);
     Route::get('/entreprises/{entreprise}',                   [PublicController::class, 'entrepriseDetail']);
+    Route::post('/signaler-bug',                              [\App\Http\Controllers\BugReportController::class, 'store']);
     Route::get('/referentiels',                               [PublicController::class, 'referentiels']);
     
     // Routes ATS Registration (Africa Talent Summit)
@@ -136,6 +137,9 @@ Route::middleware(['auth:sanctum', 'account.active'])->group(function () {
         // Offres d'emploi
         Route::apiResource('offres', OffreController::class)->names('admin.offres');
         Route::get('/offres-referentiels', [OffreController::class, 'referentiels']);
+        Route::post('/offres/{offre}/archive', [OffreController::class, 'archive']);
+        Route::post('/offres/{offre}/unarchive', [OffreController::class, 'unarchive']);
+        Route::post('/offres/archive-all', [OffreController::class, 'archiveAll']);
 
         // Événements
         Route::apiResource('categorie-evenements', CategorieEvenementController::class);
@@ -242,6 +246,9 @@ Route::middleware(['auth:sanctum', 'account.active'])->group(function () {
         // Offres d'emploi (F-01)
         Route::apiResource('offres', EntrepriseOffreController::class)->names('entreprise.offres');
         Route::get('/offres-referentiels', [EntrepriseOffreController::class, 'referentiels']);
+        Route::get('/offres-archived', [EntrepriseOffreController::class, 'archived']);
+        Route::post('/offres/{offre}/archive', [EntrepriseOffreController::class, 'archive']);
+        Route::post('/offres/{offre}/unarchive', [EntrepriseOffreController::class, 'unarchive']);
 
         // Candidatures reçues (F-02)
         Route::get('/candidatures', [EntrepriseCandidatureController::class, 'index']);
