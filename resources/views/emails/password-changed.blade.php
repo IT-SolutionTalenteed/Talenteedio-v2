@@ -1,7 +1,7 @@
 @extends('emails.layout')
 
-@section('title', 'Mot de passe modifié')
-@section('header_badge', 'Sécurité du compte')
+@section('title', __('emails.password_changed.title'))
+@section('header_badge', __('emails.password_changed.badge'))
 
 @section('hero')
   <div style="text-align:center;">
@@ -10,44 +10,42 @@
         <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/>
       </svg>
     </div>
-    <div class="email-hero-title">Mot de passe modifié avec succès</div>
-    <div class="email-hero-subtitle">La sécurité de votre compte a été mise à jour.</div>
+    <div class="email-hero-title">{{ __('emails.password_changed.hero_title') }}</div>
+    <div class="email-hero-subtitle">{{ __('emails.password_changed.hero_subtitle') }}</div>
   </div>
 @endsection
 
 @section('content')
-  <p class="email-greeting">Bonjour {{ $user->name }},</p>
+  <p class="email-greeting">{{ __('emails.password_changed.greeting', ['name' => $user->name]) }}</p>
 
   <p class="email-text">
-    Votre mot de passe <strong style="color:#040a5d;">Talenteed</strong> a bien été modifié le {{ now()->format('d/m/Y à H:i') }}.
+    {!! __('emails.password_changed.intro', ['date' => now()->format('d/m/Y à H:i')]) !!}
   </p>
 
   <div class="info-card" style="border-left-color: #22c55e;">
-    <div class="info-card-title" style="color:#15803d;">Détails de la modification</div>
+    <div class="info-card-title" style="color:#15803d;">{{ __('emails.password_changed.info_title') }}</div>
     <div class="info-row">
-      <span class="info-label">Compte</span>
+      <span class="info-label">{{ __('emails.password_changed.info_account') }}</span>
       <span class="info-value">{{ $user->email }}</span>
     </div>
     <div class="info-row">
-      <span class="info-label">Date</span>
+      <span class="info-label">{{ __('emails.password_changed.info_date') }}</span>
       <span class="info-value">{{ now()->format('d/m/Y à H:i') }}</span>
     </div>
     <div class="info-row">
-      <span class="info-label">Statut</span>
+      <span class="info-label">{{ __('emails.password_changed.info_status') }}</span>
       <span class="info-value">
-        <span class="status-badge status-badge--success">Mot de passe mis à jour</span>
+        <span class="status-badge status-badge--success">{{ __('emails.password_changed.info_status_value') }}</span>
       </span>
     </div>
   </div>
 
   <p class="email-text">
-    Si vous n'êtes pas à l'origine de cette modification, contactez-nous immédiatement à
-    <a href="mailto:contact@talenteed.io" style="color:#192bc2;">contact@talenteed.io</a>
-    afin de sécuriser votre compte.
+    {{ __('emails.password_changed.if_not_you') }}
   </p>
 
   <hr class="email-divider">
   <p class="email-text" style="font-size:13px; color:#94a3b8; text-align:center;">
-    Une question ? Contactez-nous à <a href="mailto:contact@talenteed.io" style="color:#192bc2;">contact@talenteed.io</a>
+    {{ __('emails.password_changed.contact') }}
   </p>
 @endsection
