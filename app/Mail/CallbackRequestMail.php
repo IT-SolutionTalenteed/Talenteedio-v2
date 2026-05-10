@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Mail\Concerns\LocalizesMail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
@@ -10,18 +11,21 @@ use Illuminate\Queue\SerializesModels;
 
 class CallbackRequestMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, LocalizesMail;
 
     public function __construct(
         public string $name,
         public string $email,
         public string $phone,
-        public string $message = ''
-    ) {}
+        public string $userMessage = '',
+        ?string $locale = null
+    ) {
+        $this->useLocale($locale);
+    }
 
     public function envelope(): Envelope
     {
-        return new Envelope(subject: '[Talenteed] Demande de rappel — ' . $this->name);
+        return new Envelope(subject: __('emails.callback_request.subject') . ' — ' . $this->name);
     }
 
     public function content(): Content
