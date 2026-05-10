@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\WelcomeTalentMail;
 use App\Models\User;
+use App\Support\LocaleResolver;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
@@ -18,11 +19,15 @@ class SocialiteController extends Controller
     public function redirectToGoogle()
     {
         $type = request()->query('type', 'login'); // 'register' ou 'login'
+        $locale = LocaleResolver::resolve(request());
         
         return Socialite::driver('google')
             ->stateless()
             ->with([
-                'state' => base64_encode(json_encode(['type' => $type])),
+                'state' => base64_encode(json_encode([
+                    'type' => $type,
+                    'locale' => $locale,
+                ])),
                 'prompt' => 'select_account consent', // Force le choix du compte et la confirmation
                 'access_type' => 'offline', // Optionnel : pour obtenir un refresh token
             ])
@@ -40,6 +45,7 @@ class SocialiteController extends Controller
             // Récupérer le type (register ou login) depuis le state
             $state = json_decode(base64_decode(request()->query('state')), true);
             $type = $state['type'] ?? 'login';
+            $locale = LocaleResolver::resolve(request(), preferred: $state['locale'] ?? null);
             
             // Récupérer les informations de l'utilisateur depuis Google
             $googleUser = Socialite::driver('google')->stateless()->user();
@@ -58,9 +64,9 @@ class SocialiteController extends Controller
             $existingUser = User::where('email', $email)->first();
             
             if ($type === 'register') {
-                return $this->handleRegister($existingUser, $email, $googleId, $name, $avatar, $frontendBase);
+                return $this->handleRegister($existingUser, $email, $googleId, $name, $avatar, $frontendBase, $locale);
             } else {
-                return $this->handleLogin($existingUser, $email, $googleId, $frontendBase);
+                return $this->handleLogin($existingUser, $email, $googleId, $frontendBase, $locale);
             }
             
         } catch (\Exception $e) {
@@ -74,7 +80,7 @@ class SocialiteController extends Controller
     /**
      * Gère l'inscription via Google
      */
-    private function handleRegister($existingUser, $email, $googleId, $name, $avatar, $frontendBase)
+    private function handleRegister($existingUser, $email, $googleId, $name, $avatar, $frontendBase, string $locale)
     {
         $frontendBase = rtrim($frontendBase, '/');
         // Si l'email existe déjà (compte local ou Google)
@@ -91,6 +97,7 @@ class SocialiteController extends Controller
         $user = User::create([
             'name'           => $name,
             'email'          => $email,
+            'locale'         => $locale,
             'google_id'      => $googleId,
             'auth_provider'  => 'google',
             'avatar_google'  => $avatar,
@@ -117,7 +124,7 @@ class SocialiteController extends Controller
     /**
      * Gère la connexion via Google
      */
-    private function handleLogin($existingUser, $email, $googleId, $frontendBase)
+    private function handleLogin($existingUser, $email, $googleId, $frontendBase, string $locale)
     {
         $frontendBase = rtrim($frontendBase, '/');
         // Si l'utilisateur n'existe pas
@@ -136,6 +143,10 @@ class SocialiteController extends Controller
         if ($existingUser->google_id !== $googleId) {
             return redirect("{$frontendBase}/auth/google/callback?type=login&error=" . 
                 urlencode('Erreur d\'authentification. Veuillez réessayer.'));
+        }
+
+        if ($existingUser->locale !== $locale) {
+            $existingUser->forceFill(['locale' => $locale])->saveQuietly();
         }
         
         // Connexion réussie
