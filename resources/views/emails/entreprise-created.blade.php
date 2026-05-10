@@ -1,7 +1,7 @@
 @extends('emails.layout')
 
-@section('title', 'Vos identifiants Talenteed')
-@section('header_badge', 'Compte entreprise créé')
+@section('title', __('emails.entreprise_created.title'))
+@section('header_badge', __('emails.entreprise_created.badge'))
 
 @section('hero')
   <div style="text-align:center;">
@@ -10,42 +10,42 @@
         <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
       </svg>
     </div>
-    <div class="email-hero-title">Bienvenue sur Talenteed, {{ $nomEntreprise }} !</div>
-    <div class="email-hero-subtitle">Votre espace recruteur est prêt à l'emploi.</div>
+    <div class="email-hero-title">{{ __('emails.entreprise_created.hero_title', ['company' => $nomEntreprise]) }}</div>
+    <div class="email-hero-subtitle">{{ __('emails.entreprise_created.hero_subtitle') }}</div>
   </div>
 @endsection
 
 @section('content')
-  <p class="email-greeting">Bonjour,</p>
+  <p class="email-greeting">{{ __('emails.entreprise_created.greeting') }}</p>
   <p class="email-text">
-    Un compte entreprise vient d'être créé pour <strong style="color:#040a5d;">{{ $nomEntreprise }}</strong> sur la plateforme Talenteed. Vous pouvez dès maintenant accéder à votre espace recruteur.
+    {!! __('emails.entreprise_created.intro', ['company' => $nomEntreprise]) !!}
   </p>
 
   <div class="info-card">
-    <div class="info-card-title">Vos identifiants de connexion</div>
+    <div class="info-card-title">{{ __('emails.entreprise_created.info_title') }}</div>
     <div class="info-row">
-      <span class="info-label">Email</span>
+      <span class="info-label">{{ __('emails.entreprise_created.info_email') }}</span>
       <span class="info-value">{{ $email }}</span>
     </div>
     <div class="info-row">
-      <span class="info-label">Mot de passe</span>
+      <span class="info-label">{{ __('emails.entreprise_created.info_password') }}</span>
       <span class="info-value" style="font-family: monospace; font-size: 15px; letter-spacing: 1px; color: #040a5d; font-weight: 700;">{{ $password }}</span>
     </div>
   </div>
 
   <div class="highlight-box">
-    <div class="highlight-box-label">Sécurité</div>
+    <div class="highlight-box-label">{{ __('emails.entreprise_created.security_label') }}</div>
     <div style="font-size: 14px; color: #475569; margin-top: 4px;">
-      Nous vous recommandons de <strong>changer votre mot de passe</strong> dès votre première connexion.
+      {!! __('emails.entreprise_created.security_text') !!}
     </div>
   </div>
 
   <div class="email-cta">
-    <a href="https://talenteed.io/login" class="btn-primary">Accéder à mon espace recruteur</a>
+    <a href="https://talenteed.io/login" class="btn-primary">{{ __('emails.entreprise_created.cta') }}</a>
   </div>
 
   <hr class="email-divider">
   <p class="email-text" style="font-size: 13px; color: #94a3b8; text-align: center;">
-    Besoin d'aide ? <a href="mailto:contact@talenteed.io" style="color: #192bc2;">contact@talenteed.io</a>
+    {{ __('emails.entreprise_created.contact') }}
   </p>
 @endsection
