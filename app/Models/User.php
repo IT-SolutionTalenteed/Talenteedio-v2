@@ -12,7 +12,7 @@ use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 #[Fillable([
-    'name', 'first_name', 'last_name', 'email', 'password', 'role', 'is_suspended', 'is_banned',
+    'name', 'first_name', 'last_name', 'email', 'locale', 'password', 'role', 'is_suspended', 'is_banned',
     // Statut compte (flux ATS inscription)
     'status', 'email_verified_at',
     // Profil talent étendu (H-02)
