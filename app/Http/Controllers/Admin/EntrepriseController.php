@@ -123,7 +123,7 @@ class EntrepriseController extends Controller
                 'email' => $request->email,
             ];
             if ($request->has('status')) {
-                $userData['status'] = $request->status === 'suspended' ? 'inactive' : $request->status;
+                $userData['is_suspended'] = $request->status === 'suspended';
             }
             $entreprise->user->update($userData);
         }
@@ -140,7 +140,7 @@ class EntrepriseController extends Controller
         $entreprise->update(['status' => $request->status]);
 
         if ($entreprise->user) {
-            $entreprise->user->update(['status' => $request->status === 'suspended' ? 'inactive' : $request->status]);
+            $entreprise->user->update(['is_suspended' => $request->status === 'suspended']);
         }
 
         return response()->json($entreprise->fresh()->load(['user', 'activitySector', 'plan']));
