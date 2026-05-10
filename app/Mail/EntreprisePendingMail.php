@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Mail\Concerns\LocalizesMail;
 use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
@@ -11,13 +12,16 @@ use Illuminate\Queue\SerializesModels;
 
 class EntreprisePendingMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, LocalizesMail;
 
-    public function __construct(public User $user) {}
+    public function __construct(public User $user)
+    {
+        $this->useUserLocale($user);
+    }
 
     public function envelope(): Envelope
     {
-        return new Envelope(subject: '[Talenteed] Votre demande est en cours de vérification');
+        return new Envelope(subject: __('emails.entreprise_pending.subject'));
     }
 
     public function content(): Content

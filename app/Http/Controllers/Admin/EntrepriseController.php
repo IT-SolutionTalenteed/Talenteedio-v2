@@ -90,6 +90,7 @@ class EntrepriseController extends Controller
             'nom'   => 'required|string|max:255',
             'email' => 'required|email|unique:users,email,' . $entreprise->user_id,
             'logo'  => 'nullable|image|max:2048',
+            'status' => 'nullable|string|in:active,pending,suspended',
         ]);
 
         $data = [
@@ -117,10 +118,14 @@ class EntrepriseController extends Controller
         $entreprise->update($data);
 
         if ($entreprise->user) {
-            $entreprise->user->update([
+            $userData = [
                 'name'  => $request->nom,
                 'email' => $request->email,
-            ]);
+            ];
+            if ($request->has('status')) {
+                $userData['status'] = $request->status === 'suspended' ? 'inactive' : $request->status;
+            }
+            $entreprise->user->update($userData);
         }
 
         return response()->json($entreprise->fresh()->load(['user', 'activitySector', 'plan']));
@@ -129,10 +134,14 @@ class EntrepriseController extends Controller
     public function updateStatus(Request $request, Entreprise $entreprise)
     {
         $request->validate([
-            'status' => 'required|string|in:active,pending',
+            'status' => 'required|string|in:active,pending,suspended',
         ]);
 
         $entreprise->update(['status' => $request->status]);
+
+        if ($entreprise->user) {
+            $entreprise->user->update(['status' => $request->status === 'suspended' ? 'inactive' : $request->status]);
+        }
 
         return response()->json($entreprise->fresh()->load(['user', 'activitySector', 'plan']));
     }
