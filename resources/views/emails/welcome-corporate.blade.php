@@ -1,7 +1,7 @@
 @extends('emails.layout')
 
-@section('title', 'Bienvenue sur Talenteed')
-@section('header_badge', 'Compte recruteur')
+@section('title', __('emails.welcome_corporate.title'))
+@section('header_badge', __('emails.welcome_corporate.badge'))
 
 @section('hero')
   <div style="text-align:center;">
@@ -10,32 +10,32 @@
         <rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
       </svg>
     </div>
-    <div class="email-hero-title">Bienvenue sur Talenteed, {{ $user->entreprise ?? $user->name }} !</div>
-    <div class="email-hero-subtitle">Votre espace recruteur est prêt. Trouvez les meilleurs talents.</div>
+    <div class="email-hero-title">{{ __('emails.welcome_corporate.hero_title', ['name' => $user->entreprise->nom ?? $user->name]) }}</div>
+    <div class="email-hero-subtitle">{{ __('emails.welcome_corporate.hero_subtitle') }}</div>
   </div>
 @endsection
 
 @section('content')
-  <p class="email-greeting">Bonjour {{ $user->name }},</p>
+  <p class="email-greeting">{{ __('emails.welcome_corporate.greeting', ['name' => $user->name]) }}</p>
   <p class="email-text">
-    Nous sommes ravis de vous accueillir sur <strong style="color:#040a5d;">Talenteed</strong>, la plateforme de recrutement événementiel qui connecte les entreprises avec les meilleurs talents.
+    {!! __('emails.welcome_corporate.intro') !!}
   </p>
 
-  <p class="email-text" style="margin-bottom: 8px; font-weight: 600; color: #040a5d;">Avec votre espace recruteur, vous pouvez :</p>
+  <p class="email-text" style="margin-bottom: 8px; font-weight: 600; color: #040a5d;">{{ __('emails.welcome_corporate.features_title') }}</p>
   <ul class="email-list">
-    <li>Publier vos offres d'emploi et recevoir des candidatures qualifiées</li>
-    <li>Participer aux événements de speed recruiting</li>
-    <li>Bénéficier du <strong>matching IA</strong> entre vos offres et les talents</li>
-    <li>Gérer vos entretiens et créneaux de 15 minutes sur les stands</li>
-    <li>Suivre vos candidatures et recruter plus rapidement</li>
+    <li>{{ __('emails.welcome_corporate.feature_1') }}</li>
+    <li>{{ __('emails.welcome_corporate.feature_2') }}</li>
+    <li>{!! __('emails.welcome_corporate.feature_3') !!}</li>
+    <li>{{ __('emails.welcome_corporate.feature_4') }}</li>
+    <li>{{ __('emails.welcome_corporate.feature_5') }}</li>
   </ul>
 
   <div class="email-cta">
-    <a href="https://talenteed.io/login" class="btn-primary">Accéder à mon espace recruteur</a>
+    <a href="https://talenteed.io/login" class="btn-primary">{{ __('emails.welcome_corporate.cta') }}</a>
   </div>
 
   <hr class="email-divider">
   <p class="email-text" style="font-size: 13px; color: #94a3b8; text-align: center;">
-    Une question ? Contactez-nous à <a href="mailto:contact@talenteed.io" style="color: #192bc2;">contact@talenteed.io</a>
+    {{ __('emails.welcome_corporate.contact') }}
   </p>
 @endsection
