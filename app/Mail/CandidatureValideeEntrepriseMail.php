@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Mail\Concerns\LocalizesMail;
 use App\Models\Candidature;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -13,7 +14,7 @@ use Illuminate\Queue\SerializesModels;
 
 class CandidatureValideeEntrepriseMail extends Mailable
 {
-    use Queueable, SerializesModels;
+    use Queueable, SerializesModels, LocalizesMail;
 
     public $candidature;
     public $matchingScore;
@@ -26,8 +27,7 @@ class CandidatureValideeEntrepriseMail extends Mailable
         $this->candidature = $candidature;
         $this->matchingScore = $matchingScore;
         
-        // Définir la locale pour cet email (français par défaut)
-        app()->setLocale('fr');
+        $this->useUserLocale($candidature->offre->entreprise->user);
     }
 
     /**
