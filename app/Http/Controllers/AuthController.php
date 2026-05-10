@@ -7,6 +7,7 @@ use App\Mail\EntreprisePendingMail;
 use App\Mail\EntrepriseInscriptionAdminMail;
 use App\Mail\PasswordChangedMail;
 use App\Models\User;
+use App\Support\LocaleResolver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -17,6 +18,8 @@ class AuthController extends Controller
 {
     public function register(Request $request)
     {
+        $locale = LocaleResolver::resolve($request);
+
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -39,6 +42,7 @@ class AuthController extends Controller
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
+            'locale' => $locale,
             'password' => Hash::make($request->password),
             'role' => $request->role,
             'auth_provider' => 'local', // Compte local
@@ -70,7 +74,7 @@ class AuthController extends Controller
             $admins      = \App\Models\User::where('role', 'admin')->get();
             foreach ($admins as $admin) {
                 try {
-                    Mail::to($admin->email)->send(new EntrepriseInscriptionAdminMail($user, $request->company_name, $adminUrl));
+                    Mail::to($admin->email)->send(new EntrepriseInscriptionAdminMail($user, $request->company_name, $adminUrl, $admin->locale));
                 } catch (\Exception $e) {
                     \Log::warning('[EntrepriseInscription] Admin mail failed: ' . $e->getMessage());
                 }
@@ -95,6 +99,7 @@ class AuthController extends Controller
                 'id'   => $user->id,
                 'name' => $user->name,
                 'email'=> $user->email,
+                'locale' => $user->locale,
                 'role' => $user->role,
             ],
         ], 201);
@@ -167,6 +172,7 @@ class AuthController extends Controller
                 'first_name' => $user->first_name,
                 'last_name'  => $user->last_name,
                 'email'      => $user->email,
+                'locale'     => $user->locale,
                 'role'       => $user->role,
             ],
         ]);
@@ -202,6 +208,7 @@ class AuthController extends Controller
                 'id'    => $user->id,
                 'name'  => $user->name,
                 'email' => $user->email,
+                'locale'=> $user->locale,
                 'role'  => $user->role,
             ],
         ]);
@@ -225,6 +232,7 @@ class AuthController extends Controller
             'first_name' => $user->first_name,
             'last_name'  => $user->last_name,
             'email'      => $user->email,
+            'locale'     => $user->locale,
             'role'       => $user->role,
             'telephone'  => $user->telephone,
             'ville'      => $user->ville,
@@ -241,6 +249,7 @@ class AuthController extends Controller
             'first_name'            => 'sometimes|nullable|string|max:100',
             'last_name'             => 'sometimes|nullable|string|max:100',
             'email'                 => 'sometimes|email|max:255|unique:users,email,' . $user->id,
+            'locale'                => 'sometimes|nullable|string|in:fr,en',
             'telephone'             => 'sometimes|nullable|string|max:30',
             'ville'                 => 'sometimes|nullable|string|max:100',
             'pays'                  => 'sometimes|nullable|string|max:100',
@@ -284,6 +293,7 @@ class AuthController extends Controller
             'first_name' => $user->first_name,
             'last_name'  => $user->last_name,
             'email'      => $user->email,
+            'locale'     => $user->locale,
             'role'       => $user->role,
             'telephone'  => $user->telephone,
             'ville'      => $user->ville,
