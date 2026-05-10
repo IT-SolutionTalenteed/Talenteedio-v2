@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Models\ActivitySector;
 use App\Models\Experience;
+use App\Support\LocaleResolver;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
@@ -20,6 +21,8 @@ class ATSRegistrationController extends Controller
      */
     public function registerTalent(Request $request)
     {
+        $locale = LocaleResolver::resolve($request);
+
         $validated = $request->validate([
             'first_name' => 'nullable|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -48,6 +51,7 @@ class ATSRegistrationController extends Controller
                 'first_name' => $validated['first_name'] ?? null,
                 'last_name' => $validated['last_name'],
                 'email' => $validated['email'],
+                'locale' => $locale,
                 'role' => 'talent',
                 'status' => 'pending',
                 'password' => null, // Sera défini lors de la création du mot de passe
@@ -84,6 +88,8 @@ class ATSRegistrationController extends Controller
      */
     public function registerCorporate(Request $request)
     {
+        $locale = LocaleResolver::resolve($request);
+
         $validated = $request->validate([
             'first_name' => 'nullable|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -102,6 +108,7 @@ class ATSRegistrationController extends Controller
                 'first_name' => $validated['first_name'] ?? null,
                 'last_name' => $validated['last_name'],
                 'email' => $validated['email'],
+                'locale' => $locale,
                 'role' => 'entreprise',
                 'status' => 'pending',
                 'password' => null,
