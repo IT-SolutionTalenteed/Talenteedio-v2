@@ -7,7 +7,6 @@ use App\Mail\EntretienReserveMail;
 use App\Models\Entretien;
 use App\Models\Entreprise;
 use App\Models\Evenement;
-use App\Models\User;
 use App\Traits\CheckPlanLimits;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -92,10 +91,8 @@ class EntretienController extends Controller
         // M-03 — Mail talent + entreprise + admin
         Mail::to($entretien->talent->email)->send(new EntretienReserveMail($entretien, 'talent'));
         Mail::to($entretien->entreprise->user->email)->send(new EntretienReserveMail($entretien, 'entreprise'));
-        $admin = User::where('role', 'admin')->first();
-        if ($admin) {
-            Mail::to($admin->email)->send(new EntretienReserveMail($entretien, 'admin'));
-        }
+        $adminEmail = config('mail.admin_email', 'contact@solutiontalenteed.com');
+        Mail::to($adminEmail)->send(new EntretienReserveMail($entretien, 'admin'));
 
         return response()->json($entretien, 201);
     }
