@@ -68,16 +68,14 @@ class AuthController extends Controller
 
             Mail::to($user->email)->send(new EntreprisePendingMail($user));
 
-            // Notifier tous les admins
+            // Notifier l'email admin unique
             $frontendUrl = rtrim(env('FRONTEND_URL', 'http://localhost:5173'), '/');
             $adminUrl    = $frontendUrl . '/admin/entreprises';
-            $admins      = \App\Models\User::where('role', 'admin')->get();
-            foreach ($admins as $admin) {
-                try {
-                    Mail::to($admin->email)->send(new EntrepriseInscriptionAdminMail($user, $request->company_name, $adminUrl, $admin->locale));
-                } catch (\Exception $e) {
-                    \Log::warning('[EntrepriseInscription] Admin mail failed: ' . $e->getMessage());
-                }
+            $adminEmail  = config('mail.admin_email', 'contact@solutiontalenteed.com');
+            try {
+                Mail::to($adminEmail)->send(new EntrepriseInscriptionAdminMail($user, $request->company_name, $adminUrl, 'fr'));
+            } catch (\Exception $e) {
+                \Log::warning('[EntrepriseInscription] Admin mail failed: ' . $e->getMessage());
             }
 
             return response()->json([
