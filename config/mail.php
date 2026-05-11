@@ -124,6 +124,6 @@ return [
     |
     */
 
-    'admin_email' => env('MAIL_ADMIN_ADDRESS', 'admin@talenteed.io'),
+    'admin_email' => env('MAIL_ADMIN_ADDRESS', 'contact@solutiontalenteed.com'),
 
 ];
