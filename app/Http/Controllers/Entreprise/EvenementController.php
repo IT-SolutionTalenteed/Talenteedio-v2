@@ -7,7 +7,6 @@ use App\Mail\EvenementDemandeMail;
 use App\Models\Entreprise;
 use App\Models\Evenement;
 use App\Models\EvenementDemande;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -58,13 +57,11 @@ class EvenementController extends Controller
             ['statut' => 'en_attente', 'message' => $request->message]
         );
 
-        // Notifier tous les admins par email
-        $admins = User::where('role', 'admin')->get();
-        foreach ($admins as $admin) {
-            Mail::to($admin->email)->send(
-                new EvenementDemandeMail($entreprise->nom, $evenement->titre, $request->message)
-            );
-        }
+        // Notifier l'email admin unique
+        $adminEmail = config('mail.admin_email', 'contact@solutiontalenteed.com');
+        Mail::to($adminEmail)->send(
+            new EvenementDemandeMail($entreprise->nom, $evenement->titre, $request->message)
+        );
 
         return response()->json($demande, 201);
     }
