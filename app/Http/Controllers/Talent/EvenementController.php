@@ -122,7 +122,14 @@ class EvenementController extends Controller
             'competences_libres'  => $request->input('competences'), // texte libre extrait du CV
         ];
 
-        $evenement->load(['entreprises.offres.skills', 'entreprises.offres.activitySector', 'entreprises.activitySector']);
+        $evenement->load([
+            'entreprises' => function ($q) {
+                $q->where('entreprises.status', '!=', 'suspended');
+            },
+            'entreprises.offres.skills',
+            'entreprises.offres.activitySector',
+            'entreprises.activitySector',
+        ]);
 
         if ($evenement->entreprises->isEmpty()) {
             return response()->json(['message' => 'Aucune entreprise participante pour cet événement.'], 422);
