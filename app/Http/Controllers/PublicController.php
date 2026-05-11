@@ -20,7 +20,13 @@ class PublicController extends Controller
      */
     public function featuredEvent()
     {
-        $event = Evenement::with(['entreprises:id,nom,logo', 'categorie:id,titre'])
+        $event = Evenement::with([
+            'entreprises' => function ($q) {
+                $q->where('entreprises.status', '!=', 'suspended')
+                  ->select('entreprises.id', 'nom', 'logo');
+            },
+            'categorie:id,titre',
+        ])
             ->where('is_featured', true)
             ->latest()
             ->first();
@@ -99,6 +105,7 @@ class PublicController extends Controller
             ->withCount(['offres' => function ($query) {
                 $query->notArchived(); // Compter uniquement les offres non-archivées
             }, 'articles', 'evenements'])
+            ->where('status', '!=', 'suspended')
             ->get(['id', 'nom', 'logo', 'description', 'ville', 'pays', 'activity_sector_id']);
 
         return response()->json($entreprises);
@@ -111,7 +118,12 @@ class PublicController extends Controller
     {
         $perPage = min((int) ($request->per_page ?? 15), 50);
 
-        $query = Evenement::with('entreprises:id,nom,logo')
+        $query = Evenement::with([
+            'entreprises' => function ($q) {
+                $q->where('entreprises.status', '!=', 'suspended')
+                  ->select('entreprises.id', 'nom', 'logo');
+            },
+        ])
             ->orderByDesc('is_featured')
             ->orderBy('date_debut');
 
@@ -141,7 +153,12 @@ class PublicController extends Controller
         $categorieEvenement->load([
             'temoignages:id,auteur,poste,avatar,contenu',
             'evenements' => function ($q) {
-                $q->with('entreprises:id,nom,logo')
+                $q->with([
+                    'entreprises' => function ($eq) {
+                        $eq->where('entreprises.status', '!=', 'suspended')
+                           ->select('entreprises.id', 'nom', 'logo');
+                    },
+                ])
                   ->orderBy('date_debut');
             },
         ]);
@@ -219,10 +236,11 @@ class PublicController extends Controller
         $evenement->load([
             'categorie:id,titre',
             'entreprises' => function ($q) {
-                $q->with([
-                    'activitySector:id,name',
-                    'offres:id,entreprise_id,titre,localisation,date_limite',
-                ])->select('entreprises.id', 'user_id', 'nom', 'logo', 'description', 'site_web', 'ville', 'pays', 'activity_sector_id');
+                $q->where('entreprises.status', '!=', 'suspended')
+                  ->with([
+                      'activitySector:id,name',
+                      'offres:id,entreprise_id,titre,localisation,date_limite',
+                  ])->select('entreprises.id', 'user_id', 'nom', 'logo', 'description', 'site_web', 'ville', 'pays', 'activity_sector_id');
             },
         ]);
 
@@ -256,6 +274,10 @@ class PublicController extends Controller
      */
     public function entrepriseDetail(Entreprise $entreprise): JsonResponse
     {
+        if ($entreprise->status === 'suspended') {
+            return response()->json(['message' => 'Entreprise introuvable.'], 404);
+        }
+
         $entreprise->load([
             'activitySector:id,name',
         ]);
