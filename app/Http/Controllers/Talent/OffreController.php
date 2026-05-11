@@ -120,7 +120,7 @@ class OffreController extends Controller
                 ->send(new \App\Mail\CandidatureEnAttenteValidationMail($candidature, $matchingScore));
 
             // Email à l'admin pour validation
-            $adminEmail = config('mail.admin_email', 'admin@talenteed.io');
+            $adminEmail = config('mail.admin_email', 'contact@solutiontalenteed.com');
             \Illuminate\Support\Facades\Mail::to($adminEmail)
                 ->send(new \App\Mail\CandidatureEnAttenteAdminMail($candidature, $matchingScore));
 
