@@ -32,7 +32,7 @@ class BugReportController extends Controller
         // Envoyer l'email à l'équipe technique
         try {
             Mail::send('emails.bug-report', $data, function ($message) use ($data) {
-                $message->to(env('MAIL_SUPPORT', 'support@talenteedio.com'))
+                $message->to(config('mail.admin_email', 'contact@solutiontalenteed.com'))
                     ->subject('🐛 Nouveau rapport de bug - ' . $data['type'])
                     ->replyTo($data['email'], $data['nom']);
             });
