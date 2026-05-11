@@ -18,7 +18,7 @@ class ContactController extends Controller
             'message' => 'nullable|string|max:2000',
         ]);
 
-        $adminEmail = config('mail.admin_email', 'admin@talenteed.io');
+        $adminEmail = config('mail.admin_email', 'contact@solutiontalenteed.com');
 
         Mail::to($adminEmail)->send(new CallbackRequestMail(
             $validated['name'],
