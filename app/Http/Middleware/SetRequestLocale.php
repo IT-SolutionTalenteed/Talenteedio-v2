@@ -12,18 +12,17 @@ class SetRequestLocale
 {
     public function handle(Request $request, Closure $next): Response
     {
-        $locale = LocaleResolver::resolve($request);
+        $user = $request->user();
+        $locale = LocaleResolver::resolve($request, $user);
 
         app()->setLocale($locale);
         Carbon::setLocale($locale);
 
-        $response = $next($request);
-
-        $user = $request->user();
-        if ($user && $user->locale !== $locale) {
+        // Avant le contrôleur (emails notamment) pour que $user->locale reflète cette requête.
+        if ($user !== null && $user->locale !== $locale) {
             $user->forceFill(['locale' => $locale])->saveQuietly();
         }
 
-        return $response;
+        return $next($request);
     }
 }
