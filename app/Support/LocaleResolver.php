@@ -9,15 +9,22 @@ class LocaleResolver
 {
     public const SUPPORTED = ['fr', 'en'];
 
+    /**
+     * Priorité : explicite (body/query/header) → préférence persistée au compte
+     * → Accept-Language. Une langue explicite (X-Locale, body, préférence compte)
+     * prime donc sur le navigateur.
+     */
     public static function resolve(?Request $request = null, ?User $user = null, ?string $preferred = null): string
     {
+        $persistedLocale = self::normalize(($user ?? $request?->user())?->locale);
+
         return self::normalize(
             $preferred
             ?? $request?->input('locale')
             ?? $request?->query('locale')
-            ?? $request?->header('X-Locale')
+            ?? self::normalize($request?->header('X-Locale'))
+            ?? $persistedLocale
             ?? $request?->getPreferredLanguage(self::SUPPORTED)
-            ?? $user?->locale
         ) ?? self::fallback();
     }
 
