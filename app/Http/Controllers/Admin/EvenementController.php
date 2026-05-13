@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\Evenement;
 use App\Models\CategorieEvenement;
 use App\Models\Entreprise;
+use App\Models\Evenement;
+use App\Services\CompressedImageStorage;
 use App\Traits\CheckPlanLimits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Storage;
 class EvenementController extends Controller
 {
     use CheckPlanLimits;
+
+    public function __construct(
+        private CompressedImageStorage $compressedImages,
+    ) {}
+
     public function index()
     {
         return response()->json(
@@ -25,29 +31,32 @@ class EvenementController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'titre'                   => 'required|string|max:255',
-            'image_mise_en_avant'     => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
-            'description'             => 'nullable|string',
+            'titre' => 'required|string|max:255',
+            'image_mise_en_avant' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
+            'description' => 'nullable|string',
             'details_supplementaires' => 'nullable|string',
-            'date_debut'              => 'required|date',
-            'date_fin'                => 'required|date|after_or_equal:date_debut',
-            'heure_debut_journee'     => 'required|date_format:H:i',
-            'heure_fin_journee'       => 'required|date_format:H:i',
-            'categorie_evenement_id'  => 'nullable|exists:categorie_evenements,id',
-            'pays'                    => 'nullable|string|max:255',
-            'ville'                   => 'nullable|string|max:255',
-            'adresse'                 => 'nullable|string|max:255',
-            'is_featured'             => 'boolean',
-            'entreprise_ids'          => 'array',
-            'entreprise_ids.*'        => 'exists:entreprises,id',
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date|after_or_equal:date_debut',
+            'heure_debut_journee' => 'required|date_format:H:i',
+            'heure_fin_journee' => 'required|date_format:H:i',
+            'categorie_evenement_id' => 'nullable|exists:categorie_evenements,id',
+            'pays' => 'nullable|string|max:255',
+            'ville' => 'nullable|string|max:255',
+            'adresse' => 'nullable|string|max:255',
+            'is_featured' => 'boolean',
+            'entreprise_ids' => 'array',
+            'entreprise_ids.*' => 'exists:entreprises,id',
         ]);
 
         if ($request->hasFile('image_mise_en_avant')) {
-            $validated['image_mise_en_avant'] = $request->file('image_mise_en_avant')
-                ->store('evenements', 'public');
+            $validated['image_mise_en_avant'] = $this->compressedImages->store(
+                $request->file('image_mise_en_avant'),
+                'evenements',
+                'hero'
+            );
         }
 
-        if (!empty($validated['is_featured'])) {
+        if (! empty($validated['is_featured'])) {
             Evenement::query()->update(['is_featured' => false]);
         }
 
@@ -77,40 +86,43 @@ class EvenementController extends Controller
         ]);
 
         $validated = $request->validate([
-            'titre'                   => 'required|string|max:255',
-            'image_mise_en_avant'     => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
-            'description'             => 'nullable|string',
+            'titre' => 'required|string|max:255',
+            'image_mise_en_avant' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
+            'description' => 'nullable|string',
             'details_supplementaires' => 'nullable|string',
-            'date_debut'              => 'required|date',
-            'date_fin'                => 'required|date|after_or_equal:date_debut',
-            'heure_debut_journee'     => 'required|date_format:H:i',
-            'heure_fin_journee'       => 'required|date_format:H:i',
-            'categorie_evenement_id'  => 'nullable|exists:categorie_evenements,id',
-            'pays'                    => 'nullable|string|max:255',
-            'ville'                   => 'nullable|string|max:255',
-            'adresse'                 => 'nullable|string|max:255',
-            'is_featured'             => 'boolean',
-            'entreprise_ids'          => 'array',
-            'entreprise_ids.*'        => 'exists:entreprises,id',
+            'date_debut' => 'required|date',
+            'date_fin' => 'required|date|after_or_equal:date_debut',
+            'heure_debut_journee' => 'required|date_format:H:i',
+            'heure_fin_journee' => 'required|date_format:H:i',
+            'categorie_evenement_id' => 'nullable|exists:categorie_evenements,id',
+            'pays' => 'nullable|string|max:255',
+            'ville' => 'nullable|string|max:255',
+            'adresse' => 'nullable|string|max:255',
+            'is_featured' => 'boolean',
+            'entreprise_ids' => 'array',
+            'entreprise_ids.*' => 'exists:entreprises,id',
         ]);
 
         if ($request->hasFile('image_mise_en_avant') && $request->file('image_mise_en_avant')->isValid()) {
             if ($evenement->image_mise_en_avant) {
                 Storage::disk('public')->delete($evenement->image_mise_en_avant);
             }
-            $validated['image_mise_en_avant'] = $request->file('image_mise_en_avant')
-                ->store('evenements', 'public');
+            $validated['image_mise_en_avant'] = $this->compressedImages->store(
+                $request->file('image_mise_en_avant'),
+                'evenements',
+                'hero'
+            );
         }
 
-        if (!empty($validated['is_featured'])) {
+        if (! empty($validated['is_featured'])) {
             Evenement::where('id', '!=', $evenement->id)->update(['is_featured' => false]);
         }
 
         $evenement->update($validated);
 
-        $newIds      = $validated['entreprise_ids'] ?? [];
+        $newIds = $validated['entreprise_ids'] ?? [];
         $existingIds = $evenement->entreprises()->pluck('entreprises.id')->toArray();
-        $addedIds    = array_diff($newIds, $existingIds);
+        $addedIds = array_diff($newIds, $existingIds);
         foreach (Entreprise::with('plan')->whereIn('id', $addedIds)->get() as $e) {
             $this->checkEvenementLimit($e);
         }
@@ -131,7 +143,7 @@ class EvenementController extends Controller
 
     public function toggleFeatured(Evenement $evenement)
     {
-        $newValue = !$evenement->is_featured;
+        $newValue = ! $evenement->is_featured;
 
         if ($newValue) {
             Evenement::where('id', '!=', $evenement->id)->update(['is_featured' => false]);
@@ -145,7 +157,7 @@ class EvenementController extends Controller
     public function referentiels()
     {
         return response()->json([
-            'categories'  => CategorieEvenement::orderBy('titre')->get(),
+            'categories' => CategorieEvenement::orderBy('titre')->get(),
             'entreprises' => Entreprise::orderBy('nom')->get(),
         ]);
     }
