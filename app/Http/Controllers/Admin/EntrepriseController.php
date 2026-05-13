@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Mail\EntrepriseCreatedMail;
 use App\Models\ActivitySector;
-use App\Models\Plan;
 use App\Models\Entreprise;
+use App\Models\Plan;
 use App\Models\User;
+use App\Services\CompressedImageStorage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
@@ -15,6 +16,10 @@ use Illuminate\Support\Str;
 
 class EntrepriseController extends Controller
 {
+    public function __construct(
+        private CompressedImageStorage $compressedImages,
+    ) {}
+
     public function index(Request $request)
     {
         $query = Entreprise::with(['user', 'activitySector', 'plan'])->orderBy('nom');
@@ -37,39 +42,43 @@ class EntrepriseController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nom'   => 'required|string|max:255',
+            'nom' => 'required|string|max:255',
             'email' => 'required|email|unique:users,email',
-            'logo'  => 'nullable|image|max:2048',
+            'logo' => 'nullable|image|max:2048',
         ]);
 
         $password = Str::random(12);
 
         $user = User::create([
-            'name'     => $request->nom,
-            'email'    => $request->email,
+            'name' => $request->nom,
+            'email' => $request->email,
             'password' => $password,
-            'role'     => 'entreprise',
-            'status'   => 'active',
+            'role' => 'entreprise',
+            'status' => 'active',
         ]);
 
         $data = [
-            'user_id'            => $user->id,
-            'nom'                => $request->nom,
-            'status'             => 'active',
-            'taille'             => $request->taille,
-            'poste_contact'      => $request->poste_contact,
-            'description'        => $request->description,
-            'site_web'           => $request->site_web,
-            'telephone'          => $request->telephone,
-            'adresse'            => $request->adresse,
-            'ville'              => $request->ville,
-            'pays'               => $request->pays,
+            'user_id' => $user->id,
+            'nom' => $request->nom,
+            'status' => 'active',
+            'taille' => $request->taille,
+            'poste_contact' => $request->poste_contact,
+            'description' => $request->description,
+            'site_web' => $request->site_web,
+            'telephone' => $request->telephone,
+            'adresse' => $request->adresse,
+            'ville' => $request->ville,
+            'pays' => $request->pays,
             'activity_sector_id' => $request->activity_sector_id ?: null,
-            'plan_id'            => $request->plan_id ?: null,
+            'plan_id' => $request->plan_id ?: null,
         ];
 
         if ($request->hasFile('logo')) {
-            $data['logo'] = $request->file('logo')->store('entreprises/logos', 'public');
+            $data['logo'] = $this->compressedImages->store(
+                $request->file('logo'),
+                'entreprises/logos',
+                'logo'
+            );
         }
 
         $entreprise = Entreprise::create($data);
@@ -87,39 +96,43 @@ class EntrepriseController extends Controller
     public function update(Request $request, Entreprise $entreprise)
     {
         $request->validate([
-            'nom'   => 'required|string|max:255',
-            'email' => 'required|email|unique:users,email,' . $entreprise->user_id,
-            'logo'  => 'nullable|image|max:2048',
+            'nom' => 'required|string|max:255',
+            'email' => 'required|email|unique:users,email,'.$entreprise->user_id,
+            'logo' => 'nullable|image|max:2048',
             'status' => 'nullable|string|in:active,pending,suspended',
         ]);
 
         $data = [
-            'nom'                => $request->nom,
-            'status'             => $request->status ?? $entreprise->status,
-            'taille'             => $request->taille,
-            'poste_contact'      => $request->poste_contact,
-            'description'        => $request->description,
-            'site_web'           => $request->site_web,
-            'telephone'          => $request->telephone,
-            'adresse'            => $request->adresse,
-            'ville'              => $request->ville,
-            'pays'               => $request->pays,
+            'nom' => $request->nom,
+            'status' => $request->status ?? $entreprise->status,
+            'taille' => $request->taille,
+            'poste_contact' => $request->poste_contact,
+            'description' => $request->description,
+            'site_web' => $request->site_web,
+            'telephone' => $request->telephone,
+            'adresse' => $request->adresse,
+            'ville' => $request->ville,
+            'pays' => $request->pays,
             'activity_sector_id' => $request->activity_sector_id ?: null,
-            'plan_id'            => $request->plan_id ?: null,
+            'plan_id' => $request->plan_id ?: null,
         ];
 
         if ($request->hasFile('logo')) {
             if ($entreprise->logo) {
                 Storage::disk('public')->delete($entreprise->logo);
             }
-            $data['logo'] = $request->file('logo')->store('entreprises/logos', 'public');
+            $data['logo'] = $this->compressedImages->store(
+                $request->file('logo'),
+                'entreprises/logos',
+                'logo'
+            );
         }
 
         $entreprise->update($data);
 
         if ($entreprise->user) {
             $userData = [
-                'name'  => $request->nom,
+                'name' => $request->nom,
                 'email' => $request->email,
             ];
             if ($request->has('status')) {
