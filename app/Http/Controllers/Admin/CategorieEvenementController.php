@@ -5,12 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CategorieEvenement;
 use App\Models\Temoignage;
+use App\Services\CompressedImageStorage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Validation\ValidationException;
 
 class CategorieEvenementController extends Controller
 {
+    public function __construct(
+        private CompressedImageStorage $compressedImages,
+    ) {}
+
     public function index()
     {
         return response()->json(CategorieEvenement::with('temoignages')->orderBy('titre')->get());
@@ -21,21 +26,25 @@ class CategorieEvenementController extends Controller
         $this->checkUploadErrors($request);
 
         $validated = $request->validate([
-            'titre'             => 'required|string|max:255',
-            'description'       => 'nullable|string',
-            'image'             => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
-            'video'             => 'nullable|file|max:512000',
-            'galerie'           => 'nullable|array',
-            'galerie.*'         => 'file|max:102400',
-            'liste_details'     => 'nullable|array',
-            'liste_details.*'   => 'string',
-            'liste_faqs'        => 'nullable|array',
+            'titre' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
+            'video' => 'nullable|file|max:512000',
+            'galerie' => 'nullable|array',
+            'galerie.*' => 'file|max:102400',
+            'liste_details' => 'nullable|array',
+            'liste_details.*' => 'string',
+            'liste_faqs' => 'nullable|array',
             'liste_faqs.*.question' => 'required_with:liste_faqs|string',
-            'liste_faqs.*.reponse'  => 'required_with:liste_faqs|string',
+            'liste_faqs.*.reponse' => 'required_with:liste_faqs|string',
         ]);
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('evenements/categories', 'public');
+            $validated['image'] = $this->compressedImages->store(
+                $request->file('image'),
+                'evenements/categories',
+                'content'
+            );
         }
         if ($request->hasFile('video')) {
             $validated['video'] = $request->file('video')->store('evenements/categories/videos', 'public');
@@ -44,7 +53,11 @@ class CategorieEvenementController extends Controller
         $galeriePaths = [];
         if ($request->hasFile('galerie')) {
             foreach ($request->file('galerie') as $file) {
-                $galeriePaths[] = $file->store('evenements/categories/galerie', 'public');
+                $galeriePaths[] = $this->compressedImages->store(
+                    $file,
+                    'evenements/categories/galerie',
+                    'gallery'
+                );
             }
         }
         $validated['galerie'] = $galeriePaths ?: null;
@@ -65,31 +78,43 @@ class CategorieEvenementController extends Controller
         $this->checkUploadErrors($request);
 
         $validated = $request->validate([
-            'titre'             => 'required|string|max:255',
-            'description'       => 'nullable|string',
-            'image'             => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
-            'video'             => 'nullable|file|max:512000',
-            'galerie'           => 'nullable|array',
-            'galerie.*'         => 'file|max:102400',
-            'liste_details'     => 'nullable|array',
-            'liste_details.*'   => 'string',
-            'liste_faqs'        => 'nullable|array',
+            'titre' => 'required|string|max:255',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
+            'video' => 'nullable|file|max:512000',
+            'galerie' => 'nullable|array',
+            'galerie.*' => 'file|max:102400',
+            'liste_details' => 'nullable|array',
+            'liste_details.*' => 'string',
+            'liste_faqs' => 'nullable|array',
             'liste_faqs.*.question' => 'required_with:liste_faqs|string',
-            'liste_faqs.*.reponse'  => 'required_with:liste_faqs|string',
+            'liste_faqs.*.reponse' => 'required_with:liste_faqs|string',
         ]);
 
         if ($request->hasFile('image')) {
-            if ($categorieEvenement->image) Storage::disk('public')->delete($categorieEvenement->image);
-            $validated['image'] = $request->file('image')->store('evenements/categories', 'public');
+            if ($categorieEvenement->image) {
+                Storage::disk('public')->delete($categorieEvenement->image);
+            }
+            $validated['image'] = $this->compressedImages->store(
+                $request->file('image'),
+                'evenements/categories',
+                'content'
+            );
         }
         if ($request->hasFile('video')) {
-            if ($categorieEvenement->video) Storage::disk('public')->delete($categorieEvenement->video);
+            if ($categorieEvenement->video) {
+                Storage::disk('public')->delete($categorieEvenement->video);
+            }
             $validated['video'] = $request->file('video')->store('evenements/categories/videos', 'public');
         }
         if ($request->hasFile('galerie')) {
             $existing = $categorieEvenement->galerie ?? [];
             foreach ($request->file('galerie') as $file) {
-                $existing[] = $file->store('evenements/categories/galerie', 'public');
+                $existing[] = $this->compressedImages->store(
+                    $file,
+                    'evenements/categories/galerie',
+                    'gallery'
+                );
             }
             $validated['galerie'] = $existing;
         }
@@ -102,8 +127,12 @@ class CategorieEvenementController extends Controller
 
     public function destroy(CategorieEvenement $categorieEvenement)
     {
-        if ($categorieEvenement->image) Storage::disk('public')->delete($categorieEvenement->image);
-        if ($categorieEvenement->video) Storage::disk('public')->delete($categorieEvenement->video);
+        if ($categorieEvenement->image) {
+            Storage::disk('public')->delete($categorieEvenement->image);
+        }
+        if ($categorieEvenement->video) {
+            Storage::disk('public')->delete($categorieEvenement->video);
+        }
         foreach ($categorieEvenement->galerie ?? [] as $path) {
             Storage::disk('public')->delete($path);
         }
@@ -116,7 +145,7 @@ class CategorieEvenementController extends Controller
     {
         $path = $request->validate(['path' => 'required|string'])['path'];
         Storage::disk('public')->delete($path);
-        $galerie = array_values(array_filter($categorieEvenement->galerie ?? [], fn($p) => $p !== $path));
+        $galerie = array_values(array_filter($categorieEvenement->galerie ?? [], fn ($p) => $p !== $path));
         $categorieEvenement->update(['galerie' => $galerie ?: null]);
 
         return response()->json($categorieEvenement);
@@ -133,6 +162,7 @@ class CategorieEvenementController extends Controller
         $temoignagesData = $request->input('temoignages', []);
         if (empty($temoignagesData)) {
             $categorie->temoignages()->sync([]);
+
             return;
         }
 
@@ -140,30 +170,42 @@ class CategorieEvenementController extends Controller
         $ids = [];
 
         foreach ($temoignagesData as $i => $data) {
-            $auteur  = trim($data['auteur'] ?? '');
+            $auteur = trim($data['auteur'] ?? '');
             $contenu = trim($data['contenu'] ?? '');
-            if (!$auteur || !$contenu) continue;
+            if (! $auteur || ! $contenu) {
+                continue;
+            }
 
-            $tem = !empty($data['id']) ? Temoignage::find((int) $data['id']) : null;
+            $tem = ! empty($data['id']) ? Temoignage::find((int) $data['id']) : null;
 
             if ($tem) {
                 $tem->auteur = $auteur;
-                $tem->poste  = trim($data['poste'] ?? '') ?: null;
+                $tem->poste = trim($data['poste'] ?? '') ?: null;
                 $tem->contenu = $contenu;
-                if (!empty($avatarFiles[$i])) {
-                    if ($tem->avatar) Storage::disk('public')->delete($tem->avatar);
-                    $tem->avatar = $avatarFiles[$i]->store('evenements/temoignages', 'public');
+                if (! empty($avatarFiles[$i])) {
+                    if ($tem->avatar) {
+                        Storage::disk('public')->delete($tem->avatar);
+                    }
+                    $tem->avatar = $this->compressedImages->store(
+                        $avatarFiles[$i],
+                        'evenements/temoignages',
+                        'avatar'
+                    );
                 }
                 $tem->save();
             } else {
-                $avatarPath = !empty($avatarFiles[$i])
-                    ? $avatarFiles[$i]->store('evenements/temoignages', 'public')
+                $avatarPath = ! empty($avatarFiles[$i])
+                    ? $this->compressedImages->store(
+                        $avatarFiles[$i],
+                        'evenements/temoignages',
+                        'avatar'
+                    )
                     : null;
                 $tem = Temoignage::create([
-                    'auteur'  => $auteur,
-                    'poste'   => trim($data['poste'] ?? '') ?: null,
+                    'auteur' => $auteur,
+                    'poste' => trim($data['poste'] ?? '') ?: null,
                     'contenu' => $contenu,
-                    'avatar'  => $avatarPath,
+                    'avatar' => $avatarPath,
                 ]);
             }
             $ids[] = $tem->id;
@@ -182,7 +224,7 @@ class CategorieEvenementController extends Controller
                 $file = $request->file($field);
                 $errCode = $file->getError();
                 if ($errCode !== UPLOAD_ERR_OK) {
-                    $errors[$field] = ['Le fichier ' . $field . ' est trop volumineux ou n\'a pas pu être uploadé. (code: ' . $errCode . ')'];
+                    $errors[$field] = ['Le fichier '.$field.' est trop volumineux ou n\'a pas pu être uploadé. (code: '.$errCode.')'];
                 }
             }
         }
@@ -191,12 +233,12 @@ class CategorieEvenementController extends Controller
             foreach ($request->file('galerie') as $i => $file) {
                 $errCode = $file->getError();
                 if ($errCode !== UPLOAD_ERR_OK) {
-                    $errors["galerie.$i"] = ['Le fichier galerie[' . $i . '] est trop volumineux ou n\'a pas pu être uploadé. (code: ' . $errCode . ')'];
+                    $errors["galerie.$i"] = ['Le fichier galerie['.$i.'] est trop volumineux ou n\'a pas pu être uploadé. (code: '.$errCode.')'];
                 }
             }
         }
 
-        if (!empty($errors)) {
+        if (! empty($errors)) {
             throw ValidationException::withMessages($errors);
         }
     }
