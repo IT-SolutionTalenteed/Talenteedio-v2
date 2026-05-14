@@ -239,7 +239,10 @@ class PublicController extends Controller
                 $q->where('entreprises.status', '!=', 'suspended')
                   ->with([
                       'activitySector:id,name',
-                      'offres:id,entreprise_id,titre,localisation,date_limite',
+                      'offres' => function ($offreQuery) {
+                          $offreQuery->notArchived()
+                              ->select('id', 'entreprise_id', 'titre', 'localisation', 'date_limite');
+                      },
                   ])->select('entreprises.id', 'user_id', 'nom', 'logo', 'description', 'site_web', 'ville', 'pays', 'activity_sector_id');
             },
         ]);
