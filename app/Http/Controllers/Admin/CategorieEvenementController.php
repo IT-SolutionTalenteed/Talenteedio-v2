@@ -89,6 +89,8 @@ class CategorieEvenementController extends Controller
             'liste_faqs' => 'nullable|array',
             'liste_faqs.*.question' => 'required_with:liste_faqs|string',
             'liste_faqs.*.reponse' => 'required_with:liste_faqs|string',
+            'remove_image' => 'nullable|boolean',
+            'remove_video' => 'nullable|boolean',
         ]);
 
         if ($request->hasFile('image')) {
@@ -100,12 +102,22 @@ class CategorieEvenementController extends Controller
                 'evenements/categories',
                 'content'
             );
+        } elseif ($request->boolean('remove_image')) {
+            if ($categorieEvenement->image) {
+                Storage::disk('public')->delete($categorieEvenement->image);
+            }
+            $validated['image'] = null;
         }
         if ($request->hasFile('video')) {
             if ($categorieEvenement->video) {
                 Storage::disk('public')->delete($categorieEvenement->video);
             }
             $validated['video'] = $request->file('video')->store('evenements/categories/videos', 'public');
+        } elseif ($request->boolean('remove_video')) {
+            if ($categorieEvenement->video) {
+                Storage::disk('public')->delete($categorieEvenement->video);
+            }
+            $validated['video'] = null;
         }
         if ($request->hasFile('galerie')) {
             $existing = $categorieEvenement->galerie ?? [];
@@ -148,7 +160,27 @@ class CategorieEvenementController extends Controller
         $galerie = array_values(array_filter($categorieEvenement->galerie ?? [], fn ($p) => $p !== $path));
         $categorieEvenement->update(['galerie' => $galerie ?: null]);
 
-        return response()->json($categorieEvenement);
+        return response()->json($categorieEvenement->load('temoignages'));
+    }
+
+    public function removeImage(CategorieEvenement $categorieEvenement)
+    {
+        if ($categorieEvenement->image) {
+            Storage::disk('public')->delete($categorieEvenement->image);
+        }
+        $categorieEvenement->update(['image' => null]);
+
+        return response()->json($categorieEvenement->load('temoignages'));
+    }
+
+    public function removeVideo(CategorieEvenement $categorieEvenement)
+    {
+        if ($categorieEvenement->video) {
+            Storage::disk('public')->delete($categorieEvenement->video);
+        }
+        $categorieEvenement->update(['video' => null]);
+
+        return response()->json($categorieEvenement->load('temoignages'));
     }
 
     /**
