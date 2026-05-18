@@ -12,10 +12,23 @@ class TalentController extends Controller
     {
         $perPage = min((int) $request->get('per_page', 25), 100);
         $search  = trim($request->get('search', ''));
+        $sortBy  = $request->get('sort_by', 'created_at');
+        $sortOrder = $request->get('sort_order', 'desc');
+
+        // Validation des paramètres de tri
+        $allowedSortFields = ['created_at', 'name', 'titre_poste'];
+        $allowedSortOrders = ['asc', 'desc'];
+
+        if (!in_array($sortBy, $allowedSortFields)) {
+            $sortBy = 'created_at';
+        }
+
+        if (!in_array($sortOrder, $allowedSortOrders)) {
+            $sortOrder = 'desc';
+        }
 
         $query = User::whereIn('role', ['talent', 'consultant_externe'])
-            ->with(['studyLevel', 'experience', 'activitySectors', 'languages', 'skills'])
-            ->orderBy('name');
+            ->with(['studyLevel', 'experience', 'activitySectors', 'languages', 'skills']);
 
         if ($search !== '') {
             $query->where(function ($q) use ($search) {
@@ -25,6 +38,15 @@ class TalentController extends Controller
                   ->orWhere('ville',       'like', "%{$search}%")
                   ->orWhere('pays',        'like', "%{$search}%");
             });
+        }
+
+        // Appliquer le tri avec gestion des valeurs NULL pour titre_poste
+        if ($sortBy === 'titre_poste') {
+            // Les NULL en dernier, puis tri selon l'ordre demandé
+            $query->orderByRaw("CASE WHEN titre_poste IS NULL THEN 1 ELSE 0 END")
+                  ->orderBy('titre_poste', $sortOrder);
+        } else {
+            $query->orderBy($sortBy, $sortOrder);
         }
 
         return response()->json($query->paginate($perPage));
