@@ -25,8 +25,5 @@ jobs:
           password: ${{ secrets.SSH_TALENTEED_PASSWORD }}
           port: ${{ secrets.SSH_TALENTEED_PORT }}
           script: |
-            set -euo pipefail
             cd /home/talenteedio/website/backend/
             ./scripts/deploy_prod.sh
-            echo "🔄 Déduplication des secteurs (après deploy)..."
-            php artisan activity-sectors:deduplicate
