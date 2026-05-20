@@ -9,6 +9,10 @@ git pull origin main
 composer install --no-dev --optimize-autoloader
 
 php artisan migrate --force
+
+echo "🔄 Déduplication des secteurs d'activité (doublons)..."
+php artisan activity-sectors:deduplicate
+
 php artisan config:clear
 php artisan cache:clear
 php artisan route:clear
