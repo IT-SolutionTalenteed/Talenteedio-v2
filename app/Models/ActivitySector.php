@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class ActivitySector extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'origin'];
 
     /**
      * Relation avec les entreprises
