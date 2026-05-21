@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.talenteedio.talenteed_flutter",
+      "sha256_cert_fingerprints": [
+        "4A:11:71:17:2D:45:63:EC:72:E0:36:37:C7:02:C6:5F:C5:AD:B3:DE:CA:D6:62:23:06:80:66:08:77:C2:7D:16"
+      ]
+    }
+  }
+]
