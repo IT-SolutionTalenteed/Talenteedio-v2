@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\Entreprise;
 use App\Models\MediaCategory;
+use App\Services\CompressedImageStorage;
 use App\Traits\CheckPlanLimits;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -14,6 +15,10 @@ use Illuminate\Support\Str;
 class ArticleController extends Controller
 {
     use CheckPlanLimits;
+
+    public function __construct(
+        private CompressedImageStorage $compressedImages,
+    ) {}
 
     private function getEntreprise(): Entreprise
     {
@@ -45,23 +50,27 @@ class ArticleController extends Controller
         $this->checkArticleLimit($entreprise);
 
         $request->validate([
-            'title'       => 'required|string|max:255',
-            'content'     => 'required|string',
-            'image'       => 'nullable|image|max:4096',
-            'category_ids'=> 'nullable|array',
+            'title' => 'required|string|max:255',
+            'content' => 'required|string',
+            'image' => 'nullable|image|max:4096',
+            'category_ids' => 'nullable|array',
         ]);
 
         $data = [
-            'title'         => $request->title,
-            'content'       => $request->content,
-            'slug'          => Str::slug($request->title) . '-' . uniqid(),
-            'is_published'  => $request->boolean('is_published', false),
-            'user_id'       => auth()->id(),
+            'title' => $request->title,
+            'content' => $request->content,
+            'slug' => Str::slug($request->title).'-'.uniqid(),
+            'is_published' => $request->boolean('is_published', false),
+            'user_id' => auth()->id(),
             'entreprise_id' => $entreprise->id,
         ];
 
         if ($request->hasFile('image')) {
-            $data['image'] = $request->file('image')->store('articles', 'public');
+            $data['image'] = $this->compressedImages->store(
+                $request->file('image'),
+                'articles',
+                'content'
+            );
         }
 
         $article = Article::create($data);
@@ -84,14 +93,14 @@ class ArticleController extends Controller
         abort_if($article->entreprise_id !== $entreprise->id, 403);
 
         $request->validate([
-            'title'   => 'required|string|max:255',
+            'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'image'   => 'nullable|image|max:4096',
+            'image' => 'nullable|image|max:4096',
         ]);
 
         $data = [
-            'title'        => $request->title,
-            'content'      => $request->content,
+            'title' => $request->title,
+            'content' => $request->content,
             'is_published' => $request->boolean('is_published', false),
         ];
 
@@ -99,7 +108,11 @@ class ArticleController extends Controller
             if ($article->image) {
                 Storage::disk('public')->delete($article->image);
             }
-            $data['image'] = $request->file('image')->store('articles', 'public');
+            $data['image'] = $this->compressedImages->store(
+                $request->file('image'),
+                'articles',
+                'content'
+            );
         }
 
         $article->update($data);

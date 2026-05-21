@@ -145,6 +145,8 @@ Route::middleware(['auth:sanctum', 'account.active'])->group(function () {
         // Événements
         Route::apiResource('categorie-evenements', CategorieEvenementController::class);
         Route::delete('/categorie-evenements/{categorieEvenement}/galerie', [CategorieEvenementController::class, 'removeGalerieItem']);
+        Route::delete('/categorie-evenements/{categorieEvenement}/image', [CategorieEvenementController::class, 'removeImage']);
+        Route::delete('/categorie-evenements/{categorieEvenement}/video', [CategorieEvenementController::class, 'removeVideo']);
         Route::apiResource('evenements', EvenementController::class);
         Route::patch('/evenements/{evenement}/toggle-featured', [EvenementController::class, 'toggleFeatured']);
         Route::get('/evenements-referentiels', [EvenementController::class, 'referentiels']);

@@ -5,11 +5,16 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\CategorieEvenement;
 use App\Models\Temoignage;
+use App\Services\CompressedImageStorage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class TemoignageController extends Controller
 {
+    public function __construct(
+        private CompressedImageStorage $compressedImages,
+    ) {}
+
     /**
      * Liste tous les témoignages (réutilisables).
      */
@@ -24,14 +29,18 @@ class TemoignageController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'auteur'  => 'required|string|max:255',
-            'poste'   => 'nullable|string|max:255',
-            'avatar'  => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
+            'auteur' => 'required|string|max:255',
+            'poste' => 'nullable|string|max:255',
+            'avatar' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'contenu' => 'required|string',
         ]);
 
         if ($request->hasFile('avatar')) {
-            $validated['avatar'] = $request->file('avatar')->store('temoignages/avatars', 'public');
+            $validated['avatar'] = $this->compressedImages->store(
+                $request->file('avatar'),
+                'temoignages/avatars',
+                'avatar'
+            );
         }
 
         return response()->json(Temoignage::create($validated), 201);
@@ -43,18 +52,25 @@ class TemoignageController extends Controller
     public function update(Request $request, Temoignage $temoignage)
     {
         $validated = $request->validate([
-            'auteur'  => 'required|string|max:255',
-            'poste'   => 'nullable|string|max:255',
-            'avatar'  => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
+            'auteur' => 'required|string|max:255',
+            'poste' => 'nullable|string|max:255',
+            'avatar' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:2048',
             'contenu' => 'required|string',
         ]);
 
         if ($request->hasFile('avatar')) {
-            if ($temoignage->avatar) Storage::disk('public')->delete($temoignage->avatar);
-            $validated['avatar'] = $request->file('avatar')->store('temoignages/avatars', 'public');
+            if ($temoignage->avatar) {
+                Storage::disk('public')->delete($temoignage->avatar);
+            }
+            $validated['avatar'] = $this->compressedImages->store(
+                $request->file('avatar'),
+                'temoignages/avatars',
+                'avatar'
+            );
         }
 
         $temoignage->update($validated);
+
         return response()->json($temoignage);
     }
 
@@ -63,8 +79,11 @@ class TemoignageController extends Controller
      */
     public function destroy(Temoignage $temoignage)
     {
-        if ($temoignage->avatar) Storage::disk('public')->delete($temoignage->avatar);
+        if ($temoignage->avatar) {
+            Storage::disk('public')->delete($temoignage->avatar);
+        }
         $temoignage->delete();
+
         return response()->json(['message' => 'Témoignage supprimé.']);
     }
 
@@ -75,6 +94,7 @@ class TemoignageController extends Controller
     {
         $request->validate(['temoignage_id' => 'required|integer|exists:temoignages,id']);
         $categorieEvenement->temoignages()->syncWithoutDetaching([$request->temoignage_id]);
+
         return response()->json($categorieEvenement->load('temoignages'));
     }
 
@@ -84,6 +104,7 @@ class TemoignageController extends Controller
     public function detach(CategorieEvenement $categorieEvenement, Temoignage $temoignage)
     {
         $categorieEvenement->temoignages()->detach($temoignage->id);
+
         return response()->json(['message' => 'Témoignage retiré de la catégorie.']);
     }
 }

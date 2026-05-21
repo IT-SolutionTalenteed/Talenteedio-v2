@@ -5,12 +5,17 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Article;
 use App\Models\MediaCategory;
+use App\Services\CompressedImageStorage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class ArticleController extends Controller
 {
+    public function __construct(
+        private CompressedImageStorage $compressedImages,
+    ) {}
+
     /**
      * Display a listing of the resource.
      */
@@ -45,7 +50,11 @@ class ArticleController extends Controller
         $validated['user_id'] = auth()->id();
 
         if ($request->hasFile('image')) {
-            $validated['image'] = $request->file('image')->store('articles', 'public');
+            $validated['image'] = $this->compressedImages->store(
+                $request->file('image'),
+                'articles',
+                'content'
+            );
         }
 
         $article = Article::create($validated);
@@ -73,7 +82,7 @@ class ArticleController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'slug' => 'nullable|string|unique:articles,slug,' . $article->id,
+            'slug' => 'nullable|string|unique:articles,slug,'.$article->id,
             'is_published' => 'boolean',
             'media_category_ids' => 'array',
             'media_category_ids.*' => 'exists:media_categories,id',
@@ -88,7 +97,11 @@ class ArticleController extends Controller
             if ($article->image) {
                 Storage::disk('public')->delete($article->image);
             }
-            $validated['image'] = $request->file('image')->store('articles', 'public');
+            $validated['image'] = $this->compressedImages->store(
+                $request->file('image'),
+                'articles',
+                'content'
+            );
         }
 
         $article->update($validated);
@@ -120,7 +133,7 @@ class ArticleController extends Controller
     public function getMediaCategories()
     {
         $categories = MediaCategory::active()->get();
-        
+
         return response()->json($categories);
     }
 }

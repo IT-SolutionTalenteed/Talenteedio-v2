@@ -9,10 +9,24 @@ use App\Observers\CandidatureObserver;
 use App\Observers\EntrepriseObserver;
 use App\Observers\TalentObserver;
 use Illuminate\Support\ServiceProvider;
+use Intervention\Image\ImageManager;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function register(): void {}
+    public function register(): void
+    {
+        $this->app->singleton(ImageManager::class, function () {
+            if (extension_loaded('imagick')) {
+                try {
+                    return ImageManager::imagick();
+                } catch (\Throwable) {
+                    // use GD below
+                }
+            }
+
+            return ImageManager::gd();
+        });
+    }
 
     public function boot(): void
     {

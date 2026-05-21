@@ -20,7 +20,10 @@ class ActivitySectorController extends Controller
             'name' => 'required|string|max:255|unique:activity_sectors,name',
         ]);
 
-        return response()->json(ActivitySector::create($validated), 201);
+        return response()->json(
+            ActivitySector::create([...$validated, 'origin' => 'admin']),
+            201
+        );
     }
 
     public function show(ActivitySector $activitySector)
