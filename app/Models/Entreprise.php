@@ -13,6 +13,8 @@ class Entreprise extends Model
         'user_id', 'nom', 'status', 'taille', 'poste_contact', 'logo', 'description',
         'site_web', 'telephone', 'adresse', 'ville', 'pays',
         'activity_sector_id', 'plan_id', 'hubspot_company_id',
+        // Brevo CRM (Task 1)
+        'brevo_id', 'brevo_synced_at', 'brevo_sync_error',
     ];
 
     protected $appends = ['logo_url'];

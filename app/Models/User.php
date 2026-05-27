@@ -30,6 +30,8 @@ use Laravel\Sanctum\HasApiTokens;
     'pays_souhaites', 'villes_souhaitees', 'secteur_souhaite_id',
     // ATS registration
     'cv_path', 'matching_completed',
+    // Brevo CRM (Task 1)
+    'brevo_id', 'brevo_synced_at', 'brevo_sync_error',
 ])]
 #[Hidden(['password', 'remember_token'])]
 class User extends Authenticatable
