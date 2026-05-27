@@ -8,13 +8,18 @@ use Illuminate\Support\Facades\Http;
 
 class BrevoClear extends Command
 {
-    protected $signature   = 'brevo:clear';
+    protected $signature   = 'brevo:clear {--force : Forcer l\'exécution en production}';
     protected $description = 'Supprime tous les contacts Brevo et réinitialise les champs brevo_* en base (dev uniquement)';
 
     public function handle(BrevoService $brevo): int
     {
         if (!$brevo->isConfigured()) {
             $this->error('BREVO_API_KEY non configuré dans .env');
+            return self::FAILURE;
+        }
+
+        if (app()->isProduction() && !$this->option('force')) {
+            $this->error('Commande refusée en production. Utilisez --force pour confirmer.');
             return self::FAILURE;
         }
 
@@ -43,9 +48,13 @@ class BrevoClear extends Command
             if (empty($contacts)) break;
 
             foreach ($contacts as $contact) {
-                Http::withHeaders(['api-key' => config('services.brevo.api_key')])
+                $delRes = Http::withHeaders(['api-key' => config('services.brevo.api_key')])
                     ->delete("https://api.brevo.com/v3/contacts/{$contact['id']}");
-                $deleted++;
+                if ($delRes->successful() || $delRes->status() === 204) {
+                    $deleted++;
+                } else {
+                    $this->warn("  Impossible de supprimer le contact {$contact['id']} : " . $delRes->status());
+                }
             }
 
             $this->line("  Supprimés : {$deleted}");

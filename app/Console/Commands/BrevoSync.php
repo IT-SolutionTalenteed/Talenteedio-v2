@@ -29,11 +29,12 @@ class BrevoSync extends Command
 
             if ($limit > 0) {
                 $users = $query->limit($limit)->get();
+                $total = $users->count();
             } else {
                 $users = $query->cursor();
+                $total = \App\Models\User::whereIn('role', ['talent', 'consultant_externe'])->count();
             }
 
-            $total = \App\Models\User::whereIn('role', ['talent', 'consultant_externe'])->count();
             $this->info("Sync contacts : {$total} utilisateurs...");
             $bar = $this->output->createProgressBar($total);
             $bar->start();
@@ -48,12 +49,12 @@ class BrevoSync extends Command
         }
 
         if ($syncEntreprises) {
-            $entreprises = \App\Models\Entreprise::all();
-            $this->info("Sync entreprises : {$entreprises->count()} entreprises...");
-            $bar = $this->output->createProgressBar($entreprises->count());
+            $totalEntreprises = \App\Models\Entreprise::count();
+            $this->info("Sync entreprises : {$totalEntreprises} entreprises...");
+            $bar = $this->output->createProgressBar($totalEntreprises);
             $bar->start();
 
-            foreach ($entreprises as $entreprise) {
+            foreach (\App\Models\Entreprise::cursor() as $entreprise) {
                 $result = $brevo->upsertEntreprise($entreprise);
                 if ($result === false) {
                     $stats['skipped']++;
