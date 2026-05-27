@@ -30,14 +30,15 @@ class BrevoController extends Controller
                 'sync_error' => $u->brevo_sync_error,
             ]);
 
-        $entreprises = Entreprise::select('id', 'nom', 'email', 'brevo_id', 'brevo_synced_at', 'brevo_sync_error')
+        $entreprises = Entreprise::with('user:id,email')
+            ->select('id', 'user_id', 'nom', 'brevo_id', 'brevo_synced_at', 'brevo_sync_error')
             ->orderBy('nom')
             ->get()
             ->map(fn($e) => [
                 'id'         => $e->id,
                 'type'       => 'entreprise',
                 'name'       => $e->nom,
-                'email'      => $e->email,
+                'email'      => $e->user?->email,
                 'brevo_id'   => $e->brevo_id,
                 'synced_at'  => $e->brevo_synced_at,
                 'sync_error' => $e->brevo_sync_error,
