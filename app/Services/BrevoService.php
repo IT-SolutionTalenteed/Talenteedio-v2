@@ -22,7 +22,8 @@ class BrevoService
 
     public function isConfigured(): bool
     {
-        return !empty(config('services.brevo.api_key'));
+        $key = config('services.brevo.api_key');
+        return !empty($key) && strlen($key) > 10;
     }
 
     // ─── Contacts (Talents) ────────────────────────────────────────────────────
@@ -54,6 +55,9 @@ class BrevoService
                 'TALENTEED_ROLE'                => $user->role,
                 'TALENTEED_STATUT_CRM'          => $user->statut_crm ?? '',
                 'TALENTEED_SOURCE'              => $user->source_provenance ?? '',
+                'TALENTEED_SITUATION_FAMILIALE' => $user->situation_familiale ?? '',
+                'TALENTEED_REF_CRM'             => $user->ref_ancien_crm ?? '',
+                'TALENTEED_A_ENTRETIEN_CONFIRME' => $user->entretiens()->where('statut', 'confirme')->exists() ? 'true' : 'false',
                 'TALENTEED_CIVILITE'            => $user->civilite ?? '',
                 'TALENTEED_DATE_NAISSANCE'      => $user->date_naissance?->format('Y-m-d') ?? '',
                 'TALENTEED_NATIONALITE'         => $user->nationalite ?? '',
@@ -99,7 +103,7 @@ class BrevoService
 
     // ─── Contacts (Entreprises) ────────────────────────────────────────────────
 
-    public function upsertEntreprise(Entreprise $entreprise): ?int
+    public function upsertEntreprise(Entreprise $entreprise): int|false|null
     {
         if (!$this->isConfigured()) return null;
 
@@ -115,7 +119,7 @@ class BrevoService
             $email = $entreprise->email ?? $entreprise->user?->email;
             if (!$email) {
                 Log::warning('[Brevo] upsertEntreprise skipped — no email', ['entreprise_id' => $entreprise->id]);
-                return null;
+                return false;
             }
 
             $res = $this->http()->post('/contacts', [
@@ -150,7 +154,7 @@ class BrevoService
 
     public function syncAll(): array
     {
-        $stats = ['contacts' => 0, 'entreprises' => 0, 'errors' => 0];
+        $stats = ['contacts' => 0, 'entreprises' => 0, 'skipped' => 0, 'errors' => 0];
 
         \App\Models\User::whereIn('role', ['talent', 'consultant_externe'])
             ->cursor()
@@ -160,7 +164,14 @@ class BrevoService
 
         \App\Models\Entreprise::cursor()
             ->each(function (Entreprise $e) use (&$stats) {
-                $this->upsertEntreprise($e) ? $stats['entreprises']++ : $stats['errors']++;
+                $result = $this->upsertEntreprise($e);
+                if ($result === false) {
+                    $stats['skipped']++;
+                } elseif ($result === null) {
+                    $stats['errors']++;
+                } else {
+                    $stats['entreprises']++;
+                }
             });
 
         return $stats;
