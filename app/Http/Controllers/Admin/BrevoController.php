@@ -7,6 +7,7 @@ use App\Models\Entreprise;
 use App\Models\User;
 use App\Services\BrevoService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Cache;
 
 class BrevoController extends Controller
@@ -63,7 +64,7 @@ class BrevoController extends Controller
         foreach ($request->input('items') as $item) {
             if ($item['type'] === 'talent') {
                 $user = User::find($item['id']);
-                $user && $this->brevo->upsertContact($user) ? $success++ : $errors++;
+                ($user && $this->brevo->upsertContact($user) !== null) ? $success++ : $errors++;
             } else {
                 $entreprise = Entreprise::find($item['id']);
                 $result = $entreprise ? $this->brevo->upsertEntreprise($entreprise) : null;
@@ -102,10 +103,10 @@ class BrevoController extends Controller
 
     public function setup()
     {
-        \Illuminate\Support\Facades\Artisan::call('brevo:setup');
+        Artisan::call('brevo:setup');
         return response()->json([
             'message' => 'Setup Brevo terminé',
-            'output'  => \Illuminate\Support\Facades\Artisan::output(),
+            'output'  => Artisan::output(),
         ]);
     }
 }
