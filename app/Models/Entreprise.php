@@ -19,6 +19,18 @@ class Entreprise extends Model
 
     protected $appends = ['logo_url'];
 
+    /**
+     * Get the attributes that should be cast.
+     *
+     * @return array<string, string>
+     */
+    protected function casts(): array
+    {
+        return [
+            'brevo_synced_at' => 'datetime',
+        ];
+    }
+
     public function getLogoUrlAttribute(): ?string
     {
         return $this->logo ? url(Storage::url($this->logo)) : null;

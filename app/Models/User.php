@@ -54,6 +54,7 @@ class User extends Authenticatable
             'date_naissance'     => 'date',
             'pays_souhaites'     => 'array',
             'villes_souhaitees'  => 'array',
+            'brevo_synced_at'    => 'datetime',
         ];
     }
 
