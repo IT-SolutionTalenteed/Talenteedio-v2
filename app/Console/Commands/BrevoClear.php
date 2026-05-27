@@ -29,7 +29,6 @@ class BrevoClear extends Command
         }
 
         $deleted = 0;
-        $offset  = 0;
         $limit   = 500;
 
         $this->info('Récupération des contacts Brevo...');
@@ -37,7 +36,7 @@ class BrevoClear extends Command
         do {
             $res = Http::withHeaders(['api-key' => config('services.brevo.api_key')])
                 ->acceptJson()
-                ->get('https://api.brevo.com/v3/contacts', ['limit' => $limit, 'offset' => $offset]);
+                ->get('https://api.brevo.com/v3/contacts', ['limit' => $limit, 'offset' => 0]);
 
             if (!$res->successful()) {
                 $this->error('Erreur API : ' . $res->body());
@@ -49,16 +48,17 @@ class BrevoClear extends Command
 
             foreach ($contacts as $contact) {
                 $delRes = Http::withHeaders(['api-key' => config('services.brevo.api_key')])
-                    ->delete("https://api.brevo.com/v3/contacts/{$contact['id']}");
+                    ->delete("https://api.brevo.com/v3/contacts/{$contact['email']}");
                 if ($delRes->successful() || $delRes->status() === 204) {
                     $deleted++;
+                    $this->output->write('.');
                 } else {
-                    $this->warn("  Impossible de supprimer le contact {$contact['id']} : " . $delRes->status());
+                    $this->warn("  Impossible de supprimer le contact {$contact['email']} : " . $delRes->status());
                 }
+                usleep(100000); // 0.1s to respect Brevo rate limit
             }
 
             $this->line("  Supprimés : {$deleted}");
-            $offset += $limit;
 
         } while (count($contacts) === $limit);
 

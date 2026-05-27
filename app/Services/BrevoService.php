@@ -33,16 +33,16 @@ class BrevoService
         if (!$this->isConfigured()) return null;
 
         try {
-            $user->loadMissing(['studyLevel', 'experience', 'languages', 'activitySectors', 'skills']);
+            $user->loadMissing(['studyLevel', 'experience', 'languages', 'activitySectors', 'skills', 'entretiens', 'candidatures']);
 
             $nameParts = explode(' ', $user->name, 2);
 
-            $nbCandidatures     = $user->candidatures()->count();
-            $nbEntretiens       = $user->entretiens()->count();
-            $dernierEntretien   = $user->entretiens()
-                ->where('statut', 'confirme')
-                ->orderByDesc('date')
-                ->value('date');
+            $entretiens         = $user->entretiens;
+            $confirmes          = $entretiens->where('statut', 'confirme');
+            $nbEntretiens       = $entretiens->count();
+            $dernierEntretien   = $confirmes->sortByDesc('date')->first()?->date;
+            $aEntretienConfirme = $confirmes->isNotEmpty();
+            $nbCandidatures     = $user->candidatures->count();
 
             $attributes = array_filter([
                 'PRENOM'                        => $nameParts[0] ?? '',
@@ -57,7 +57,7 @@ class BrevoService
                 'TALENTEED_SOURCE'              => $user->source_provenance ?? '',
                 'TALENTEED_SITUATION_FAMILIALE' => $user->situation_familiale ?? '',
                 'TALENTEED_REF_CRM'             => $user->ref_ancien_crm ?? '',
-                'TALENTEED_A_ENTRETIEN_CONFIRME' => $user->entretiens()->where('statut', 'confirme')->exists() ? 'true' : 'false',
+                'TALENTEED_A_ENTRETIEN_CONFIRME' => $aEntretienConfirme ? 'true' : 'false',
                 'TALENTEED_CIVILITE'            => $user->civilite ?? '',
                 'TALENTEED_DATE_NAISSANCE'      => $user->date_naissance?->format('Y-m-d') ?? '',
                 'TALENTEED_NATIONALITE'         => $user->nationalite ?? '',
@@ -70,7 +70,7 @@ class BrevoService
                 'TALENTEED_SKILLS'              => $user->skills->pluck('name')->implode(', '),
                 'TALENTEED_NB_CANDIDATURES'     => (string) $nbCandidatures,
                 'TALENTEED_NB_ENTRETIENS'       => (string) $nbEntretiens,
-                'TALENTEED_DERNIER_ENTRETIEN'   => $dernierEntretien ? (string) $dernierEntretien : '',
+                'TALENTEED_DERNIER_ENTRETIEN'   => $dernierEntretien ? $dernierEntretien->format('Y-m-d') : '',
             ], fn($v) => $v !== null && $v !== '');
 
             $res = $this->http()->post('/contacts', [
