@@ -16,3 +16,6 @@ Schedule::command('entretien:demander-feedback')->everyMinute();
 
 // I-05 — Sync HubSpot CRM (chaque nuit à 2h00)
 Schedule::command('hubspot:sync')->dailyAt('02:00');
+
+// Sync Brevo CRM (chaque nuit à 02h30)
+Schedule::command('brevo:sync')->dailyAt('02:30');
