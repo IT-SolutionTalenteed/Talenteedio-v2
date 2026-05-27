@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\TalentController;
 use App\Http\Controllers\Admin\EntretienController as AdminEntretienController;
 use App\Http\Controllers\Admin\FeedbackController as AdminFeedbackController;
 use App\Http\Controllers\Admin\HubSpotController as AdminHubSpotController;
+use App\Http\Controllers\Admin\BrevoController as AdminBrevoController;
 use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\TemoignageController as AdminTemoignageController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
@@ -195,6 +196,12 @@ Route::middleware(['auth:sanctum', 'account.active'])->group(function () {
         Route::get('/hubspot/status',  [AdminHubSpotController::class, 'status']);
         Route::post('/hubspot/sync',   [AdminHubSpotController::class, 'sync']);
         Route::post('/hubspot/setup',  [AdminHubSpotController::class, 'setup']);
+
+        // Brevo CRM
+        Route::get('/brevo/status',    [AdminBrevoController::class, 'status']);
+        Route::post('/brevo/sync',     [AdminBrevoController::class, 'sync']);
+        Route::post('/brevo/sync-all', [AdminBrevoController::class, 'syncAll']);
+        Route::post('/brevo/setup',    [AdminBrevoController::class, 'setup']);
 
         // Témoignages (réutilisables)
         Route::get('/temoignages', [AdminTemoignageController::class, 'index']);
