@@ -105,7 +105,7 @@ class PublicController extends Controller
             ->withCount(['offres' => function ($query) {
                 $query->notArchived(); // Compter uniquement les offres non-archivées
             }, 'articles', 'evenements'])
-            ->where('status', '!=', 'suspended')
+            ->where('status', 'active')
             ->get(['id', 'nom', 'logo', 'description', 'ville', 'pays', 'activity_sector_id']);
 
         return response()->json($entreprises);
