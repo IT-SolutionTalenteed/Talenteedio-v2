@@ -51,36 +51,57 @@ class DashboardController extends Controller
      */
     public function stats(Request $request)
     {
-        // Période pour les évolutions (6 derniers mois)
-        $sixMonthsAgo = Carbon::now()->subMonths(6);
+        // Paramètre optionnel pour le mois/année (format: YYYY-MM)
+        $monthYear = $request->input('month', Carbon::now()->format('Y-m'));
+        $selectedDate = Carbon::createFromFormat('Y-m', $monthYear);
         
-        // Période pour les sparklines (7 derniers jours)
-        $sevenDaysAgo = Carbon::now()->subDays(7);
+        // Début et fin du mois sélectionné
+        $startOfMonth = $selectedDate->copy()->startOfMonth();
+        $endOfMonth = $selectedDate->copy()->endOfMonth();
+        
+        // Période pour les sparklines (7 derniers jours du mois sélectionné)
+        $sevenDaysAgo = $endOfMonth->copy()->subDays(6);
 
         return response()->json([
             // ═══════════════════════════════════════════════════════
-            // SPARKLINES (7 derniers jours)
+            // SPARKLINES (7 derniers jours du mois)
             // ═══════════════════════════════════════════════════════
             'sparklines' => [
-                'talents' => $this->getSparklineData(User::where('role', 'talent'), $sevenDaysAgo),
-                'entreprises' => $this->getSparklineData(Entreprise::query(), $sevenDaysAgo),
-                'offres' => $this->getSparklineData(Offre::query(), $sevenDaysAgo),
-                'evenements' => $this->getSparklineData(Evenement::query(), $sevenDaysAgo),
+                'talents' => $this->getSparklineDataForPeriod(
+                    User::where('role', 'talent'), 
+                    $sevenDaysAgo, 
+                    $endOfMonth
+                ),
+                'entreprises' => $this->getSparklineDataForPeriod(
+                    Entreprise::query(), 
+                    $sevenDaysAgo, 
+                    $endOfMonth
+                ),
+                'offres' => $this->getSparklineDataForPeriod(
+                    Offre::query(), 
+                    $sevenDaysAgo, 
+                    $endOfMonth
+                ),
+                'evenements' => $this->getSparklineDataForPeriod(
+                    Evenement::query(), 
+                    $sevenDaysAgo, 
+                    $endOfMonth
+                ),
             ],
 
             // ═══════════════════════════════════════════════════════
-            // ÉVOLUTION DES INSCRIPTIONS (6 derniers mois)
+            // ÉVOLUTION DES INSCRIPTIONS (pour le mois sélectionné)
             // ═══════════════════════════════════════════════════════
-            'evolution' => [
-                'months' => $this->getLastSixMonths(),
-                'talents' => $this->getMonthlyData(User::where('role', 'talent'), $sixMonthsAgo),
-                'entreprises' => $this->getMonthlyData(Entreprise::query(), $sixMonthsAgo),
-            ],
+            'evolution' => $this->getMonthlyEvolutionData($monthYear),
 
             // ═══════════════════════════════════════════════════════
-            // SECTEURS D'ACTIVITÉ (Top 6)
+            // SECTEURS D'ACTIVITÉ (Top 6 pour le mois sélectionné)
             // ═══════════════════════════════════════════════════════
-            'secteurs' => ActivitySector::withCount('entreprises')
+            'secteurs' => ActivitySector::select('activity_sectors.id', 'activity_sectors.name')
+                ->leftJoin('entreprises', 'entreprises.activity_sector_id', '=', 'activity_sectors.id')
+                ->whereBetween('entreprises.created_at', [$startOfMonth, $endOfMonth])
+                ->selectRaw('COUNT(entreprises.id) as entreprises_count')
+                ->groupBy('activity_sectors.id', 'activity_sectors.name')
                 ->having('entreprises_count', '>', 0)
                 ->orderBy('entreprises_count', 'desc')
                 ->limit(6)
@@ -93,11 +114,13 @@ class DashboardController extends Controller
                 }),
 
             // ═══════════════════════════════════════════════════════
-            // OFFRES PAR TYPE DE CONTRAT
+            // OFFRES PAR TYPE DE CONTRAT (pour le mois sélectionné)
             // ═══════════════════════════════════════════════════════
             'offres_par_contrat' => JobContract::select('job_contracts.id', 'job_contracts.name')
                 ->leftJoin('offre_job_contract', 'job_contracts.id', '=', 'offre_job_contract.job_contract_id')
-                ->selectRaw('COUNT(offre_job_contract.offre_id) as offres_count')
+                ->leftJoin('offres', 'offres.id', '=', 'offre_job_contract.offre_id')
+                ->whereBetween('offres.created_at', [$startOfMonth, $endOfMonth])
+                ->selectRaw('COUNT(DISTINCT offres.id) as offres_count')
                 ->groupBy('job_contracts.id', 'job_contracts.name')
                 ->orderBy('offres_count', 'desc')
                 ->get()
@@ -109,13 +132,36 @@ class DashboardController extends Controller
                 }),
 
             // ═══════════════════════════════════════════════════════
-            // CANDIDATURES PAR STATUT
+            // CANDIDATURES PAR STATUT (pour le mois sélectionné)
             // ═══════════════════════════════════════════════════════
             'candidatures_statut' => [
-                'acceptees' => Candidature::where('statut', 'acceptee')->count(),
-                'en_attente' => Candidature::where('statut', 'en_attente')->count(),
-                'refusees' => Candidature::where('statut', 'refusee')->count(),
-                'archivees' => Candidature::where('statut', 'archivee')->count(),
+                'acceptees' => Candidature::where('statut', 'acceptee')
+                    ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                    ->count(),
+                'en_attente' => Candidature::where('statut', 'en_attente')
+                    ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                    ->count(),
+                'refusees' => Candidature::where('statut', 'refusee')
+                    ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                    ->count(),
+                'archivees' => Candidature::where('statut', 'archivee')
+                    ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                    ->count(),
+            ],
+
+            // ═══════════════════════════════════════════════════════
+            // TOTAUX POUR LE MOIS SÉLECTIONNÉ
+            // ═══════════════════════════════════════════════════════
+            'totals_for_month' => [
+                'talents' => User::where('role', 'talent')
+                    ->whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                    ->count(),
+                'entreprises' => Entreprise::whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                    ->count(),
+                'offres' => Offre::whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                    ->count(),
+                'evenements' => Evenement::whereBetween('created_at', [$startOfMonth, $endOfMonth])
+                    ->count(),
             ],
         ]);
     }
@@ -129,6 +175,26 @@ class DashboardController extends Controller
         
         for ($i = 6; $i >= 0; $i--) {
             $date = Carbon::now()->subDays($i)->format('Y-m-d');
+            $count = (clone $query)->whereDate('created_at', $date)->count();
+            $data[] = $count;
+        }
+        
+        return $data;
+    }
+
+    /**
+     * Obtenir les données pour un sparkline sur une période donnée
+     */
+    private function getSparklineDataForPeriod($query, $startDate, $endDate)
+    {
+        $data = [];
+        $days = $startDate->diffInDays($endDate);
+        
+        // Limiter à 7 jours maximum
+        $daysToShow = min($days, 6);
+        
+        for ($i = $daysToShow; $i >= 0; $i--) {
+            $date = $endDate->copy()->subDays($i)->format('Y-m-d');
             $count = (clone $query)->whereDate('created_at', $date)->count();
             $data[] = $count;
         }
@@ -168,5 +234,43 @@ class DashboardController extends Controller
         }
         
         return $months;
+    }
+
+    /**
+     * Obtenir l'évolution des inscriptions jour par jour pour un mois donné
+     */
+    private function getMonthlyEvolutionData($monthYear)
+    {
+        // Parse le mois/année (format: YYYY-MM)
+        $date = Carbon::createFromFormat('Y-m', $monthYear)->startOfMonth();
+        $daysInMonth = $date->daysInMonth;
+        
+        $days = [];
+        $talents = [];
+        $entreprises = [];
+        
+        // Collecter les données pour chaque jour du mois
+        for ($day = 1; $day <= $daysInMonth; $day++) {
+            $currentDate = $date->copy()->day($day);
+            
+            // Format de la date pour l'axe X (ex: "1 jan", "2 jan", etc.)
+            $days[] = $currentDate->format('j') . ' ' . $currentDate->locale('fr')->format('M');
+            
+            // Compter les inscriptions pour ce jour
+            $talents[] = User::where('role', 'talent')
+                ->whereDate('created_at', $currentDate->format('Y-m-d'))
+                ->count();
+                
+            $entreprises[] = Entreprise::whereDate('created_at', $currentDate->format('Y-m-d'))
+                ->count();
+        }
+        
+        return [
+            'month' => $date->locale('fr')->isoFormat('MMMM YYYY'), // ex: "juin 2026"
+            'monthYear' => $monthYear, // ex: "2026-06"
+            'days' => $days,
+            'talents' => $talents,
+            'entreprises' => $entreprises,
+        ];
     }
 }
