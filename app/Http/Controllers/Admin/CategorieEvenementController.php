@@ -36,7 +36,7 @@ class CategorieEvenementController extends Controller
             'liste_details.*' => 'string',
             'liste_faqs' => 'nullable|array',
             'liste_faqs.*.question' => 'required_with:liste_faqs|string',
-            'liste_faqs.*.reponse' => 'required_with:liste_faqs|string',
+            'liste_faqs.*.reponse' => 'nullable|string',
         ]);
 
         if ($request->hasFile('image')) {
@@ -88,7 +88,7 @@ class CategorieEvenementController extends Controller
             'liste_details.*' => 'string',
             'liste_faqs' => 'nullable|array',
             'liste_faqs.*.question' => 'required_with:liste_faqs|string',
-            'liste_faqs.*.reponse' => 'required_with:liste_faqs|string',
+            'liste_faqs.*.reponse' => 'nullable|string',
             'remove_image' => 'nullable|boolean',
             'remove_video' => 'nullable|boolean',
         ]);
@@ -130,6 +130,17 @@ class CategorieEvenementController extends Controller
             }
             $validated['galerie'] = $existing;
         }
+
+        // Toujours réécrire les listes (sinon vider tous les points/FAQs ne persiste pas :
+        // une clé absente de la requête n'est pas mise à jour par update()).
+        $validated['liste_details'] = array_values(array_filter(
+            $request->input('liste_details', []),
+            fn ($d) => filled($d)
+        )) ?: null;
+        $validated['liste_faqs'] = array_values(array_filter(
+            $request->input('liste_faqs', []),
+            fn ($f) => filled($f['question'] ?? null)
+        )) ?: null;
 
         $categorieEvenement->update($validated);
         $this->syncTemoignages($categorieEvenement, $request);
