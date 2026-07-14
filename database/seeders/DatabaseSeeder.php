@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             AdminUserSeeder::class,
             MediaCategorySeeder::class,
             ArticleSeeder::class,
+            CountrySeeder::class,
         ]);
 
         // User::factory(10)->create();
