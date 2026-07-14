@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\HubSpotController as AdminHubSpotController;
 use App\Http\Controllers\Admin\BrevoController as AdminBrevoController;
 use App\Http\Controllers\Admin\ImportController;
 use App\Http\Controllers\Admin\TemoignageController as AdminTemoignageController;
+use App\Http\Controllers\Admin\ObservatorySubmissionController as AdminObservatorySubmissionController;
 use App\Http\Controllers\Admin\DashboardController as AdminDashboardController;
 use App\Http\Controllers\Admin\CandidatureController as AdminCandidatureController;
 use App\Http\Controllers\Admin\EvenementDemandeController as AdminEvenementDemandeController;
@@ -79,6 +80,7 @@ Route::prefix('public')->group(function () {
     Route::get('/articles/{article}',                         [PublicController::class, 'articleDetail']);
     Route::get('/offres/{offre}',                             [PublicController::class, 'offreDetail']);
     Route::post('/callback',                                  [\App\Http\Controllers\Public\ContactController::class, 'callback']);
+    Route::post('/observatory',                               [\App\Http\Controllers\Public\ObservatoryController::class, 'store']);
     Route::get('/entreprises/{entreprise}',                   [PublicController::class, 'entrepriseDetail']);
     Route::post('/signaler-bug',                              [\App\Http\Controllers\BugReportController::class, 'store']);
     Route::get('/referentiels',                               [PublicController::class, 'referentiels']);
@@ -204,6 +206,7 @@ Route::middleware(['auth:sanctum', 'account.active'])->group(function () {
         Route::post('/brevo/setup',    [AdminBrevoController::class, 'setup']);
 
         // Témoignages (réutilisables)
+        Route::get('/observatory-submissions', [AdminObservatorySubmissionController::class, 'index']);
         Route::get('/temoignages', [AdminTemoignageController::class, 'index']);
         Route::post('/temoignages', [AdminTemoignageController::class, 'store']);
         Route::post('/temoignages/{temoignage}', [AdminTemoignageController::class, 'update']);
