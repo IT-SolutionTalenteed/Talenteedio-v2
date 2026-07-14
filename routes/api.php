@@ -135,6 +135,7 @@ Route::middleware(['auth:sanctum', 'account.active'])->group(function () {
         Route::apiResource('experiences', ExperienceController::class);
         Route::apiResource('languages', LanguageController::class);
         Route::apiResource('activity-sectors', ActivitySectorController::class);
+        Route::apiResource('countries', \App\Http\Controllers\Admin\CountryController::class);
         Route::apiResource('legal-pages', LegalPageController::class);
         Route::apiResource('plans', PlanController::class);
 
