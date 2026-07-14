@@ -9,6 +9,10 @@ git pull origin main
 composer install --no-dev --optimize-autoloader
 
 php artisan migrate --force
+
+# Seeders de référentiels (idempotents, sûrs en prod — surtout PAS `db:seed` global)
+php artisan db:seed --class=CountrySeeder --force
+
 php artisan config:clear
 php artisan cache:clear
 php artisan route:clear
