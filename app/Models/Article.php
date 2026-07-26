@@ -17,6 +17,7 @@ class Article extends Model
         'content',
         'slug',
         'is_published',
+        'published_at',
         'user_id',
         'entreprise_id',
         'image',
@@ -24,6 +25,7 @@ class Article extends Model
 
     protected $casts = [
         'is_published' => 'boolean',
+        'published_at' => 'datetime',
     ];
 
     protected $appends = ['image_url'];
