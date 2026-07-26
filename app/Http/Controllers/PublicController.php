@@ -175,9 +175,9 @@ class PublicController extends Controller
         if (!$request->has('page') && !$request->has('per_page') && !$request->has('media_category_id')) {
             $articles = Article::with('mediaCategories:id,name')
                 ->where('is_published', true)
-                ->latest()
+                ->orderByDesc('published_at')
                 ->take(3)
-                ->get(['id', 'title', 'content', 'image', 'created_at']);
+                ->get(['id', 'title', 'content', 'image', 'created_at', 'published_at']);
 
             return response()->json($articles);
         }
@@ -194,7 +194,7 @@ class PublicController extends Controller
         $perPage = min((int) ($request->per_page ?? 9), 50);
 
         return response()->json(
-            $query->latest()->paginate($perPage)
+            $query->orderByDesc('published_at')->paginate($perPage)
         );
     }
 
@@ -295,8 +295,8 @@ class PublicController extends Controller
         $articles = Article::with('mediaCategories:id,name')
             ->where('entreprise_id', $entreprise->id)
             ->where('is_published', true)
-            ->latest()
-            ->get(['id', 'title', 'content', 'image', 'created_at', 'entreprise_id']);
+            ->orderByDesc('published_at')
+            ->get(['id', 'title', 'content', 'image', 'created_at', 'published_at', 'entreprise_id']);
 
         $evenements = $entreprise->evenements()
             ->where('date_debut', '>=', now())
