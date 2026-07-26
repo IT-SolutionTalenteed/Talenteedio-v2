@@ -38,6 +38,7 @@ class ArticleController extends Controller
             'content' => 'required|string',
             'slug' => 'nullable|string|unique:articles,slug',
             'is_published' => 'boolean',
+            'published_at' => 'nullable|date',
             'media_category_ids' => 'array',
             'media_category_ids.*' => 'exists:media_categories,id',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
@@ -45,6 +46,11 @@ class ArticleController extends Controller
 
         if (empty($validated['slug'])) {
             $validated['slug'] = Str::slug($validated['title']);
+        }
+
+        // Par défaut, la date de publication est la date de création
+        if (empty($validated['published_at'])) {
+            $validated['published_at'] = now();
         }
 
         $validated['user_id'] = auth()->id();
@@ -84,6 +90,7 @@ class ArticleController extends Controller
             'content' => 'required|string',
             'slug' => 'nullable|string|unique:articles,slug,'.$article->id,
             'is_published' => 'boolean',
+            'published_at' => 'nullable|date',
             'media_category_ids' => 'array',
             'media_category_ids.*' => 'exists:media_categories,id',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
