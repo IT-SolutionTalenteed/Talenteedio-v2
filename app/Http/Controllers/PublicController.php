@@ -327,6 +327,7 @@ class PublicController extends Controller
             'mediaCategories:id,name',
             'entreprise:id,nom,logo',
             'user:id,name',
+            'media',
         ]);
 
         $data = $article->toArray();
