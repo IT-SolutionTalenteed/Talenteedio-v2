@@ -21,7 +21,7 @@ class ArticleController extends Controller
      */
     public function index()
     {
-        $articles = Article::with(['user', 'mediaCategories'])
+        $articles = Article::with(['user', 'mediaCategories', 'media'])
             ->orderBy('created_at', 'desc')
             ->paginate(15);
 
@@ -42,6 +42,10 @@ class ArticleController extends Controller
             'media_category_ids' => 'array',
             'media_category_ids.*' => 'exists:media_categories,id',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpg,jpeg,png,gif,webp|max:5120',
+            'videos' => 'nullable|array',
+            'videos.*' => 'file|mimetypes:video/mp4,video/webm,video/ogg,video/quicktime|max:102400',
         ]);
 
         if (empty($validated['slug'])) {
@@ -69,7 +73,9 @@ class ArticleController extends Controller
             $article->mediaCategories()->attach($validated['media_category_ids']);
         }
 
-        return response()->json($article->load(['user', 'mediaCategories']), 201);
+        $this->storeGalleryMedia($request, $article);
+
+        return response()->json($article->load(['user', 'mediaCategories', 'media']), 201);
     }
 
     /**
@@ -77,7 +83,7 @@ class ArticleController extends Controller
      */
     public function show(Article $article)
     {
-        return response()->json($article->load(['user', 'mediaCategories']));
+        return response()->json($article->load(['user', 'mediaCategories', 'media']));
     }
 
     /**
@@ -94,6 +100,12 @@ class ArticleController extends Controller
             'media_category_ids' => 'array',
             'media_category_ids.*' => 'exists:media_categories,id',
             'image' => 'nullable|image|mimes:jpg,jpeg,png,gif,webp|max:5120',
+            'images' => 'nullable|array',
+            'images.*' => 'image|mimes:jpg,jpeg,png,gif,webp|max:5120',
+            'videos' => 'nullable|array',
+            'videos.*' => 'file|mimetypes:video/mp4,video/webm,video/ogg,video/quicktime|max:102400',
+            'removed_media_ids' => 'nullable|array',
+            'removed_media_ids.*' => 'integer',
         ]);
 
         if (isset($validated['title']) && ($validated['slug'] ?? '') === '') {
@@ -117,7 +129,44 @@ class ArticleController extends Controller
             $article->mediaCategories()->sync($validated['media_category_ids']);
         }
 
-        return response()->json($article->load(['user', 'mediaCategories']));
+        // Suppression des médias de galerie retirés côté admin
+        if (! empty($validated['removed_media_ids'])) {
+            $toRemove = $article->media()->whereIn('id', $validated['removed_media_ids'])->get();
+            foreach ($toRemove as $media) {
+                Storage::disk('public')->delete($media->path);
+                $media->delete();
+            }
+        }
+
+        $this->storeGalleryMedia($request, $article);
+
+        return response()->json($article->load(['user', 'mediaCategories', 'media']));
+    }
+
+    /**
+     * Stocke les images et vidéos supplémentaires (galerie) uploadées pour un article.
+     */
+    private function storeGalleryMedia(Request $request, Article $article): void
+    {
+        $position = (int) $article->media()->max('position');
+
+        foreach ((array) $request->file('images', []) as $image) {
+            $path = $this->compressedImages->store($image, 'articles/gallery', 'content');
+            $article->media()->create([
+                'type' => 'image',
+                'path' => $path,
+                'position' => ++$position,
+            ]);
+        }
+
+        foreach ((array) $request->file('videos', []) as $video) {
+            $path = $video->store('articles/videos', 'public');
+            $article->media()->create([
+                'type' => 'video',
+                'path' => $path,
+                'position' => ++$position,
+            ]);
+        }
     }
 
     /**
@@ -127,6 +176,11 @@ class ArticleController extends Controller
     {
         if ($article->image) {
             Storage::disk('public')->delete($article->image);
+        }
+
+        // Nettoyage des fichiers de galerie (la cascade DB ne supprime pas les fichiers)
+        foreach ($article->media as $media) {
+            Storage::disk('public')->delete($media->path);
         }
 
         $article->delete();
