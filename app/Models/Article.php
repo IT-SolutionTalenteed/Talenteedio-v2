@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Storage;
 
 class Article extends Model
@@ -54,5 +55,23 @@ class Article extends Model
     public function mediaCategories(): BelongsToMany
     {
         return $this->belongsToMany(MediaCategory::class);
+    }
+
+    /**
+     * Galerie d'images / vidéos supplémentaires de l'article.
+     */
+    public function media(): HasMany
+    {
+        return $this->hasMany(ArticleMedia::class)->orderBy('position');
+    }
+
+    public function images(): HasMany
+    {
+        return $this->media()->where('type', 'image');
+    }
+
+    public function videos(): HasMany
+    {
+        return $this->media()->where('type', 'video');
     }
 }
