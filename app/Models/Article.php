@@ -19,6 +19,7 @@ class Article extends Model
         'slug',
         'is_published',
         'published_at',
+        'archived_at',
         'user_id',
         'entreprise_id',
         'image',
@@ -27,6 +28,7 @@ class Article extends Model
     protected $casts = [
         'is_published' => 'boolean',
         'published_at' => 'datetime',
+        'archived_at'  => 'datetime',
     ];
 
     protected $appends = ['image_url'];
@@ -73,5 +75,34 @@ class Article extends Model
     public function videos(): HasMany
     {
         return $this->media()->where('type', 'video');
+    }
+
+    // Scopes pour filtrer les articles archivés/non-archivés
+    public function scopeNotArchived($query)
+    {
+        return $query->whereNull('archived_at');
+    }
+
+    public function scopeArchived($query)
+    {
+        return $query->whereNotNull('archived_at');
+    }
+
+    // Méthodes d'archivage
+    public function archive()
+    {
+        $this->archived_at = now();
+        $this->save();
+    }
+
+    public function unarchive()
+    {
+        $this->archived_at = null;
+        $this->save();
+    }
+
+    public function isArchived(): bool
+    {
+        return $this->archived_at !== null;
     }
 }
