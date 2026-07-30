@@ -175,6 +175,7 @@ class PublicController extends Controller
         if (!$request->has('page') && !$request->has('per_page') && !$request->has('media_category_id')) {
             $articles = Article::with('mediaCategories:id,name')
                 ->where('is_published', true)
+                ->notArchived()
                 ->orderByDesc('published_at')
                 ->take(3)
                 ->get(['id', 'title', 'content', 'image', 'created_at', 'published_at']);
@@ -183,7 +184,8 @@ class PublicController extends Controller
         }
 
         $query = Article::with('mediaCategories:id,name')
-            ->where('is_published', true);
+            ->where('is_published', true)
+            ->notArchived();
 
         if ($request->filled('media_category_id')) {
             $query->whereHas('mediaCategories', function ($q) use ($request) {
@@ -295,6 +297,7 @@ class PublicController extends Controller
         $articles = Article::with('mediaCategories:id,name')
             ->where('entreprise_id', $entreprise->id)
             ->where('is_published', true)
+            ->notArchived()
             ->orderByDesc('published_at')
             ->get(['id', 'title', 'content', 'image', 'created_at', 'published_at', 'entreprise_id']);
 
@@ -319,7 +322,7 @@ class PublicController extends Controller
      */
     public function articleDetail(Article $article): JsonResponse
     {
-        if (!$article->is_published) {
+        if (!$article->is_published || $article->isArchived()) {
             return response()->json(['message' => 'Article introuvable.'], 404);
         }
 
