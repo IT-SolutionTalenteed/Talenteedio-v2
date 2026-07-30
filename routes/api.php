@@ -126,6 +126,8 @@ Route::middleware(['auth:sanctum', 'account.active'])->group(function () {
         // Gestion des articles (admin seulement)
         Route::apiResource('articles', ArticleController::class);
         Route::get('/articles-media-categories', [ArticleController::class, 'getMediaCategories']);
+        Route::post('/articles/{article}/archive', [ArticleController::class, 'archive']);
+        Route::post('/articles/{article}/unarchive', [ArticleController::class, 'unarchive']);
 
         // Référentiels
         Route::apiResource('job-contracts', JobContractController::class);

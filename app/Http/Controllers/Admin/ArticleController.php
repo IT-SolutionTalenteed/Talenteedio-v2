@@ -19,13 +19,53 @@ class ArticleController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::with(['user', 'mediaCategories', 'media'])
-            ->orderBy('created_at', 'desc')
-            ->paginate(15);
+        $query = Article::with(['user', 'mediaCategories', 'media'])
+            ->orderBy('created_at', 'desc');
 
-        return response()->json($articles);
+        // Onglet « Actifs » par défaut, « Archivés » sur demande
+        if ($request->boolean('archived', false)) {
+            $query->archived();
+        } else {
+            $query->notArchived();
+        }
+
+        return response()->json($query->paginate(15));
+    }
+
+    /**
+     * Archive un article : il disparaît du blog public.
+     */
+    public function archive(Article $article)
+    {
+        if ($article->isArchived()) {
+            return response()->json(['message' => 'Cet article est déjà archivé.'], 400);
+        }
+
+        $article->archive();
+
+        return response()->json([
+            'message' => 'Article archivé avec succès.',
+            'article' => $article,
+        ]);
+    }
+
+    /**
+     * Désarchive un article : il redevient disponible sur le blog s'il est publié.
+     */
+    public function unarchive(Article $article)
+    {
+        if (!$article->isArchived()) {
+            return response()->json(['message' => "Cet article n'est pas archivé."], 400);
+        }
+
+        $article->unarchive();
+
+        return response()->json([
+            'message' => 'Article désarchivé avec succès.',
+            'article' => $article,
+        ]);
     }
 
     /**
