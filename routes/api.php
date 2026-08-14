@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\PublicController;
+use App\Http\Controllers\SocialPreviewController;
 use App\Http\Controllers\SocialiteController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\Admin\MediaCategoryController;
@@ -65,6 +66,16 @@ Route::get('/activity-sectors', [ActivitySectorController::class, 'index']);
 Route::get('/plans', [\App\Http\Controllers\Public\PlanPublicController::class, 'index']);
 Route::post('/forgot-password', [PasswordResetController::class, 'forgot']);
 Route::post('/reset-password',  [PasswordResetController::class, 'reset']);
+
+/*
+ * Aperçus de partage (Open Graph) servis aux robots des réseaux sociaux.
+ * Nginx y redirige les requêtes des crawlers sur /blog/{id}, /annonces/{id},
+ * /evenements/{id} et /entreprises/{id} ; les humains vont sur la SPA.
+ * Route placée sous /api car nginx proxifie déjà ce préfixe vers Laravel.
+ */
+Route::get('/og/{type}/{id}', [SocialPreviewController::class, 'show'])
+    ->where('type', 'blog|annonces|evenements|entreprises')
+    ->where('id', '[A-Za-z0-9\-_]+');
 
 // Routes publiques — site visiteurs
 Route::prefix('public')->group(function () {
