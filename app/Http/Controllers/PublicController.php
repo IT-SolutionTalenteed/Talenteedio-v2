@@ -13,6 +13,7 @@ use App\Models\ActivitySector;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Validation\Rule;
 
 class PublicController extends Controller
 {
@@ -344,6 +345,9 @@ class PublicController extends Controller
         return response()->json($data);
     }
 
+    /** Réseaux proposés par le bloc de partage du front. */
+    private const SHARE_NETWORKS = ['facebook', 'twitter', 'linkedin', 'copy'];
+
     /**
      * Enregistre une vue d'article et renvoie le nouveau total.
      *
@@ -358,15 +362,56 @@ class PublicController extends Controller
             return response()->json(['message' => 'Article introuvable.'], 404);
         }
 
-        $visitor = sha1($request->ip().'|'.$request->userAgent());
-        $alreadyCounted = !Cache::add("article:view:{$article->id}:{$visitor}", true, now()->addDay());
-
-        if (!$alreadyCounted) {
-            Article::whereKey($article->id)->increment('views_count');
-        }
+        $this->countOncePerDay($request, "article:view:{$article->id}", $article, 'views_count');
 
         return response()->json([
             'views_count' => (int) $article->fresh()->views_count,
         ]);
+    }
+
+    /**
+     * Enregistre un partage d'article et renvoie le nouveau total.
+     *
+     * On compte l'intention de partage : le clic sur un bouton. Ce qui se passe
+     * ensuite chez Facebook ou LinkedIn nous est invisible. La fenêtre de 24h
+     * est posée par réseau, pour qu'un visiteur qui partage sur Facebook puis
+     * sur LinkedIn compte bien deux fois, sans qu'un clic répété en compte dix.
+     */
+    public function registerArticleShare(Request $request, Article $article): JsonResponse
+    {
+        if (!$article->is_published || $article->isArchived()) {
+            return response()->json(['message' => 'Article introuvable.'], 404);
+        }
+
+        $validated = $request->validate([
+            'network' => ['required', 'string', Rule::in(self::SHARE_NETWORKS)],
+        ]);
+
+        $this->countOncePerDay(
+            $request,
+            "article:share:{$article->id}:{$validated['network']}",
+            $article,
+            'shares_count',
+        );
+
+        return response()->json([
+            'shares_count' => (int) $article->fresh()->shares_count,
+        ]);
+    }
+
+    /**
+     * Incrémente un compteur au plus une fois par visiteur et par tranche de 24h.
+     *
+     * Le visiteur est identifié par son IP et son navigateur : c'est approximatif
+     * — deux personnes derrière la même connexion peuvent se confondre — mais
+     * suffisant pour un compteur d'audience, et sans cookie ni traçage.
+     */
+    private function countOncePerDay(Request $request, string $scope, Article $article, string $column): void
+    {
+        $visitor = sha1($request->ip().'|'.$request->userAgent());
+
+        if (Cache::add("{$scope}:{$visitor}", true, now()->addDay())) {
+            Article::whereKey($article->id)->increment($column);
+        }
     }
 }

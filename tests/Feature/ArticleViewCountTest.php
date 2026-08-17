@@ -124,8 +124,98 @@ class ArticleViewCountTest extends TestCase
     {
         $article = $this->publishedArticle();
 
-        $article->update(['title' => 'Titre modifié', 'views_count' => 9999]);
+        $article->update(['title' => 'Titre modifié', 'views_count' => 9999, 'shares_count' => 9999]);
 
         $this->assertSame(0, $article->fresh()->views_count);
+        $this->assertSame(0, $article->fresh()->shares_count);
+    }
+
+    // ── Partages ──
+
+    public function test_enregistrer_un_partage_incremente_le_compteur(): void
+    {
+        $article = $this->publishedArticle();
+
+        $this->postJson("/api/public/articles/{$article->id}/share", ['network' => 'facebook'])
+            ->assertOk()
+            ->assertJsonPath('shares_count', 1);
+
+        $this->assertSame(1, $article->fresh()->shares_count);
+    }
+
+    public function test_repartager_sur_le_meme_reseau_ne_recompte_pas_dans_les_24h(): void
+    {
+        $article = $this->publishedArticle();
+
+        $this->postJson("/api/public/articles/{$article->id}/share", ['network' => 'facebook']);
+        $this->postJson("/api/public/articles/{$article->id}/share", ['network' => 'facebook'])
+            ->assertOk()
+            ->assertJsonPath('shares_count', 1);
+
+        $this->assertSame(1, $article->fresh()->shares_count);
+    }
+
+    public function test_partager_sur_un_autre_reseau_compte_une_fois_de_plus(): void
+    {
+        $article = $this->publishedArticle();
+
+        $this->postJson("/api/public/articles/{$article->id}/share", ['network' => 'facebook']);
+        $this->postJson("/api/public/articles/{$article->id}/share", ['network' => 'linkedin'])
+            ->assertOk()
+            ->assertJsonPath('shares_count', 2);
+    }
+
+    public function test_un_reseau_inconnu_est_refuse(): void
+    {
+        $article = $this->publishedArticle();
+
+        $this->postJson("/api/public/articles/{$article->id}/share", ['network' => 'myspace'])
+            ->assertStatus(422);
+
+        $this->assertSame(0, $article->fresh()->shares_count);
+    }
+
+    public function test_un_partage_sans_reseau_est_refuse(): void
+    {
+        $article = $this->publishedArticle();
+
+        $this->postJson("/api/public/articles/{$article->id}/share", [])
+            ->assertStatus(422);
+
+        $this->assertSame(0, $article->fresh()->shares_count);
+    }
+
+    public function test_un_article_non_publie_ne_peut_pas_etre_partage(): void
+    {
+        $article = $this->publishedArticle(['is_published' => false]);
+
+        $this->postJson("/api/public/articles/{$article->id}/share", ['network' => 'facebook'])
+            ->assertNotFound();
+
+        $this->assertSame(0, $article->fresh()->shares_count);
+    }
+
+    public function test_les_partages_de_depart_sont_proportionnels_aux_vues(): void
+    {
+        $article = $this->publishedArticle();
+        Article::whereKey($article->id)->update(['views_count' => 1200]);
+
+        $migration = require database_path('migrations/2026_08_15_130001_seed_initial_article_shares.php');
+        $migration->up();
+
+        // 1200 / (40 à 80) → 15 à 30
+        $this->assertGreaterThanOrEqual(15, $article->fresh()->shares_count);
+        $this->assertLessThanOrEqual(30, $article->fresh()->shares_count);
+    }
+
+    public function test_les_partages_de_depart_n_ecrasent_pas_les_partages_deja_comptes(): void
+    {
+        $article = $this->publishedArticle();
+        Article::whereKey($article->id)->update(['views_count' => 1200, 'shares_count' => 3]);
+
+        $migration = require database_path('migrations/2026_08_15_130001_seed_initial_article_shares.php');
+        $migration->up();
+
+        $this->assertSame(3, $article->fresh()->shares_count);
     }
 }

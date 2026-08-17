@@ -26,14 +26,16 @@ class Article extends Model
     ];
 
     /**
-     * `views_count` est volontairement absent de $fillable : il ne se met à jour
-     * que par la route publique d'enregistrement de vue, jamais via un formulaire.
+     * `views_count` et `shares_count` sont volontairement absents de $fillable :
+     * ils ne se mettent à jour que par les routes publiques d'enregistrement,
+     * jamais via un formulaire.
      */
     protected $casts = [
         'is_published' => 'boolean',
         'published_at' => 'datetime',
         'archived_at'  => 'datetime',
         'views_count'  => 'integer',
+        'shares_count' => 'integer',
     ];
 
     protected $appends = ['image_url'];
