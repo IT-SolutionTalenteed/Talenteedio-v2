@@ -25,10 +25,15 @@ class Article extends Model
         'image',
     ];
 
+    /**
+     * `views_count` est volontairement absent de $fillable : il ne se met à jour
+     * que par la route publique d'enregistrement de vue, jamais via un formulaire.
+     */
     protected $casts = [
         'is_published' => 'boolean',
         'published_at' => 'datetime',
         'archived_at'  => 'datetime',
+        'views_count'  => 'integer',
     ];
 
     protected $appends = ['image_url'];

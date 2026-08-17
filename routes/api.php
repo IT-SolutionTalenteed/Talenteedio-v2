@@ -89,6 +89,8 @@ Route::prefix('public')->group(function () {
     Route::get('/categories-evenements/{categorieEvenement}', [PublicController::class, 'categorieEvenement']);
     Route::get('/articles',                                   [PublicController::class, 'articles']);
     Route::get('/articles/{article}',                         [PublicController::class, 'articleDetail']);
+    Route::post('/articles/{article}/view',                    [PublicController::class, 'registerArticleView'])
+        ->middleware('throttle:30,1');
     Route::get('/offres/{offre}',                             [PublicController::class, 'offreDetail']);
     Route::post('/callback',                                  [\App\Http\Controllers\Public\ContactController::class, 'callback']);
     Route::post('/observatory',                               [\App\Http\Controllers\Public\ObservatoryController::class, 'store']);

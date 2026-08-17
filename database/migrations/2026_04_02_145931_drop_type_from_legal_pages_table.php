@@ -12,6 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('legal_pages', function (Blueprint $table) {
+            // L'index unique posé avec la colonne doit partir en premier : SQLite
+            // refuse de supprimer une colonne encore référencée par un index.
+            $table->dropUnique('legal_pages_type_unique');
             $table->dropColumn('type');
         });
     }

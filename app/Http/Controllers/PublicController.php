@@ -12,6 +12,7 @@ use App\Models\StudyLevel;
 use App\Models\ActivitySector;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Cache;
 
 class PublicController extends Controller
 {
@@ -341,5 +342,31 @@ class PublicController extends Controller
         }
 
         return response()->json($data);
+    }
+
+    /**
+     * Enregistre une vue d'article et renvoie le nouveau total.
+     *
+     * Le front ne poste qu'une fois par navigateur et par tranche de 24h
+     * (marqueur en localStorage). Ce garde-fou serveur double la protection :
+     * si le localStorage est vidé — ou si quelqu'un boucle sur la route —
+     * le visiteur reste compté une seule fois dans la même fenêtre.
+     */
+    public function registerArticleView(Request $request, Article $article): JsonResponse
+    {
+        if (!$article->is_published || $article->isArchived()) {
+            return response()->json(['message' => 'Article introuvable.'], 404);
+        }
+
+        $visitor = sha1($request->ip().'|'.$request->userAgent());
+        $alreadyCounted = !Cache::add("article:view:{$article->id}:{$visitor}", true, now()->addDay());
+
+        if (!$alreadyCounted) {
+            Article::whereKey($article->id)->increment('views_count');
+        }
+
+        return response()->json([
+            'views_count' => (int) $article->fresh()->views_count,
+        ]);
     }
 }
